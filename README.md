@@ -1,4 +1,10 @@
+<p align="center">
+  <img src="ellmos-logo.jpg" alt="FileCommander logo" width="400">
+</p>
+
 # BACH FileCommander MCP Server
+
+*Part of the [ellmos-ai](https://github.com/ellmos-ai) family.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/bach-filecommander-mcp.svg)](https://www.npmjs.com/package/bach-filecommander-mcp)
