@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="ellmos-logo.jpg" alt="FileCommander logo" width="400">
+  <img src="filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
 # BACH FileCommander MCP Server
