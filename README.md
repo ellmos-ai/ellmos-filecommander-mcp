@@ -2,6 +2,13 @@
   <img src="filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
+> **DEPRECATED:** This package has been renamed. Use [`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp) instead.
+> ```bash
+> npm uninstall -g bach-filecommander-mcp
+> npm i -g ellmos-filecommander-mcp
+> ```
+> GitHub: [ellmos-ai/ellmos-filecommander-mcp](https://github.com/ellmos-ai/ellmos-filecommander-mcp)
+
 # BACH FileCommander MCP Server
 
 *Part of the [ellmos-ai](https://github.com/ellmos-ai) family.*
