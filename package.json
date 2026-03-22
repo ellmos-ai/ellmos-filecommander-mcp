@@ -38,12 +38,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lukisch/bach-filecommander-mcp.git"
+    "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/lukisch/bach-filecommander-mcp/issues"
+    "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp/issues"
   },
-  "homepage": "https://github.com/lukisch/bach-filecommander-mcp#readme",
+  "homepage": "https://github.com/ellmos-ai/ellmos-filecommander-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@toon-format/toon": "^2.1.0",
