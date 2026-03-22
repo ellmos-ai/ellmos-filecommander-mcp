@@ -1,12 +1,12 @@
 {
-  "name": "bach-filecommander-mcp",
-  "version": "1.7.4",
-  "mcpName": "io.github.lukisch/bach-filecommander-mcp",
+  "name": "ellmos-filecommander-mcp",
+  "version": "1.7.5",
+  "mcpName": "io.github.ellmos-ai/ellmos-filecommander-mcp",
   "description": "A comprehensive MCP server providing 43 tools for filesystem operations, process management, interactive sessions, async file search, JSON repair, encoding fix, duplicate detection, OCR, ZIP archives, and Markdown export",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "bach-filecommander": "dist/index.js"
+    "ellmos-filecommander": "dist/index.js"
   },
   "files": [
     "dist/",
