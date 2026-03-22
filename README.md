@@ -2,19 +2,12 @@
   <img src="filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
-> **DEPRECATED:** This package has been renamed. Use [`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp) instead.
-> ```bash
-> npm uninstall -g bach-filecommander-mcp
-> npm i -g ellmos-filecommander-mcp
-> ```
-> GitHub: [ellmos-ai/ellmos-filecommander-mcp](https://github.com/ellmos-ai/ellmos-filecommander-mcp)
-
-# BACH FileCommander MCP Server
+# ellmos FileCommander MCP Server
 
 *Part of the [ellmos-ai](https://github.com/ellmos-ai) family.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm version](https://img.shields.io/npm/v/bach-filecommander-mcp.svg)](https://www.npmjs.com/package/bach-filecommander-mcp)
+[![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org/)
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities.
@@ -52,14 +45,14 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 ### Option 1: Install from NPM
 
 ```bash
-npm install -g bach-filecommander-mcp
+npm install -g ellmos-filecommander-mcp
 ```
 
 ### Option 2: Install from Source
 
 ```bash
-git clone https://github.com/lukisch/bach-filecommander-mcp.git
-cd bach-filecommander-mcp
+git clone https://github.com/ellmos-ai/ellmos-filecommander-mcp.git
+cd ellmos-filecommander-mcp
 npm install
 npm run build
 ```
@@ -81,7 +74,7 @@ Add to your `claude_desktop_config.json`:
 {
   "mcpServers": {
     "filecommander": {
-      "command": "bach-filecommander"
+      "command": "ellmos-filecommander"
     }
   }
 }
@@ -104,7 +97,7 @@ Restart Claude Desktop after saving.
 
 ### Other MCP Clients
 
-The server communicates via **stdio transport**. Point your MCP client to the `dist/index.js` entry point or the `bach-filecommander` binary.
+The server communicates via **stdio transport**. Point your MCP client to the `dist/index.js` entry point or the `ellmos-filecommander` binary.
 
 ---
 
@@ -288,4 +281,17 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 ## License
 
-[MIT](LICENSE) - Lukas (BACH)
+[MIT](LICENSE) - Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai))
+
+---
+
+## History
+
+This project was originally developed as **BACH FileCommander** (`bach-filecommander-mcp`). It has been renamed to **ellmos FileCommander** (`ellmos-filecommander-mcp`) as part of the [ellmos-ai](https://github.com/ellmos-ai) organization.
+
+The old npm package [`bach-filecommander-mcp`](https://www.npmjs.com/package/bach-filecommander-mcp) is deprecated. Please use [`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp) instead:
+
+```bash
+npm uninstall -g bach-filecommander-mcp
+npm install -g ellmos-filecommander-mcp
+```
