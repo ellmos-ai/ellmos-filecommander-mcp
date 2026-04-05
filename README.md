@@ -295,3 +295,34 @@ The old npm package [`bach-filecommander-mcp`](https://www.npmjs.com/package/bac
 npm uninstall -g bach-filecommander-mcp
 npm install -g ellmos-filecommander-mcp
 ```
+
+---
+
+## ellmos-ai Ecosystem
+
+This MCP server is part of the **[ellmos-ai](https://github.com/ellmos-ai)** ecosystem — AI infrastructure, MCP servers, and intelligent tools.
+
+### MCP Server Family
+
+| Server | Tools | Focus | npm |
+|--------|-------|-------|-----|
+| **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **43** | **Filesystem, process management, interactive sessions** | `ellmos-filecommander-mcp` |
+| [CodeCommander](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | 17 | Code analysis, AST parsing, import management | `ellmos-codecommander-mcp` |
+| [Clatcher](https://github.com/ellmos-ai/ellmos-clatcher-mcp) | 12 | File repair, format conversion, batch operations | `ellmos-clatcher-mcp` |
+| [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 13 | n8n workflow management via AI assistants | `n8n-manager-mcp` |
+
+### AI Infrastructure
+
+| Project | Description |
+|---------|-------------|
+| [BACH](https://github.com/ellmos-ai/bach) | Text-based OS for LLMs — 109+ handlers, 373+ tools, 932+ skills |
+| [clutch](https://github.com/ellmos-ai/clutch) | Provider-neutral LLM orchestration with auto-routing and budget tracking |
+| [rinnsal](https://github.com/ellmos-ai/rinnsal) | Lightweight agent memory, connectors, and automation infrastructure |
+| [ellmos-stack](https://github.com/ellmos-ai/ellmos-stack) | Self-hosted AI research stack (Ollama + n8n + Rinnsal + KnowledgeDigest) |
+| [MarbleRun](https://github.com/ellmos-ai/MarbleRun) | Autonomous agent chain framework for Claude Code |
+| [gardener](https://github.com/ellmos-ai/gardener) | Minimalist database-driven LLM OS prototype (4 functions, 1 table) |
+| [ellmos-tests](https://github.com/ellmos-ai/ellmos-tests) | Testing framework for LLM operating systems (7 dimensions) |
+
+### Desktop Software
+
+Our partner organization **[open-bricks](https://github.com/open-bricks)** bundles AI-native desktop applications — a modern, open-source software suite built for the age of AI. Categories include file management, document tools, developer utilities, and more.
