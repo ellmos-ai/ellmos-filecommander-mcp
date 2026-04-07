@@ -1,8 +1,10 @@
 <p align="center">
-  <img src="filecommander_banner.jpg" alt="FileCommander banner" width="700">
+  <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
 # ellmos FileCommander MCP Server
+
+**🇩🇪 [Deutsche Version](README_de.md)**
 
 *Part of the [ellmos-ai](https://github.com/ellmos-ai) family.*
 
