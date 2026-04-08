@@ -1,20 +1,20 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.lukisch/bach-filecommander-mcp",
-  "version": "1.7.2",
+  "name": "io.github.ellmos-ai/ellmos-filecommander-mcp",
+  "version": "1.7.8",
   "title": "BACH FileCommander",
   "description": "43 tools for filesystem, process management, sessions, search, OCR, ZIP, and PDF export.",
-  "websiteUrl": "https://github.com/lukisch/bach-filecommander-mcp",
+  "websiteUrl": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
   "repository": {
-    "url": "https://github.com/lukisch/bach-filecommander-mcp",
+    "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
     "source": "github",
-    "id": "lukisch/bach-filecommander-mcp"
+    "id": "ellmos-ai/ellmos-filecommander-mcp"
   },
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "bach-filecommander-mcp",
-      "version": "1.7.2",
+      "identifier": "ellmos-filecommander-mcp",
+      "version": "1.7.8",
       "transport": { "type": "stdio" },
       "runtimeHint": "npx"
     }
