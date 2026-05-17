@@ -153,7 +153,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | `fc_list_sessions` | Alle Sitzungen auflisten |
 | `fc_close_session` | Sitzung beenden |
 
-### Dateiwartung & Reparatur (8 Tools)
+### Dateiwartung & Reparatur (9 Tools)
 
 | Tool | Beschreibung |
 |------|-------------|
@@ -269,7 +269,21 @@ npm run build
 
 # Server starten
 npm start
+
+# Tests ausführen
+npm test
 ```
+
+### Tests
+
+Das Projekt enthält eine umfassende Test-Suite mit **136 Tests** für Dateisystem-Operationen, Format-Konvertierung, Encoding-Reparatur, Archiv-Handling, Duplikat-Erkennung und mehr.
+
+```bash
+npm test              # Alle Tests ausführen
+npx vitest --watch    # Watch-Modus
+```
+
+Tests sind auf **Windows**, **macOS** und **Linux** verifiziert.
 
 Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für Richtlinien zur Mitwirkung.
 

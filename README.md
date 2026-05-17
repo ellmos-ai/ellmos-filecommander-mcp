@@ -153,7 +153,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | `fc_list_sessions` | List all sessions |
 | `fc_close_session` | Terminate a session |
 
-### File Maintenance & Repair (8 tools)
+### File Maintenance & Repair (9 tools)
 
 | Tool | Description |
 |------|-------------|
@@ -269,7 +269,22 @@ npm run build
 
 # Start the server
 npm start
+
+# Run test suite
+npm test
 ```
+
+### Testing
+
+The project includes a comprehensive test suite with **136 tests** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, and more.
+
+```bash
+npm test              # Run all tests
+npx vitest run        # Same as above
+npx vitest --watch    # Watch mode
+```
+
+Tests are verified on **Windows**, **macOS**, and **Linux**.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
