@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.10] - 2026-05-23
+
+### Fixed
+- Refresh npm lockfile and overrides to resolve Dependabot alerts for `fast-xml-builder`, `fast-uri`, `hono`, and `ip-address`.
+- Update dev dependency lockfile path away from vulnerable Vite/esbuild ranges.
+
 ## [1.7.9] - 2026-05-17
 
 ### Added

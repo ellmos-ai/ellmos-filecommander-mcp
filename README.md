@@ -306,7 +306,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 This project was originally developed as **BACH FileCommander** (`bach-filecommander-mcp`). It has been renamed to **ellmos FileCommander** (`ellmos-filecommander-mcp`) as part of the [ellmos-ai](https://github.com/ellmos-ai) organization.
 
-The old npm package [`bach-filecommander-mcp`](https://www.npmjs.com/package/bach-filecommander-mcp) is deprecated. Please use [`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp) instead:
+The legacy package name `bach-filecommander-mcp` is deprecated. Please use [`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp) instead:
 
 ```bash
 npm uninstall -g bach-filecommander-mcp
@@ -326,7 +326,7 @@ This MCP server is part of the **[ellmos-ai](https://github.com/ellmos-ai)** eco
 | **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **43** | **Filesystem, process management, interactive sessions** | `ellmos-filecommander-mcp` |
 | [CodeCommander](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | 17 | Code analysis, AST parsing, import management | `ellmos-codecommander-mcp` |
 | [Clatcher](https://github.com/ellmos-ai/ellmos-clatcher-mcp) | 12 | File repair, format conversion, batch operations | `ellmos-clatcher-mcp` |
-| [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 13 | n8n workflow management via AI assistants | `n8n-manager-mcp` |
+| [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 18 | n8n workflow management via AI assistants | `n8n-manager-mcp` |
 
 ### AI Infrastructure
 

@@ -1,6 +1,6 @@
 {
   "name": "ellmos-filecommander-mcp",
-  "version": "1.7.9",
+  "version": "1.7.10",
   "mcpName": "io.github.ellmos-ai/ellmos-filecommander-mcp",
   "description": "A comprehensive MCP server providing 43 tools for filesystem operations, process management, interactive sessions, async file search, JSON repair, encoding fix, duplicate detection, OCR, ZIP archives, and Markdown export",
   "type": "module",
@@ -49,21 +49,25 @@
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@toon-format/toon": "^2.1.0",
     "adm-zip": "^0.5.16",
-    "fast-xml-parser": "^5.3.6",
+    "fast-xml-parser": "^5.8.0",
     "js-yaml": "^4.1.1",
     "smol-toml": "^1.6.0",
     "zod": "^3.23.8"
   },
   "overrides": {
-    "hono": "^4.12.12",
-    "@hono/node-server": "^1.19.13"
+    "hono": "^4.12.18",
+    "@hono/node-server": "^1.19.13",
+    "fast-uri": "^3.1.2",
+    "ip-address": "^10.1.1",
+    "fast-xml-builder": "^1.1.7",
+    "qs": "^6.15.2"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.0",
     "typescript": "^5.3.3",
-    "vitest": "^3.1.3"
+    "vitest": "^4.1.6"
   },
   "engines": {
     "node": ">=18.0.0"
