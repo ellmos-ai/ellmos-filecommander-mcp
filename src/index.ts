@@ -4226,7 +4226,7 @@ server.registerTool(
 server.tool(
   "fc_set_language",
   "Set the output language for FileCommander tools",
-  { language: z.enum(["de", "en"]).describe("Language code") },
+  { language: z.enum(["de", "en", "es", "zh", "ja", "ru"]).describe("Language code") },
   async ({ language }) => {
     setLanguage(language as Lang);
     return { content: [{ type: "text", text: t().server.languageSet(language) }] };
