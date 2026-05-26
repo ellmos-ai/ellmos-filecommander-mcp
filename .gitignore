@@ -17,6 +17,21 @@ desktop.ini
 # Environment
 .env
 .env.local
+.env.*
+!.env.example
+!.env.sample
+.npmrc
+
+# Secrets / credentials
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+*_recovery_codes.txt
+*recovery*codes*.txt
+secrets.json
 
 # Logs
 *.log
