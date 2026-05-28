@@ -16,6 +16,10 @@ A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants
 
 **43 tools** in a single server - everything an AI agent needs to interact with the local system.
 
+**Discovery keywords:** local filesystem MCP server, safe delete MCP, Recycle Bin MCP server, process management MCP, interactive shell MCP, async file search for AI agents, Markdown to PDF MCP, OCR MCP server.
+
+**Registry status:** published on [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp), listed on [Glama](https://glama.ai/mcp/servers/eyurifgg4t), and prepared for the official MCP Registry via [`server.json`](server.json). Glama currently indexes the repository metadata but still reports `tools: []`, so a reindex should be triggered after the next npm patch release.
+
 ---
 
 ## Why FileCommander?
@@ -241,6 +245,19 @@ All tools use the `fc_` prefix (FileCommander) to avoid conflicts with other MCP
 
 ---
 
+## Discoverability
+
+FileCommander is designed to be discoverable by both people and AI agents:
+
+- `package.json` exposes the official `mcpName` (`io.github.ellmos-ai/ellmos-filecommander-mcp`) and MCP-specific npm keywords.
+- [`server.json`](server.json) follows the official MCP Registry schema and points to the npm package.
+- [`glama.json`](glama.json) provides MCP-directory metadata for Glama-compatible indexes.
+- [`llms.txt`](llms.txt) gives compact context for LLMs, agent catalogs, and documentation crawlers.
+
+Primary search terms: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
+
+---
+
 ## Security
 
 **This server has full filesystem access with the running user's permissions.**
@@ -349,9 +366,9 @@ Our partner organization **[open-bricks](https://github.com/open-bricks)** bundl
 
 ## Haftung / Liability
 
-Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß **§ 521 BGB** auf **Vorsatz und grobe Fahrlässigkeit** beschränkt. Ergänzend gelten die Haftungsausschlüsse aus GPL-3.0 / MIT / Apache-2.0 §§ 15–16 (je nach gewählter Lizenz).
+Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß **§ 521 BGB** auf **Vorsatz und grobe Fahrlässigkeit** beschränkt. Ergänzend gilt der Haftungsausschluss der MIT-Lizenz.
 
 Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
 
-This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
+This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). The MIT license disclaimer also applies. Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
 

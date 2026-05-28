@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+- Include `server.json` in the npm package so official MCP Registry metadata ships with the published artifact.
+- Rename the official registry title from legacy "BACH FileCommander" to "ellmos FileCommander".
+- Update community workflows to `actions/stale@v10` and `actions/first-interaction@v3` with current input names.
+- Refresh README/README_de and `llms.txt` discovery notes for Glama, npm, and the ellmos MCP family.
+
 ## [1.7.10] - 2026-05-23
 
 ### Fixed

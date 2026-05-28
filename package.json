@@ -15,7 +15,8 @@
     "README_de.md",
     "CHANGELOG.md",
     "SECURITY.md",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "server.json"
   ],
   "scripts": {
     "build": "node node_modules/typescript/bin/tsc",
@@ -34,7 +35,12 @@
     "mcp-server",
     "ai-tools",
     "claude-desktop",
-    "bach"
+    "bach",
+    "mcp-registry",
+    "safe-delete",
+    "async-search",
+    "markdown-export",
+    "pdf-export"
   ],
   "author": "Lukas (BACH)",
   "license": "MIT",

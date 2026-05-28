@@ -16,6 +16,10 @@ Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten voll
 
 **43 Tools** in einem einzigen Server — alles, was ein KI-Agent für die Interaktion mit dem lokalen System braucht.
 
+**Discovery-Suchbegriffe:** lokaler Dateisystem-MCP-Server, Safe-Delete-MCP, Papierkorb-MCP-Server, Prozessverwaltungs-MCP, interaktive Shell per MCP, asynchrone Dateisuche für KI-Agenten, Markdown-zu-PDF-MCP, OCR-MCP-Server.
+
+**Registry-Status:** auf [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp) veröffentlicht, auf [Glama](https://glama.ai/mcp/servers/eyurifgg4t) gelistet und über [`server.json`](server.json) für die offizielle MCP Registry vorbereitet. Glama indexiert aktuell die Repository-Metadaten, meldet aber noch `tools: []`; nach dem nächsten npm-Patchrelease sollte dort ein Reindex angestoßen werden.
+
 ---
 
 ## Warum FileCommander?
@@ -238,6 +242,19 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 ## Tool-Präfix
 
 Alle Tools verwenden das `fc_`-Präfix (FileCommander), um Konflikte mit anderen MCP-Servern zu vermeiden.
+
+---
+
+## Auffindbarkeit
+
+FileCommander ist so dokumentiert, dass Menschen, LLMs und MCP-Verzeichnisse ihn eindeutig einordnen können:
+
+- `package.json` enthält den offiziellen `mcpName` (`io.github.ellmos-ai/ellmos-filecommander-mcp`) und MCP-spezifische npm-Keywords.
+- [`server.json`](server.json) folgt dem offiziellen MCP-Registry-Schema und verweist auf das npm-Paket.
+- [`glama.json`](glama.json) liefert Metadaten für Glama-kompatible MCP-Verzeichnisse.
+- [`llms.txt`](llms.txt) bietet kompakten Kontext für LLMs, Agentenkataloge und Dokumentations-Crawler.
+
+Primäre Suchbegriffe: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
 
 ---
 

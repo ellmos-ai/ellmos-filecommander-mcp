@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.ellmos-ai/ellmos-filecommander-mcp",
   "version": "1.7.10",
-  "title": "BACH FileCommander",
-  "description": "43 tools for filesystem, process management, sessions, search, OCR, ZIP, and PDF export.",
+  "title": "ellmos FileCommander",
+  "description": "Local filesystem MCP with 43 tools for safe delete, sessions, async search, OCR, ZIP, and PDF.",
   "websiteUrl": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
   "repository": {
     "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
