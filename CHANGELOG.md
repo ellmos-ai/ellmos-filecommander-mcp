@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-05-31
+
+### Added
+- **Cloud-lock-safe file operations**: `fc_move`, `fc_batch_rename`, and `fc_safe_delete` now automatically fall back to copy+delete when the Windows Cloud Files filter (`cldflt.sys`) or other file locks block `rename()`. Triggered on EPERM, EACCES, EXDEV, and EBUSY errors.
+- **`fc_check_cloud_lock`** — New read-only diagnostic tool that checks whether a path is at risk of cloud-sync lock conflicts. Reports driver status, sync folder detection, and risk level. Windows-only (graceful no-op on macOS/Linux).
+- Empirical cloud-lock test (`test/empirical_cloud_lock.mjs`) using real Windows file locks to verify the fallback path.
+- 7 new unit tests for `cloudSafeRename` helper (143 total tests).
+- Full i18n (DE/EN) for all new features.
+- Total tools: 44
+
 ### Changed
 - Include `server.json` in the npm package so official MCP Registry metadata ships with the published artifact.
 - Rename the official registry title from legacy "BACH FileCommander" to "ellmos FileCommander".

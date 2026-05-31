@@ -168,8 +168,62 @@ async function moveToTrash(targetPath: string): Promise<string> {
     } catch {
       await fs.mkdir(trashDir, { recursive: true });
     }
-    await fs.rename(targetPath, trashPath);
+    await cloudSafeRename(targetPath, trashPath);
     return trashPath;
+  }
+}
+
+const CLOUD_LOCK_ERRORS = new Set(['EPERM', 'EACCES', 'EXDEV']);
+
+async function cloudSafeRename(sourcePath: string, destPath: string): Promise<{ usedFallback: boolean }> {
+  try {
+    await fs.rename(sourcePath, destPath);
+    return { usedFallback: false };
+  } catch (renameError: unknown) {
+    const code = (renameError as NodeJS.ErrnoException).code;
+    if (!code || !CLOUD_LOCK_ERRORS.has(code)) {
+      throw renameError;
+    }
+
+    const stats = await fs.stat(sourcePath);
+
+    if (stats.isDirectory()) {
+      await fs.cp(sourcePath, destPath, { recursive: true });
+    } else {
+      await fs.copyFile(sourcePath, destPath);
+    }
+
+    const destStats = await fs.stat(destPath);
+    if (stats.isFile() && destStats.size !== stats.size) {
+      await fs.rm(destPath, { recursive: true, force: true });
+      throw new Error(`Copy verification failed: expected ${stats.size} bytes, got ${destStats.size} bytes`);
+    }
+
+    try {
+      if (stats.isDirectory()) {
+        await fs.rm(sourcePath, { recursive: true });
+      } else {
+        await fs.unlink(sourcePath);
+      }
+    } catch (deleteError: unknown) {
+      const delCode = (deleteError as NodeJS.ErrnoException).code;
+      if (delCode === 'EPERM' && process.platform === 'win32') {
+        try {
+          await fs.chmod(sourcePath, 0o666);
+          if (stats.isDirectory()) {
+            await fs.rm(sourcePath, { recursive: true });
+          } else {
+            await fs.unlink(sourcePath);
+          }
+        } catch {
+          throw new Error(`Copied to destination but cannot delete source (still locked): ${sourcePath}`);
+        }
+      } else {
+        throw deleteError;
+      }
+    }
+
+    return { usedFallback: true };
   }
 }
 
@@ -834,11 +888,12 @@ Examples:
         await fs.mkdir(destDir, { recursive: true });
       }
 
-      await fs.rename(sourcePath, destPath);
+      const { usedFallback } = await cloudSafeRename(sourcePath, destPath);
 
-      return {
-        content: [{ type: "text", text: t().fc_move.moved(sourcePath, destPath) }]
-      };
+      const msg = usedFallback
+        ? t().fc_move.movedViaFallback(sourcePath, destPath)
+        : t().fc_move.moved(sourcePath, destPath);
+      return { content: [{ type: "text", text: msg }] };
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);
       return {
@@ -1448,7 +1503,7 @@ Note: Uses Windows recycle bin or creates backup on other systems.`,
           await fs.mkdir(trashDir, { recursive: true });
         }
 
-        await fs.rename(targetPath, trashPath);
+        await cloudSafeRename(targetPath, trashPath);
 
         return {
           content: [{
@@ -3182,7 +3237,7 @@ Examples:
       const errors: string[] = [];
       for (const r of renames) {
         try {
-          await fs.rename(path.join(dirPath, r.old), path.join(dirPath, r.new));
+          await cloudSafeRename(path.join(dirPath, r.old), path.join(dirPath, r.new));
           successCount++;
         } catch (e) {
           errors.push(`${r.old}: ${e instanceof Error ? e.message : String(e)}`);
@@ -4230,6 +4285,97 @@ server.tool(
   async ({ language }) => {
     setLanguage(language as Lang);
     return { content: [{ type: "text", text: t().server.languageSet(language) }] };
+  }
+);
+
+// ============================================================================
+// Tool: Check Cloud Lock
+// ============================================================================
+
+server.registerTool(
+  "fc_check_cloud_lock",
+  {
+    title: "Check Cloud Lock",
+    description: t().fc_check_cloud_lock.description,
+    inputSchema: {
+      path: z.string().min(1).describe("Path to check"),
+    },
+    annotations: {
+      title: "Cloud Lock Check",
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false
+    }
+  },
+  async (params) => {
+    try {
+      const targetPath = normalizePath(params.path);
+      const isWindows = process.platform === 'win32';
+
+      if (!isWindows) {
+        return {
+          content: [{ type: "text" as const, text: t().fc_check_cloud_lock.notApplicable }]
+        };
+      }
+
+      let driverLoaded = false;
+      try {
+        const { stdout } = await execAsync('sc query cldflt', { timeout: 5000 });
+        driverLoaded = /RUNNING/.test(stdout);
+      } catch {
+        driverLoaded = false;
+      }
+
+      const syncRoots: { provider: string; root: string }[] = [];
+      const envVars = ['OneDrive', 'OneDriveConsumer', 'OneDriveCommercial'];
+      for (const v of envVars) {
+        const val = process.env[v];
+        if (val) syncRoots.push({ provider: 'OneDrive', root: val });
+      }
+
+      const userHome = process.env.USERPROFILE || process.env.HOME || '';
+      const candidates = [
+        { provider: 'OneDrive', sub: 'OneDrive' },
+        { provider: 'Dropbox', sub: 'Dropbox' },
+        { provider: 'Google Drive', sub: 'Google Drive' },
+        { provider: 'iCloud', sub: 'iCloudDrive' },
+      ];
+      for (const c of candidates) {
+        const candidate = path.join(userHome, c.sub);
+        if (await pathExists(candidate) && !syncRoots.some(r => r.root === candidate)) {
+          syncRoots.push({ provider: c.provider, root: candidate });
+        }
+      }
+
+      const normalTarget = path.normalize(targetPath).toLowerCase();
+      const matchedProvider = syncRoots.find(
+        r => normalTarget.startsWith(path.normalize(r.root).toLowerCase())
+      );
+
+      const lines: string[] = [t().fc_check_cloud_lock.header(targetPath), ''];
+      lines.push(`| | |`, `|---|---|`);
+      lines.push(`| ${t().fc_check_cloud_lock.labelDriver} | ${driverLoaded ? t().fc_check_cloud_lock.driverActive : t().fc_check_cloud_lock.driverInactive} |`);
+      lines.push(`| ${t().fc_check_cloud_lock.labelInSyncFolder} | ${matchedProvider ? `${matchedProvider.provider} (${matchedProvider.root})` : t().fc_check_cloud_lock.notInSyncFolder} |`);
+
+      const riskLevel = driverLoaded && matchedProvider
+        ? t().fc_check_cloud_lock.riskHigh
+        : driverLoaded || matchedProvider
+          ? t().fc_check_cloud_lock.riskMedium
+          : t().fc_check_cloud_lock.riskLow;
+      lines.push(`| ${t().fc_check_cloud_lock.labelRisk} | ${riskLevel} |`);
+
+      if (driverLoaded && matchedProvider) {
+        lines.push('', t().fc_check_cloud_lock.advice);
+      }
+
+      return { content: [{ type: "text" as const, text: lines.join('\n') }] };
+    } catch (error) {
+      return {
+        isError: true,
+        content: [{ type: "text" as const, text: t().fc_check_cloud_lock.checkError(error instanceof Error ? error.message : String(error)) }]
+      };
+    }
   }
 );
 

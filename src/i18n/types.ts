@@ -65,6 +65,7 @@ export interface Translations {
   // ==================== fc_move ====================
   fc_move: {
     moved: (source: string, dest: string) => string;
+    movedViaFallback: (source: string, dest: string) => string;
     moveError: (msg: string) => string;
   };
 
@@ -467,6 +468,24 @@ export interface Translations {
     enabled: string;
     disabled: string;
     redirected: (originalAction: string) => string;
+  };
+
+  // ==================== fc_check_cloud_lock ====================
+  fc_check_cloud_lock: {
+    description: string;
+    notApplicable: string;
+    header: (path: string) => string;
+    labelDriver: string;
+    driverActive: string;
+    driverInactive: string;
+    labelInSyncFolder: string;
+    notInSyncFolder: string;
+    labelRisk: string;
+    riskHigh: string;
+    riskMedium: string;
+    riskLow: string;
+    advice: string;
+    checkError: (msg: string) => string;
   };
 
   // ==================== Server ====================

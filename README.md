@@ -14,7 +14,7 @@
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities.
 
-**43 tools** in a single server - everything an AI agent needs to interact with the local system.
+**44 tools** in a single server - everything an AI agent needs to interact with the local system.
 
 **Discovery keywords:** local filesystem MCP server, safe delete MCP, Recycle Bin MCP server, process management MCP, interactive shell MCP, async file search for AI agents, Markdown to PDF MCP, OCR MCP server.
 
@@ -37,6 +37,8 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 - **OCR** - Extract text from images (optional tesseract.js dependency)
 - **Safety Mode** - Toggle to route all deletes through Recycle Bin / Trash
 - **Markdown Export** - Convert Markdown to professional HTML/PDF with code blocks, tables, nested lists, blockquotes
+- **Cloud-Lock Safe** - Automatic copy+delete fallback when cloud sync filters (OneDrive, Dropbox, Google Drive, iCloud) block rename operations
+- **Cloud Lock Diagnosis** - Check whether a path is at risk of sync-filter conflicts before operating
 - **Cross-platform** - Works on Windows, macOS, and Linux with platform-specific optimizations
 
 ---
@@ -123,7 +125,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | `fc_delete_file` | Delete a file (permanent) |
 | `fc_delete_directory` | Delete a directory (with optional recursive flag) |
 | `fc_safe_delete` | Move to Recycle Bin / Trash (recoverable!) |
-| `fc_move` | Move or rename files and directories |
+| `fc_move` | Move or rename files and directories (cloud-lock safe) |
 | `fc_copy` | Copy files and directories |
 | `fc_file_info` | Get detailed file metadata (size, dates, type) |
 | `fc_search_files` | Synchronous file search with wildcard patterns |
@@ -183,6 +185,12 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 |------|-------------|
 | `fc_ocr` | Extract text from images via tesseract.js (optional dependency) |
 
+### Cloud Sync (1 tool)
+
+| Tool | Description |
+|------|-------------|
+| `fc_check_cloud_lock` | Diagnose whether a path may be blocked by cloud sync filters (Windows) |
+
 ### System (2 tools)
 
 | Tool | Description |
@@ -197,7 +205,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | `fc_md_to_html` | Markdown to standalone HTML with CSS styling (headers, code blocks, tables, nested lists, blockquotes, images, checkboxes) |
 | `fc_md_to_pdf` | Markdown to PDF via headless browser (Edge/Chrome). Falls back to HTML if no browser is available |
 
-**Total: 43 tools**
+**Total: 44 tools**
 
 ---
 
@@ -227,14 +235,15 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | Excel / PDF support | PDF (via browser) | Yes | No |
 | HTTP transport | No | No | No |
 | Markdown to HTML/PDF export | Yes | No | No |
-| **Total tools** | **43** | ~15 | ~11 |
+| **Total tools** | **44** | ~15 | ~11 |
 | **Servers needed** | **1** | 1 | + extra for processes |
 
 **Key differentiators:**
 - Only MCP server with **recoverable delete** (Recycle Bin / Trash)
 - Only MCP server with **async background search** with pagination
 - Built-in **JSON repair**, **encoding fix**, and **duplicate detection**
-- Most comprehensive single-server solution (43 tools)
+- Only MCP server with **cloud-lock-safe file operations** (automatic copy+delete fallback)
+- Most comprehensive single-server solution (44 tools)
 - Built-in **safety mode** to prevent accidental permanent deletion
 
 ---
@@ -293,7 +302,7 @@ npm test
 
 ### Testing
 
-The project includes a comprehensive test suite with **136 tests** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, and more.
+The project includes a comprehensive test suite with **143 tests** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, and more.
 
 ```bash
 npm test              # Run all tests
@@ -340,7 +349,7 @@ This MCP server is part of the **[ellmos-ai](https://github.com/ellmos-ai)** eco
 
 | Server | Tools | Focus | npm |
 |--------|-------|-------|-----|
-| **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **43** | **Filesystem, process management, interactive sessions** | **[`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp)** |
+| **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **44** | **Filesystem, process management, interactive sessions, cloud-lock safe** | **[`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp)** |
 | [CodeCommander](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | 17 | Code analysis, AST parsing, import management | [`ellmos-codecommander-mcp`](https://www.npmjs.com/package/ellmos-codecommander-mcp) |
 | [Clatcher](https://github.com/ellmos-ai/ellmos-clatcher-mcp) | 12 | File repair, format conversion, batch operations | [`ellmos-clatcher-mcp`](https://www.npmjs.com/package/ellmos-clatcher-mcp) |
 | [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 18 | n8n workflow management via AI assistants | [`n8n-manager-mcp`](https://www.npmjs.com/package/n8n-manager-mcp) |

@@ -63,6 +63,7 @@ export const en: Translations = {
   // ==================== fc_move ====================
   fc_move: {
     moved: (source, dest) => `\u2705 Moved:\n  \uD83D\uDCE4 ${source}\n  \uD83D\uDCE5 ${dest}`,
+    movedViaFallback: (source, dest) => `\u2705 Moved (via copy+delete, cloud lock bypassed):\n  \uD83D\uDCE4 ${source}\n  \uD83D\uDCE5 ${dest}`,
     moveError: (msg) => `\u274C Error moving: ${msg}`,
   },
 
@@ -465,6 +466,24 @@ export const en: Translations = {
     enabled: '\uD83D\uDEE1\uFE0F **Safe Mode enabled.** All delete operations now use the recycle bin.',
     disabled: '\u26A0\uFE0F **Safe Mode disabled.** Delete operations are now permanent.',
     redirected: (originalAction) => `\uD83D\uDEE1\uFE0F Safe Mode active: ${originalAction} was redirected to the recycle bin.`,
+  },
+
+  // ==================== fc_check_cloud_lock ====================
+  fc_check_cloud_lock: {
+    description: 'Checks whether a path might be blocked by a cloud sync filter (cldflt.sys). Windows only.',
+    notApplicable: '\u2139\uFE0F Cloud lock check is only relevant on Windows. Not applicable on this system.',
+    header: (p) => `\u2601\uFE0F **Cloud Lock Diagnosis: ${p}**`,
+    labelDriver: 'cldflt.sys driver',
+    driverActive: '\uD83D\uDFE1 Active (loaded)',
+    driverInactive: '\uD83D\uDFE2 Not loaded',
+    labelInSyncFolder: 'In sync folder',
+    notInSyncFolder: '\u2014 No',
+    labelRisk: 'Lock risk',
+    riskHigh: '\uD83D\uDD34 High \u2014 rename operations may be blocked',
+    riskMedium: '\uD83D\uDFE1 Medium \u2014 partial condition met',
+    riskLow: '\uD83D\uDFE2 Low \u2014 no cloud sync conflict expected',
+    advice: '\uD83D\uDCA1 fc_move automatically uses a copy+delete fallback when the cloud filter blocks.',
+    checkError: (msg) => `\u274C Error checking cloud lock: ${msg}`,
   },
 
   // ==================== Server ====================

@@ -14,7 +14,7 @@
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateisuche bietet.
 
-**43 Tools** in einem einzigen Server — alles, was ein KI-Agent für die Interaktion mit dem lokalen System braucht.
+**44 Tools** in einem einzigen Server — alles, was ein KI-Agent für die Interaktion mit dem lokalen System braucht.
 
 **Discovery-Suchbegriffe:** lokaler Dateisystem-MCP-Server, Safe-Delete-MCP, Papierkorb-MCP-Server, Prozessverwaltungs-MCP, interaktive Shell per MCP, asynchrone Dateisuche für KI-Agenten, Markdown-zu-PDF-MCP, OCR-MCP-Server.
 
@@ -37,6 +37,8 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 - **OCR** — Texterkennung aus Bildern (optionale tesseract.js-Abhängigkeit)
 - **Safety Mode** — Umschalten, damit alle Löschvorgänge über den Papierkorb / Trash laufen
 - **Markdown-Export** — Markdown in professionelles HTML/PDF konvertieren mit Codeblöcken, Tabellen, verschachtelten Listen, Blockzitaten
+- **Cloud-Lock-sicher** — Automatischer copy+delete-Fallback wenn Cloud-Sync-Filter (OneDrive, Dropbox, Google Drive, iCloud) rename-Operationen blockieren
+- **Cloud-Lock-Diagnose** — Prüft ob ein Pfad von Sync-Filter-Konflikten betroffen sein könnte
 - **Plattformübergreifend** — Funktioniert auf Windows, macOS und Linux mit plattformspezifischen Optimierungen
 
 ---
@@ -123,7 +125,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | `fc_delete_file` | Datei löschen (permanent) |
 | `fc_delete_directory` | Verzeichnis löschen (mit optionalem rekursivem Flag) |
 | `fc_safe_delete` | In Papierkorb / Trash verschieben (wiederherstellbar!) |
-| `fc_move` | Dateien und Verzeichnisse verschieben oder umbenennen |
+| `fc_move` | Dateien und Verzeichnisse verschieben oder umbenennen (Cloud-Lock-sicher) |
 | `fc_copy` | Dateien und Verzeichnisse kopieren |
 | `fc_file_info` | Detaillierte Dateimetadaten abrufen (Größe, Daten, Typ) |
 | `fc_search_files` | Synchrone Dateisuche mit Wildcard-Mustern |
@@ -183,6 +185,12 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 |------|-------------|
 | `fc_ocr` | Texterkennung aus Bildern über tesseract.js (optionale Abhängigkeit) |
 
+### Cloud Sync (1 Tool)
+
+| Tool | Beschreibung |
+|------|-------------|
+| `fc_check_cloud_lock` | Diagnose ob ein Pfad von Cloud-Sync-Filtern blockiert werden könnte (Windows) |
+
 ### System (2 Tools)
 
 | Tool | Beschreibung |
@@ -197,7 +205,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | `fc_md_to_html` | Markdown zu eigenständigem HTML mit CSS-Styling (Überschriften, Codeblöcke, Tabellen, verschachtelte Listen, Blockzitate, Bilder, Checkboxen) |
 | `fc_md_to_pdf` | Markdown zu PDF über Headless-Browser (Edge/Chrome). Fällt auf HTML zurück, wenn kein Browser verfügbar ist |
 
-**Gesamt: 43 Tools**
+**Gesamt: 44 Tools**
 
 ---
 
@@ -227,14 +235,15 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | Excel / PDF-Unterstützung | PDF (über Browser) | Ja | Nein |
 | HTTP Transport | Nein | Nein | Nein |
 | Markdown zu HTML/PDF Export | Ja | Nein | Nein |
-| **Tools gesamt** | **43** | ~15 | ~11 |
+| **Tools gesamt** | **44** | ~15 | ~11 |
 | **Benötigte Server** | **1** | 1 | + extra für Prozesse |
 
 **Hauptunterscheidungsmerkmale:**
 - Einziger MCP-Server mit **wiederherstellbarem Löschen** (Papierkorb / Trash)
 - Einziger MCP-Server mit **asynchroner Hintergrundsuche** mit Paginierung
 - Integrierte **JSON-Reparatur**, **Encoding-Korrektur** und **Duplikaterkennung**
-- Umfassendste Einzelserver-Lösung (43 Tools)
+- Einziger MCP-Server mit **Cloud-Lock-sicheren Dateioperationen** (automatischer copy+delete-Fallback)
+- Umfassendste Einzelserver-Lösung (44 Tools)
 - Integrierter **Safety Mode** zur Vermeidung versehentlicher permanenter Löschungen
 
 ---
@@ -293,7 +302,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält eine umfassende Test-Suite mit **136 Tests** für Dateisystem-Operationen, Format-Konvertierung, Encoding-Reparatur, Archiv-Handling, Duplikat-Erkennung und mehr.
+Das Projekt enthält eine umfassende Test-Suite mit **143 Tests** für Dateisystem-Operationen, Format-Konvertierung, Encoding-Reparatur, Archiv-Handling, Duplikat-Erkennung und mehr.
 
 ```bash
 npm test              # Alle Tests ausführen
@@ -339,7 +348,7 @@ Dieser MCP-Server ist Teil des **[ellmos-ai](https://github.com/ellmos-ai)**-Ök
 
 | Server | Tools | Fokus | npm |
 |--------|-------|-------|-----|
-| **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **43** | **Dateisystem, Prozessverwaltung, interaktive Sitzungen** | **[`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp)** |
+| **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **44** | **Dateisystem, Prozessverwaltung, interaktive Sitzungen, Cloud-Lock-sicher** | **[`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp)** |
 | [CodeCommander](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | 17 | Code-Analyse, AST-Parsing, Import-Verwaltung | [`ellmos-codecommander-mcp`](https://www.npmjs.com/package/ellmos-codecommander-mcp) |
 | [Clatcher](https://github.com/ellmos-ai/ellmos-clatcher-mcp) | 12 | Dateireparatur, Formatkonvertierung, Batch-Operationen | [`ellmos-clatcher-mcp`](https://www.npmjs.com/package/ellmos-clatcher-mcp) |
 | [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 18 | n8n-Workflow-Verwaltung über KI-Assistenten | [`n8n-manager-mcp`](https://www.npmjs.com/package/n8n-manager-mcp) |

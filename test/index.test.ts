@@ -1602,3 +1602,174 @@ describe("Encoding Detection", () => {
     expect(content.includes("\0")).toBe(true);
   });
 });
+
+// ============================================================================
+// cloudSafeRename helper (mirrors src/index.ts, with injectable renameFn for testing)
+// ============================================================================
+
+const CLOUD_LOCK_ERRORS = new Set(['EPERM', 'EACCES', 'EXDEV']);
+
+type RenameFn = (src: string, dst: string) => Promise<void>;
+
+async function cloudSafeRename(
+  sourcePath: string,
+  destPath: string,
+  renameFn: RenameFn = fs.rename
+): Promise<{ usedFallback: boolean }> {
+  try {
+    await renameFn(sourcePath, destPath);
+    return { usedFallback: false };
+  } catch (renameError: unknown) {
+    const code = (renameError as NodeJS.ErrnoException).code;
+    if (!code || !CLOUD_LOCK_ERRORS.has(code)) {
+      throw renameError;
+    }
+
+    const stats = await fs.stat(sourcePath);
+
+    if (stats.isDirectory()) {
+      await fs.cp(sourcePath, destPath, { recursive: true });
+    } else {
+      await fs.copyFile(sourcePath, destPath);
+    }
+
+    const destStats = await fs.stat(destPath);
+    if (stats.isFile() && destStats.size !== stats.size) {
+      await fs.rm(destPath, { recursive: true, force: true });
+      throw new Error(`Copy verification failed: expected ${stats.size} bytes, got ${destStats.size} bytes`);
+    }
+
+    try {
+      if (stats.isDirectory()) {
+        await fs.rm(sourcePath, { recursive: true });
+      } else {
+        await fs.unlink(sourcePath);
+      }
+    } catch (deleteError: unknown) {
+      const delCode = (deleteError as NodeJS.ErrnoException).code;
+      if (delCode === 'EPERM' && process.platform === 'win32') {
+        try {
+          await fs.chmod(sourcePath, 0o666);
+          if (stats.isDirectory()) {
+            await fs.rm(sourcePath, { recursive: true });
+          } else {
+            await fs.unlink(sourcePath);
+          }
+        } catch {
+          throw new Error(`Copied to destination but cannot delete source (still locked): ${sourcePath}`);
+        }
+      } else {
+        throw deleteError;
+      }
+    }
+
+    return { usedFallback: true };
+  }
+}
+
+function throwWithCode(message: string, code: string): never {
+  const err = new Error(message) as NodeJS.ErrnoException;
+  err.code = code;
+  throw err;
+}
+
+// ============================================================================
+// TESTS: cloudSafeRename
+// ============================================================================
+
+describe("cloudSafeRename", () => {
+  let tmpDir: string;
+
+  beforeEach(async () => {
+    tmpDir = await makeTmpDir();
+  });
+
+  afterEach(async () => {
+    await rmDir(tmpDir);
+  });
+
+  it("moves a file via fast path (fs.rename)", async () => {
+    const src = path.join(tmpDir, "file.txt");
+    const dst = path.join(tmpDir, "moved.txt");
+    await fs.writeFile(src, "hello", "utf-8");
+
+    const result = await cloudSafeRename(src, dst);
+
+    expect(result.usedFallback).toBe(false);
+    expect(await exists(src)).toBe(false);
+    expect(await fs.readFile(dst, "utf-8")).toBe("hello");
+  });
+
+  it("moves a directory via fast path", async () => {
+    const srcDir = path.join(tmpDir, "srcdir");
+    const dstDir = path.join(tmpDir, "dstdir");
+    await fs.mkdir(srcDir);
+    await fs.writeFile(path.join(srcDir, "inner.txt"), "data", "utf-8");
+
+    const result = await cloudSafeRename(srcDir, dstDir);
+
+    expect(result.usedFallback).toBe(false);
+    expect(await exists(srcDir)).toBe(false);
+    expect(await fs.readFile(path.join(dstDir, "inner.txt"), "utf-8")).toBe("data");
+  });
+
+  it("falls back to copy+delete on cross-device (EXDEV)", async () => {
+    const src = path.join(tmpDir, "cross.txt");
+    const dst = path.join(tmpDir, "crossed.txt");
+    await fs.writeFile(src, "cross device content", "utf-8");
+
+    const failingRename: RenameFn = async () => throwWithCode("EXDEV: cross-device link not permitted", "EXDEV");
+
+    const result = await cloudSafeRename(src, dst, failingRename);
+    expect(result.usedFallback).toBe(true);
+    expect(await exists(src)).toBe(false);
+    expect(await fs.readFile(dst, "utf-8")).toBe("cross device content");
+  });
+
+  it("falls back to copy+delete on EPERM", async () => {
+    const src = path.join(tmpDir, "perm.txt");
+    const dst = path.join(tmpDir, "permitted.txt");
+    await fs.writeFile(src, "permission test", "utf-8");
+
+    const failingRename: RenameFn = async () => throwWithCode("EPERM: operation not permitted", "EPERM");
+
+    const result = await cloudSafeRename(src, dst, failingRename);
+    expect(result.usedFallback).toBe(true);
+    expect(await exists(src)).toBe(false);
+    expect(await fs.readFile(dst, "utf-8")).toBe("permission test");
+  });
+
+  it("falls back to copy+delete for directories on EACCES", async () => {
+    const srcDir = path.join(tmpDir, "acces_dir");
+    const dstDir = path.join(tmpDir, "moved_dir");
+    await fs.mkdir(srcDir);
+    await fs.writeFile(path.join(srcDir, "a.txt"), "aaa", "utf-8");
+    await fs.writeFile(path.join(srcDir, "b.txt"), "bbb", "utf-8");
+
+    const failingRename: RenameFn = async () => throwWithCode("EACCES: permission denied", "EACCES");
+
+    const result = await cloudSafeRename(srcDir, dstDir, failingRename);
+    expect(result.usedFallback).toBe(true);
+    expect(await exists(srcDir)).toBe(false);
+    expect(await fs.readFile(path.join(dstDir, "a.txt"), "utf-8")).toBe("aaa");
+    expect(await fs.readFile(path.join(dstDir, "b.txt"), "utf-8")).toBe("bbb");
+  });
+
+  it("rethrows non-cloud-lock errors (e.g. ENOENT)", async () => {
+    const src = path.join(tmpDir, "nonexistent.txt");
+    const dst = path.join(tmpDir, "dst.txt");
+
+    await expect(cloudSafeRename(src, dst)).rejects.toThrow();
+  });
+
+  it("does not trigger fallback for unknown error codes", async () => {
+    const src = path.join(tmpDir, "unkn.txt");
+    const dst = path.join(tmpDir, "unkn_dst.txt");
+    await fs.writeFile(src, "data", "utf-8");
+
+    const failingRename: RenameFn = async () => throwWithCode("EISDIR: is a directory", "EISDIR");
+
+    await expect(cloudSafeRename(src, dst, failingRename)).rejects.toThrow("EISDIR");
+    expect(await exists(src)).toBe(true);
+  });
+});

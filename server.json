@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.ellmos-ai/ellmos-filecommander-mcp",
-  "version": "1.7.10",
+  "version": "1.8.0",
   "title": "ellmos FileCommander",
-  "description": "Local filesystem MCP with 43 tools for safe delete, sessions, async search, OCR, ZIP, and PDF.",
+  "description": "Local filesystem MCP with 44 tools for safe delete, sessions, async search, OCR, ZIP, PDF, and cloud-lock-safe file operations.",
   "websiteUrl": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
   "repository": {
     "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
@@ -14,7 +14,7 @@
     {
       "registryType": "npm",
       "identifier": "ellmos-filecommander-mcp",
-      "version": "1.7.10",
+      "version": "1.8.0",
       "transport": { "type": "stdio" },
       "runtimeHint": "npx"
     }

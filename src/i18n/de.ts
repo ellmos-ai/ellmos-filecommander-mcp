@@ -63,6 +63,7 @@ export const de: Translations = {
   // ==================== fc_move ====================
   fc_move: {
     moved: (source, dest) => `\u2705 Verschoben:\n  \uD83D\uDCE4 ${source}\n  \uD83D\uDCE5 ${dest}`,
+    movedViaFallback: (source, dest) => `\u2705 Verschoben (via copy+delete, Cloud-Lock umgangen):\n  \uD83D\uDCE4 ${source}\n  \uD83D\uDCE5 ${dest}`,
     moveError: (msg) => `\u274C Fehler beim Verschieben: ${msg}`,
   },
 
@@ -465,6 +466,24 @@ export const de: Translations = {
     enabled: '\uD83D\uDEE1\uFE0F **Safe Mode aktiviert.** Alle L\u00f6schoperationen nutzen jetzt den Papierkorb.',
     disabled: '\u26A0\uFE0F **Safe Mode deaktiviert.** L\u00f6schoperationen sind jetzt permanent.',
     redirected: (originalAction) => `\uD83D\uDEE1\uFE0F Safe Mode aktiv: ${originalAction} wurde in den Papierkorb umgeleitet.`,
+  },
+
+  // ==================== fc_check_cloud_lock ====================
+  fc_check_cloud_lock: {
+    description: 'Pr\u00FCft ob ein Pfad von einem Cloud-Sync-Filter (cldflt.sys) blockiert werden k\u00F6nnte. Nur auf Windows relevant.',
+    notApplicable: '\u2139\uFE0F Cloud-Lock-Pr\u00FCfung ist nur auf Windows relevant. Auf diesem System nicht anwendbar.',
+    header: (p) => `\u2601\uFE0F **Cloud-Lock-Diagnose: ${p}**`,
+    labelDriver: 'cldflt.sys Treiber',
+    driverActive: '\uD83D\uDFE1 Aktiv (geladen)',
+    driverInactive: '\uD83D\uDFE2 Nicht geladen',
+    labelInSyncFolder: 'In Sync-Ordner',
+    notInSyncFolder: '\u2014 Nein',
+    labelRisk: 'Lock-Risiko',
+    riskHigh: '\uD83D\uDD34 Hoch \u2014 rename-Operationen k\u00F6nnen blockiert werden',
+    riskMedium: '\uD83D\uDFE1 Mittel \u2014 Teilbedingung erf\u00FCllt',
+    riskLow: '\uD83D\uDFE2 Niedrig \u2014 kein Cloud-Sync-Konflikt erwartet',
+    advice: '\uD83D\uDCA1 fc_move nutzt automatisch einen copy+delete-Fallback wenn der Cloud-Filter blockiert.',
+    checkError: (msg) => `\u274C Fehler bei Cloud-Lock-Pr\u00FCfung: ${msg}`,
   },
 
   // ==================== Server ====================
