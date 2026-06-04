@@ -11,6 +11,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org/)
+[![FileCommander tests](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml)
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities.
 
@@ -311,6 +312,7 @@ npx vitest --watch    # Watch mode
 ```
 
 Tests are verified on **Windows**, **macOS**, and **Linux**.
+Pushes and pull requests run CI on Node.js **20**, **22**, and **24** with `npm ci`, TypeScript build, Vitest, and an npm package dry-run.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 

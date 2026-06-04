@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Add a dedicated GitHub Actions test workflow for Node.js 20, 22, and 24. The workflow runs `npm ci`, TypeScript build, Vitest, and an npm package dry-run on pushes and pull requests.
+
 ## [1.8.0] - 2026-05-31
 
 ### Added
