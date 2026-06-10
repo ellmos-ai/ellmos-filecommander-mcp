@@ -40,7 +40,7 @@ const execAsync = promisify(exec);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.7.10"
+  version: "1.8.0"
 });
 
 // ============================================================================
@@ -4120,7 +4120,7 @@ server.registerTool(
     const filePath = normalizePath(params.file_path);
     const ext = path.extname(filePath).toLowerCase();
     if (!['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif', '.pdf'].includes(ext)) {
-      throw new Error(t().fc_ocr.unsupportedFormat(ext));
+      return { isError: true, content: [{ type: "text" as const, text: t().fc_ocr.unsupportedFormat(ext) }] };
     }
 
     if (ext === '.pdf') {
