@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Added
+### Fixed
+- Correct version mismatch in banner/description display (1.7.10 → 1.8.0) and improve OCR `fc_ocr` error handling for edge cases.
+
+### Changed
+- Bump `@modelcontextprotocol/sdk` from 1.27.1 to 1.29.0.
+
+### CI
 - Add a dedicated GitHub Actions test workflow for Node.js 20, 22, and 24. The workflow runs `npm ci`, TypeScript build, Vitest, and an npm package dry-run on pushes and pull requests.
 - Lock `@emnapi/core` and `@emnapi/runtime` as dev dependencies so Linux `npm ci` resolves Vitest/Rolldown optional WASM peer dependencies deterministically.
 

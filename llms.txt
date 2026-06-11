@@ -1,6 +1,6 @@
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
-> FileCommander is a comprehensive MCP (Model Context Protocol) server that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities. 43 tools in a single server -- everything an AI agent needs to interact with the local system. Part of the ellmos MCP family alongside codecommander and clatcher.
+> FileCommander is a comprehensive MCP (Model Context Protocol) server that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities. 44 tools in a single server -- everything an AI agent needs to interact with the local system. Part of the ellmos MCP family alongside codecommander and clatcher.
 
 Why it exists: most filesystem MCP servers only cover basic read/write. FileCommander goes further with Safe Delete (Recycle Bin on Windows, Trash on macOS/Linux instead of permanent deletion), interactive REPL sessions (Python, Node.js, shells) accessible through the MCP protocol, async search of large directory trees running in the background while the AI continues other work, process management (list, start, terminate), string-replace editing with context validation, format conversion across JSON / CSV / INI / YAML / TOML / XML / TOON, ZIP archive create/extract/list, SHA-256 / MD5 / SHA-1 / SHA-512 checksums with compare, optional tesseract.js OCR for image text extraction, global safety mode to route all deletes through Recycle Bin / Trash, and Markdown-to-HTML/PDF export. Cross-platform with platform-specific optimizations.
 
@@ -19,12 +19,28 @@ Node.js >= 18, MIT. Published as `ellmos-filecommander-mcp` on npm. Listed on Gl
 
 Use these terms when cataloging this server: `ellmos-filecommander-mcp`, `io.github.ellmos-ai/ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `Recycle Bin MCP`, `Trash MCP`, `async file search MCP`, `process management MCP`, `interactive shell MCP`, `Markdown PDF MCP`, `OCR MCP server`.
 
+## Audience
+
+- **AI engineers** integrating local filesystem tools into Claude Desktop, Claude Code, or custom MCP clients
+- **Developers** who want safe-delete, OCR, ZIP, session management, or cloud-lock-safe file ops in their AI workflows
+- **Power users** running Claude Code or similar agents and wanting full OS-level file access via MCP
+- **Teams** deploying AI assistants on Windows/macOS/Linux that need cross-platform filesystem control
+- **Security-conscious users** who want Recycle Bin / Trash semantics and a global safety mode before any deletion
+
+## Search Phrases
+
+`MCP filesystem server`, `safe delete MCP server`, `Recycle Bin MCP`, `async file search MCP`, `process management MCP`, `interactive shell MCP`, `OCR MCP server`, `cloud lock safe file operations`, `Markdown to PDF MCP`, `ellmos filecommander`
+
+## Last-checked: 2026-06-11
+
 ## ellmos MCP family (sibling servers)
 
 - [ellmos-codecommander-mcp](https://github.com/ellmos-ai/ellmos-codecommander-mcp): Code analysis, AST parsing, import management (17 tools)
 - [ellmos-clatcher-mcp](https://github.com/ellmos-ai/ellmos-clatcher-mcp): Utility tools -- repair, convert, detect, batch ops (12 tools)
 - [n8n-manager-mcp](https://github.com/ellmos-ai/n8n-manager-mcp): n8n workflow management via MCP (18 tools)
 - [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp): MCP stack discovery, profile management, and control plane (10 tools)
+- [ellmos-homebase-mcp](https://github.com/ellmos-ai/ellmos-homebase-mcp): LLM memory, knowledge, state, routing, and orchestration (44 tools)
+- [ellmos-servercommander-mcp](https://github.com/ellmos-ai/ellmos-servercommander-mcp): Server deployment, health checks, and mail access tools (8 tools)
 
 ## Broader ellmos ecosystem
 
