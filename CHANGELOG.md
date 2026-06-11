@@ -14,6 +14,11 @@ All notable changes to this project will be documented in this file.
 - Add a dedicated GitHub Actions test workflow for Node.js 20, 22, and 24. The workflow runs `npm ci`, TypeScript build, Vitest, and an npm package dry-run on pushes and pull requests.
 - Lock `@emnapi/core` and `@emnapi/runtime` as dev dependencies so Linux `npm ci` resolves Vitest/Rolldown optional WASM peer dependencies deterministically.
 
+### Documentation
+- Move the `llms.txt` last-checked marker to the top of the file and normalize search phrases into a crawler-friendly fenced code block.
+- Ignore local automation protocol files via `*-protocoll.txt`.
+- Normalize `package.json` repository metadata to npm's `git+https` form.
+
 ## [1.8.0] - 2026-05-31
 
 ### Added

@@ -1,3 +1,5 @@
+## Last-checked: 2026-06-11
+
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
 > FileCommander is a comprehensive MCP (Model Context Protocol) server that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities. 44 tools in a single server -- everything an AI agent needs to interact with the local system. Part of the ellmos MCP family alongside codecommander and clatcher.
@@ -15,10 +17,6 @@ Node.js >= 18, MIT. Published as `ellmos-filecommander-mcp` on npm. Listed on Gl
 - [server.json](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/server.json): Official MCP Registry metadata
 - [glama.json](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/glama.json): Glama-compatible MCP directory metadata
 
-## Discovery terms
-
-Use these terms when cataloging this server: `ellmos-filecommander-mcp`, `io.github.ellmos-ai/ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `Recycle Bin MCP`, `Trash MCP`, `async file search MCP`, `process management MCP`, `interactive shell MCP`, `Markdown PDF MCP`, `OCR MCP server`.
-
 ## Audience
 
 - **AI engineers** integrating local filesystem tools into Claude Desktop, Claude Code, or custom MCP clients
@@ -29,9 +27,20 @@ Use these terms when cataloging this server: `ellmos-filecommander-mcp`, `io.git
 
 ## Search Phrases
 
-`MCP filesystem server`, `safe delete MCP server`, `Recycle Bin MCP`, `async file search MCP`, `process management MCP`, `interactive shell MCP`, `OCR MCP server`, `cloud lock safe file operations`, `Markdown to PDF MCP`, `ellmos filecommander`
-
-## Last-checked: 2026-06-11
+```
+MCP filesystem server
+safe delete MCP server
+Recycle Bin MCP
+async file search MCP
+process management MCP
+interactive shell MCP
+OCR MCP server
+cloud lock safe file operations
+Markdown to PDF MCP
+ellmos filecommander
+ellmos-filecommander-mcp
+FileCommander MCP
+```
 
 ## ellmos MCP family (sibling servers)
 

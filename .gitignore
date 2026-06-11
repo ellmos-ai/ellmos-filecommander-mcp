@@ -39,6 +39,7 @@ npm-debug.log*
 
 # Internal development files
 _Spielwiese/
+*-protocoll.txt
 build.py.wip
 BUILD_SKILL.md
 COMPLETE_PROJECT_CONTEXT.txt

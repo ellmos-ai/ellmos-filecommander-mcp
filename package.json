@@ -46,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp.git"
+    "url": "git+https://github.com/ellmos-ai/ellmos-filecommander-mcp.git"
   },
   "bugs": {
     "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp/issues"
