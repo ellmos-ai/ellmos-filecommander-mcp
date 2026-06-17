@@ -9,7 +9,7 @@
  * See LICENSE file for details.
  *
  * @author Lukas (BACH)
- * @version 1.7.0
+ * @version 1.8.2
  * @license MIT
  */
 
@@ -43,7 +43,7 @@ const execAsync = promisify(exec);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.8.0"
+  version: "1.8.2"
 });
 
 // ============================================================================

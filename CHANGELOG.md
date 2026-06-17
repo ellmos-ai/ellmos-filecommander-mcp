@@ -2,13 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.8.2] - 2026-06-17
 
 ### Fixed
 - Correct version mismatch in banner/description display (1.7.10 → 1.8.0) and improve OCR `fc_ocr` error handling for edge cases.
+- Align `package.json`, lockfile, MCP runtime version, source header, and `server.json` metadata after the update-notifier release.
+- Refresh npm dependency locks so production audit findings for `hono` and `js-yaml` are resolved.
 
 ### Changed
 - Bump `@modelcontextprotocol/sdk` from 1.27.1 to 1.29.0.
+- Add a TTY-guarded `update-notifier` check for interactive CLI starts while keeping MCP stdio output unchanged.
 
 ### CI
 - Add a dedicated GitHub Actions test workflow for Node.js 20, 22, and 24. The workflow runs `npm ci`, TypeScript build, Vitest, and an npm package dry-run on pushes and pull requests.
