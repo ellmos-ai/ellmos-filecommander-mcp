@@ -303,7 +303,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält eine umfassende Test-Suite mit **143 Tests** für Dateisystem-Operationen, Format-Konvertierung, Encoding-Reparatur, Archiv-Handling, Duplikat-Erkennung und mehr.
+Das Projekt enthält eine umfassende Test-Suite mit **154 Tests** für Dateisystem-Operationen, Format-Konvertierung, Encoding-Reparatur, Archiv-Handling, Duplikat-Erkennung, i18n-Sprachpakete und mehr.
 
 ```bash
 npm test              # Alle Tests ausführen

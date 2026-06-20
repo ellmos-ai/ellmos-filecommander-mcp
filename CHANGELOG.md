@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Replace the Spanish, Chinese, Japanese, and Russian i18n fallback stubs with full FileCommander runtime translations.
+- Add an i18n regression test covering localized core messages, interpolation, and stub removal for all four language packs.
+
+### Documentation
+- Update README test counts to 154 after adding the i18n regression coverage.
+
 ## [1.8.2] - 2026-06-17
 
 ### Fixed

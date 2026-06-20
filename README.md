@@ -303,7 +303,7 @@ npm test
 
 ### Testing
 
-The project includes a comprehensive test suite with **143 tests** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, and more.
+The project includes a comprehensive test suite with **154 tests** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, i18n language packs, and more.
 
 ```bash
 npm test              # Run all tests
