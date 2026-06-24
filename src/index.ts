@@ -356,7 +356,8 @@ async function executeCommand(
         '"$1"'
       );
 
-      return execAsync(`"${windowsShell}" -Command "${psCommand.replace(/"/g, '\\"')}"`, {
+      const encodedCommand = Buffer.from(psCommand, 'utf16le').toString('base64');
+      return execAsync(`"${windowsShell}" -NonInteractive -EncodedCommand ${encodedCommand}`, {
         timeout: options.timeout
       });
     } else {
