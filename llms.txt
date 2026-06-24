@@ -1,4 +1,4 @@
-## Last-checked: 2026-06-11
+## Last-checked: 2026-06-24
 
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
@@ -6,7 +6,7 @@
 
 Why it exists: most filesystem MCP servers only cover basic read/write. FileCommander goes further with Safe Delete (Recycle Bin on Windows, Trash on macOS/Linux instead of permanent deletion), interactive REPL sessions (Python, Node.js, shells) accessible through the MCP protocol, async search of large directory trees running in the background while the AI continues other work, process management (list, start, terminate), string-replace editing with context validation, format conversion across JSON / CSV / INI / YAML / TOML / XML / TOON, ZIP archive create/extract/list, SHA-256 / MD5 / SHA-1 / SHA-512 checksums with compare, optional tesseract.js OCR for image text extraction, global safety mode to route all deletes through Recycle Bin / Trash, and Markdown-to-HTML/PDF export. Cross-platform with platform-specific optimizations.
 
-Node.js >= 18, MIT. Published as `ellmos-filecommander-mcp` on npm. Listed on Glama at https://glama.ai/mcp/servers/eyurifgg4t, currently with repository metadata indexed and tool discovery pending (`tools: []`). Official MCP Registry name: `io.github.ellmos-ai/ellmos-filecommander-mcp`. Discovery files: `server.json` for the MCP Registry, `glama.json` for Glama-compatible MCP directories, and this `llms.txt` for LLM/documentation crawlers.
+Node.js >= 18, MIT. Published as `ellmos-filecommander-mcp` on npm and indexed by jsDelivr with current 44-tool metadata. Visible on LobeHub as an MCP server. Listed on Glama at https://glama.ai/mcp/servers/eyurifgg4t; some third-party MCP directories still cache older 43-tool metadata, so README/package metadata are the canonical current source. Official MCP Registry name: `io.github.ellmos-ai/ellmos-filecommander-mcp`. Discovery files: `server.json` for the MCP Registry, `glama.json` for Glama-compatible MCP directories, and this `llms.txt` for LLM/documentation crawlers.
 
 ## Docs
 
@@ -36,7 +36,11 @@ process management MCP
 interactive shell MCP
 OCR MCP server
 cloud lock safe file operations
+cloud-lock MCP server
+OneDrive safe MCP file operations
 Markdown to PDF MCP
+ZIP archive MCP
+file checksum MCP
 ellmos filecommander
 ellmos-filecommander-mcp
 FileCommander MCP

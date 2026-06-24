@@ -8,8 +8,12 @@ All notable changes to this project will be documented in this file.
 - Replace the Spanish, Chinese, Japanese, and Russian i18n fallback stubs with full FileCommander runtime translations.
 - Add an i18n regression test covering localized core messages, interpolation, and stub removal for all four language packs.
 
+### Fixed
+- Use `-EncodedCommand` (Base64/UTF-16LE) for PowerShell execution instead of string interpolation, preventing injection via metacharacters (`$`, backtick, `&`). Fixes CodeQL `js/incomplete-string-escaping` alert.
+
 ### Documentation
 - Update README test counts to 154 after adding the i18n regression coverage.
+- Refresh discoverability metadata for the current 44-tool FileCommander release, including jsDelivr and LobeHub visibility, cached third-party directory caveats, and additional Cloud-Lock/OCR/ZIP search phrases.
 
 ## [1.8.2] - 2026-06-17
 
