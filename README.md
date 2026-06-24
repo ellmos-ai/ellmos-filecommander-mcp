@@ -17,9 +17,9 @@ A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants
 
 **44 tools** in a single server - everything an AI agent needs to interact with the local system.
 
-**Discovery keywords:** local filesystem MCP server, safe delete MCP, Recycle Bin MCP server, process management MCP, interactive shell MCP, async file search for AI agents, Markdown to PDF MCP, OCR MCP server.
+**Discovery keywords:** local filesystem MCP server, safe delete MCP, Recycle Bin MCP server, process management MCP, interactive shell MCP, async file search for AI agents, cloud-lock-safe file operations, Markdown to PDF MCP, OCR MCP server, ZIP archive MCP.
 
-**Registry status:** published on [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp), listed on [Glama](https://glama.ai/mcp/servers/eyurifgg4t), and prepared for the official MCP Registry via [`server.json`](server.json). Glama currently indexes the repository metadata but still reports `tools: []`, so a reindex should be triggered after the next npm patch release.
+**Registry status:** published on [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp), indexed by [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp), visible on [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp), listed on [Glama](https://glama.ai/mcp/servers/eyurifgg4t), and prepared for the official MCP Registry via [`server.json`](server.json). Some third-party directories still show older 43-tool metadata, so the canonical README/npm metadata should remain the source of truth until their reindex catches up.
 
 ---
 
@@ -265,6 +265,8 @@ FileCommander is designed to be discoverable by both people and AI agents:
 - [`llms.txt`](llms.txt) gives compact context for LLMs, agent catalogs, and documentation crawlers.
 
 Primary search terms: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
+
+External discovery notes: npm and jsDelivr already show the current 44-tool package metadata. LobeHub indexes the GitHub repo as an MCP server. Some secondary MCP directories still cache older 43-tool descriptions; use the package description and this README as the canonical 44-tool reference.
 
 ---
 

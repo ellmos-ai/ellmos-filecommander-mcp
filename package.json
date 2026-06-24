@@ -39,6 +39,10 @@
     "mcp-registry",
     "safe-delete",
     "async-search",
+    "cloud-lock",
+    "recycle-bin",
+    "ocr",
+    "zip-archive",
     "markdown-export",
     "pdf-export"
   ],
