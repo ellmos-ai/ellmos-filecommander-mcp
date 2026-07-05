@@ -9,7 +9,7 @@
  * See LICENSE file for details.
  *
  * @author Lukas (BACH)
- * @version 1.8.2
+ * @version 1.9.0
  * @license MIT
  */
 
@@ -27,6 +27,8 @@ import * as path from "path";
 import * as crypto from "crypto";
 import { createHash } from "crypto";
 import * as os from "os";
+import * as dns from "dns/promises";
+import * as net from "net";
 import { exec, execSync, spawn } from "child_process";
 import { promisify } from "util";
 import * as yaml from 'js-yaml';
@@ -43,7 +45,7 @@ const execAsync = promisify(exec);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.8.2"
+  version: "1.9.0"
 });
 
 // ============================================================================
@@ -4251,6 +4253,236 @@ server.registerTool(
     }
 
     return { content: [{ type: "text" as const, text: result }] };
+  }
+);
+
+// ============================================================================
+// Tool: Web Fetch (fc_web_fetch) — read-only network tool (first online tool)
+// Portiert aus BACH web_scrape.py; kanonische Vollversion: .MODULES/web-scraper.
+// Leichtgewichtig (Node fetch), ohne Screenshot. Mit SSRF-Schutz.
+// ============================================================================
+
+const FC_WEB_USER_AGENT = "Mozilla/5.0 (compatible; ellmos-filecommander/1.9; +https://github.com/ellmos-ai/ellmos-filecommander-mcp)";
+const FC_WEB_MAX_BYTES = 5_000_000;
+const FC_WEB_BODY_PREVIEW = 10_000;
+const FC_WEB_EXTRACT_PREVIEW = 20_000;
+
+function fcWebIsBlockedIp(ip: string): boolean {
+  const version = net.isIP(ip);
+  if (version === 4) {
+    const parts = ip.split('.').map(Number);
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return true;
+    const [a, b] = parts;
+    if (a === 0 || a === 10 || a === 127) return true;
+    if (a === 169 && b === 254) return true;          // link-local
+    if (a === 172 && b >= 16 && b <= 31) return true; // private
+    if (a === 192 && b === 168) return true;          // private
+    if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT
+    if (a >= 224) return true;                        // multicast / reserved
+    return false;
+  }
+  if (version === 6) {
+    const ip6 = ip.toLowerCase();
+    if (ip6 === '::1' || ip6 === '::') return true;
+    if (ip6.startsWith('fe80')) return true;          // link-local
+    if (ip6.startsWith('fc') || ip6.startsWith('fd')) return true; // ULA fc00::/7
+    if (ip6.startsWith('::ffff:')) return fcWebIsBlockedIp(ip6.replace('::ffff:', ''));
+    return false;
+  }
+  return true; // not a valid IP literal -> block
+}
+
+async function fcWebGuardTarget(rawUrl: string, allowPrivate: boolean): Promise<URL> {
+  let u: URL;
+  try {
+    u = new URL(rawUrl);
+  } catch {
+    throw new Error(`Invalid URL: ${rawUrl}`);
+  }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') {
+    throw new Error(`Only http/https allowed, not: ${u.protocol}`);
+  }
+  if (allowPrivate) return u;
+  const host = u.hostname;
+  if (!host) throw new Error('No host in URL');
+  if (host.toLowerCase() === 'localhost') {
+    throw new Error('Blocked internal target: localhost (set allow_private to override)');
+  }
+  let ips: string[];
+  if (net.isIP(host)) {
+    ips = [host];
+  } else {
+    try {
+      const records = await dns.lookup(host, { all: true });
+      ips = records.map(r => r.address);
+    } catch {
+      throw new Error(`Cannot resolve host: ${host}`);
+    }
+  }
+  if (ips.length === 0) throw new Error(`Cannot resolve host: ${host}`);
+  for (const ip of ips) {
+    if (fcWebIsBlockedIp(ip)) {
+      throw new Error(`Blocked internal/private target: ${host} -> ${ip} (set allow_private to override)`);
+    }
+  }
+  return u;
+}
+
+function fcWebHtmlToText(html: string): string {
+  let s = html.replace(/<(script|style|noscript)[^>]*>[\s\S]*?<\/\1>/gi, ' ');
+  s = s.replace(/<\/(p|div|section|article|li|h[1-6]|tr)>/gi, '\n');
+  s = s.replace(/<br\s*\/?>/gi, '\n');
+  s = s.replace(/<[^>]+>/g, ' ');
+  s = s.replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&lt;/gi, '<')
+       .replace(/&gt;/gi, '>').replace(/&quot;/gi, '"').replace(/&#39;/gi, "'");
+  s = s.replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{3,}/g, '\n\n');
+  return s.trim();
+}
+
+function fcWebParseLinks(html: string, base: string): { text: string; href: string }[] {
+  const out: { text: string; href: string }[] = [];
+  const seen = new Set<string>();
+  const re = /<a[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(html)) !== null) {
+    if (/^(javascript:|mailto:|tel:|#)/i.test(m[1])) continue;
+    let href: string;
+    try { href = new URL(m[1], base).toString(); } catch { continue; }
+    if (seen.has(href)) continue;
+    seen.add(href);
+    const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120);
+    out.push({ text, href });
+    if (out.length >= 200) break;
+  }
+  return out;
+}
+
+function fcWebParseForms(html: string): { action: string; method: string; fields: string[] }[] {
+  const forms: { action: string; method: string; fields: string[] }[] = [];
+  const formRe = /<form([^>]*)>([\s\S]*?)<\/form>/gi;
+  let fm: RegExpExecArray | null;
+  while ((fm = formRe.exec(html)) !== null) {
+    const attrs = fm[1];
+    const body = fm[2];
+    const action = (/action=["']([^"']*)["']/i.exec(attrs) || [])[1] || '';
+    const method = ((/method=["']([^"']*)["']/i.exec(attrs) || [])[1] || 'GET').toUpperCase();
+    const fields: string[] = [];
+    let im: RegExpExecArray | null;
+    const inputRe = /<input([^>]*)>/gi;
+    while ((im = inputRe.exec(body)) !== null) {
+      const name = (/name=["']([^"']*)["']/i.exec(im[1]) || [])[1] || '?';
+      const type = (/type=["']([^"']*)["']/i.exec(im[1]) || [])[1] || 'text';
+      fields.push(`input[${type}] name=${name}`);
+    }
+    const taRe = /<textarea[^>]*name=["']([^"']*)["']/gi;
+    while ((im = taRe.exec(body)) !== null) fields.push(`textarea name=${im[1]}`);
+    const selRe = /<select[^>]*name=["']([^"']*)["']/gi;
+    while ((im = selRe.exec(body)) !== null) fields.push(`select name=${im[1]}`);
+    forms.push({ action, method, fields });
+  }
+  return forms;
+}
+
+async function fcWebDoFetch(startUrl: URL, timeoutMs: number, allowPrivate: boolean): Promise<{ status: number; headers: Headers; body: string; contentType: string; finalUrl: string }> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const MAX_REDIRECTS = 5;
+  try {
+    let current = startUrl;
+    for (let hop = 0; ; hop++) {
+      const resp = await fetch(current, {
+        redirect: 'manual',
+        signal: controller.signal,
+        headers: { 'User-Agent': FC_WEB_USER_AGENT },
+      });
+      const location = resp.headers.get('location');
+      if (resp.status >= 300 && resp.status < 400 && location) {
+        // Re-guard EVERY hop so a public URL cannot redirect into an internal target.
+        if (hop >= MAX_REDIRECTS) throw new Error(`Too many redirects (>${MAX_REDIRECTS})`);
+        const next = new URL(location, current);
+        current = await fcWebGuardTarget(next.toString(), allowPrivate);
+        continue;
+      }
+      const contentType = resp.headers.get('content-type') || '';
+      const cl = resp.headers.get('content-length');
+      if (cl && Number(cl) > FC_WEB_MAX_BYTES) {
+        throw new Error(`Response too large: ${cl} bytes (limit ${FC_WEB_MAX_BYTES})`);
+      }
+      const buf = Buffer.from(await resp.arrayBuffer());
+      const body = buf.subarray(0, FC_WEB_MAX_BYTES).toString('utf-8');
+      return { status: resp.status, headers: resp.headers, body, contentType, finalUrl: current.toString() };
+    }
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+server.registerTool(
+  "fc_web_fetch",
+  {
+    title: "Web Fetch",
+    description: t().fc_web_fetch.description,
+    inputSchema: {
+      url: z.string().min(1).describe("URL to fetch (http/https only)"),
+      mode: z.enum(["extract", "raw", "links", "forms", "headers"]).default("extract")
+        .describe("extract=clean main text (default), raw=HTTP body, links=all links, forms=form fields, headers=response headers"),
+      allow_private: z.boolean().default(false).describe("Allow internal/private/loopback targets (turns the SSRF guard off). Default false."),
+      timeout_seconds: z.number().int().min(1).max(120).default(20).describe("Request timeout in seconds (default 20)"),
+    },
+    annotations: {
+      title: "Web Fetch",
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true
+    }
+  },
+  async (params) => {
+    try {
+      const u = await fcWebGuardTarget(params.url, params.allow_private);
+      const r = await fcWebDoFetch(u, params.timeout_seconds * 1000, params.allow_private);
+      const sep = "=".repeat(40);
+      let text = "";
+
+      if (params.mode === "headers") {
+        const lines = [`Headers for ${r.finalUrl}`, `Status: ${r.status}`, sep];
+        r.headers.forEach((v, k) => lines.push(`  ${k}: ${v}`));
+        text = lines.join("\n");
+      } else if (params.mode === "raw") {
+        const truncated = r.body.length > FC_WEB_BODY_PREVIEW;
+        const head = `URL: ${r.finalUrl}\nStatus: ${r.status}\nContent-Type: ${r.contentType}\nSize: ${r.body.length} chars\n${sep}\n\n`;
+        text = head + (truncated
+          ? r.body.slice(0, FC_WEB_BODY_PREVIEW) + `\n\n... (truncated to ${FC_WEB_BODY_PREVIEW} chars)`
+          : r.body);
+      } else if (params.mode === "links") {
+        const links = fcWebParseLinks(r.body, r.finalUrl);
+        const lines = [`Links on ${r.finalUrl} (${links.length} found)`, sep];
+        for (const l of links) lines.push(`  ${l.text || "(no text)"}\n    ${l.href}`);
+        text = lines.join("\n");
+      } else if (params.mode === "forms") {
+        const forms = fcWebParseForms(r.body);
+        if (forms.length === 0) {
+          text = `No forms on ${r.finalUrl}`;
+        } else {
+          const lines = [`Forms on ${r.finalUrl} (${forms.length} found)`, sep];
+          forms.forEach((f, i) => {
+            lines.push(`  Form #${i + 1}: action=${f.action || "?"} method=${f.method}`);
+            f.fields.forEach(fl => lines.push(`    ${fl}`));
+          });
+          text = lines.join("\n");
+        }
+      } else {
+        const content = fcWebHtmlToText(r.body);
+        const truncated = content.length > FC_WEB_EXTRACT_PREVIEW;
+        text = `Extract from ${r.finalUrl} (${content.length} chars)\n${sep}\n\n`
+          + (truncated ? content.slice(0, FC_WEB_EXTRACT_PREVIEW) + `\n\n... (truncated to ${FC_WEB_EXTRACT_PREVIEW} chars)` : content);
+      }
+
+      return { content: [{ type: "text" as const, text }] };
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      return { content: [{ type: "text" as const, text: t().common.errorGeneric(msg) }] };
+    }
   }
 );
 

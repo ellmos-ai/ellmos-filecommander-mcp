@@ -15,7 +15,7 @@
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities.
 
-**44 tools** in a single server - everything an AI agent needs to interact with the local system.
+**46 tools** in a single server - everything an AI agent needs to interact with the local system.
 
 **Discovery keywords:** local filesystem MCP server, safe delete MCP, Recycle Bin MCP server, process management MCP, interactive shell MCP, async file search for AI agents, cloud-lock-safe file operations, Markdown to PDF MCP, OCR MCP server, ZIP archive MCP.
 
@@ -206,7 +206,13 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | `fc_md_to_html` | Markdown to standalone HTML with CSS styling (headers, code blocks, tables, nested lists, blockquotes, images, checkboxes) |
 | `fc_md_to_pdf` | Markdown to PDF via headless browser (Edge/Chrome). Falls back to HTML if no browser is available |
 
-**Total: 44 tools**
+### Web (1 tool)
+
+| Tool | Description |
+|------|-------------|
+| `fc_web_fetch` | Fetch a web page and return content by `mode`: extract (clean main text), raw (HTTP body), links, forms, or headers. Read-only network tool; SSRF guard blocks internal/private targets by default. |
+
+**Total: 46 tools**
 
 ---
 
@@ -244,7 +250,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 - Only MCP server with **async background search** with pagination
 - Built-in **JSON repair**, **encoding fix**, and **duplicate detection**
 - Only MCP server with **cloud-lock-safe file operations** (automatic copy+delete fallback)
-- Most comprehensive single-server solution (44 tools)
+- Most comprehensive single-server solution (46 tools)
 - Built-in **safety mode** to prevent accidental permanent deletion
 
 ---

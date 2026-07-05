@@ -441,6 +441,10 @@ export const zh: Translations = {
     checkError: (msg) => `\u274C 检查云锁时出错: ${msg}`,
   },
 
+  fc_web_fetch: {
+    description: '获取网页并根据模式返回内容：extract（干净的正文）、raw（HTTP 正文，已截断）、links、forms 或 headers。只读网络工具；默认阻止内部/私有目标（设置 allow_private 可覆盖）。',
+  },
+
   server: {
     started: '\uD83D\uDE80 FileCommander MCP 服务器已启动',
     languageSet: (lang) => `语言设置为: ${lang}`,

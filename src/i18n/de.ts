@@ -487,6 +487,10 @@ export const de: Translations = {
   },
 
   // ==================== Server ====================
+  fc_web_fetch: {
+    description: 'Ruft eine Webseite ab und gibt je nach Modus Inhalt zurück: extract (sauberer Haupttext), raw (HTTP-Body, gekürzt), links, forms oder headers. Nur lesendes Netzwerk-Tool; interne/private Ziele sind standardmäßig blockiert (allow_private zum Überschreiben).',
+  },
+
   server: {
     started: '\uD83D\uDE80 BACH FileCommander MCP Server gestartet',
     languageSet: (lang) => `Language set to: ${lang}`,

@@ -2,9 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.9.0] - 2026-07-05
 
 ### Added
+- Add `fc_web_fetch`: read-only network tool that fetches a web page and returns content by `mode` (extract=clean main text, raw=HTTP body, links, forms, headers). First online tool in FileCommander; uses Node native `fetch` (no new dependency). SSRF guard blocks internal/private/loopback targets by default (`allow_private` to override); 5 MB size cap and configurable timeout. Description localized in all 6 languages. The full, portable version (incl. screenshot) lives in the `web-scraper` module.
 - Replace the Spanish, Chinese, Japanese, and Russian i18n fallback stubs with full FileCommander runtime translations.
 - Add an i18n regression test covering localized core messages, interpolation, and stub removal for all four language packs.
 

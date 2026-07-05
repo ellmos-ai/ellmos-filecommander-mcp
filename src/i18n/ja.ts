@@ -441,6 +441,10 @@ export const ja: Translations = {
     checkError: (msg) => `\u274C クラウドロック確認エラー: ${msg}`,
   },
 
+  fc_web_fetch: {
+    description: 'ウェブページを取得し、モードに応じて内容を返します：extract（クリーンな本文）、raw（HTTP ボディ、切り詰め）、links、forms、headers。読み取り専用のネットワークツールです。内部／プライベートの宛先はデフォルトでブロックされます（allow_private で上書き）。',
+  },
+
   server: {
     started: '\uD83D\uDE80 FileCommander MCPサーバーを起動しました',
     languageSet: (lang) => `言語を設定しました: ${lang}`,

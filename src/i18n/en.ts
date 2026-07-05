@@ -487,6 +487,10 @@ export const en: Translations = {
   },
 
   // ==================== Server ====================
+  fc_web_fetch: {
+    description: 'Fetch a web page and return content depending on mode: extract (clean main text), raw (HTTP body, truncated), links, forms, or headers. Read-only network tool; internal/private targets are blocked by default (set allow_private to override).',
+  },
+
   server: {
     started: '\uD83D\uDE80 BACH FileCommander MCP Server started',
     languageSet: (lang) => `Language set to: ${lang}`,

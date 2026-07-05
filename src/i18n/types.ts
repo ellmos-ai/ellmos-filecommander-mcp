@@ -489,6 +489,10 @@ export interface Translations {
   };
 
   // ==================== Server ====================
+  fc_web_fetch: {
+    description: string;
+  };
+
   server: {
     started: string;
     languageSet: (lang: string) => string;

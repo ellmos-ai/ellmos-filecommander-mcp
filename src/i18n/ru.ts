@@ -441,6 +441,10 @@ export const ru: Translations = {
     checkError: (msg) => `\u274C Ошибка проверки облачной блокировки: ${msg}`,
   },
 
+  fc_web_fetch: {
+    description: 'Загружает веб-страницу и возвращает содержимое в зависимости от режима: extract (чистый основной текст), raw (тело HTTP, усечённое), links, forms или headers. Сетевой инструмент только для чтения; внутренние/приватные адреса заблокированы по умолчанию (allow_private для обхода).',
+  },
+
   server: {
     started: '\uD83D\uDE80 MCP-сервер FileCommander запущен',
     languageSet: (lang) => `Язык установлен: ${lang}`,

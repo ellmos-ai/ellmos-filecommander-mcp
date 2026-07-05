@@ -15,7 +15,7 @@
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateisuche bietet.
 
-**44 Tools** in einem einzigen Server — alles, was ein KI-Agent für die Interaktion mit dem lokalen System braucht.
+**46 Tools** in einem einzigen Server — alles, was ein KI-Agent für die Interaktion mit dem lokalen System braucht.
 
 **Discovery-Suchbegriffe:** lokaler Dateisystem-MCP-Server, Safe-Delete-MCP, Papierkorb-MCP-Server, Prozessverwaltungs-MCP, interaktive Shell per MCP, asynchrone Dateisuche für KI-Agenten, Cloud-Lock-sichere Dateioperationen, Markdown-zu-PDF-MCP, OCR-MCP-Server, ZIP-Archiv-MCP.
 
@@ -206,7 +206,13 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | `fc_md_to_html` | Markdown zu eigenständigem HTML mit CSS-Styling (Überschriften, Codeblöcke, Tabellen, verschachtelte Listen, Blockzitate, Bilder, Checkboxen) |
 | `fc_md_to_pdf` | Markdown zu PDF über Headless-Browser (Edge/Chrome). Fällt auf HTML zurück, wenn kein Browser verfügbar ist |
 
-**Gesamt: 44 Tools**
+### Web (1 Tool)
+
+| Tool | Beschreibung |
+|------|-------------|
+| `fc_web_fetch` | Ruft eine Webseite ab und gibt Inhalt je nach `mode` zurück: extract (sauberer Haupttext), raw (HTTP-Body), links, forms oder headers. Nur lesendes Netzwerk-Tool; SSRF-Schutz blockiert interne/private Ziele standardmäßig. |
+
+**Gesamt: 46 Tools**
 
 ---
 
@@ -244,7 +250,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 - Einziger MCP-Server mit **asynchroner Hintergrundsuche** mit Paginierung
 - Integrierte **JSON-Reparatur**, **Encoding-Korrektur** und **Duplikaterkennung**
 - Einziger MCP-Server mit **Cloud-Lock-sicheren Dateioperationen** (automatischer copy+delete-Fallback)
-- Umfassendste Einzelserver-Lösung (44 Tools)
+- Umfassendste Einzelserver-Lösung (46 Tools)
 - Integrierter **Safety Mode** zur Vermeidung versehentlicher permanenter Löschungen
 
 ---

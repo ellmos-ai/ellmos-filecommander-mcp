@@ -441,6 +441,10 @@ export const es: Translations = {
     checkError: (msg) => `\u274C Error al comprobar el bloqueo de nube: ${msg}`,
   },
 
+  fc_web_fetch: {
+    description: 'Obtiene una página web y devuelve contenido según el modo: extract (texto principal limpio), raw (cuerpo HTTP, truncado), links, forms o headers. Herramienta de red de solo lectura; los destinos internos/privados están bloqueados por defecto (usa allow_private para permitirlos).',
+  },
+
   server: {
     started: '\uD83D\uDE80 Servidor MCP FileCommander iniciado',
     languageSet: (lang) => `Idioma establecido en: ${lang}`,
