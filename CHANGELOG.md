@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.9.1] - 2026-07-06
+
+### Security
+- Harden `fc_web_fetch` link/text sanitization, resolving 5 CodeQL `high` code-scanning alerts:
+  - `js/double-escaping`: unescape `&amp;` last in the HTML→text pass so a produced `&` cannot be re-read as the start of another entity (`&amp;lt;` now yields literal `&lt;` instead of `<`).
+  - `js/incomplete-multi-character-sanitization`: strip tags in the parsed link text in a loop until stable, so removing one tag cannot re-form a new one.
+  - `js/incomplete-url-scheme-check`: filter parsed link URLs with an http/https allowlist (also drops `data:`, `vbscript:`, `blob:`) instead of a scheme blocklist; `javascript:`, `mailto:`, `tel:` and fragment-only links stay dropped.
+- Defense-in-depth only: parsed link output is reported to the caller, not auto-fetched; the fetch path remains guarded by the existing SSRF allowlist (`fcWebGuardTarget`, unchanged).
+
 ## [1.9.0] - 2026-07-05
 
 ### Added
