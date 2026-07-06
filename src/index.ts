@@ -4333,8 +4333,10 @@ function fcWebHtmlToText(html: string): string {
   s = s.replace(/<\/(p|div|section|article|li|h[1-6]|tr)>/gi, '\n');
   s = s.replace(/<br\s*\/?>/gi, '\n');
   s = s.replace(/<[^>]+>/g, ' ');
-  s = s.replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&lt;/gi, '<')
-       .replace(/&gt;/gi, '>').replace(/&quot;/gi, '"').replace(/&#39;/gi, "'");
+  // Unescape &amp; LAST so an '&' it produces cannot be re-read as the start of
+  // another entity by a following replacement (avoids double-unescaping).
+  s = s.replace(/&nbsp;/gi, ' ').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>')
+       .replace(/&quot;/gi, '"').replace(/&#39;/gi, "'").replace(/&amp;/gi, '&');
   s = s.replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{3,}/g, '\n\n');
   return s.trim();
 }
@@ -4345,12 +4347,20 @@ function fcWebParseLinks(html: string, base: string): { text: string; href: stri
   const re = /<a[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(html)) !== null) {
-    if (/^(javascript:|mailto:|tel:|#)/i.test(m[1])) continue;
-    let href: string;
-    try { href = new URL(m[1], base).toString(); } catch { continue; }
+    const raw = m[1].trim();
+    if (raw.startsWith('#')) continue; // fragment-only self-links carry no navigable target
+    let u: URL;
+    try { u = new URL(raw, base); } catch { continue; }
+    // Allowlist http/https only; drops javascript:, data:, vbscript:, mailto:, tel:, blob: ...
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') continue;
+    const href = u.toString();
     if (seen.has(href)) continue;
     seen.add(href);
-    const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120);
+    // Strip tags repeatedly until stable so a removal cannot re-form a new tag.
+    let inner = m[2];
+    let prev = '';
+    while (inner !== prev) { prev = inner; inner = inner.replace(/<[^>]*>/g, ''); }
+    const text = inner.replace(/\s+/g, ' ').trim().slice(0, 120);
     out.push({ text, href });
     if (out.length >= 200) break;
   }

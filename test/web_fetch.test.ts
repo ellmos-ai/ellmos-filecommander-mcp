@@ -42,8 +42,9 @@ function htmlToText(html: string): string {
   s = s.replace(/<\/(p|div|section|article|li|h[1-6]|tr)>/gi, "\n");
   s = s.replace(/<br\s*\/?>/gi, "\n");
   s = s.replace(/<[^>]+>/g, " ");
-  s = s.replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&lt;/gi, "<")
-       .replace(/&gt;/gi, ">").replace(/&quot;/gi, '"').replace(/&#39;/gi, "'");
+  // Unescape &amp; LAST (mirror of src): avoids double-unescaping.
+  s = s.replace(/&nbsp;/gi, " ").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">")
+       .replace(/&quot;/gi, '"').replace(/&#39;/gi, "'").replace(/&amp;/gi, "&");
   s = s.replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n");
   return s.trim();
 }
@@ -54,12 +55,20 @@ function parseLinks(html: string, base: string): { text: string; href: string }[
   const re = /<a[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(html)) !== null) {
-    if (/^(javascript:|mailto:|tel:|#)/i.test(m[1])) continue;
-    let href: string;
-    try { href = new URL(m[1], base).toString(); } catch { continue; }
+    const raw = m[1].trim();
+    if (raw.startsWith("#")) continue; // fragment-only self-links carry no navigable target
+    let u: URL;
+    try { u = new URL(raw, base); } catch { continue; }
+    // Allowlist http/https only; drops javascript:, data:, vbscript:, mailto:, tel:, blob: ...
+    if (u.protocol !== "http:" && u.protocol !== "https:") continue;
+    const href = u.toString();
     if (seen.has(href)) continue;
     seen.add(href);
-    const text = m[2].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim().slice(0, 120);
+    // Strip tags repeatedly until stable so a removal cannot re-form a new tag.
+    let inner = m[2];
+    let prev = "";
+    while (inner !== prev) { prev = inner; inner = inner.replace(/<[^>]*>/g, ""); }
+    const text = inner.replace(/\s+/g, " ").trim().slice(0, 120);
     out.push({ text, href });
     if (out.length >= 200) break;
   }
@@ -96,6 +105,7 @@ const SAMPLE = `<html><head><style>.x{color:red}</style><script>var a=1;</script
 <body><nav>Nav</nav><h1>Titel</h1><p>Echter Inhalt hier.</p>
 <a href="/rel">Rel</a><a href="https://ex.org/abs">Abs</a>
 <a href="mailto:a@b.c">Mail</a><a href="javascript:void(0)">JS</a>
+<a href="data:text/html,x">Data</a><a href="vbscript:msgbox(1)">VB</a><a href="#top">Frag</a>
 <form action="/submit" method="post"><input type="text" name="user">
 <input type="password" name="pw"><textarea name="msg"></textarea>
 <select name="opt"></select></form><footer>Foot</footer></body></html>`;
@@ -138,7 +148,9 @@ describe("fc_web_fetch parsing", () => {
     const hrefs = parseLinks(SAMPLE, "https://site.test/page").map((l) => l.href);
     expect(hrefs).toContain("https://site.test/rel");
     expect(hrefs).toContain("https://ex.org/abs");
-    expect(hrefs.some((h) => h.startsWith("mailto:") || h.startsWith("javascript:"))).toBe(false);
+    // Allowlist check: every surviving link must be http/https. This positively
+    // proves javascript:, data:, vbscript:, mailto: and fragment-only links are dropped.
+    expect(hrefs.every((h) => h.startsWith("http:") || h.startsWith("https:"))).toBe(true);
   });
 
   it("parses forms with action, method and fields", () => {
