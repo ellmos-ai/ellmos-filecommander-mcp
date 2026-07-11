@@ -4258,7 +4258,7 @@ server.registerTool(
 
 // ============================================================================
 // Tool: Web Fetch (fc_web_fetch) — read-only network tool (first online tool)
-// Portiert aus BACH web_scrape.py; kanonische Vollversion: .MODULES/web-scraper.
+// Portiert aus BACH web_scrape.py; kanonische Vollversion: .MODULES/.TOOLS/web-scraper.
 // Leichtgewichtig (Node fetch), ohne Screenshot. Mit SSRF-Schutz.
 // ============================================================================
 
