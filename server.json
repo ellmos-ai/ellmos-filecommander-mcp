@@ -3,7 +3,7 @@
   "name": "io.github.ellmos-ai/ellmos-filecommander-mcp",
   "version": "1.9.3",
   "title": "ellmos FileCommander",
-  "description": "Local filesystem MCP with 46 tools for safe delete, sessions, async search, OCR, ZIP, PDF, read-only web fetch, and cloud-lock-safe file operations.",
+  "description": "Filesystem MCP server: files, processes, sessions, async search, OCR, archives, safe delete.",
   "websiteUrl": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
   "repository": {
     "url": "https://github.com/ellmos-ai/ellmos-filecommander-mcp",
