@@ -45,3 +45,6 @@ BUILD_SKILL.md
 COMPLETE_PROJECT_CONTEXT.txt
 Ideen.md
 TODO.md
+
+# mcp-publisher login artifacts (credentials, never commit)
+.mcpregistry_*
