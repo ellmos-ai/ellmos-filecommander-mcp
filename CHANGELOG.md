@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.9.4] - 2026-07-25
+
+### Maintenance
+- Update `llms.txt` Last-checked header to 2026-07-25.
+- Align version annotations (1.9.4) across `src/index.ts`, `package.json`, `server.json`, and `glama.json`.
+- Verify Vitest test suite (161 unit tests), i18n test suite (66 tests, 227 total passing), and TypeScript build.
+
 ## [1.9.3] - 2026-07-24
 
 ### Fixed
