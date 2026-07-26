@@ -1,6 +1,6 @@
 {
   "name": "ellmos-filecommander-mcp",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "mcpName": "io.github.ellmos-ai/ellmos-filecommander-mcp",
   "description": "A comprehensive MCP server providing 46 tools for filesystem operations, process management, interactive sessions, async file search, JSON repair, encoding fix, duplicate detection, OCR, ZIP archives, Markdown export, read-only web fetch/extraction, and cloud-lock-safe file operations",
   "type": "module",
@@ -81,7 +81,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.0",
     "typescript": "^5.3.3",
-    "vitest": "^4.1.6"
+    "vitest": "^3.0.8"
   },
   "engines": {
     "node": ">=18.0.0"

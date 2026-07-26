@@ -21,6 +21,10 @@ A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants
 
 **Registry status:** published on [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp), indexed by [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp), visible on [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp), listed on [Glama](https://glama.ai/mcp/servers/eyurifgg4t), and prepared for the official MCP Registry via [`server.json`](server.json). Some third-party directories still show older 43-tool metadata, so the canonical README/npm metadata should remain the source of truth until their reindex catches up.
 
+> [!NOTE]
+> **For AI Agents & LLM Integrations:**
+> FileCommander provides **46 specialized tools** accessible via standard stdio transport. All tool names use the `fc_` prefix to prevent namespace collisions. For LLMs, compact context and schema overviews are available in [`llms.txt`](llms.txt) and [`server.json`](server.json).
+
 ---
 
 ## Why FileCommander?
@@ -41,6 +45,40 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 - **Cloud-Lock Safe** - Automatic copy+delete fallback when cloud sync filters (OneDrive, Dropbox, Google Drive, iCloud) block rename operations
 - **Cloud Lock Diagnosis** - Check whether a path is at risk of sync-filter conflicts before operating
 - **Cross-platform** - Works on Windows, macOS, and Linux with platform-specific optimizations
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client["MCP Client Layer"]
+        Claude["Claude Desktop / Claude Code"]
+        Custom["Custom LLM Agents / Frameworks"]
+    end
+
+    subgraph Transport["Transport Layer"]
+        Stdio["Stdio Transport (JSON-RPC)"]
+    end
+
+    subgraph Core["ellmos FileCommander Engine (46 Tools)"]
+        FS["Filesystem & Cloud-Lock Guard\n(14 tools: read, write, edit, safe-delete, cloud-lock safe)"]
+        Search["Async Search Engine\n(5 tools: start, get, stop, list, clear)"]
+        Proc["Process & REPL Sessions\n(9 tools: exec, background proc, interactive REPLs)"]
+        Repair["Repair & Format Converter\n(9 tools: JSON fix, Mojibake fix, duplicates, format convert)"]
+        Export["Export & Web Scraper\n(3 tools: Markdown->HTML/PDF, web_fetch)"]
+        Sys["System & Utilities\n(6 tools: OCR, ZIP, checksums, safe-mode, time)"]
+    end
+
+    Client -->|JSON-RPC| Stdio
+    Stdio --> Core
+    Core --> FS
+    Core --> Search
+    Core --> Proc
+    Core --> Repair
+    Core --> Export
+    Core --> Sys
+```
 
 ---
 
@@ -242,7 +280,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | Excel / PDF support | PDF (via browser) | Yes | No |
 | HTTP transport | No | No | No |
 | Markdown to HTML/PDF export | Yes | No | No |
-| **Total tools** | **44** | ~15 | ~11 |
+| **Total tools** | **46** | ~15 | ~11 |
 | **Servers needed** | **1** | 1 | + extra for processes |
 
 **Key differentiators:**
@@ -272,7 +310,7 @@ FileCommander is designed to be discoverable by both people and AI agents:
 
 Primary search terms: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
 
-External discovery notes: npm and jsDelivr already show the current 44-tool package metadata. LobeHub indexes the GitHub repo as an MCP server. Some secondary MCP directories still cache older 43-tool descriptions; use the package description and this README as the canonical 44-tool reference.
+External discovery notes: npm and jsDelivr already show the current package metadata. LobeHub indexes the GitHub repo as an MCP server. Some secondary MCP directories still cache older 43-tool descriptions; use the package description and this README as the canonical 46-tool reference.
 
 ---
 

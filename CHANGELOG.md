@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.9.5] - 2026-07-26
+
+### Documentation & Discoverability
+- Synchronize tool counts (46 tools) across `README.md`, `README_de.md`, and `llms.txt`.
+- Add GFM LLM Integration Note (`> [!NOTE]`) for AI agent discoverability.
+- Add Mermaid System Architecture flowcharts to both `README.md` and `README_de.md`.
+- Update `llms.txt` verification timestamp to 2026-07-26.
+
 ## [1.9.4] - 2026-07-25
 
 ### Maintenance

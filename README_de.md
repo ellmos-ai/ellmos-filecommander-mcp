@@ -19,7 +19,11 @@ Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten voll
 
 **Discovery-Suchbegriffe:** lokaler Dateisystem-MCP-Server, Safe-Delete-MCP, Papierkorb-MCP-Server, Prozessverwaltungs-MCP, interaktive Shell per MCP, asynchrone Dateisuche für KI-Agenten, Cloud-Lock-sichere Dateioperationen, Markdown-zu-PDF-MCP, OCR-MCP-Server, ZIP-Archiv-MCP.
 
-**Registry-Status:** auf [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp) veröffentlicht, über [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp) indexiert, auf [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp) sichtbar, auf [Glama](https://glama.ai/mcp/servers/eyurifgg4t) gelistet und über [`server.json`](server.json) für die offizielle MCP Registry vorbereitet. Einige Drittverzeichnisse zeigen noch ältere 43-Tool-Metadaten; bis deren Reindex durch ist, bleiben README und npm-Metadaten die kanonische 44-Tool-Referenz.
+**Registry-Status:** auf [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp) veröffentlicht, über [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp) indexiert, auf [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp) sichtbar, auf [Glama](https://glama.ai/mcp/servers/eyurifgg4t) gelistet und über [`server.json`](server.json) für die offizielle MCP Registry vorbereitet. Einige Drittverzeichnisse zeigen noch ältere 43-Tool-Metadaten; bis deren Reindex durch ist, bleiben README und npm-Metadaten die kanonische Referenz.
+
+> [!NOTE]
+> **Für KI-Agenten & LLM-Integrationen:**
+> FileCommander bietet **46 spezialisierte Tools**, die über den Standard-stdio-Transport erreichbar sind. Alle Tool-Namen nutzen das `fc_`-Präfix zur Vermeidung von Namenskonflikten. Für LLMs stehen kompakte Kontextübersichten in [`llms.txt`](llms.txt) und [`server.json`](server.json) zur Verfügung.
 
 ---
 
@@ -41,6 +45,40 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 - **Cloud-Lock-sicher** — Automatischer copy+delete-Fallback wenn Cloud-Sync-Filter (OneDrive, Dropbox, Google Drive, iCloud) rename-Operationen blockieren
 - **Cloud-Lock-Diagnose** — Prüft ob ein Pfad von Sync-Filter-Konflikten betroffen sein könnte
 - **Plattformübergreifend** — Funktioniert auf Windows, macOS und Linux mit plattformspezifischen Optimierungen
+
+---
+
+## Systemarchitektur
+
+```mermaid
+flowchart TD
+    subgraph Client["MCP-Client-Ebene"]
+        Claude["Claude Desktop / Claude Code"]
+        Custom["Eigene LLM-Agenten / Frameworks"]
+    end
+
+    subgraph Transport["Transport-Ebene"]
+        Stdio["Stdio Transport (JSON-RPC)"]
+    end
+
+    subgraph Core["ellmos FileCommander Engine (46 Tools)"]
+        FS["Dateisystem & Cloud-Lock-Guard\n(14 Tools: Lesen, Schreiben, Editieren, Safe-Delete, Cloud-Lock-sicher)"]
+        Search["Asynchrone Such-Engine\n(5 Tools: Starten, Ergebnisse, Stoppen, Listen, Leeren)"]
+        Proc["Prozess & REPL-Sitzungen\n(9 Tools: Exec, Hintergrundprozesse, interaktive REPLs)"]
+        Repair["Reparatur & Formatkonverter\n(9 Tools: JSON-Fix, Mojibake-Fix, Duplikate, Format-Convert)"]
+        Export["Export & Web Scraper\n(3 Tools: Markdown->HTML/PDF, web_fetch)"]
+        Sys["System & Dienstprogramme\n(6 Tools: OCR, ZIP, Prüfsummen, Safety-Mode, Zeit)"]
+    end
+
+    Client -->|JSON-RPC| Stdio
+    Stdio --> Core
+    Core --> FS
+    Core --> Search
+    Core --> Proc
+    Core --> Repair
+    Core --> Export
+    Core --> Sys
+```
 
 ---
 
@@ -242,7 +280,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | Excel / PDF-Unterstützung | PDF (über Browser) | Ja | Nein |
 | HTTP Transport | Nein | Nein | Nein |
 | Markdown zu HTML/PDF Export | Ja | Nein | Nein |
-| **Tools gesamt** | **44** | ~15 | ~11 |
+| **Tools gesamt** | **46** | ~15 | ~11 |
 | **Benötigte Server** | **1** | 1 | + extra für Prozesse |
 
 **Hauptunterscheidungsmerkmale:**
@@ -272,7 +310,7 @@ FileCommander ist so dokumentiert, dass Menschen, LLMs und MCP-Verzeichnisse ihn
 
 Primäre Suchbegriffe: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
 
-Externe Auffindbarkeit: npm und jsDelivr zeigen bereits die aktuellen 44-Tool-Paketmetadaten. LobeHub indexiert das GitHub-Repo als MCP-Server. Einige sekundäre MCP-Verzeichnisse cachen noch ältere 43-Tool-Beschreibungen; die Paketbeschreibung und diese README sind die kanonische 44-Tool-Referenz.
+Externe Auffindbarkeit: npm und jsDelivr zeigen bereits die aktuellen Paketmetadaten. LobeHub indexiert das GitHub-Repo als MCP-Server. Einige sekundäre MCP-Verzeichnisse cachen noch ältere 43-Tool-Beschreibungen; die Paketbeschreibung und diese README sind die kanonische 46-Tool-Referenz.
 
 ---
 
