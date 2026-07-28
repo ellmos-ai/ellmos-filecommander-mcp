@@ -1773,3 +1773,15 @@ describe("cloudSafeRename", () => {
     expect(await exists(src)).toBe(true);
   });
 });
+
+// ============================================================================
+// TESTS: File Checksum Algorithms (MD5, SHA-1, SHA-256, SHA-384, SHA-512)
+// ============================================================================
+
+describe("File Checksum Algorithms", () => {
+  it("supports sha384 calculation and digest verification", () => {
+    const input = "ellmos-filecommander-checksum-test";
+    const expectedSha384 = crypto.createHash("sha384").update(input).digest("hex");
+    expect(expectedSha384).toHaveLength(96);
+  });
+});

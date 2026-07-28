@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.9.6] - 2026-07-28
+
+### Added
+- Add SHA-384 support to `fc_checksum` and cover the digest length in the test suite.
+
+### Migration
+- Move the canonical Git worktree out of OneDrive under Plan D. OneDrive keeps a
+  `.git`-less tracked-file mirror plus a cloud-readable repository pointer.
+
 ## [1.9.5] - 2026-07-26
 
 ### Documentation & Discoverability

@@ -9,7 +9,7 @@
  * See LICENSE file for details.
  *
  * @author Lukas (BACH)
- * @version 1.9.5
+ * @version 1.9.6
  * @license MIT
  */
 
@@ -45,7 +45,7 @@ const execAsync = promisify(exec);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.9.5"
+  version: "1.9.6"
 });
 
 // ============================================================================
@@ -4229,7 +4229,7 @@ server.registerTool(
     description: t().fc_checksum.description,
     inputSchema: {
       file_path: z.string().min(1).describe("Path to file"),
-      algorithm: z.enum(["md5", "sha1", "sha256", "sha512"]).default("sha256").describe("Hash algorithm (default: sha256)"),
+      algorithm: z.enum(["md5", "sha1", "sha256", "sha384", "sha512"]).default("sha256").describe("Hash algorithm (default: sha256)"),
       compare: z.string().optional().describe("Optional: Hash to compare against"),
     },
     annotations: {
