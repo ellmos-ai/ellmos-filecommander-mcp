@@ -50,5 +50,5 @@ If you discover a security vulnerability, please open an issue on the GitHub rep
 
 | Version | Supported |
 |---------|-----------|
-| 1.7.x   | Yes       |
-| < 1.7   | No        |
+| 1.9.x   | Yes       |
+| < 1.9   | No        |

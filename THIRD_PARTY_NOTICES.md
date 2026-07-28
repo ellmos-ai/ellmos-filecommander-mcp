@@ -37,6 +37,10 @@ This project uses the following third-party packages:
 - **License:** MIT
 - **Repository:** https://github.com/nicfontaine/toon
 
+### update-notifier
+- **License:** BSD-2-Clause
+- **Repository:** https://github.com/yeoman/update-notifier
+
 ## Development Dependencies
 
 ### typescript

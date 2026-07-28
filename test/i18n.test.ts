@@ -42,7 +42,7 @@ describe("i18n language packs", () => {
 
   it("defaults back to German after tests reset the language", () => {
     expect(getLanguage()).toBe("de");
-    expect(t().server.started).toBe("\uD83D\uDE80 BACH FileCommander MCP Server gestartet");
+    expect(t().server.started).toBe("\uD83D\uDE80 ellmos FileCommander MCP Server gestartet");
   });
 
   for (const [lang, expected] of Object.entries(localizedExpectations) as Array<[NonFallbackLang, typeof localizedExpectations.es]>) {

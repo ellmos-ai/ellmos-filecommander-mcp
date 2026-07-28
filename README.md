@@ -10,7 +10,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![FileCommander tests](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml)
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, process management, interactive shell sessions, and async file search capabilities.
@@ -38,7 +38,7 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 - **String Replace** - Edit files by matching unique strings with context validation
 - **Format Conversion** - Convert between JSON, CSV, INI, YAML, TOML, XML, and TOON
 - **ZIP Archives** - Create, extract, and list ZIP archives
-- **File Checksums** - SHA-256, MD5, SHA-1, SHA-512 hashing with compare
+- **File Checksums** - MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashing with compare
 - **OCR** - Extract text from images (optional tesseract.js dependency)
 - **Safety Mode** - Toggle to route all deletes through Recycle Bin / Trash
 - **Markdown Export** - Convert Markdown to professional HTML/PDF with code blocks, tables, nested lists, blockquotes
@@ -86,7 +86,7 @@ flowchart TD
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 18 or higher
+- [Node.js](https://nodejs.org/) 20 or higher
 - npm
 
 ### Option 1: Install from NPM
@@ -210,7 +210,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | `fc_batch_rename` | Pattern-based batch renaming (prefix/suffix, replace, auto-detect) |
 | `fc_convert_format` | Convert between JSON, CSV, INI, YAML, TOML, XML, and TOON formats |
 | `fc_detect_duplicates` | Find duplicate files using SHA-256 hashing |
-| `fc_checksum` | File hashing (MD5, SHA-1, SHA-256, SHA-512) with optional compare |
+| `fc_checksum` | File hashing (MD5, SHA-1, SHA-256, SHA-384, SHA-512) with optional compare |
 
 ### Archive (1 tool)
 
@@ -273,7 +273,7 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 | Batch rename (pattern-based) | Yes | No | No |
 | Format conversion (JSON/CSV/INI/YAML/TOML/XML/TOON) | Yes | No | No |
 | ZIP archive (create/extract/list) | Yes | No | No |
-| File checksums (SHA-256/MD5) | Yes | No | No |
+| File checksums (MD5/SHA-1/SHA-256/SHA-384/SHA-512) | Yes | No | No |
 | OCR (image to text) | Optional | No | No |
 | Safety mode (delete → Recycle Bin) | Yes | No | No |
 | Path allowlist / sandboxing | No | No | Yes |
@@ -349,10 +349,11 @@ npm test
 
 ### Testing
 
-The project includes a comprehensive test suite with **154 tests** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, i18n language packs, and more.
+The project includes **162 Vitest tests plus 66 standalone i18n checks (228 total)** covering filesystem operations, format conversion, encoding repair, archive handling, duplicate detection, language packs, and more.
 
 ```bash
 npm test              # Run all tests
+node test-i18n.mjs    # Run standalone i18n checks
 npx vitest run        # Same as above
 npx vitest --watch    # Watch mode
 ```

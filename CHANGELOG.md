@@ -7,6 +7,20 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add SHA-384 support to `fc_checksum` and cover the digest length in the test suite.
 
+### Security
+- Upgrade `@modelcontextprotocol/sdk` to 1.30.x and require
+  `@hono/node-server` 2.0.12 or newer to resolve the Windows encoded-backslash
+  path-traversal advisory GHSA-frvp-7c67-39w9.
+
+### Changed
+- Raise the minimum supported Node.js version from 18 to 20, matching the
+  secure Hono Node adapter and the existing Node.js 20/22/24 CI matrix.
+
+### Verification
+- Verify the TypeScript build, 162 Vitest tests, 66 standalone i18n checks,
+  production dependency audit, and npm package dry-run.
+- Align the runtime startup banner with the current `ellmos FileCommander` name.
+
 ### Migration
 - Move the canonical Git worktree out of OneDrive under Plan D. OneDrive keeps a
   `.git`-less tracked-file mirror plus a cloud-readable repository pointer.

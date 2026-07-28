@@ -10,7 +10,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![FileCommander tests](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml)
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateisuche bietet.
@@ -38,7 +38,7 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 - **String Replace** — Dateien bearbeiten durch eindeutigen Stringabgleich mit Kontextvalidierung
 - **Formatkonvertierung** — Konvertierung zwischen JSON, CSV, INI, YAML, TOML, XML und TOON
 - **ZIP-Archive** — ZIP-Archive erstellen, entpacken und auflisten
-- **Prüfsummen** — SHA-256, MD5, SHA-1, SHA-512 Hashing mit Vergleichsfunktion
+- **Prüfsummen** — MD5-, SHA-1-, SHA-256-, SHA-384- und SHA-512-Hashing mit Vergleichsfunktion
 - **OCR** — Texterkennung aus Bildern (optionale tesseract.js-Abhängigkeit)
 - **Safety Mode** — Umschalten, damit alle Löschvorgänge über den Papierkorb / Trash laufen
 - **Markdown-Export** — Markdown in professionelles HTML/PDF konvertieren mit Codeblöcken, Tabellen, verschachtelten Listen, Blockzitaten
@@ -86,7 +86,7 @@ flowchart TD
 
 ### Voraussetzungen
 
-- [Node.js](https://nodejs.org/) 18 oder höher
+- [Node.js](https://nodejs.org/) 20 oder höher
 - npm
 
 ### Option 1: Installation über NPM
@@ -210,7 +210,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | `fc_batch_rename` | Musterbasierte Massenumbenennung (Präfix/Suffix, Ersetzen, Auto-Erkennung) |
 | `fc_convert_format` | Konvertierung zwischen JSON, CSV, INI, YAML, TOML, XML und TOON |
 | `fc_detect_duplicates` | Doppelte Dateien mittels SHA-256-Hashing finden |
-| `fc_checksum` | Datei-Hashing (MD5, SHA-1, SHA-256, SHA-512) mit optionalem Vergleich |
+| `fc_checksum` | Datei-Hashing (MD5, SHA-1, SHA-256, SHA-384, SHA-512) mit optionalem Vergleich |
 
 ### Archiv (1 Tool)
 
@@ -273,7 +273,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 | Massenumbenennung (musterbasiert) | Ja | Nein | Nein |
 | Formatkonvertierung (JSON/CSV/INI/YAML/TOML/XML/TOON) | Ja | Nein | Nein |
 | ZIP-Archiv (erstellen/entpacken/auflisten) | Ja | Nein | Nein |
-| Datei-Prüfsummen (SHA-256/MD5) | Ja | Nein | Nein |
+| Datei-Prüfsummen (MD5/SHA-1/SHA-256/SHA-384/SHA-512) | Ja | Nein | Nein |
 | OCR (Bild zu Text) | Optional | Nein | Nein |
 | Safety Mode (Löschen → Papierkorb) | Ja | Nein | Nein |
 | Pfad-Allowlist / Sandboxing | Nein | Nein | Ja |
@@ -349,10 +349,11 @@ npm test
 
 ### Tests
 
-Das Projekt enthält eine umfassende Test-Suite mit **154 Tests** für Dateisystem-Operationen, Format-Konvertierung, Encoding-Reparatur, Archiv-Handling, Duplikat-Erkennung, i18n-Sprachpakete und mehr.
+Das Projekt enthält **162 Vitest-Tests plus 66 eigenständige i18n-Prüfungen (228 insgesamt)** für Dateisystemoperationen, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete und mehr.
 
 ```bash
 npm test              # Alle Tests ausführen
+node test-i18n.mjs    # Eigenständige i18n-Prüfungen ausführen
 npx vitest --watch    # Watch-Modus
 ```
 

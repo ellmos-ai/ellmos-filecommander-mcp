@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * BACH FileCommander MCP Server
+ * ellmos FileCommander MCP Server
  *
  * A comprehensive MCP server for filesystem access, process management,
  * interactive sessions, and async file search.

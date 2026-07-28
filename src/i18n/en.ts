@@ -492,7 +492,7 @@ export const en: Translations = {
   },
 
   server: {
-    started: '\uD83D\uDE80 BACH FileCommander MCP Server started',
+    started: '\uD83D\uDE80 ellmos FileCommander MCP Server started',
     languageSet: (lang) => `Language set to: ${lang}`,
   },
 };
