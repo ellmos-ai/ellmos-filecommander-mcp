@@ -86,6 +86,20 @@ export const es: Translations = {
     searchError: (msg) => `\u274C Error de búsqueda: ${msg}`,
   },
 
+  fc_search_content: {
+    description: 'Busca texto únicamente en los archivos proporcionados explícitamente. Búsqueda literal por defecto, expresiones regulares opcionales, salida JSON determinista y limitada, errores parciales por archivo, omisión de binarios, líneas de contexto y censura de secretos. No expande globs ni recorre directorios.',
+    invalidRegex: '\u274C Sintaxis de expresión regular no válida.',
+    missing: 'Archivo no encontrado.',
+    notFile: 'La ruta no es un archivo normal.',
+    permissionDenied: 'Permiso denegado.',
+    cloudUnavailable: 'El archivo en la nube no está disponible o está bloqueado.',
+    encodingError: 'El archivo no contiene texto UTF-8 válido.',
+    readError: 'No se pudo leer el archivo.',
+    tooLarge: 'El archivo supera el límite de búsqueda de 10 MB.',
+    binary: 'Archivo binario omitido.',
+    globalLimitReached: 'Omitido porque se alcanzó el límite global de resultados.',
+  },
+
   fc_start_search: {
     started: (id, dir, pattern) => `\uD83D\uDD0D **Búsqueda iniciada**\n\n| | |\n|---|---|\n| ID de búsqueda | \`${id}\` |\n| Directorio | ${dir} |\n| Patrón | ${pattern} |`,
     useGetResults: `Usa \`fc_get_search_results\` para obtener resultados.`,

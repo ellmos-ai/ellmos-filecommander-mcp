@@ -97,6 +97,21 @@ export const en: Translations = {
     searchError: (msg) => `\u274C Search error: ${msg}`,
   },
 
+  // ==================== fc_search_content ====================
+  fc_search_content: {
+    description: 'Searches text in explicitly provided files. Literal by default, optional regular expressions, deterministic bounded JSON output, per-file partial errors, binary skipping, context lines, and secret redaction. Does not expand globs or recurse into directories.',
+    invalidRegex: '\u274C Invalid regular expression syntax.',
+    missing: 'File not found.',
+    notFile: 'Path is not a regular file.',
+    permissionDenied: 'Permission denied.',
+    cloudUnavailable: 'Cloud-backed file is unavailable or locked.',
+    encodingError: 'File is not valid UTF-8 text.',
+    readError: 'File could not be read.',
+    tooLarge: 'File exceeds the 10 MB search limit.',
+    binary: 'Binary file skipped.',
+    globalLimitReached: 'Skipped because the global match limit was reached.',
+  },
+
   // ==================== fc_start_search ====================
   fc_start_search: {
     started: (id, dir, pattern) => `\uD83D\uDD0D **Search started**\n\n| | |\n|---|---|\n| Search ID | \`${id}\` |\n| Directory | ${dir} |\n| Pattern | ${pattern} |`,

@@ -1,8 +1,8 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "ellmos-filecommander-mcp",
-  "version": "1.9.6",
-  "description": "Comprehensive MCP server for filesystem operations, process management, interactive sessions, async file search, JSON repair, encoding fixes, duplicate detection, OCR, ZIP archives, and Markdown export.",
+  "version": "1.10.0",
+  "description": "Comprehensive MCP server for filesystem operations, bounded multi-file content search, process management, interactive sessions, async file search, JSON repair, encoding fixes, duplicate detection, OCR, ZIP archives, and Markdown export.",
   "maintainers": [
     "lukisch"
   ],
@@ -20,13 +20,14 @@
     "mcp-server"
   ],
   "tools": {
-    "count": 46
+    "count": 47
   },
   "features": [
     "Filesystem operations",
     "Process management",
     "Interactive sessions",
     "Async file search",
+    "Explicit multi-file content search",
     "Safe delete via Recycle Bin",
     "OCR and archive utilities"
   ]

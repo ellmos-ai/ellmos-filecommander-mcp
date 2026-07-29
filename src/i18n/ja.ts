@@ -86,6 +86,20 @@ export const ja: Translations = {
     searchError: (msg) => `\u274C 検索エラー: ${msg}`,
   },
 
+  fc_search_content: {
+    description: '明示的に指定されたファイルだけをテキスト検索します。既定はリテラル検索で、正規表現も選択可能です。決定的で上限付きのJSON出力、ファイル単位の部分エラー、バイナリのスキップ、コンテキスト行、秘密情報の伏せ字に対応します。glob展開やディレクトリ再帰は行いません。',
+    invalidRegex: '\u274C 正規表現の構文が無効です。',
+    missing: 'ファイルが見つかりません。',
+    notFile: 'パスは通常ファイルではありません。',
+    permissionDenied: 'アクセスが拒否されました。',
+    cloudUnavailable: 'クラウドファイルを利用できないか、ロックされています。',
+    encodingError: 'ファイルは有効なUTF-8テキストではありません。',
+    readError: 'ファイルを読み取れませんでした。',
+    tooLarge: 'ファイルが10 MBの検索上限を超えています。',
+    binary: 'バイナリファイルをスキップしました。',
+    globalLimitReached: '全体の結果上限に達したためスキップしました。',
+  },
+
   fc_start_search: {
     started: (id, dir, pattern) => `\uD83D\uDD0D **検索を開始しました**\n\n| | |\n|---|---|\n| 検索 ID | \`${id}\` |\n| ディレクトリ | ${dir} |\n| パターン | ${pattern} |`,
     useGetResults: `結果を取得するには \`fc_get_search_results\` を使ってください。`,

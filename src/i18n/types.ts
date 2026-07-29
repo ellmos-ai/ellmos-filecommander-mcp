@@ -99,6 +99,21 @@ export interface Translations {
     searchError: (msg: string) => string;
   };
 
+  // ==================== fc_search_content ====================
+  fc_search_content: {
+    description: string;
+    invalidRegex: string;
+    missing: string;
+    notFile: string;
+    permissionDenied: string;
+    cloudUnavailable: string;
+    encodingError: string;
+    readError: string;
+    tooLarge: string;
+    binary: string;
+    globalLimitReached: string;
+  };
+
   // ==================== fc_start_search ====================
   fc_start_search: {
     started: (id: string, dir: string, pattern: string) => string;

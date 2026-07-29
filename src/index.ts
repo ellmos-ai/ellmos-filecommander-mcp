@@ -9,7 +9,7 @@
  * See LICENSE file for details.
  *
  * @author Lukas (BACH)
- * @version 1.9.6
+ * @version 1.10.0
  * @license MIT
  */
 
@@ -36,6 +36,14 @@ import * as toml from 'smol-toml';
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import AdmZip from 'adm-zip';
 import { encode as toonEncode, decode as toonDecode } from '@toon-format/toon';
+import {
+  formatSearchContentResult,
+  InvalidRegularExpressionError,
+  SEARCH_CONTENT_LIMITS,
+  searchContent,
+  type SearchContentErrorCode,
+  type SearchContentResult,
+} from "./search-content.js";
 
 const execAsync = promisify(exec);
 
@@ -45,7 +53,7 @@ const execAsync = promisify(exec);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.9.6"
+  version: "1.10.0"
 });
 
 // ============================================================================
@@ -1116,6 +1124,96 @@ Examples:
       };
     }
   }
+);
+
+// ============================================================================
+// Tool: Search Content in Explicit Files
+// ============================================================================
+
+function localizeSearchContentError(code: SearchContentErrorCode): string {
+  const translations = t().fc_search_content;
+  switch (code) {
+    case "missing":
+      return translations.missing;
+    case "not_file":
+      return translations.notFile;
+    case "permission_denied":
+      return translations.permissionDenied;
+    case "cloud_unavailable":
+      return translations.cloudUnavailable;
+    case "encoding_error":
+      return translations.encodingError;
+    case "read_error":
+      return translations.readError;
+    case "too_large":
+      return translations.tooLarge;
+    case "binary":
+      return translations.binary;
+    case "global_limit_reached":
+      return translations.globalLimitReached;
+  }
+}
+
+server.registerTool(
+  "fc_search_content",
+  {
+    title: "Search File Content",
+    description: t().fc_search_content.description,
+    inputSchema: {
+      paths: z.array(
+        z.string().min(1).max(SEARCH_CONTENT_LIMITS.maxPathChars),
+      ).min(1).max(SEARCH_CONTENT_LIMITS.maxPaths)
+        .describe("Explicit file paths in result order; directories and glob patterns are not expanded"),
+      query: z.string().min(1).max(SEARCH_CONTENT_LIMITS.maxQueryChars)
+        .describe("Literal text by default, or a regular expression when regex=true"),
+      regex: z.boolean().default(false).describe("Interpret query as a regular expression"),
+      case_sensitive: z.boolean().default(false).describe("Use case-sensitive matching"),
+      context_lines: z.number().int().min(0).max(SEARCH_CONTENT_LIMITS.maxContextLines).default(1)
+        .describe("Context lines before and after each match"),
+      max_results: z.number().int().min(1).max(SEARCH_CONTENT_LIMITS.maxResults).default(100)
+        .describe("Global match limit"),
+      max_results_per_file: z.number().int().min(1).max(SEARCH_CONTENT_LIMITS.maxResultsPerFile).default(50)
+        .describe("Match limit per file"),
+    },
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params) => {
+    try {
+      const result = await searchContent({
+        paths: params.paths,
+        query: params.query,
+        regex: params.regex,
+        caseSensitive: params.case_sensitive,
+        contextLines: params.context_lines,
+        maxResults: params.max_results,
+        maxResultsPerFile: params.max_results_per_file,
+      });
+      const localized = JSON.parse(JSON.stringify(result)) as SearchContentResult & {
+        files: Array<SearchContentResult["files"][number] & {
+          error?: SearchContentResult["files"][number]["error"] & { message?: string };
+        }>;
+      };
+      for (const file of localized.files) {
+        if (file.error) file.error.message = localizeSearchContentError(file.error.code);
+      }
+      return {
+        content: [{ type: "text", text: formatSearchContentResult(localized) }],
+      };
+    } catch (error) {
+      const message = error instanceof InvalidRegularExpressionError
+        ? t().fc_search_content.invalidRegex
+        : t().fc_search_content.readError;
+      return {
+        isError: true,
+        content: [{ type: "text", text: message }],
+      };
+    }
+  },
 );
 
 // ============================================================================

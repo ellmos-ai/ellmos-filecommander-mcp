@@ -86,6 +86,20 @@ export const zh: Translations = {
     searchError: (msg) => `\u274C 搜索错误: ${msg}`,
   },
 
+  fc_search_content: {
+    description: '仅在明确提供的文件中搜索文本。默认按字面量搜索，可选正则表达式；输出确定且有界的 JSON，逐文件报告部分错误，跳过二进制文件，支持上下文行并隐藏密钥。不展开通配符，也不递归目录。',
+    invalidRegex: '\u274C 正则表达式语法无效。',
+    missing: '文件不存在。',
+    notFile: '路径不是普通文件。',
+    permissionDenied: '权限被拒绝。',
+    cloudUnavailable: '云文件不可用或已锁定。',
+    encodingError: '文件不是有效的 UTF-8 文本。',
+    readError: '无法读取文件。',
+    tooLarge: '文件超过 10 MB 搜索限制。',
+    binary: '已跳过二进制文件。',
+    globalLimitReached: '因达到全局结果上限而跳过。',
+  },
+
   fc_start_search: {
     started: (id, dir, pattern) => `\uD83D\uDD0D **搜索已启动**\n\n| | |\n|---|---|\n| 搜索 ID | \`${id}\` |\n| 目录 | ${dir} |\n| 模式 | ${pattern} |`,
     useGetResults: `使用 \`fc_get_search_results\` 获取结果。`,

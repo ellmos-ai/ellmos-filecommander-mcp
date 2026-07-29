@@ -58,7 +58,7 @@ console.log('\n--- All Tool Sections Exist ---');
 const sections = [
   'common', 'fc_read_file', 'fc_write_file', 'fc_list_directory', 'fc_create_directory',
   'fc_delete_file', 'fc_delete_directory', 'fc_move', 'fc_copy', 'fc_file_info',
-  'fc_search_files', 'fc_start_search', 'fc_get_search_results', 'fc_stop_search',
+  'fc_search_files', 'fc_search_content', 'fc_start_search', 'fc_get_search_results', 'fc_stop_search',
   'fc_list_searches', 'fc_clear_search', 'fc_safe_delete', 'fc_execute_command',
   'fc_start_process', 'fc_get_time', 'fc_read_multiple_files', 'fc_edit_file',
   'fc_str_replace', 'fc_list_processes', 'fc_kill_process', 'fc_start_session',
@@ -77,12 +77,14 @@ setLanguage('de');
 assert(t().fc_read_file.fileHeader('test.txt', '1 KB').includes('test.txt'), 'fc_read_file.fileHeader includes filename');
 assert(t().fc_write_file.success('geschrieben', '/test').includes('/test'), 'fc_write_file.success includes path');
 assert(t().fc_search_files.found(42).includes('42'), 'fc_search_files.found includes count');
+assert(t().fc_search_content.description.includes('explizit'), 'fc_search_content has German description');
 assert(t().fc_move.moved('/a', '/b').includes('/a'), 'fc_move.moved includes source');
 assert(t().server.languageSet('en').includes('en'), 'server.languageSet includes lang');
 
 setLanguage('en');
 assert(t().fc_read_file.fileHeader('test.txt', '1 KB').includes('test.txt'), 'EN: fc_read_file.fileHeader includes filename');
 assert(t().fc_search_files.found(42).includes('42'), 'EN: fc_search_files.found includes count');
+assert(t().fc_search_content.description.includes('explicit'), 'EN: fc_search_content has English description');
 
 // === Test 7: DE and EN return different strings ===
 console.log('\n--- DE vs EN differ ---');

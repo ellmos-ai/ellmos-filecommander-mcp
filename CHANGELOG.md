@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.10.0] - 2026-07-29
+
+### Added
+- Add the read-only `fc_search_content` tool for deterministic literal or
+  regular-expression search across an explicit ordered list of files.
+- Add case sensitivity, bounded context, global and per-file match limits,
+  binary/UTF-8/size guards, per-file partial errors, and common-secret
+  redaction.
+- Localize the complete tool surface in all six runtime language packs.
+
+### Safety
+- Do not expand globs, traverse directories, or recurse from
+  `fc_search_content`; callers must supply every file path explicitly.
+- Bound input paths, query length, file size, excerpts, context, matches, and
+  serialized output.
+- Redact complete private-key blocks, quoted credentials, bearer tokens, and
+  common token formats from both matching lines and returned context.
+
+### Verification
+- Add unit coverage for ordering, literal/regex behavior, Unicode case,
+  context, limits, non-recursion, binary/encoding/size handling, partial
+  errors, output bounds, and secret redaction.
+
 ## [1.9.6] - 2026-07-28
 
 ### Added

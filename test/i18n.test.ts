@@ -8,26 +8,31 @@ const localizedExpectations: Record<NonFallbackLang, {
   serverStarted: string;
   jsonRepaired: string;
   noDuplicates: string;
+  searchContentMissing: string;
 }> = {
   es: {
     serverStarted: "Servidor MCP FileCommander iniciado",
     jsonRepaired: "JSON reparado: demo.json",
     noDuplicates: "No se encontraron duplicados",
+    searchContentMissing: "Archivo no encontrado",
   },
   zh: {
     serverStarted: "FileCommander MCP 服务器已启动",
     jsonRepaired: "JSON 已修复: demo.json",
     noDuplicates: "未找到重复文件",
+    searchContentMissing: "文件不存在",
   },
   ja: {
     serverStarted: "FileCommander MCPサーバーを起動しました",
     jsonRepaired: "JSONを修復しました: demo.json",
     noDuplicates: "重複は見つかりませんでした",
+    searchContentMissing: "ファイルが見つかりません",
   },
   ru: {
     serverStarted: "MCP-сервер FileCommander запущен",
     jsonRepaired: "JSON восстановлен: demo.json",
     noDuplicates: "Дубликаты не найдены",
+    searchContentMissing: "Файл не найден",
   },
 };
 
@@ -52,8 +57,10 @@ describe("i18n language packs", () => {
       expect(t().server.started).toContain(expected.serverStarted);
       expect(t().fc_fix_json.repairedHeader("demo.json")).toContain(expected.jsonRepaired);
       expect(t().fc_detect_duplicates.noDuplicates(5, 5)).toContain(expected.noDuplicates);
+      expect(t().fc_search_content.missing).toContain(expected.searchContentMissing);
       expect(t().server.started).not.toContain("FileCommander MCP Server started");
       expect(t().fc_detect_duplicates.noDuplicates(5, 5)).not.toContain("No duplicates found");
+      expect(t().fc_search_content.missing).not.toContain("File was not found");
     });
   }
 

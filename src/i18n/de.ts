@@ -97,6 +97,21 @@ export const de: Translations = {
     searchError: (msg) => `\u274C Fehler bei Suche: ${msg}`,
   },
 
+  // ==================== fc_search_content ====================
+  fc_search_content: {
+    description: 'Durchsucht ausschließlich explizit übergebene Dateien nach Text. Standardmäßig literal, optional mit regulärem Ausdruck; deterministische begrenzte JSON-Ausgabe, dateibezogene Teilfehler, Binärdatei-Skip, Kontextzeilen und Geheimnis-Redaktion. Keine Glob-Auflösung und keine Verzeichnisrekursion.',
+    invalidRegex: '\u274C Ungültige Syntax des regulären Ausdrucks.',
+    missing: 'Datei nicht gefunden.',
+    notFile: 'Pfad ist keine reguläre Datei.',
+    permissionDenied: 'Zugriff verweigert.',
+    cloudUnavailable: 'Cloud-Datei ist nicht verfügbar oder gesperrt.',
+    encodingError: 'Datei ist kein gültiger UTF-8-Text.',
+    readError: 'Datei konnte nicht gelesen werden.',
+    tooLarge: 'Datei überschreitet das Suchlimit von 10 MB.',
+    binary: 'Binärdatei übersprungen.',
+    globalLimitReached: 'Übersprungen, weil das globale Trefferlimit erreicht wurde.',
+  },
+
   // ==================== fc_start_search ====================
   fc_start_search: {
     started: (id, dir, pattern) => `\uD83D\uDD0D **Suche gestartet**\n\n| | |\n|---|---|\n| Search-ID | \`${id}\` |\n| Verzeichnis | ${dir} |\n| Muster | ${pattern} |`,
