@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [1.10.0] - 2026-07-29
 
+### Maintenance & Discoverability (2026-07-30)
+- Update `llms.txt` Last-checked timestamp to `2026-07-30`.
+- Add open-bricks ecosystem cross-reference badge to README & German README documentation.
+- Verify full test suite (175/175 passed across 4 test files).
+
 ### Added
 - Add the read-only `fc_search_content` tool for deterministic literal or
   regular-expression search across an explicit ordered list of files.
