@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [1.10.0] - 2026-07-29
 
+### Documentation & Discoverability (2026-08-03)
+- Replace the legacy opaque Glama URL with the canonical owner-based listing URL in both READMEs and `llms.txt`.
+
 ### Maintenance & Discoverability (2026-07-30)
 - Update `llms.txt` Last-checked timestamp to `2026-07-30`.
 - Add open-bricks ecosystem cross-reference badge to README & German README documentation.

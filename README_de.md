@@ -20,7 +20,7 @@ Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten voll
 
 **Discovery-Suchbegriffe:** lokaler Dateisystem-MCP-Server, Mehrdatei-Inhaltssuche per MCP, Safe-Delete-MCP, Papierkorb-MCP-Server, Prozessverwaltungs-MCP, interaktive Shell per MCP, asynchrone Dateisuche für KI-Agenten, Cloud-Lock-sichere Dateioperationen, Markdown-zu-PDF-MCP, OCR-MCP-Server, ZIP-Archiv-MCP.
 
-**Registry-Status:** auf [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp) veröffentlicht, über [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp) indexiert, auf [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp) sichtbar, auf [Glama](https://glama.ai/mcp/servers/eyurifgg4t) gelistet und über [`server.json`](server.json) für die offizielle MCP Registry vorbereitet. Einige Drittverzeichnisse zeigen noch ältere 43-Tool-Metadaten; bis deren Reindex durch ist, bleiben README und npm-Metadaten die kanonische Referenz.
+**Registry-Status:** auf [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp) veröffentlicht, über [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp) indexiert, auf [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp) sichtbar, auf [Glama](https://glama.ai/mcp/servers/ellmos-ai/ellmos-filecommander-mcp) gelistet und über [`server.json`](server.json) für die offizielle MCP Registry vorbereitet. Einige Drittverzeichnisse zeigen noch ältere 43-Tool-Metadaten; bis deren Reindex durch ist, bleiben README und npm-Metadaten die kanonische Referenz.
 
 > [!NOTE]
 > **Für KI-Agenten & LLM-Integrationen:**

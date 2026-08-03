@@ -20,7 +20,7 @@ A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants
 
 **Discovery keywords:** local filesystem MCP server, multi-file content search MCP, safe delete MCP, Recycle Bin MCP server, process management MCP, interactive shell MCP, async file search for AI agents, cloud-lock-safe file operations, Markdown to PDF MCP, OCR MCP server, ZIP archive MCP.
 
-**Registry status:** published on [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp), indexed by [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp), visible on [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp), listed on [Glama](https://glama.ai/mcp/servers/eyurifgg4t), and prepared for the official MCP Registry via [`server.json`](server.json). Some third-party directories still show older 43-tool metadata, so the canonical README/npm metadata should remain the source of truth until their reindex catches up.
+**Registry status:** published on [npm](https://www.npmjs.com/package/ellmos-filecommander-mcp), indexed by [jsDelivr](https://www.jsdelivr.com/package/npm/ellmos-filecommander-mcp), visible on [LobeHub](https://lobehub.com/mcp/ellmos-ai-ellmos-filecommander-mcp), listed on [Glama](https://glama.ai/mcp/servers/ellmos-ai/ellmos-filecommander-mcp), and prepared for the official MCP Registry via [`server.json`](server.json). Some third-party directories still show older 43-tool metadata, so the canonical README/npm metadata should remain the source of truth until their reindex catches up.
 
 > [!NOTE]
 > **For AI Agents & LLM Integrations:**
