@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [1.10.0] - 2026-07-29
 
+### Maintenance & Technical Hygiene (2026-08-04)
+- Update `llms.txt` Last-checked timestamp to `2026-08-04`.
+- Fix canonical repository branch reference (`master`) in `llms.txt` documentation links.
+- Re-verify TypeScript build (`npm run build`) & Vitest unit test suite (`175/175 passed`).
+
 ### Documentation & Discoverability (2026-08-03)
 - Replace the legacy opaque Glama URL with the canonical owner-based listing URL in both READMEs and `llms.txt`.
 

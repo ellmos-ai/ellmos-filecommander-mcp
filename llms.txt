@@ -1,4 +1,4 @@
-## Last-checked: 2026-07-30
+## Last-checked: 2026-08-04
 
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
@@ -12,12 +12,12 @@ Node.js >= 20, MIT. Published as `ellmos-filecommander-mcp` on npm and indexed b
 
 ## Docs
 
-- [README (English)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/README.md): Tools, installation, configuration for Claude Desktop / Claude Code
-- [README (Deutsch)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/README_de.md): German version
-- [LICENSE](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/LICENSE): MIT license text
+- [README (English)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/README.md): Tools, installation, configuration for Claude Desktop / Claude Code
+- [README (Deutsch)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/README_de.md): German version
+- [LICENSE](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/LICENSE): MIT license text
 - [npm package](https://www.npmjs.com/package/ellmos-filecommander-mcp): Published artifact
-- [server.json](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/server.json): Official MCP Registry metadata
-- [glama.json](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/main/glama.json): Glama-compatible MCP directory metadata
+- [server.json](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/server.json): Official MCP Registry metadata
+- [glama.json](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/glama.json): Glama-compatible MCP directory metadata
 
 ## Audience
 
