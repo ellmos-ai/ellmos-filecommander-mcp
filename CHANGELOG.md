@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [1.10.0] - 2026-07-29
 
+### Security (2026-08-05)
+- Close both open Dependabot advisories via lockfile update: `fast-uri`
+  (high, GHSA-7p8r-x3mc-p8w7 — host confusion via backslash authority
+  introducer) and `hono` (moderate, GHSA-8j4g-w8fx-2239 — ReDoS in the CORS
+  middleware). `npm audit` reports 0 vulnerabilities; build and 175/175
+  Vitest tests stay green.
+
 ### Maintenance & Technical Hygiene (2026-08-04)
 - Update `llms.txt` Last-checked timestamp to `2026-08-04`.
 - Fix canonical repository branch reference (`master`) in `llms.txt` documentation links.

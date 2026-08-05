@@ -51,3 +51,6 @@ TODO.md
 
 # lock system (multi-agent coordination, host-local, never commit)
 LOCK*.txt
+
+# Lokale Ablage verworfener Artefakte
+_archive/
