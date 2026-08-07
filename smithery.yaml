@@ -1,7 +1,0 @@
-startCommand:
-  type: stdio
-  config:
-    command: npx
-    args:
-      - "-y"
-      - "ellmos-filecommander-mcp"

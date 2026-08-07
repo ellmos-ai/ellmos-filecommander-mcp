@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Removed
+- Drop the inert `smithery.yaml`. It was never referenced by a badge, a
+  README link or the `files` array, and the listing it would configure does
+  not exist: `smithery.ai/server/@ellmos-ai/ellmos-filecommander-mcp` returns
+  HTTP 404. Found by a sweep across all 142 active repositories in the nine
+  organisations after the same manifest was removed from
+  `ellmos-clatcher-mcp`, `ellmos-codecommander-mcp` and `n8n-manager-mcp`;
+  this repository was the only remaining carrier. Restoring it is seven
+  lines if a Smithery listing is ever actually pursued -- but the file alone
+  demonstrably does not create one.
+
 ## [1.10.0] - 2026-07-29
 
 ### Security (2026-08-05)
