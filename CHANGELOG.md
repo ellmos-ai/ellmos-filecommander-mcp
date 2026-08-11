@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Security (2026-08-11)
+- Close all open Dependabot advisories in lockfile (`js-yaml` 4.3.1, `express-rate-limit` ^8.6.2, `nanoid` ^3.3.17, `fast-uri` ^3.1.5, `hono` ^4.13.0). `npm audit` reports 0 vulnerabilities.
+
 ### Removed
 - Drop the inert `smithery.yaml`. It was never referenced by a badge, a
   README link or the `files` array, and the listing it would configure does
