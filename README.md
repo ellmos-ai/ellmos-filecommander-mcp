@@ -11,7 +11,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
-[![FileCommander tests](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml)
+[![MCP Tools](https://img.shields.io/badge/MCP%20Tools-47-blueviolet.svg)](#tools-overview)
+[![Tests](https://img.shields.io/badge/tests-175%20passed-brightgreen.svg)](#testing)
+[![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, bounded multi-file content search, process management, interactive shell sessions, and async filename search capabilities.
@@ -64,12 +66,12 @@ flowchart TD
     end
 
     subgraph Core["ellmos FileCommander Engine (47 Tools)"]
-        FS["Filesystem & Cloud-Lock Guard\n(14 tools: read, write, edit, safe-delete, cloud-lock safe)"]
+        FS["Filesystem Engine\n(14 tools: read, write, edit, safe-delete, cloud-lock safe)"]
         Search["Search Engine\n(6 tools: explicit content search plus 5 async filename-search tools)"]
         Proc["Process & REPL Sessions\n(9 tools: exec, background proc, interactive REPLs)"]
-        Repair["Repair & Format Converter\n(9 tools: JSON fix, Mojibake fix, duplicates, format convert)"]
-        Export["Export & Web Scraper\n(3 tools: Markdown->HTML/PDF, web_fetch)"]
-        Sys["System & Utilities\n(6 tools: OCR, ZIP, checksums, safe-mode, time)"]
+        Repair["Repair & Format Converter\n(9 tools: JSON fix, Mojibake fix, duplicates, format convert, checksum)"]
+        Export["Export & Web Fetch\n(3 tools: Markdown->HTML/PDF, web_fetch)"]
+        Sys["System, Utilities & i18n\n(6 tools: OCR, ZIP, cloud-lock check, safe-mode, time, i18n)"]
     end
 
     Client -->|JSON-RPC| Stdio
@@ -240,12 +242,13 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 |------|-------------|
 | `fc_check_cloud_lock` | Diagnose whether a path may be blocked by cloud sync filters (Windows) |
 
-### System (2 tools)
+### System (3 tools)
 
 | Tool | Description |
 |------|-------------|
 | `fc_get_time` | Get current system time with timezone info |
 | `fc_set_safe_mode` | Toggle safe mode: all deletes go through Recycle Bin / Trash |
+| `fc_set_language` | Set runtime language for tool responses (`de` or `en`) |
 
 ### Export (2 tools)
 

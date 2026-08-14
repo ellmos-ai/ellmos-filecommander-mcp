@@ -11,7 +11,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
-[![FileCommander tests](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml/badge.svg)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/actions/workflows/tests.yml)
+[![MCP Tools](https://img.shields.io/badge/MCP%20Tools-47-blueviolet.svg)](#tools-übersicht)
+[![Tests](https://img.shields.io/badge/tests-175%20passed-brightgreen.svg)](#entwicklung)
+[![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
@@ -64,12 +66,12 @@ flowchart TD
     end
 
     subgraph Core["ellmos FileCommander Engine (47 Tools)"]
-        FS["Dateisystem & Cloud-Lock-Guard\n(14 Tools: Lesen, Schreiben, Editieren, Safe-Delete, Cloud-Lock-sicher)"]
+        FS["Dateisystem-Engine\n(14 Tools: Lesen, Schreiben, Editieren, Safe-Delete, Cloud-Lock-sicher)"]
         Search["Such-Engine\n(6 Tools: explizite Inhaltssuche plus 5 asynchrone Dateinamensuchen)"]
-        Proc["Prozess & REPL-Sitzungen\n(9 Tools: Exec, Hintergrundprozesse, interaktive REPLs)"]
-        Repair["Reparatur & Formatkonverter\n(9 Tools: JSON-Fix, Mojibake-Fix, Duplikate, Format-Convert)"]
-        Export["Export & Web Scraper\n(3 Tools: Markdown->HTML/PDF, web_fetch)"]
-        Sys["System & Dienstprogramme\n(6 Tools: OCR, ZIP, Prüfsummen, Safety-Mode, Zeit)"]
+        Proc["Prozess- & REPL-Sitzungen\n(9 Tools: Exec, Hintergrundprozesse, interaktive REPLs)"]
+        Repair["Reparatur & Formatkonverter\n(9 Tools: JSON-Fix, Mojibake-Fix, Duplikate, Format-Convert, Prüfsummen)"]
+        Export["Export & Web-Fetch\n(3 Tools: Markdown->HTML/PDF, web_fetch)"]
+        Sys["System, Dienstprogramme & i18n\n(6 Tools: OCR, ZIP, Cloud-Lock-Check, Safety-Mode, Zeit, i18n)"]
     end
 
     Client -->|JSON-RPC| Stdio
@@ -240,12 +242,13 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 |------|-------------|
 | `fc_check_cloud_lock` | Diagnose ob ein Pfad von Cloud-Sync-Filtern blockiert werden könnte (Windows) |
 
-### System (2 Tools)
+### System (3 Tools)
 
 | Tool | Beschreibung |
 |------|-------------|
 | `fc_get_time` | Aktuelle Systemzeit mit Zeitzoneninformation abrufen |
 | `fc_set_safe_mode` | Safety Mode umschalten: alle Löschvorgänge über Papierkorb / Trash |
+| `fc_set_language` | Laufzeitsprache für Tool-Rückmeldungen umschalten (`de` oder `en`) |
 
 ### Export (2 Tools)
 

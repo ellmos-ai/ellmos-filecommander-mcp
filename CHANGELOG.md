@@ -17,6 +17,13 @@ All notable changes to this project will be documented in this file.
 
 ## [1.10.0] - 2026-07-29
 
+### Maintenance & Discoverability (2026-08-14)
+- Update `llms.txt` Last-checked timestamp to `2026-08-14`.
+- Complete all 47 tool entries in `README.md` and `README_de.md` by documenting `fc_set_language` in the System tools tables.
+- Add MCP Tools (47), Vitest suite (175 passed), and organization badges to `README.md` and `README_de.md`.
+- Synchronize system architecture Mermaid diagrams with exact 47-tool category mapping.
+- Re-verify TypeScript build (`npm run build`), full Vitest suite (175/175 tests passed), and i18n test suite (69/69 passed).
+
 ### Security (2026-08-05)
 - Close both open Dependabot advisories via lockfile update: `fast-uri`
   (high, GHSA-7p8r-x3mc-p8w7 — host confusion via backslash authority
