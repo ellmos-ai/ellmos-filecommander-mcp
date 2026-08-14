@@ -16,7 +16,10 @@
     "CHANGELOG.md",
     "SECURITY.md",
     "THIRD_PARTY_NOTICES.md",
-    "server.json"
+    "server.json",
+    "glama.json",
+    "smithery.yaml",
+    "llms.txt"
   ],
   "scripts": {
     "build": "node node_modules/typescript/bin/tsc",
