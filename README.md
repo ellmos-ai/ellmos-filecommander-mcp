@@ -453,8 +453,8 @@ This MCP server is part of the **[ellmos-ai](https://github.com/ellmos-ai)** eco
 | **[FileCommander](https://github.com/ellmos-ai/ellmos-filecommander-mcp)** | **47** | **Filesystem, content search, process management, interactive sessions, cloud-lock-safe operations** | **[`ellmos-filecommander-mcp`](https://www.npmjs.com/package/ellmos-filecommander-mcp)** |
 | [CodeCommander](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | 22 | Code analysis, JSON repair, imports, diffs, regex | [`ellmos-codecommander-mcp`](https://www.npmjs.com/package/ellmos-codecommander-mcp) |
 | [Clatcher](https://github.com/ellmos-ai/ellmos-clatcher-mcp) | 12 | File repair, format conversion, batch operations | [`ellmos-clatcher-mcp`](https://www.npmjs.com/package/ellmos-clatcher-mcp) |
-| [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 18 | n8n workflow management via AI assistants | [`n8n-manager-mcp`](https://www.npmjs.com/package/n8n-manager-mcp) |
-| [ControlCenter](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | 20 | MCP stack discovery, profile management, control plane | [`ellmos-controlcenter-mcp`](https://www.npmjs.com/package/ellmos-controlcenter-mcp) |
+| [n8n Manager](https://github.com/ellmos-ai/n8n-manager-mcp) | 19 | n8n workflow management via AI assistants | [`n8n-manager-mcp`](https://www.npmjs.com/package/n8n-manager-mcp) |
+| [ControlCenter](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | 31 | MCP stack discovery, profile management, control plane | [`ellmos-controlcenter-mcp`](https://www.npmjs.com/package/ellmos-controlcenter-mcp) |
 | [Homebase](https://github.com/ellmos-ai/ellmos-homebase-mcp) | 45 | Local-first LLM memory, knowledge, state, routing, swarm orchestration | [`ellmos-homebase-mcp`](https://www.npmjs.com/package/ellmos-homebase-mcp) (alpha) |
 | [ServerCommander](https://github.com/ellmos-ai/ellmos-servercommander-mcp) | 8 | Server operations: health checks, log analysis, deploy dry-runs, mail diagnostics | [`ellmos-servercommander-mcp`](https://www.npmjs.com/package/ellmos-servercommander-mcp) (alpha) |
 | [Blender Use](https://github.com/ellmos-ai/ellmos-blender-use-mcp) | 3 | Headless Blender asset QA and FBX reimport verification | [`ellmos-blender-use-mcp`](https://www.npmjs.com/package/ellmos-blender-use-mcp) (alpha) |
@@ -484,9 +484,13 @@ Our partner organization **[open-bricks](https://github.com/open-bricks)** and i
 | [WinStorePackager](https://github.com/file-bricks/WinStorePackager) | Packaging | file-bricks | MSIX & Store packaging for Windows desktop applications |
 | [SoftwareCenter](https://github.com/file-bricks/SoftwareCenter) | App Store | file-bricks | Centralized desktop package management & distribution |
 | [SQLiteViewer](https://github.com/file-bricks/SQLiteViewer) | Database Tool | file-bricks | Lightweight SQLite exploration & querying |
+| [DokuZen](https://github.com/doc-bricks/DokuZen) | Markdown Suite | doc-bricks | Markdown editor, PDF export & document conversion |
 | [MediaBrain](https://github.com/doc-bricks/MediaBrain) | Document / Media | doc-bricks | Audio/video transcription, metadata extraction & cataloging |
+| [UniversalInvoiceMail](https://github.com/doc-bricks/UniversalInvoiceMail) | Document / Mail | doc-bricks | Automated invoice parsing, PDF extraction & mail routing |
 | [DevCenter](https://github.com/dev-bricks/DevCenter) | Developer Suite | dev-bricks | Integrated developer toolbox, code analyzers & generators |
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | Code Editor | dev-bricks | Multi-language code editor with LLM augmentation |
+| [safe-start-for-codex](https://github.com/dev-bricks/safe-start-for-codex) | Security & Audit | dev-bricks | Hardened runtime environment & pre-flight checker for Codex |
+| [automation-master](https://github.com/dev-bricks/automation-master) | Task Automation | dev-bricks | High-reliability background automation runner & scheduler |
 
 
 ## Haftung / Liability
