@@ -12,9 +12,11 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-47-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-175%20passed-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-181%20vitest%20%2B%2069%20i18n%20passed-brightgreen.svg)](#entwicklung)
+[![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
 [![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
+[![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -82,6 +84,42 @@ flowchart TD
     Core --> Repair
     Core --> Export
     Core --> Sys
+```
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant AI as KI-Assistent (Client)
+    participant FC as FileCommander Engine
+    participant FS as Host-Dateisystem
+    participant Trash as Papierkorb / Trash
+    participant Cloud as Cloud-Sync-Filter
+
+    Note over AI,FC: 1. Sichere Löschung & Wiederherstellbarkeit
+    AI->>FC: fc_delete_file / fc_safe_delete(targetPath)
+    alt Safety Mode aktiv oder fc_safe_delete gewählt
+        FC->>Trash: Objekt in den Papierkorb verschieben
+        Trash-->>FC: Sicher verschoben (wiederherstellbar)
+        FC-->>AI: Erfolg (im Papierkorb geschützt)
+    else Permanente Löschung angefordert
+        FC->>FS: Direktes Unlink
+        FS-->>FC: Endgültig entfernt
+        FC-->>AI: Erfolg
+    end
+
+    Note over AI,Cloud: 2. Robuste Cloud-Lock-Behandlung (OneDrive/Dropbox)
+    AI->>FC: fc_move(sourcePath, destPath)
+    alt Cloud-Filter blockiert Zielort
+        FC->>Cloud: Regulärer Rename-Versuch
+        Cloud-->>FC: EPERM / EBUSY (Cloud Filter Error)
+        FC->>FS: Fallback: copyFileSync + SHA-256 Validierung
+        FC->>FS: unlinkSync Originalquelle
+        FC-->>AI: Verschiebevorgang via Ausweichroutine geglückt
+    else Lokales Standarddateisystem
+        FC->>FS: Atomarer Rename
+        FS-->>FC: Fertiggestellt
+        FC-->>AI: Verschiebevorgang geglückt
+    end
 ```
 
 ---
@@ -434,6 +472,18 @@ Dieser MCP-Server ist Teil des **[ellmos-ai](https://github.com/ellmos-ai)**-Ök
 | [gardener](https://github.com/ellmos-ai/gardener) | Minimalistischer datenbankgetriebener LLM-OS-Prototyp (4 Funktionen, 1 Tabelle) |
 | [ellmos-tests](https://github.com/ellmos-ai/ellmos-tests) | Testframework für LLM-Betriebssysteme (7 Dimensionen) |
 
-### Desktop-Software
+### Desktop-Software & Geschwister-Anwendungen
 
-Unsere Partnerorganisation **[open-bricks](https://github.com/open-bricks)** bündelt KI-native Desktop-Anwendungen: eine moderne Open-Source-Softwaresuite für Datei-, Dokumenten- und Entwicklerwerkzeuge.
+Unsere Partnerorganisation **[open-bricks](https://github.com/open-bricks)** und ihre Line-Organisationen bieten KI-native Desktop-Anwendungen und Entwickler-Tools:
+
+| Anwendung | Kategorie | Organisation | Fokus |
+|-----------|-----------|--------------|-------|
+| [ProFiler](https://github.com/file-bricks/ProFiler) | Dateiverwaltung | file-bricks | Hochleistungs-Zweifenster-Dateimanager mit KI-Integration |
+| [ExplorerPro](https://github.com/file-bricks/ExplorerPro) | Dateiexploration | file-bricks | Intelligenter Dateiexplorer mit semantischen Filtern & Vorschau |
+| [WinStorePackager](https://github.com/file-bricks/WinStorePackager) | Paketierung | file-bricks | MSIX- & Microsoft Store-Paketierung für Windows-Desktop-Apps |
+| [SoftwareCenter](https://github.com/file-bricks/SoftwareCenter) | App Store | file-bricks | Zentrales Desktop-Paketmanagement und Software-Verteilung |
+| [SQLiteViewer](https://github.com/file-bricks/SQLiteViewer) | Datenbank-Tool | file-bricks | Schlanker SQLite-Inspektor und Query-Editor |
+| [MediaBrain](https://github.com/doc-bricks/MediaBrain) | Dokumente / Medien | doc-bricks | Audio-/Video-Transkription, Metadaten-Extraktion & Katalogisierung |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | Entwickler-Suite | dev-bricks | Integrierter Werkzeugkasten für Entwickler, Code-Analysen & Generatoren |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | Code-Editor | dev-bricks | Mehrsprachiger Code-Editor mit LLM-Unterstützung |
+

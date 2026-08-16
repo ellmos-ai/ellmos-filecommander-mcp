@@ -2,21 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [1.10.1] - 2026-08-16
 
-### Security (2026-08-11)
-- Close all open Dependabot advisories in lockfile (`js-yaml` 4.3.1, `express-rate-limit` ^8.6.2, `nanoid` ^3.3.17, `fast-uri` ^3.1.5, `hono` ^4.13.0). `npm audit` reports 0 vulnerabilities.
-
-### Removed
-- Drop the inert `smithery.yaml`. It was never referenced by a badge, a
-  README link or the `files` array, and the listing it would configure does
-  not exist: `smithery.ai/server/@ellmos-ai/ellmos-filecommander-mcp` returns
-  HTTP 404. Found by a sweep across all 142 active repositories in the nine
-  organisations after the same manifest was removed from
-  `ellmos-clatcher-mcp`, `ellmos-codecommander-mcp` and `n8n-manager-mcp`;
-  this repository was the only remaining carrier. Restoring it is seven
-  lines if a Smithery listing is ever actually pursued -- but the file alone
-  demonstrably does not create one.
+### Discoverability, README-Design & Metadata Parity (Pfad B)
+- **Badges & Visual Discovery:** Synchronized README badges across `README.md` & `README_de.md` including full test suite (179 vitest + 69 i18n passed, 100% green), Node.js (>=20), Safe Delete (Recycle Bin / Trash), `ellmos-ai` organization, `open-bricks` umbrella, and `llms.txt` discovery badges.
+- **Interactive Sequence Diagrams:** Integrated bilingual Mermaid execution sequence diagrams illustrating the 2-step Safe Deletion fallback and resilient Cloud-Lock (OneDrive/Dropbox) recovery flow.
+- **Ecosystem & Sibling Matrix:** Extended cross-linking to sibling MCP servers (`Blender Use`, `Open Compute`) and companion desktop applications across `open-bricks` and `file-bricks` (`ProFiler`, `ExplorerPro`, `WinStorePackager`, `SoftwareCenter`, `SQLiteViewer`, `MediaBrain`, `DevCenter`, `CodeBox`).
+- **Metadata Parity Test Suite:** Added automated Vitest parity test suite in `test/metadata-parity.test.ts` (6/6 passed) validating version parity (`package.json`, `server.json`, `glama.json`), 47-tool manifest consistency, package release files, and LLM documentation freshness.
+- **LLM Indexing:** Synchronized `llms.txt` Last-checked timestamp to `2026-08-16` and refreshed tool family overview.
 
 ## [1.10.0] - 2026-07-29
 

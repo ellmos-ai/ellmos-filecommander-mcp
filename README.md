@@ -12,9 +12,11 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-47-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-175%20passed-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-181%20vitest%20%2B%2069%20i18n%20passed-brightgreen.svg)](#testing)
+[![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
 [![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
+[![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, bounded multi-file content search, process management, interactive shell sessions, and async filename search capabilities.
 
@@ -82,6 +84,42 @@ flowchart TD
     Core --> Repair
     Core --> Export
     Core --> Sys
+```
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant AI as AI Assistant (Client)
+    participant FC as FileCommander Engine
+    participant FS as Host Filesystem
+    participant Trash as Recycle Bin / Trash
+    participant Cloud as Cloud Sync Filter
+
+    Note over AI,FC: 1. Safe Deletion & Recovery Protection
+    AI->>FC: fc_delete_file / fc_safe_delete(targetPath)
+    alt Safety Mode Active or fc_safe_delete invoked
+        FC->>Trash: Move item to Recycle Bin / Trash
+        Trash-->>FC: Moved safely (recoverable)
+        FC-->>AI: Success (item preserved in Trash/Recycle Bin)
+    else Permanent Unlink requested
+        FC->>FS: Direct unlink
+        FS-->>FC: Removed permanently
+        FC-->>AI: Success
+    end
+
+    Note over AI,Cloud: 2. Resilient Cloud-Lock Handling (OneDrive/Dropbox)
+    AI->>FC: fc_move(sourcePath, destPath)
+    alt Cloud Filter Locks Destination
+        FC->>Cloud: Attempt standard rename
+        Cloud-->>FC: EPERM / EBUSY (Cloud Filter Error)
+        FC->>FS: Fallback: copyFileSync + SHA-256 verify
+        FC->>FS: unlinkSync source
+        FC-->>AI: Move succeeded via resilient fallback
+    else Local Native Filesystem
+        FC->>FS: Rename (atomic)
+        FS-->>FC: Done
+        FC-->>AI: Move succeeded
+    end
 ```
 
 ---
@@ -435,9 +473,21 @@ This MCP server is part of the **[ellmos-ai](https://github.com/ellmos-ai)** eco
 | [gardener](https://github.com/ellmos-ai/gardener) | Minimalist database-driven LLM OS prototype (4 functions, 1 table) |
 | [ellmos-tests](https://github.com/ellmos-ai/ellmos-tests) | Testing framework for LLM operating systems (7 dimensions) |
 
-### Desktop Software
+### Desktop Software & Sibling Applications
 
-Our partner organization **[open-bricks](https://github.com/open-bricks)** bundles AI-native desktop applications — a modern, open-source software suite built for the age of AI. Categories include file management, document tools, developer utilities, and more.
+Our partner organization **[open-bricks](https://github.com/open-bricks)** and its line organizations provide AI-native desktop applications and developer utilities:
+
+| Application | Category | Organization | Focus |
+|-------------|----------|--------------|-------|
+| [ProFiler](https://github.com/file-bricks/ProFiler) | File Management | file-bricks | High-speed dual-pane file manager with AI integration |
+| [ExplorerPro](https://github.com/file-bricks/ExplorerPro) | File Exploration | file-bricks | Smart file explorer with semantic filters & preview |
+| [WinStorePackager](https://github.com/file-bricks/WinStorePackager) | Packaging | file-bricks | MSIX & Store packaging for Windows desktop applications |
+| [SoftwareCenter](https://github.com/file-bricks/SoftwareCenter) | App Store | file-bricks | Centralized desktop package management & distribution |
+| [SQLiteViewer](https://github.com/file-bricks/SQLiteViewer) | Database Tool | file-bricks | Lightweight SQLite exploration & querying |
+| [MediaBrain](https://github.com/doc-bricks/MediaBrain) | Document / Media | doc-bricks | Audio/video transcription, metadata extraction & cataloging |
+| [DevCenter](https://github.com/dev-bricks/DevCenter) | Developer Suite | dev-bricks | Integrated developer toolbox, code analyzers & generators |
+| [CodeBox](https://github.com/dev-bricks/CodeBox) | Code Editor | dev-bricks | Multi-language code editor with LLM augmentation |
+
 
 ## Haftung / Liability
 

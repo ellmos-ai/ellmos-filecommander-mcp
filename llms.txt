@@ -1,4 +1,4 @@
-## Last-checked: 2026-08-14
+## Last-checked: 2026-08-16
 
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
@@ -58,12 +58,23 @@ FileCommander MCP
 - [ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp): MCP stack discovery, profile management, and control plane (20 tools)
 - [ellmos-homebase-mcp](https://github.com/ellmos-ai/ellmos-homebase-mcp): LLM memory, knowledge, state, routing, and orchestration (45 tools)
 - [ellmos-servercommander-mcp](https://github.com/ellmos-ai/ellmos-servercommander-mcp): Server deployment, health checks, and mail access tools (8 tools)
+- [ellmos-blender-use-mcp](https://github.com/ellmos-ai/ellmos-blender-use-mcp): Headless Blender asset QA and FBX reimport verification (3 tools)
+- [open-compute-mcp](https://github.com/ellmos-ai/open-compute-mcp): Model-agnostic computer use and OS interaction (10 tools)
 
 ## Broader ellmos ecosystem
 
 - [BACH](https://github.com/ellmos-ai/bach): Full text-based OS for LLMs -- primary consumer of the MCP servers
 - [Rinnsal](https://github.com/ellmos-ai/rinnsal): Lightweight LLM agent infrastructure
+- [clutch](https://github.com/ellmos-ai/clutch): Multi-provider AI routing and failover
 - [USMC](https://github.com/ellmos-ai/usmc): Shared memory primitive
+
+## open-bricks sibling applications
+
+- [ProFiler](https://github.com/file-bricks/ProFiler): High-speed dual-pane file manager with AI integration
+- [ExplorerPro](https://github.com/file-bricks/ExplorerPro): Intelligent file explorer with smart filters
+- [WinStorePackager](https://github.com/file-bricks/WinStorePackager): MSIX and Store packaging for Windows desktop apps
+- [MediaBrain](https://github.com/doc-bricks/MediaBrain): Media metadata, audio/video transcription and cataloging
+- [DevCenter](https://github.com/dev-bricks/DevCenter): Centralized developer tool suite
 
 ## Optional
 
