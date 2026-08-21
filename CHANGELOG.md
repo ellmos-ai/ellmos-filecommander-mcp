@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.10.1] - 2026-08-21
+
+### Technical Hygiene, CI Multi-OS Matrix & Bilingual Security Policy (Pfad A)
+- **GitHub Actions CI Modernization:** Upgraded `.github/workflows/tests.yml` to official modern actions (`actions/checkout@v4`, `actions/setup-node@v4` with npm cache), multi-OS matrix (`ubuntu-latest`, `windows-latest`, `macos-latest`), and Node.js matrix (`[20, 22, 24]`).
+- **Bilingual Security Policy (`SECURITY.md`):** Comprehensive English and German security documentation covering Local-First & Zero-Egress guarantees, unprivileged User-Mode execution (Non-Elevation), Safe Mode routing (`fc_set_safe_mode`), Cloud-Lock resilience (`fc_check_cloud_lock`), tool risk classifications, direct contact endpoints (`security@ellmos.ai`, `support@lukasgeiger.com`, `lukas@open-bricks.org`), and supported versions table.
+- **Automated Contract & Parity Test Suite:** Expanded `test/metadata-parity.test.ts` (8 contract tests, 100% green) validating version parity, 47-tool manifest consistency, package release files, bilingual security policy, multi-OS CI workflow, and LLM documentation freshness.
+- **Documentation & Badges:** Added CI status badge, Zero-Egress security badge, quick navigation bar in `README.md` and `README_de.md`, updated sibling server tool counts (`Blender Use: 5`, `Open Compute: 16`), and synchronized `llms.txt` Last-checked timestamp to `2026-08-21`.
+- **Integrated Test Runner:** Updated `npm test` script to seamlessly run Vitest (181 tests) and i18n test runner (69 tests) in unified automated execution (250 tests total, 100% green).
+
 ## [1.10.1] - 2026-08-16
 
 ### Discoverability, README-Design & Metadata Parity (Pfad B)

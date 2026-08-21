@@ -64,16 +64,46 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('llms.txt');
   });
 
-  it('llms.txt is synchronized with 2026-08-16 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-08-21 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-08-16');
+    expect(llms).toContain('## Last-checked: 2026-08-21');
     expect(llms).toContain('47 tools');
     expect(llms).toContain('fc_search_content');
     expect(llms).toContain('safe-delete');
+    expect(llms).toContain('SECURITY.md');
+    expect(llms).toContain('CHANGELOG.md');
     expect(llms).toContain('ellmos-controlcenter-mcp');
     expect(llms).toContain('31 tools');
     expect(llms).toContain('n8n-manager-mcp');
     expect(llms).toContain('19 tools');
+    expect(llms).toContain('open-compute-mcp');
+    expect(llms).toContain('16 tools');
+  });
+
+  it('SECURITY.md contains bilingual policy, zero-egress guarantees, and contact endpoints', () => {
+    const sec = readFileSync(securityPath, 'utf-8');
+    expect(sec).toContain('Security Policy / Sicherheitsrichtlinie');
+    expect(sec).toContain('English: Security Policy');
+    expect(sec).toContain('Deutsch: Sicherheitsrichtlinie');
+    expect(sec).toContain('Zero-Egress');
+    expect(sec).toContain('Local-First');
+    expect(sec).toContain('fc_set_safe_mode');
+    expect(sec).toContain('fc_check_cloud_lock');
+    expect(sec).toContain('security@ellmos.ai');
+    expect(sec).toContain('support@lukasgeiger.com');
+    expect(sec).toContain('1.10.x');
+  });
+
+  it('GitHub Actions CI workflow uses multi-OS matrix and v4 actions', () => {
+    const ciPath = resolve(ROOT, '.github/workflows/tests.yml');
+    expect(existsSync(ciPath)).toBe(true);
+    const ci = readFileSync(ciPath, 'utf-8');
+    expect(ci).toContain('ubuntu-latest');
+    expect(ci).toContain('windows-latest');
+    expect(ci).toContain('macos-latest');
+    expect(ci).toContain('actions/checkout@v4');
+    expect(ci).toContain('actions/setup-node@v4');
+    expect(ci).toContain('npm test');
   });
 
   it('README files contain valid badges, ecosystem links, and architecture diagrams', () => {
