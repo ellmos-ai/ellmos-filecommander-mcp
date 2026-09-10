@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.11.1] - 2026-09-10
+
+### Discoverability, Visual Architecture & Governance Invariants (Pfad B)
+- **10 Governance & Runtime Invariants (`INV-LOCAL-01` to `INV-SLA-10`):** Codified formal invariant IDs across `README.md`, `README_de.md`, `llms.txt`, and `MARKETING-LOG.txt` covering local stdio isolation, trash protection, cloud-lock resilient move/diagnostics, bounded multi-file search, secret redaction, bounded inline previews, REPL circular ring buffers, unprivileged execution, and 48h SLA.
+- **Third-Party Dependency & Licensing Review (`THIRD_PARTY_LICENSES.md`):** Complete inventory and license compatibility audit for all runtime (`@modelcontextprotocol/sdk`, `@types/node`, `tesseract.js`) and dev dependencies, ensuring 100% MIT-permissive alignment.
+- **Marketing & Discoverability Log (`MARKETING-LOG.txt`):** Structured register detailing product identity (50 tools), 4 target personas (Autonomous Agent Developers, DevOps & Sysadmins, Cross-Platform Desktop Power Users, Enterprise MCP Integrators), 10 architectural invariants, sibling ecosystem matrix (12 desktop apps, 9 MCP servers, 8 AI infrastructure projects), and automated verification status.
+- **Bilingual Documentation Parity & Quick Navigation:** Synchronized 16-point navigation bars across `README.md` and `README_de.md`, updated test assertions metric to 286 passed checks, and embedded explicit links to `MARKETING-LOG.txt` and `THIRD_PARTY_LICENSES.md`.
+- **Packaging & Parity Contract Expansion:** Included new documentation manifests in `package.json` `"files"` whitelist, updated `llms.txt` `Last-checked: 2026-09-10`, and expanded `test/metadata-parity.test.ts` to assert invariant IDs and new documentation files.
+
 ## [1.11.1] - 2026-09-09
 
 ### Repository Hygiene, Security Hardening & Parity Tests (Pfad A)

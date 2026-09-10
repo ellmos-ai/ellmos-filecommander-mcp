@@ -14,6 +14,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   const readmeDePath = resolve(ROOT, 'README_de.md');
   const changelogPath = resolve(ROOT, 'CHANGELOG.md');
   const securityPath = resolve(ROOT, 'SECURITY.md');
+  const marketingLogPath = resolve(ROOT, 'MARKETING-LOG.txt');
+  const thirdPartyLicensesPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.md');
 
   it('all required manifests and discoverability files exist', () => {
     expect(existsSync(pkgPath)).toBe(true);
@@ -25,6 +27,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(existsSync(readmeDePath)).toBe(true);
     expect(existsSync(changelogPath)).toBe(true);
     expect(existsSync(securityPath)).toBe(true);
+    expect(existsSync(marketingLogPath)).toBe(true);
+    expect(existsSync(thirdPartyLicensesPath)).toBe(true);
   });
 
   it('maintains exact version parity across package.json, server.json, glama.json, package-lock.json, and src/index.ts', () => {
@@ -65,17 +69,23 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('server.json');
     expect(files).toContain('glama.json');
     expect(files).toContain('llms.txt');
+    expect(files).toContain('MARKETING-LOG.txt');
+    expect(files).toContain('THIRD_PARTY_LICENSES.md');
   });
 
-  it('llms.txt is synchronized with 2026-09-09 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-10 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-09');
+    expect(llms).toContain('## Last-checked: 2026-09-10');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
     expect(llms).toContain('safe-delete');
     expect(llms).toContain('SECURITY.md');
     expect(llms).toContain('CHANGELOG.md');
+    expect(llms).toContain('MARKETING-LOG.txt');
+    expect(llms).toContain('THIRD_PARTY_LICENSES.md');
+    expect(llms).toContain('INV-LOCAL-01');
+    expect(llms).toContain('INV-SLA-10');
     expect(llms).toContain('ellmos-controlcenter-mcp');
     expect(llms).toContain('31 tools');
     expect(llms).toContain('n8n-manager-mcp');
@@ -191,6 +201,18 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('Lossless Multi-Format Engine');
     expect(en).toContain('Mojibake & File Repair Engine');
     expect(en).toContain('Unprivileged Non-Elevation Execution');
+    expect(en).toContain('INV-LOCAL-01');
+    expect(en).toContain('INV-SAFE-02');
+    expect(en).toContain('INV-LOCK-03');
+    expect(en).toContain('INV-DIAG-04');
+    expect(en).toContain('INV-SRCH-05');
+    expect(en).toContain('INV-MASK-06');
+    expect(en).toContain('INV-PREV-07');
+    expect(en).toContain('INV-REPL-08');
+    expect(en).toContain('INV-PROC-09');
+    expect(en).toContain('INV-SLA-10');
+    expect(en).toContain('MARKETING-LOG.txt');
+    expect(en).toContain('THIRD_PARTY_LICENSES.md');
 
     expect(de).toContain('Lokales stdio & expliziter Egress');
     expect(de).toContain('Sicheres Löschen & Papierkorb-Schutz');
@@ -200,5 +222,17 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('Verlustfreie Multi-Format-Engine');
     expect(de).toContain('Mojibake- & Dateireparatur-Engine');
     expect(de).toContain('Unprivilegierter Non-Elevation-Betrieb');
+    expect(de).toContain('INV-LOCAL-01');
+    expect(de).toContain('INV-SAFE-02');
+    expect(de).toContain('INV-LOCK-03');
+    expect(de).toContain('INV-DIAG-04');
+    expect(de).toContain('INV-SRCH-05');
+    expect(de).toContain('INV-MASK-06');
+    expect(de).toContain('INV-PREV-07');
+    expect(de).toContain('INV-REPL-08');
+    expect(de).toContain('INV-PROC-09');
+    expect(de).toContain('INV-SLA-10');
+    expect(de).toContain('MARKETING-LOG.txt');
+    expect(de).toContain('THIRD_PARTY_LICENSES.md');
   });
 });

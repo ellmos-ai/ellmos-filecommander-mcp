@@ -21,7 +21,7 @@
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
 
-> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleich](#vergleich-mit-alternativen) | [Auffindbarkeit](#auffindbarkeit) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Changelog](CHANGELOG.md) | [llms.txt](llms.txt)
+> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Verfügbare Werkzeuge](#tools-übersicht) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleich](#vergleich-mit-alternativen) | [Entwicklung & Tests](#entwicklung) | [Governance & Laufzeit-Invarianten](#governance--laufzeit-invarianten) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) | [Marketing-Log](MARKETING-LOG.txt) | [Changelog](CHANGELOG.md) | [llms.txt](llms.txt)
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -144,7 +144,7 @@ sequenceDiagram
 | **Mojibake- & Dateireparatur-Engine** | `fc_fix_encoding`, `fc_fix_json` und `fc_cleanup_file` reparieren fehlerhafte UTF-8-Codierungen (27+ Muster), defekte JSON-Syntax, BOMs und NUL-Bytes. | Selbstheilende Dateipipelines bei plattformübergreifend beschädigten Text- und Datendateien. |
 | **Unprivilegierter Non-Elevation-Betrieb** | Ausgelegt und verifiziert für den Betrieb im unprivilegierten Standard-Benutzerkontext ohne Root-/Admin-Rechte. | Minimale Angriffsfläche nach dem Prinzip der geringsten Rechte (Least Privilege). |
 | **Sechssprachige Laufzeit-i18n-Engine** | Dynamische Sprachumschaltung und -abfrage (`fc_set_language`, `fc_get_language`) für Deutsch (`de`), Englisch (`en`), Spanisch (`es`), Chinesisch (`zh`), Japanisch (`ja`) und Russisch (`ru`). | Native mehrsprachige Entwicklererfahrung und verständliche Fehlerdiagnostik. |
-| **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 283 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
+| **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 286 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
 
 ---
 
@@ -390,10 +390,31 @@ FileCommander ist so dokumentiert, dass Menschen, LLMs und MCP-Verzeichnisse ihn
 - [`server.json`](server.json) folgt dem offiziellen MCP-Registry-Schema und verweist auf das npm-Paket.
 - [`glama.json`](glama.json) liefert Metadaten für Glama-kompatible MCP-Verzeichnisse.
 - [`llms.txt`](llms.txt) bietet kompakten Kontext für LLMs, Agentenkataloge und Dokumentations-Crawler.
+- [`MARKETING-LOG.txt`](MARKETING-LOG.txt) dokumentiert Auffindbarkeit, 4 Ziel-Personas und Verifikationsverträge.
+- [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) inventarisiert Lizenzen aller Laufzeit- und Entwicklungsabhängigkeiten.
 
 Primäre Suchbegriffe: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `multi-file content search MCP`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
 
 Externe Auffindbarkeit: npm und jsDelivr können dem aktuellen Release kurzzeitig hinterherhinken. LobeHub indexiert das GitHub-Repo als MCP-Server. Die Paketbeschreibung und diese README sind die kanonische 50-Tool-Referenz für den aktuellen Repository-Stand.
+
+---
+
+## Governance & Laufzeit-Invarianten
+
+Der Server erzwingt 10 strikte Laufzeit-Invarianten, die Sicherheit, Vorhersehbarkeit und das Least-Privilege-Prinzip garantieren:
+
+| Invarianten-ID | Bezeichnung | Garantie & Implementierungsdetails | Sicherheits- & Betriebsnutzen |
+|----------------|-------------|-----------------------------------|-------------------------------|
+| **INV-LOCAL-01** | **Lokales stdio & expliziter Egress** | Lokaler stdio-Transport, null Telemetrie, keine offenen Netzwerkports. Ausgehende HTTP(S)-Anfragen erfolgen ausschließlich über explizite Client-Aufrufe an `fc_web_fetch`. | Kein unautorisierter Netzwerk-Datenabfluss; strikte Local-First-Isolation. |
+| **INV-SAFE-02** | **Sicheres Löschen & Papierkorb-Schutz** | `fc_safe_delete` und globaler `fc_set_safe_mode` leiten Datei- und Verzeichnis-Löschungen über den System-Papierkorb (Windows) / Trash (macOS/Linux). | Verhindert irreversiblen Datenverlust durch autonome Agentenaktionen. |
+| **INV-LOCK-03** | **Cloud-Lock-robuste Verschiebung** | `fc_move` führt automatisch copy + SHA-256 Validierung + Quell-Unlink aus, wenn Sync-Filter (OneDrive, Dropbox, iCloud) EPERM/EBUSY auslösen. | Zuverlässige Dateioperationen auch in synchronisierten Cloud-Verzeichnissen. |
+| **INV-DIAG-04** | **Cloud-Lock-Diagnose** | `fc_check_cloud_lock` liefert rein lesende Pfadanalysen und Reparse-Point-Erkennung ohne Seiteneffekte auf das Dateisystem. | Ermöglicht Agenten die Prüfung von Sperrrisiken vor Ausführung von Änderungen. |
+| **INV-SRCH-05** | **Begrenzte Mehrdatei-Inhaltssuche** | `fc_search_content` limitiert Eingaben strikt (max. 50 Dateien, 10 MB/Datei, 200 Treffer, 200k Zeichen) ohne rekursive Glob-Explosion. | Schutz vor Arbeitsspeicherüberlauf und unkontrollierter CPU-Last. |
+| **INV-MASK-06** | **Automatische Geheimnis- & Token-Schwärzung** | Suchauszüge maskieren bekannte API-Keys, Bearer-Tokens, AWS-Credentials und Auth-Header automatisch. | Schutz vor Kontext-Kontamination und versehentlichem Credential-Leak. |
+| **INV-PREV-07** | **Begrenzte Inline-Vorschau & Sicheres Öffnen** | `fc_preview_file` arbeitet metadatenbasiert mit striktem 1-MiB-Limit; `fc_open_path` nutzt sichere native Betriebssystem-Handler. | Sichere Dateivorschau ohne UI-Blockaden oder unkontrollierte Payloads. |
+| **INV-REPL-08** | **Interaktive REPL- & Sitzungsisolation** | Zustandsbehaftete Sitzungen (`fc_start_session`, `fc_send_input`, `fc_read_output`) nutzen begrenzte Ringpuffer. | Multiturn-Debugging ohne Gefahr akkumulierter Zombie-Prozesse. |
+| **INV-PROC-09** | **Unprivilegierter Non-Elevation-Betrieb** | Läuft vollständig im Standard-Benutzerkontext; benötigt niemals Administrator- oder Root-Rechte. | Minimale Angriffsfläche nach dem Prinzip der geringsten Rechte. |
+| **INV-SLA-10** | **48h Sicherheitsreaktion & 5-Tage-Triage-SLA** | Verbindliche Reaktions- und Triage-Zusage mit Multi-Channel-Sicherheitskontakten (`security@open-bricks.org`, `security@ellmos.ai`). | Zuverlässige Sicherheitsgovernance nach Open-Bricks-Standards. |
 
 ---
 
@@ -436,7 +457,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **212 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (283 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **215 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (286 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen

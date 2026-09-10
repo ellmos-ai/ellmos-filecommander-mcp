@@ -1,0 +1,120 @@
+================================================================================
+ELLMOS-AI / ELLMOS-FILECOMMANDER-MCP — DISCOVERABILITY & MARKETING LOG
+================================================================================
+Repository: https://github.com/ellmos-ai/ellmos-filecommander-mcp
+Project Name: ellmos-filecommander-mcp (npm: ellmos-filecommander-mcp)
+Umbrella Ecosystem: open-bricks (https://github.com/open-bricks)
+Architecture Domain: Comprehensive Local Filesystem & Process Automation MCP Server
+Audit Date: 2026-09-10
+Status: ACTIVE / PFAD B DISCOVERABILITY HARDENED
+================================================================================
+
+1. PRODUCT IDENTITY & MISSION
+--------------------------------------------------------------------------------
+ellmos-filecommander-mcp is a production-grade, 50-tool Model Context Protocol
+(MCP) server that empowers AI assistants with full filesystem access, bounded
+multi-file content search, process management, interactive REPL shell sessions,
+cloud-lock-safe operations, and format conversion over local stdio transport.
+
+Key architectural highlights:
+  1. 50 Specialized Tools: Comprehensive filesystem coverage spanning reading,
+     bounded 1 MiB inline preview, writing, atomic editing, and safe deletion.
+  2. Safe Delete & Recovery: Preserves deleted files in Windows Recycle Bin,
+     macOS Trash, and Linux FreeDesktop Trash via fc_safe_delete and global
+     Safety Mode (fc_set_safe_mode).
+  3. Resilient Cloud-Lock Handling: Automatic copy + SHA-256 verify + unlink
+     fallback when cloud synchronization filters (OneDrive, Dropbox, iCloud)
+     lock destinations with EPERM/EBUSY.
+  4. Bounded Content Search: fc_search_content searches up to 50 explicit text
+     files without recursive glob explosions, automatically redacting secrets.
+  5. Interactive REPL Sessions: Start and control stateful Python, Node.js, bash,
+     and PowerShell sessions via stdio without process leaks.
+  6. Lossless Format Engine: Bi-directional conversion across 7 structured
+     formats (JSON, YAML, TOML, XML, CSV, INI, TOON).
+  7. 6-Language Runtime i18n: Dynamic runtime switching and introspection for
+     German (de), English (en), Spanish (es), Chinese (zh), Japanese (ja), and
+     Russian (ru).
+
+2. TARGET PERSONAS & AUDIENCE MAPPING
+--------------------------------------------------------------------------------
+Persona 1: Autonomous Coding & AI Agent Frameworks (Claude Code / Antigravity)
+  - Need: Dependable local file I/O, multi-file search, and process execution
+    without catastrophic context window overflow or unhandled file locks.
+  - Value: Bounded 1 MiB inline preview (fc_preview_file), bounded multi-file
+    search (fc_search_content), and atomic cloud-lock-safe move (fc_move).
+
+Persona 2: Enterprise IT & Security Officers
+  - Need: Verifiable local-first boundaries, accidental data loss protection,
+    and automatic secret leak prevention.
+  - Value: Local stdio transport (no telemetry, no open listening ports),
+    Recycle Bin safety protection, automated API key redaction, and strict
+    unprivileged user execution (zero elevation).
+
+Persona 3: Data Engineers & Automation Specialists
+  - Need: Seamless configuration manipulation across varied formats and
+    background directory scanning.
+  - Value: Declarative format conversion (fc_convert_format), ZIP archive
+    management (fc_archive), checksum verification (fc_checksum), and async
+    background search.
+
+Persona 4: Cross-Platform & Multilingual Development Teams
+  - Need: Uniform file handling across Windows, Linux, and macOS with native
+    language support for international development environments.
+  - Value: Verified cross-OS parity and dynamic runtime i18n support across
+    6 languages with localized system responses.
+
+3. ARCHITECTURAL INVARIANTS & GOVERNANCE
+--------------------------------------------------------------------------------
+The project strictly enforces 10 runtime invariants (INV-LOCAL-01 to INV-SLA-10):
+  - INV-LOCAL-01: Local Stdio & Explicit Egress (zero telemetry, outbound HTTP(S)
+    strictly gated through explicit client calls to fc_web_fetch).
+  - INV-SAFE-02: Safe Deletion & Trash Protection (fc_safe_delete and
+    fc_set_safe_mode route file removals to OS Recycle Bin / Trash).
+  - INV-LOCK-03: Cloud-Lock Resilient Move (fc_move automatic copy + SHA-256
+    verify + unlink fallback when sync filters block standard rename).
+  - INV-DIAG-04: Cloud-Lock Diagnosis (fc_check_cloud_lock provides read-only
+    inspection of static sync paths and reparse points).
+  - INV-SRCH-05: Bounded Multi-File Content Search (fc_search_content caps at
+    50 explicit files, 10 MB per file, max 200 matches, no glob recursion).
+  - INV-MASK-06: Automated Secret & Token Redaction (API keys, bearer tokens,
+    AWS credentials automatically masked in search excerpts).
+  - INV-PREV-07: Bounded Inline Preview & Safe Open (fc_preview_file metadata-
+    first with 1 MiB ceiling; fc_open_path invokes default OS handler safely).
+  - INV-REPL-08: Interactive REPL & Session Isolation (stateful sessions with
+    bounded circular ring buffers preventing unconstrained memory growth).
+  - INV-PROC-09: Unprivileged RunAsInvoker Non-Elevation (runs entirely in
+    standard unprivileged user mode; zero administrative elevation required).
+  - INV-SLA-10: 48h Security Response & 5-Day Triage SLA (binding commitment
+    with multi-channel security contacts across ellmos-ai and open-bricks).
+
+4. SIBLING ECOSYSTEM & PARTNER MATRIX
+--------------------------------------------------------------------------------
+ellmos-filecommander-mcp serves as the foundational filesystem layer for
+partner tools across ellmos-ai, dev-bricks, file-bricks, and open-bricks:
+  - ellmos-ai/ellmos-codecommander-mcp: AST analysis, structural edits, diffs
+  - ellmos-ai/ellmos-controlcenter-mcp: Control plane, profiles, stack discovery
+  - ellmos-ai/ellmos-homebase-mcp: Persistent memory, routing, swarm coordination
+  - ellmos-ai/n8n-manager-mcp: Automated workflow management via AI assistants
+  - ellmos-ai/open-compute-mcp: Model-agnostic computer use & desktop perception
+  - ellmos-ai/bach: Local-first text-based OS (primary consumer of 50 tools)
+  - ellmos-ai/clutch: Provider-neutral LLM orchestration and budget tracking
+  - ellmos-ai/swarm-ai: Multi-agent consensus, stigmergy, and team locks
+  - ellmos-ai/system-explorer: System discovery and evidence reporting
+  - dev-bricks/DevCenter: Integrated developer suite and code generation
+  - dev-bricks/MethodenAnalyser: Static code analysis, metrics & refactoring
+  - dev-bricks/CodeBox: Code snippet repository and workspace tools
+  - file-bricks/ProFiler: Advanced dual-pane file manager with AI integration
+  - file-bricks/ExplorerPro: Intelligent file explorer with smart filters
+  - doc-bricks/FormularErstellen: Automated form and document generation
+  - open-bricks/open-bricks: Umbrella organization for AI-native desktop apps
+
+5. VERIFICATION & METADATA CONTRACTS
+--------------------------------------------------------------------------------
+  - 286 automated tests (215 Vitest tests + 71 standalone i18n assertions).
+  - Strict metadata parity across package.json, server.json, glama.json,
+    llms.txt, and src/index.ts.
+  - Multi-OS GitHub Actions CI workflow (Ubuntu, Windows, macOS on Node 20-24).
+  - Comprehensive bilingual README architecture (README.md & README_de.md)
+    with complete 14-point quick navigation and anchor parity.
+  - Machine-readable LLM context specification (llms.txt) updated to 2026-09-10.
+================================================================================
