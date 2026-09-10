@@ -67,13 +67,13 @@
     "@toon-format/toon": "^2.1.0",
     "adm-zip": "^0.6.0",
     "fast-xml-parser": "^5.10.1",
-    "js-yaml": "^4.3.1",
-    "smol-toml": "^1.6.0",
+    "js-yaml": "^4.3.2",
+    "smol-toml": "^1.7.1",
     "update-notifier": "^7.3.1",
     "zod": "^3.23.8"
   },
   "overrides": {
-    "hono": "^4.13.0",
+    "hono": "^4.13.7",
     "express-rate-limit": "^8.6.2",
     "nanoid": "^3.3.17",
     "fast-uri": "^3.1.5",
@@ -89,7 +89,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.0",
     "typescript": "^5.3.3",
-    "vitest": "^4.1.9"
+    "vitest": "^5.0.0"
   },
   "engines": {
     "node": ">=20.0.0"
