@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.2] - 2026-09-11
+
+### Repository Hygiene & Multi-Host Sync Hardening (Pfad A)
+- **Version Bump (v1.11.2):** Synchronized semantic patch version across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts` (@version & server metadata).
+- **.gitignore Hardening:** Added explicit multi-host sync conflict protection patterns (`*-ASUS-GEI.*`, `*-WORKSTATION-LG.*`, `*-WORKSTATION.*`, `* (kopie)*`, `* (copy)*`), Python/multi-agent lock hygiene (`uv.lock`, `LOCK`, `LOCK.permissions.json`), and coverage wildcard artifacts (`.coverage.*`, `coverage/`).
+- **Automated Contract & Parity Test Expansion:** Added automated Vitest contract tests to `test/metadata-parity.test.ts` asserting multi-host gitignore patterns, release changelog integrity, and active marketing governance verification, bringing total verified tests to 289 passed (218 Vitest + 71 standalone i18n checks).
+- **Documentation & Context Synchronization:** Updated `llms.txt` `Last-checked` timestamp to `2026-09-11`, updated test count references to 289 across `README.md`, `README_de.md`, `llms.txt`, and `MARKETING-LOG.txt`.
+
 ## [1.11.1] - 2026-09-10
 
 ### Discoverability, Visual Architecture & Governance Invariants (Pfad B)

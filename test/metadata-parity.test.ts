@@ -73,9 +73,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('THIRD_PARTY_LICENSES.md');
   });
 
-  it('llms.txt is synchronized with 2026-09-10 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-11 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-10');
+    expect(llms).toContain('## Last-checked: 2026-09-11');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -125,15 +125,22 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*.conflict');
     expect(gitignore).toContain('*-CONFLIT-*');
     expect(gitignore).toContain('*-conflict-*');
+    expect(gitignore).toContain('*-ASUS-GEI.*');
+    expect(gitignore).toContain('*-WORKSTATION-LG.*');
+    expect(gitignore).toContain('*-WORKSTATION.*');
+    expect(gitignore).toContain('* (kopie)*');
+    expect(gitignore).toContain('* (copy)*');
     expect(gitignore).toContain('LOCK.*');
     expect(gitignore).toContain('*.lock');
     expect(gitignore).toContain('!package-lock.json');
+    expect(gitignore).toContain('uv.lock');
     expect(gitignore).toContain('*.tmp');
     expect(gitignore).toContain('*.bak');
     expect(gitignore).toContain('*.swp');
     expect(gitignore).toContain('*~');
     expect(gitignore).toContain('.pytest_cache/');
     expect(gitignore).toContain('.ruff_cache/');
+    expect(gitignore).toContain('.coverage.*');
   });
 
   it('GitHub Actions CI workflow uses multi-OS matrix, v4 actions, concurrency control, and packaging validation', () => {
@@ -161,7 +168,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-286%20passed');
+    expect(en).toContain('tests-289%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('#core-capabilities--safety-invariants');
@@ -171,7 +178,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-286%20passed');
+    expect(de).toContain('tests-289%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('#kernfähigkeiten--sicherheitsinvarianten');
@@ -234,5 +241,29 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('INV-SLA-10');
     expect(de).toContain('MARKETING-LOG.txt');
     expect(de).toContain('THIRD_PARTY_LICENSES.md');
+  });
+
+  it('verifies changelog records recent release history and version consistency', () => {
+    const cl = readFileSync(changelogPath, 'utf-8');
+    expect(cl).toContain('## [1.11.2] - 2026-09-11');
+    expect(cl).toContain('Repository Hygiene & Multi-Host Sync Hardening (Pfad A)');
+    expect(cl).toContain('.gitignore Hardening');
+  });
+
+  it('verifies marketing log records active hygiene and discoverability status', () => {
+    const mkt = readFileSync(marketingLogPath, 'utf-8');
+    expect(mkt).toContain('Audit Date: 2026-09-11');
+    expect(mkt).toContain('ACTIVE / PFAD A HYGIENE & PFAD B DISCOVERABILITY VERIFIED');
+    expect(mkt).toContain('289 automated tests');
+  });
+
+  it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {
+    const en = readFileSync(readmeEnPath, 'utf-8');
+    const de = readFileSync(readmeDePath, 'utf-8');
+    expect(en).toContain('```mermaid');
+    expect(de).toContain('```mermaid');
+    // Ensure diagrams have balanced code blocks
+    expect((en.match(/```mermaid/g) || []).length).toBeGreaterThan(0);
+    expect((de.match(/```mermaid/g) || []).length).toBeGreaterThan(0);
   });
 });

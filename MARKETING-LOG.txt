@@ -5,8 +5,8 @@ Repository: https://github.com/ellmos-ai/ellmos-filecommander-mcp
 Project Name: ellmos-filecommander-mcp (npm: ellmos-filecommander-mcp)
 Umbrella Ecosystem: open-bricks (https://github.com/open-bricks)
 Architecture Domain: Comprehensive Local Filesystem & Process Automation MCP Server
-Audit Date: 2026-09-10
-Status: ACTIVE / PFAD B DISCOVERABILITY HARDENED
+Audit Date: 2026-09-11
+Status: ACTIVE / PFAD A HYGIENE & PFAD B DISCOVERABILITY VERIFIED
 ================================================================================
 
 1. PRODUCT IDENTITY & MISSION
@@ -110,11 +110,11 @@ partner tools across ellmos-ai, dev-bricks, file-bricks, and open-bricks:
 
 5. VERIFICATION & METADATA CONTRACTS
 --------------------------------------------------------------------------------
-  - 286 automated tests (215 Vitest tests + 71 standalone i18n assertions).
+  - 289 automated tests (218 Vitest tests + 71 standalone i18n assertions).
   - Strict metadata parity across package.json, server.json, glama.json,
     llms.txt, and src/index.ts.
   - Multi-OS GitHub Actions CI workflow (Ubuntu, Windows, macOS on Node 20-24).
   - Comprehensive bilingual README architecture (README.md & README_de.md)
     with complete 14-point quick navigation and anchor parity.
-  - Machine-readable LLM context specification (llms.txt) updated to 2026-09-10.
+  - Machine-readable LLM context specification (llms.txt) updated to 2026-09-11.
 ================================================================================
