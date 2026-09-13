@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.11.2] - 2026-09-11
+## [1.11.2] - 2026-09-13
+
+### Discoverability, Target Personas & 5-Way Comparative Matrix (Pfad B)
+- **16-Point Quick Navigation Parity:** Synchronized complete 16-point navigation bars across `README.md` and `README_de.md` with 1:1 mutual anchor integrity (`#target-personas--discoverability`, `#zielgruppen--auffindbarkeit`, `#comparative-matrix--alternatives`, `#vergleichsmatrix--alternativen`).
+- **4 Dedicated Target Personas:** Codified explicit persona profiles, operational pain points, and tool solutions in English and German for Autonomous AI Coding Agents & LLM Swarms, DevOps & Multi-Host Automation Engineers, SecOps & Compliance Officers, and Enterprise Platform Architects.
+- **5-Way Comparative Matrix Across 10 Operational Dimensions:** Upgraded the comparison section across both READMEs to contrast FileCommander (50 tools) against the Official Filesystem MCP, Desktop Commander, direct host shells (`bash`/PowerShell), and ad-hoc scripts across tool scope, safe deletion/trash, cloud-lock resilience, bounded search with secret masking, async scans, interactive REPLs, self-healing repairs, multi-format transformation, document utilities, and local-first governance SLAs.
+- **Discoverability Register & LLM Context:** Expanded `MARKETING-LOG.txt` with high-intent keyword search matrices (EN/DE), 5-way comparative matrix, and audit records; synchronized `llms.txt` `Last-checked` timestamp to `2026-09-13`.
+- **Contract Test Suite Expansion:** Extended `test/metadata-parity.test.ts` to assert 16-point navigation, target personas, 5-way comparative matrix dimensions, and discoverability log integrity across 291 automated checks (220 Vitest + 71 standalone i18n checks).
 
 ### Repository Hygiene & Multi-Host Sync Hardening (Pfad A)
 - **Version Bump (v1.11.2):** Synchronized semantic patch version across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts` (@version & server metadata).

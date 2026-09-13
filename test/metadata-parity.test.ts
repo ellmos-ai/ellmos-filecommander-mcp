@@ -73,9 +73,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('THIRD_PARTY_LICENSES.md');
   });
 
-  it('llms.txt is synchronized with 2026-09-11 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-13 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-11');
+    expect(llms).toContain('## Last-checked: 2026-09-13');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -168,21 +168,29 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-289%20passed');
+    expect(en).toContain('tests-291%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('#core-capabilities--safety-invariants');
     expect(en).toContain('## Core Capabilities & Safety Invariants');
+    expect(en).toContain('#target-personas--discoverability');
+    expect(en).toContain('## Target Personas & Discoverability');
+    expect(en).toContain('#comparative-matrix--alternatives');
+    expect(en).toContain('## Comparative Matrix & Alternatives');
 
     expect(de).toContain('ellmos-ai');
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-289%20passed');
+    expect(de).toContain('tests-291%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('#kernfähigkeiten--sicherheitsinvarianten');
     expect(de).toContain('## Kernfähigkeiten & Sicherheitsinvarianten');
+    expect(de).toContain('#zielgruppen--auffindbarkeit');
+    expect(de).toContain('## Zielgruppen & Auffindbarkeit');
+    expect(de).toContain('#vergleichsmatrix--alternativen');
+    expect(de).toContain('## Vergleichsmatrix & Alternativen');
 
     // Sibling server tools counts
     expect(en).toContain('ControlCenter');
@@ -194,6 +202,65 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('31');
     expect(de).toContain('n8n Manager');
     expect(de).toContain('19');
+  });
+
+  it('verifies bilingual target personas section parity for 4 core profiles', () => {
+    const en = readFileSync(readmeEnPath, 'utf-8');
+    const de = readFileSync(readmeDePath, 'utf-8');
+
+    // 4 personas in EN
+    expect(en).toContain('Autonomous AI Coding Agents & LLM Swarms');
+    expect(en).toContain('DevOps, Toolchain & Multi-Host Automation Engineers');
+    expect(en).toContain('SecOps, Governance & Compliance Officers');
+    expect(en).toContain('Enterprise Platform Architects & Data Pipeline Developers');
+
+    // 4 personas in DE
+    expect(de).toContain('Autonome KI-Coding-Agenten & LLM-Schwärme');
+    expect(de).toContain('DevOps-, Toolchain- & Multi-Host-Automatisierungs-Ingenieure');
+    expect(de).toContain('SecOps-, Governance- & Compliance-Verantwortliche');
+    expect(de).toContain('Enterprise-Plattform-Architekten & Daten-Pipeline-Entwickler');
+  });
+
+  it('verifies 5-way comparative matrix parity across 10 operational dimensions', () => {
+    const en = readFileSync(readmeEnPath, 'utf-8');
+    const de = readFileSync(readmeDePath, 'utf-8');
+
+    // 5 Columns
+    expect(en).toContain('ellmos FileCommander MCP (50 Tools)');
+    expect(en).toContain('Official Filesystem MCP');
+    expect(en).toContain('Desktop Commander MCP');
+    expect(en).toContain('Direct Host Shell');
+    expect(en).toContain('Ad-Hoc Scripts & Cloud APIs');
+
+    expect(de).toContain('ellmos FileCommander MCP (50 Tools)');
+    expect(de).toContain('Offizielles Filesystem MCP');
+    expect(de).toContain('Desktop Commander MCP');
+    expect(de).toContain('Direkte Host-Shell');
+    expect(de).toContain('Ad-Hoc-Skripte & Cloud-APIs');
+
+    // 10 Dimensions in EN
+    expect(en).toContain('Tool Breadth & Scope');
+    expect(en).toContain('Safe Deletion & Recovery');
+    expect(en).toContain('Cloud-Lock & Sync Resilience');
+    expect(en).toContain('Bounded Search & Secret Redaction');
+    expect(en).toContain('Async Long-Running Search');
+    expect(en).toContain('Interactive REPL & Session Control');
+    expect(en).toContain('Self-Healing & Data Repair');
+    expect(en).toContain('Multi-Format Transformation');
+    expect(en).toContain('Document & Archive Utilities');
+    expect(en).toContain('Governance & Security SLAs');
+
+    // 10 Dimensions in DE
+    expect(de).toContain('Werkzeug-Breite & Umfang');
+    expect(de).toContain('Sicheres Löschen & Recovery');
+    expect(de).toContain('Cloud-Lock- & Sync-Resilienz');
+    expect(de).toContain('Begrenzte Suche & Token-Schwärzung');
+    expect(de).toContain('Asynchrone Hintergrundsuche');
+    expect(de).toContain('Interaktive REPL & Sitzungssteuerung');
+    expect(de).toContain('Selbstheilung & Datenreparatur');
+    expect(de).toContain('Multi-Format-Transformation');
+    expect(de).toContain('Dokument- & Archiv-Werkzeuge');
+    expect(de).toContain('Governance & Sicherheits-SLAs');
   });
 
   it('verifies bilingual core capabilities and safety invariants matrix parity', () => {
@@ -245,16 +312,19 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies changelog records recent release history and version consistency', () => {
     const cl = readFileSync(changelogPath, 'utf-8');
-    expect(cl).toContain('## [1.11.2] - 2026-09-11');
+    expect(cl).toContain('## [1.11.2] - 2026-09-13');
+    expect(cl).toContain('Discoverability, Target Personas & 5-Way Comparative Matrix (Pfad B)');
     expect(cl).toContain('Repository Hygiene & Multi-Host Sync Hardening (Pfad A)');
     expect(cl).toContain('.gitignore Hardening');
   });
 
   it('verifies marketing log records active hygiene and discoverability status', () => {
     const mkt = readFileSync(marketingLogPath, 'utf-8');
-    expect(mkt).toContain('Audit Date: 2026-09-11');
-    expect(mkt).toContain('ACTIVE / PFAD A HYGIENE & PFAD B DISCOVERABILITY VERIFIED');
-    expect(mkt).toContain('289 automated tests');
+    expect(mkt).toContain('Audit Date: 2026-09-13');
+    expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
+    expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
+    expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
+    expect(mkt).toContain('291 automated tests');
   });
 
   it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {

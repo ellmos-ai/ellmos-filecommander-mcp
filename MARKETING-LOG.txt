@@ -110,11 +110,70 @@ partner tools across ellmos-ai, dev-bricks, file-bricks, and open-bricks:
 
 5. VERIFICATION & METADATA CONTRACTS
 --------------------------------------------------------------------------------
-  - 289 automated tests (218 Vitest tests + 71 standalone i18n assertions).
+  - 291 automated tests (220 Vitest tests + 71 standalone i18n assertions).
   - Strict metadata parity across package.json, server.json, glama.json,
     llms.txt, and src/index.ts.
   - Multi-OS GitHub Actions CI workflow (Ubuntu, Windows, macOS on Node 20-24).
   - Comprehensive bilingual README architecture (README.md & README_de.md)
-    with complete 14-point quick navigation and anchor parity.
-  - Machine-readable LLM context specification (llms.txt) updated to 2026-09-11.
+    with complete 16-point quick navigation and anchor parity.
+  - Machine-readable LLM context specification (llms.txt) updated to 2026-09-13.
+
+6. HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS
+--------------------------------------------------------------------------------
+English Search Queries:
+  - "mcp filesystem server"
+  - "model context protocol file manager"
+  - "safe delete mcp recycle bin trash"
+  - "async background search mcp"
+  - "multi file content search mcp"
+  - "interactive repl session mcp server"
+  - "cloud lock safe mcp file operations"
+  - "mojibake encoding fix mcp"
+  - "json repair mcp tool"
+  - "markdown to pdf html mcp"
+
+Deutsche Suchanfragen:
+  - "mcp dateisystem server"
+  - "model context protocol dateiverwaltung"
+  - "sicheres loeschen mcp papierkorb"
+  - "asynchrone hintergrundsuche mcp"
+  - "mehrdatei inhaltssuche mcp"
+  - "interaktive repl sitzung mcp server"
+  - "cloud lock sichere dateioperationen mcp"
+  - "mojibake zeichensatz reparatur mcp"
+  - "json reparatur mcp tool"
+  - "markdown zu pdf html mcp konverter"
+
+7. 5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)
+--------------------------------------------------------------------------------
+1. Tool Breadth & Scope: 50 unified tools vs ~11 basic tools vs ~15 tools vs unconstrained CLI vs fragmented ad-hoc scripts.
+2. Safe Deletion & Recovery: Native OS Recycle Bin / Trash (fc_safe_delete, Safety Mode) vs Permanent unlink (rm -rf) vs Permanent unlink vs Irreversible shell delete vs Custom routines.
+3. Cloud-Lock & Sync Resilience: Automatic fallback (copy + SHA-256 verify + unlink on EPERM/EBUSY) vs Fails on locked files vs Fails on locked files vs Blocks/crashes vs Sync conflict copies.
+4. Bounded Search & Secret Redaction: Bounded search (max 50 files, 10 MB, auto API token redaction) vs Directory walk only vs Unbounded regex vs Unbounded grep leaking secrets vs Custom regex without redaction.
+5. Async Long-Running Search: Token-paginated background scans (fc_start_search) vs Synchronous only vs Synchronous only vs Background jobs (&) vs Polling loops.
+6. Interactive REPL & Session Control: Stateful REPLs (Node, Python, Shell) with circular buffers vs Not supported vs Basic terminal sessions vs Raw subprocesses (zombie risk) vs Complex IPC pipes.
+7. Self-Healing & Data Repair: Built-in Mojibake fix (27+ patterns) & JSON repair vs Not supported vs Not supported vs Manual iconv/sed vs Custom error handling.
+8. Multi-Format Transformation: Declarative conversion across 7 formats (JSON, YAML, TOML, XML, CSV, INI, TOON) vs Not supported vs Not supported vs External jq/yq CLI tools vs External python packages.
+9. Document & Archive Utilities: Built-in ZIP lifecycle, OCR (Tesseract), Markdown to HTML/PDF vs Not supported vs Excel/PDF via desktop app vs Pandoc/zip CLI vs Fragmented libraries.
+10. Governance & Security SLAs: Local stdio, zero telemetry, explicit egress, binding 48h SLA vs Reference stdio vs Stdio without SLA vs Shell injection risk vs Cloud egress.
+
+8. PFAD B AUDIT & VERIFICATION SUMMARY (2026-09-13)
+--------------------------------------------------------------------------------
+Audit Date: 2026-09-13
+Actor: Antigravity (Gemini 3.8 / WORKSTATION-LG)
+Status: ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED
+Measures Applied:
+  1. Synchronized 16-point Quick Navigation bars across README.md and README_de.md
+     with 100% mutual link and anchor parity (#target-personas--discoverability,
+     #zielgruppen--auffindbarkeit, #comparative-matrix--alternatives,
+     #vergleichsmatrix--alternativen, #third-party-licenses--transparency).
+  2. Codified 4 dedicated target personas in English and German READMEs:
+     Autonomous AI Coding Agents, DevOps & Multi-Host Automation Engineers,
+     SecOps & Compliance Officers, Enterprise Platform Architects.
+  3. Deployed full 5-Way Comparative Architecture Matrix across 10 operational
+     dimensions in both English and German documentation.
+  4. Updated llms.txt Last-checked timestamp to 2026-09-13.
+  5. Expanded automated contract test suite in test/metadata-parity.test.ts
+     to assert 16-point navigation, target personas, 5-way comparative matrix,
+     and updated llms.txt date, verifying 291 passed checks (220 Vitest + 71 i18n).
 ================================================================================

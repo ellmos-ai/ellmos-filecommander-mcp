@@ -13,7 +13,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-289%20passed%20(218%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-291%20passed%20(220%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -21,7 +21,7 @@
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
 
-> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Verfügbare Werkzeuge](#tools-übersicht) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleich](#vergleich-mit-alternativen) | [Entwicklung & Tests](#entwicklung) | [Governance & Laufzeit-Invarianten](#governance--laufzeit-invarianten) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) | [Marketing-Log](MARKETING-LOG.txt) | [Changelog](CHANGELOG.md) | [llms.txt](llms.txt)
+> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Zielgruppen](#zielgruppen--auffindbarkeit) | [Verfügbare Werkzeuge](#tools-übersicht) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleichsmatrix](#vergleichsmatrix--alternativen) | [Entwicklung & Tests](#entwicklung) | [Governance & Laufzeit-Invarianten](#governance--laufzeit-invarianten) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) | [Marketing-Log](MARKETING-LOG.txt) | [llms.txt](llms.txt)
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -144,7 +144,50 @@ sequenceDiagram
 | **Mojibake- & Dateireparatur-Engine** | `fc_fix_encoding`, `fc_fix_json` und `fc_cleanup_file` reparieren fehlerhafte UTF-8-Codierungen (27+ Muster), defekte JSON-Syntax, BOMs und NUL-Bytes. | Selbstheilende Dateipipelines bei plattformübergreifend beschädigten Text- und Datendateien. |
 | **Unprivilegierter Non-Elevation-Betrieb** | Ausgelegt und verifiziert für den Betrieb im unprivilegierten Standard-Benutzerkontext ohne Root-/Admin-Rechte. | Minimale Angriffsfläche nach dem Prinzip der geringsten Rechte (Least Privilege). |
 | **Sechssprachige Laufzeit-i18n-Engine** | Dynamische Sprachumschaltung und -abfrage (`fc_set_language`, `fc_get_language`) für Deutsch (`de`), Englisch (`en`), Spanisch (`es`), Chinesisch (`zh`), Japanisch (`ja`) und Russisch (`ru`). | Native mehrsprachige Entwicklererfahrung und verständliche Fehlerdiagnostik. |
-| **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 286 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
+| **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 291 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
+
+---
+
+## Zielgruppen & Auffindbarkeit
+<a id="zielgruppen--auffindbarkeit"></a>
+
+FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgruppen konzipiert und verifiziert:
+
+### 1. Autonome KI-Coding-Agenten & LLM-Schwärme
+- **Profil:** Multi-Agenten-Architekturen und autonome Agenten-Laufzeiten (Claude Code, Antigravity/Gemini, OpenAI Codex, AutoGen, CrewAI), die selbstständig Refactorings, Fehlerbehebungen und Code-Explorationen durchführen.
+- **Zentrale Pain Points:** Kontextfenster-Überlauf durch ungefiltertes Lesen großer Dateien, Prozessabbrüche durch Dateisperren (`EPERM`/`EBUSY`) in Cloud-Ordnern und irreversibler Datenverlust bei automatisierten Aufräumarbeiten.
+- **FileCommander-Lösung:**
+  - `fc_preview_file`: Metadaten-zentrierte Inspektion mit fester 1-MiB-Grenze für Inline-Inhalte zur Vermeidung von Prompt-Bloat.
+  - `fc_search_content`: Begrenzte Mehrdatei-Inhaltssuche (max. 50 Dateien, 10 MB/Datei, 200 Treffer) mit automatischer Token-Schwärzung.
+  - `fc_safe_delete` & `fc_set_safe_mode`: Verschiebt gelöschte Dateien in den Papierkorb (Recycle Bin / Trash) für risikolose Dateioperationen.
+  - `fc_move` & `fc_check_cloud_lock`: Automatischer Kopier-, Prüf- und Entfernungsfallback bei Dateisperren, verhindert Agenten-Crashes.
+
+### 2. DevOps-, Toolchain- & Multi-Host-Automatisierungs-Ingenieure
+- **Profil:** Systemingenieure und Automatisierer, die plattformübergreifende CLI-Tools, CI/CD-Pipelines und Multi-Rechner-Workflows unter Windows, Linux und macOS pflegen.
+- **Zentrale Pain Points:** Divergierende Plattform-Syntax (Windows-Backslashes vs POSIX-Slashes, Zeilenumbruchfehler), Zombie-Prozesse durch verwaiste Subprozesse und blockierende Dateisperren in geteilten Cloud-Verzeichnissen.
+- **FileCommander-Lösung:**
+  - Einheitliche plattformübergreifende Semantik unter Windows, Linux und macOS.
+  - Zustandsbehaftete interaktive REPL-Sitzungen (`fc_start_session`, `fc_send_input`, `fc_read_output`) mit Ringpuffern.
+  - Massenumbenennung (`fc_batch_rename`) und asynchrone Hintergrundsuche (`fc_start_search`, `fc_get_search_results`).
+  - Umfassendes Prozess-Lifecycle-Management (`fc_execute_command`, `fc_start_process`, `fc_kill_process`) ohne Prozesslecks.
+
+### 3. SecOps-, Governance- & Compliance-Verantwortliche
+- **Profil:** Sicherheitsteams und Auditoren, die Zero-Trust-Datenschutz und Governance-Richtlinien auf Entwickler-Workstations durchsetzen.
+- **Zentrale Pain Points:** Undokumentierte Telemetrie-Verbindungen von KI-Erweiterungen, unabsichtliches Einschleusen von API-Keys/Tokens in LLM-Prompts und unkontrollierter Netzwerk-Egress.
+- **FileCommander-Lösung:**
+  - Lokaler stdio-Transport mit null Telemetrie und null offenen Netzwerk-Ports.
+  - Expliziter Egress ausschließlich bei Client-Aufruf von `fc_web_fetch` (private/interne IP-Adressen standardmäßig blockiert).
+  - Automatische Geheimnis- und Bearer-Token-Schwärzung in Suchergebnissen (`INV-MASK-06`).
+  - Strikte unprivilegierte Benutzer-Ausführung (`INV-PROC-09`) und verbindliche 48h-Sicherheits-SLA (`security@open-bricks.org`, `security@ellmos.ai`).
+
+### 4. Enterprise-Plattform-Architekten & Daten-Pipeline-Entwickler
+- **Profil:** Software-Architekten und Dateningenieure, die heterogene Datenformate vereinheitlichen, Archivintegrität sichern und automatisierte Berichte erzeugen.
+- **Zentrale Pain Points:** Tool-Wildwuchs durch zahlreiche Einzel-MCP-Server, beschädigte UTF-8-Kodierungen (Mojibake) und fehleranfällige manuelle Konvertierungsskripte.
+- **FileCommander-Lösung:**
+  - Umfassende 50-Tool-Architektur in einem einzigen Server, die Multi-Server-Wildwuchs und Overhead eliminiert.
+  - Verlustfreie 7-Format-Transformation (`fc_convert_format`: JSON, YAML, TOML, XML, CSV, INI, TOON).
+  - Integrierte Dateireparatur-Engines (`fc_fix_encoding`, `fc_fix_json`, `fc_cleanup_file`) für selbstheilende Pipelines.
+  - Kryptografische Hash-Prüfungen (`fc_checksum`: SHA-256, SHA-512, MD5, SHA-1) und Markdown-zu-PDF/HTML-Export (`fc_md_to_pdf`, `fc_md_to_html`).
 
 ---
 
@@ -336,43 +379,32 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 
 ---
 
-## Vergleich mit Alternativen
+## Vergleichsmatrix & Alternativen
+<a id="vergleichsmatrix--alternativen"></a>
+<a id="vergleich-mit-alternativen"></a>
 
-| Feature | FileCommander | [Desktop Commander](https://github.com/wonderwhy-er/DesktopCommanderMCP) | [Official Filesystem](https://www.npmjs.com/package/@modelcontextprotocol/server-filesystem) |
-|---------|:---:|:---:|:---:|
-| Dateien lesen/schreiben/kopieren/verschieben | 14 Tools | Ja | Ja |
-| Safe Delete (Papierkorb) | Ja | Nein | Nein |
-| Explizite Mehrdatei-Inhaltssuche | Ja | Nein | Nein |
-| Asynchrone Hintergrundsuche | 5 Tools | Nein | Nein |
-| Interaktive Sitzungen (REPL) | 5 Tools | Ja | Nein |
-| Prozessverwaltung | 5 Tools | Ja | Nein |
-| Shell-Befehlsausführung | Ja | Ja | Nein |
-| String Replace mit Validierung | Ja | Ja | Nein |
-| Zeilenbasierte Dateibearbeitung | Ja | Nein | Nein |
-| JSON-Reparatur & Validierung | 2 Tools | Nein | Nein |
-| Encoding-Reparatur (Mojibake) | Ja | Nein | Nein |
-| Duplikaterkennung (SHA-256) | Ja | Nein | Nein |
-| Verzeichnis-Diff / Änderungsverfolgung | Ja | Nein | Nein |
-| Massenumbenennung (musterbasiert) | Ja | Nein | Nein |
-| Formatkonvertierung (JSON/CSV/INI/YAML/TOML/XML/TOON) | Ja | Nein | Nein |
-| ZIP-Archiv (erstellen/entpacken/auflisten) | Ja | Nein | Nein |
-| Datei-Prüfsummen (MD5/SHA-1/SHA-256/SHA-384/SHA-512) | Ja | Nein | Nein |
-| OCR (Bild zu Text) | Optional | Nein | Nein |
-| Safety Mode (Löschen → Papierkorb) | Ja | Nein | Nein |
-| Pfad-Allowlist / Sandboxing | Nein | Nein | Ja |
-| Excel / PDF-Unterstützung | PDF (über Browser) | Ja | Nein |
-| HTTP Transport | Nein | Nein | Nein |
-| Markdown zu HTML/PDF Export | Ja | Nein | Nein |
-| **Tools gesamt** | **50** | ~15 | ~11 |
-| **Benötigte Server** | **1** | 1 | + extra für Prozesse |
+FileCommander vereint Dateisystem-Manipulation, begrenzte Suche, Prozesssteuerung, Datenreparatur, Formatkonvertierung und Dokumenten-Rendering in einer einzigen einheitlichen MCP-Schnittstelle. Die folgende Architekturmatrix stellt FileCommander gängigen Alternativen über 10 zentrale operationale Dimensionen gegenüber:
 
-**Hauptunterscheidungsmerkmale:**
-- Einziger MCP-Server mit **wiederherstellbarem Löschen** (Papierkorb / Trash)
-- Einziger MCP-Server mit **asynchroner Hintergrundsuche** mit Paginierung
-- Integrierte **JSON-Reparatur**, **Encoding-Korrektur** und **Duplikaterkennung**
-- Einziger MCP-Server mit **Cloud-Lock-sicheren Dateioperationen** (automatischer copy+delete-Fallback)
-- Umfassendste Einzelserver-Lösung (50 Tools)
-- Integrierter **Safety Mode** zur Vermeidung versehentlicher permanenter Löschungen
+| Operationale Dimension | ellmos FileCommander MCP (50 Tools) | Offizielles Filesystem MCP (`@modelcontextprotocol/server-filesystem`) | Desktop Commander MCP | Direkte Host-Shell (`bash` / PowerShell) | Ad-Hoc-Skripte & Cloud-APIs |
+|------------------------|:-----------------------------------:|:---------------------------------------------------------------------:|:---------------------:|:---------------------------------------:|:---------------------------:|
+| **Werkzeug-Breite & Umfang** | **50 einheitliche Tools** in 6 Domänen | ~11 Basis-Datei-Tools | ~15 Tools (Datei + Prozess) | Unbegrenzte CLI-Befehle | Fragmentierte Einzellösungen |
+| **Sicheres Löschen & Recovery** | **Nativer Papierkorb** (`fc_safe_delete`, Sicherheitsmodus) | Nur permanente Löschung (`unlink`) | Nur permanente Löschung | Irreversibles `rm -rf` / `Remove-Item` | Eigene Papierkorb-Routinen |
+| **Cloud-Lock- & Sync-Resilienz** | **Automatischer Fallback** (Kopieren + SHA-256 + Löschen bei EPERM) | Schlägt bei gesperrten Dateien fehl | Schlägt bei Sperren fehl | Bricht ab oder blockiert | Synchronisationskonflikte |
+| **Begrenzte Suche & Token-Schwärzung** | **Begrenzte Suche** (max 50 Dateien, 10 MB, Auto-Token-Schwärzung) | Nur Verzeichnisauflistung | Unbegrenzte Regex-Suche | Unbegrenztes `grep` (Gefahr von Token-Leaks) | Eigene Regex ohne Maskierung |
+| **Asynchrone Hintergrundsuche** | **Token-paginierte Hintergrundscans** (`fc_start_search`) | Nur synchron (blockiert Agenten) | Nur synchron | Hintergrundjobs (`&`) | Polling-Schleifen |
+| **Interaktive REPL & Sitzungssteuerung** | **Zustandsbehaftete REPLs** (Node, Python, Shell) mit Ringpuffer | Nicht unterstützt | Einfache Terminalsitzungen | Rohe Subprozesse (Zombie-Risiko) | Komplexe IPC-Pipes |
+| **Selbstheilung & Datenreparatur** | **Integrierter** Mojibake-Fix (27+ Muster) & JSON-Reparatur | Nicht unterstützt | Nicht unterstützt | Manuelle `iconv`- / `sed`-Pipelines | Eigener Reparaturcode |
+| **Multi-Format-Transformation** | **Deklarative Konvertierung** (JSON, YAML, TOML, XML, CSV, INI, TOON) | Nicht unterstützt | Nicht unterstützt | Erfordert externe `jq` / `yq` CLI-Tools | Externe Python-Pakete |
+| **Dokument- & Archiv-Werkzeuge** | **Integriert:** ZIP, OCR (Tesseract), Markdown zu HTML/PDF | Nicht unterstützt | Excel/PDF über Desktop-App | Erfordert `pandoc`, `zip`, `tesseract` | Fragmentierte Bibliotheken |
+| **Governance & Sicherheits-SLAs** | **Lokales stdio**, null Telemetrie, expliziter Egress, 48h SLA | Standard-stdio, Community-SLA | Stdio ohne formale SLA | Uneingeschränktes Ausführungsrisiko | Ad-hoc Cloud-Datenabfluss |
+
+**Wesentliche Differenzierungsmerkmale:**
+- Einziger MCP-Server mit **wiederherstellbarem Löschen** (Papierkorb / Trash) und globalem **Sicherheitsmodus**
+- Einziger MCP-Server mit **asynchroner Hintergrundsuche** inklusive Paginierung
+- Einziger MCP-Server mit **automatischer Geheimnis- & Bearer-Token-Schwärzung** in Suchergebnissen
+- Integrierte **JSON-Reparatur**, **Mojibake-Kodierungsreparatur** und **Duplikaterkennung**
+- Integrierte **Cloud-Lock-robuste Dateioperationen** mit automatischem Kopier- und Prüf-Fallback
+- Umfassendste Ein-Server-Lösung (**50 Tools**), die Multi-Server-Wildwuchs eliminiert
 
 ---
 
@@ -457,7 +489,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **218 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (289 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **220 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (291 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen
