@@ -13,7 +13,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-291%20passed%20(220%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-292%20passed%20(221%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -144,7 +144,7 @@ sequenceDiagram
 | **Mojibake & File Repair Engine** | `fc_fix_encoding`, `fc_fix_json`, and `fc_cleanup_file` repair broken UTF-8 encoding (27+ patterns), malformed JSON syntax, BOMs, and NUL bytes. | Self-healing pipelines for corrupted files generated across divergent OS platforms. |
 | **Unprivileged Non-Elevation Execution** | Designed and verified to run in standard unprivileged user-mode. Never requires administrative or root privileges. | Minimal attack surface; adheres to the principle of least privilege. |
 | **Six-language Runtime i18n Engine** | Dynamic language switching and introspection (`fc_set_language`, `fc_get_language`) for German (`de`), English (`en`), Spanish (`es`), Chinese (`zh`), Japanese (`ja`), and Russian (`ru`). | Native multilingual developer experience and localized error reporting. |
-| **Multi-OS Verified Matrix** | Tested across Windows, Ubuntu Linux, and macOS on Node.js 20, 22, and 24 with 291 automated assertions. | Continuous cross-platform parity and reliability. |
+| **Multi-OS Verified Matrix** | Tested across Windows, Ubuntu Linux, and macOS on Node.js 20, 22, and 24 with 292 automated assertions. | Continuous cross-platform parity and reliability. |
 
 ---
 
@@ -489,7 +489,7 @@ npm test
 
 ### Testing
 
-The project includes **220 Vitest tests plus 71 standalone i18n checks (291 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+The project includes **221 Vitest tests plus 71 standalone i18n checks (292 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
 
 ```bash
 npm test              # Run all tests

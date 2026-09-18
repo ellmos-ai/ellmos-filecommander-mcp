@@ -176,4 +176,29 @@ Measures Applied:
   5. Expanded automated contract test suite in test/metadata-parity.test.ts
      to assert 16-point navigation, target personas, 5-way comparative matrix,
      and updated llms.txt date, verifying 291 passed checks (220 Vitest + 71 i18n).
+
+9. AI SECURITY & DEPENDENCY AUDIT SUMMARY (2026-09-19)
+--------------------------------------------------------------------------------
+Audit Date: 2026-09-19
+Actor: Antigravity (Gemini 3.8)
+Status: ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED
+Measures Applied:
+  1. Supply-Chain & Vulnerability Remediation:
+     - Upgraded adm-zip from ^0.6.0 to ^0.6.1 (GHSA-vwc7-r8mq-g2x9, GHSA-7q85-xj36-vmfc).
+     - Upgraded js-yaml from ^4.3.1 to ^4.3.2 (GHSA-2883-xcg3-v3hh).
+     - Upgraded smol-toml from ^1.6.0 to ^1.8.0 (GHSA-7w5x-hrqm-74c2).
+     - Updated hono override to ^4.13.8 (GHSA-gqvv-2mrq-wpjv, GHSA-g6gw-c38x-mqfc, GHSA-crvj-82cr-hjcx).
+     - Upgraded vitest devDependency from ^4.1.9 to ^4.1.11 (GHSA-82fw-gwwq-j7x9).
+     - npm audit verifies 0 vulnerabilities across 215 audited packages.
+  2. Gitignore Security & Hygiene Hardening:
+     - Restored TODO.md to version control tracking.
+     - Added explicit ignore patterns for certificates (*.crt, *.cert, *.csr),
+       packaging credentials (.pypirc), auth tokens (*.token, *.secret, credentials.json),
+       wildcard SSH keys (id_rsa*, id_ed25519*, id_ecdsa*, id_dsa*), and patch residues (*.orig, *.rej).
+  3. 30-Day Remediation SLA:
+     - Formally added binding 30-day remediation SLA commitment in English and German in SECURITY.md.
+     - Synchronized THIRD_PARTY_LICENSES.md audit date (2026-09-19) and version ranges.
+  4. Contract Test Verification:
+     - Expanded test/metadata-parity.test.ts to 292 passed tests (221 Vitest + 71 i18n).
 ================================================================================
+

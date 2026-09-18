@@ -13,7 +13,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-291%20passed%20(220%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-292%20passed%20(221%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -144,7 +144,7 @@ sequenceDiagram
 | **Mojibake- & Dateireparatur-Engine** | `fc_fix_encoding`, `fc_fix_json` und `fc_cleanup_file` reparieren fehlerhafte UTF-8-Codierungen (27+ Muster), defekte JSON-Syntax, BOMs und NUL-Bytes. | Selbstheilende Dateipipelines bei plattformübergreifend beschädigten Text- und Datendateien. |
 | **Unprivilegierter Non-Elevation-Betrieb** | Ausgelegt und verifiziert für den Betrieb im unprivilegierten Standard-Benutzerkontext ohne Root-/Admin-Rechte. | Minimale Angriffsfläche nach dem Prinzip der geringsten Rechte (Least Privilege). |
 | **Sechssprachige Laufzeit-i18n-Engine** | Dynamische Sprachumschaltung und -abfrage (`fc_set_language`, `fc_get_language`) für Deutsch (`de`), Englisch (`en`), Spanisch (`es`), Chinesisch (`zh`), Japanisch (`ja`) und Russisch (`ru`). | Native mehrsprachige Entwicklererfahrung und verständliche Fehlerdiagnostik. |
-| **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 291 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
+| **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 292 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
 
 ---
 
@@ -489,7 +489,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **220 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (291 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **221 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (292 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen
@@ -578,4 +578,14 @@ Unsere Partnerorganisation **[open-bricks](https://github.com/open-bricks)** und
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | Code-Editor | dev-bricks | Mehrsprachiger Code-Editor mit LLM-Unterstützung |
 | [safe-start-for-codex](https://github.com/dev-bricks/safe-start-for-codex) | Sicherheit & Audit | dev-bricks | Gehärtete Laufzeitumgebung & Pre-Flight-Prüfer für Codex |
 | [automation-master](https://github.com/dev-bricks/automation-master) | Aufgaben-Automatisierung | dev-bricks | Hochzuverlässiger Hintergrund-Automations-Runner & Scheduler |
+
+
+## Haftung / Liability
+
+Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß **§ 521 BGB** auf **Vorsatz und grobe Fahrlässigkeit** beschränkt. Ergänzend gilt der Haftungsausschluss der MIT-Lizenz.
+
+Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
+
+This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). The MIT license disclaimer also applies. Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
+
 

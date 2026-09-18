@@ -1,6 +1,6 @@
 # Third-Party License Inventory
 
-Stand: 2026-09-10.
+Stand: 2026-09-19.
 
 This document inventories all direct third-party runtime and development dependencies used by `ellmos-filecommander-mcp`.
 
@@ -10,9 +10,9 @@ This document inventories all direct third-party runtime and development depende
 |---------|---------------|---------|-----------------|---------------------|
 | `@modelcontextprotocol/sdk` | `^1.30.0` | MIT | Core Model Context Protocol stdio transport & schema binding | https://github.com/modelcontextprotocol/typescript-sdk |
 | `zod` | `^3.23.8` | MIT | Tool argument schema validation & parsing | https://github.com/colinhacks/zod |
-| `adm-zip` | `^0.6.0` | MIT | ZIP archive creation, extraction, and inspection | https://github.com/cthackers/adm-zip |
-| `js-yaml` | `^4.3.1` | MIT | YAML document serialization and parsing | https://github.com/nodeca/js-yaml |
-| `smol-toml` | `^1.6.0` | MIT | TOML parsing and serialization | https://github.com/nicolo-ribaudo/smol-toml |
+| `adm-zip` | `^0.6.1` | MIT | ZIP archive creation, extraction, and inspection | https://github.com/cthackers/adm-zip |
+| `js-yaml` | `^4.3.2` | MIT | YAML document serialization and parsing | https://github.com/nodeca/js-yaml |
+| `smol-toml` | `^1.8.0` | MIT | TOML parsing and serialization | https://github.com/nicolo-ribaudo/smol-toml |
 | `fast-xml-parser` | `^5.10.1` | MIT | Fast XML parser and validator | https://github.com/NaturalIntelligence/fast-xml-parser |
 | `@toon-format/toon` | `^2.1.0` | MIT | TOON format serialization and conversion | https://github.com/nicfontaine/toon |
 | `update-notifier` | `^7.3.1` | BSD-2-Clause | Non-intrusive interactive CLI update notification | https://github.com/yeoman/update-notifier |
@@ -24,7 +24,7 @@ This document inventories all direct third-party runtime and development depende
 | Package | Version Range | License | Primary Purpose |
 |---------|---------------|---------|-----------------|
 | `typescript` | `^5.3.3` | Apache-2.0 | TypeScript compiler (build-time only) |
-| `vitest` | `^4.1.9` | MIT | Unit and contract test execution suite |
+| `vitest` | `^4.1.11` | MIT | Unit and contract test execution suite |
 | `@types/node` | `^20.11.0` | MIT | Node.js standard library type definitions |
 | `@types/adm-zip` | `^0.5.7` | MIT | Type definitions for adm-zip |
 | `@types/js-yaml` | `^4.0.9` | MIT | Type definitions for js-yaml |

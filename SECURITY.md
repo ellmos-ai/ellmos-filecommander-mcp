@@ -48,7 +48,7 @@ If you discover a security vulnerability, please report it responsibly:
 - **Email**: [security@open-bricks.org](mailto:security@open-bricks.org) (Umbrella Security), [security@ellmos.ai](mailto:security@ellmos.ai), [support@lukasgeiger.com](mailto:support@lukasgeiger.com), or [lukas@open-bricks.org](mailto:lukas@open-bricks.org)
 - **GitHub**: [GitHub Security Advisories](https://github.com/ellmos-ai/ellmos-filecommander-mcp/security/advisories)
 
-We commit to a binding initial response SLA within 48 hours and a formal triage assessment within 5 business days.
+We commit to a binding initial response SLA within 48 hours and a formal triage assessment within 5 business days. Confirmed critical and high-severity security vulnerabilities are patched and released within a 30-calendar-day remediation window.
 
 ### Supported Versions
 
@@ -103,7 +103,7 @@ Bitte melden Sie gefundene Sicherheitslücken direkt an:
 - **E-Mail**: [security@open-bricks.org](mailto:security@open-bricks.org) (Dachorganisation Security), [security@ellmos.ai](mailto:security@ellmos.ai), [support@lukasgeiger.com](mailto:support@lukasgeiger.com) oder [lukas@open-bricks.org](mailto:lukas@open-bricks.org)
 - **GitHub**: [GitHub Security Advisories](https://github.com/ellmos-ai/ellmos-filecommander-mcp/security/advisories)
 
-Wir garantieren eine verbindliche Eingangsbestätigung (Initial Response SLA) innerhalb von 48 Stunden sowie eine strukturierte Triage-Rückmeldung innerhalb von 5 Werktagen.
+Wir garantieren eine verbindliche Eingangsbestätigung (Initial Response SLA) innerhalb von 48 Stunden sowie eine strukturierte Triage-Rückmeldung innerhalb von 5 Werktagen. Bestätigte kritische und hochgradige Sicherheitslücken werden innerhalb einer Frist von 30 Kalendertagen behoben und bereitgestellt (30-Tage-Remediation-SLA).
 
 ### Unterstützte Versionen
 

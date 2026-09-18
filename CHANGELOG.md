@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.11.3] - 2026-09-19
+
+### AI Security & Dependency Audit, Supply-Chain Hardening & 30-Day SLA
+- **Supply-Chain Security & Vulnerability Remediation (npm audit: 0 vulnerabilities):**
+  - **`adm-zip` (High Severity GHSA-vwc7-r8mq-g2x9 & GHSA-7q85-xj36-vmfc):** Upgraded `adm-zip` from `^0.6.0` to `^0.6.1` to eliminate arbitrary file overwrite via destination symlinks during archive extraction and prevent memory exhaustion (DoS).
+  - **`js-yaml` (High Severity GHSA-2883-xcg3-v3hh):** Upgraded `js-yaml` from `^4.3.1` to `^4.3.2` fixing unconstrained CPU utilization on empty merge sources (DoS).
+  - **`smol-toml` (High Severity GHSA-7w5x-hrqm-74c2):** Upgraded `smol-toml` from `^1.6.0` to `^1.8.0` preventing DoS via malformed TOML structures.
+  - **`hono` (Moderate Severity GHSA-gqvv-2mrq-wpjv, GHSA-g6gw-c38x-mqfc, GHSA-crvj-82cr-hjcx):** Updated dependency override to `^4.13.8` resolving SSG directory traversal and unbounded body nesting DoS.
+  - **`vitest` / `@vitest/mocker` (Moderate Severity GHSA-82fw-gwwq-j7x9):** Upgraded devDependency from `^4.1.9` to `^4.1.11` to patch path traversal and arbitrary file read via mock redirects.
+  - Verified `npm audit` exits with code 0 and confirms **0 vulnerabilities** across all 215 audited packages.
+- **Gitignore Security & Multi-Host Protection:**
+  - Removed `TODO.md` from `.gitignore` to restore version-controlled roadmap and task tracking.
+  - Added explicit exclusions for SSL/TLS certificates and key exchanges (`*.crt`, `*.cert`, `*.csr`), packaging credentials (`.pypirc`), authentication tokens and secrets (`*.token`, `*.secret`, `credentials.json`), wildcard SSH keys (`id_rsa*`, `id_ed25519*`, `id_ecdsa*`, `id_dsa*`), and patch residue artifacts (`*.orig`, `*.rej`).
+- **30-Day Remediation SLA in Security Policy (`SECURITY.md`):**
+  - Formally codified binding 30-calendar-day remediation SLA commitment in English and German for critical and high-severity security vulnerabilities.
+- **Third-Party Licensing Inventory (`THIRD_PARTY_LICENSES.md`):**
+  - Updated inventory audit stamp to `2026-09-19` and synchronized version ranges for `adm-zip` (`^0.6.1`), `js-yaml` (`^4.3.2`), `smol-toml` (`^1.8.0`), and `vitest` (`^4.1.11`).
+- **Parity & Security Contract Tests:**
+  - Expanded `test/metadata-parity.test.ts` to assert 0 vulnerabilities, version `1.11.3` parity, 30-day remediation SLA presence, and comprehensive `.gitignore` credential and certificate patterns.
+
 ## [1.11.2] - 2026-09-13
 
 ### Discoverability, Target Personas & 5-Way Comparative Matrix (Pfad B)

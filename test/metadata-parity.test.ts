@@ -73,9 +73,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('THIRD_PARTY_LICENSES.md');
   });
 
-  it('llms.txt is synchronized with 2026-09-13 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-19 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-13');
+    expect(llms).toContain('## Last-checked: 2026-09-19');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -94,7 +94,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(llms).toContain('16 tools');
   });
 
-  it('SECURITY.md contains bilingual policy, umbrella contacts, and 48h / 5-day SLAs', () => {
+  it('SECURITY.md contains bilingual policy, umbrella contacts, and 48h / 5-day / 30-day SLAs', () => {
     const sec = readFileSync(securityPath, 'utf-8');
     expect(sec).toContain('Security Policy / Sicherheitsrichtlinie');
     expect(sec).toContain('English: Security Policy');
@@ -114,13 +114,32 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(sec).toContain('48 Stunden');
     expect(sec).toContain('5 business days');
     expect(sec).toContain('5 Werktagen');
+    expect(sec).toContain('30-calendar-day remediation window');
+    expect(sec).toContain('30 Kalendertagen');
+    expect(sec).toContain('30-Tage-Remediation-SLA');
     expect(sec).toContain('1.11.x');
   });
 
-  it('verifies .gitignore hardening for conflict copies, multi-agent locks, and temporary files', () => {
+  it('verifies .gitignore hardening for conflict copies, multi-agent locks, credentials, and temporary files', () => {
     const gitignorePath = resolve(ROOT, '.gitignore');
     expect(existsSync(gitignorePath)).toBe(true);
     const gitignore = readFileSync(gitignorePath, 'utf-8');
+    const lines = gitignore.split(/\r?\n/).map(l => l.trim());
+
+    // Credentials, certificates, tokens and packaging
+    expect(gitignore).toContain('*.crt');
+    expect(gitignore).toContain('*.cert');
+    expect(gitignore).toContain('*.csr');
+    expect(gitignore).toContain('*.token');
+    expect(gitignore).toContain('*.secret');
+    expect(gitignore).toContain('credentials.json');
+    expect(gitignore).toContain('.pypirc');
+    expect(gitignore).toContain('id_rsa*');
+    expect(gitignore).toContain('id_ed25519*');
+    expect(gitignore).toContain('id_ecdsa*');
+    expect(gitignore).toContain('id_dsa*');
+
+    // Multi-host and lock patterns
     expect(gitignore).toContain('*.sync-conflict-*');
     expect(gitignore).toContain('*.conflict');
     expect(gitignore).toContain('*-CONFLIT-*');
@@ -137,10 +156,15 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*.tmp');
     expect(gitignore).toContain('*.bak');
     expect(gitignore).toContain('*.swp');
+    expect(gitignore).toContain('*.orig');
+    expect(gitignore).toContain('*.rej');
     expect(gitignore).toContain('*~');
     expect(gitignore).toContain('.pytest_cache/');
     expect(gitignore).toContain('.ruff_cache/');
     expect(gitignore).toContain('.coverage.*');
+
+    // TODO.md must NOT be ignored
+    expect(lines).not.toContain('TODO.md');
   });
 
   it('GitHub Actions CI workflow uses multi-OS matrix, v4 actions, concurrency control, and packaging validation', () => {
@@ -168,7 +192,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-291%20passed');
+    expect(en).toContain('tests-292%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('#core-capabilities--safety-invariants');
@@ -182,7 +206,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-291%20passed');
+    expect(de).toContain('tests-292%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('#kernfähigkeiten--sicherheitsinvarianten');
@@ -312,19 +336,47 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies changelog records recent release history and version consistency', () => {
     const cl = readFileSync(changelogPath, 'utf-8');
+    expect(cl).toContain('## [1.11.3] - 2026-09-19');
+    expect(cl).toContain('AI Security & Dependency Audit, Supply-Chain Hardening & 30-Day SLA');
     expect(cl).toContain('## [1.11.2] - 2026-09-13');
     expect(cl).toContain('Discoverability, Target Personas & 5-Way Comparative Matrix (Pfad B)');
     expect(cl).toContain('Repository Hygiene & Multi-Host Sync Hardening (Pfad A)');
     expect(cl).toContain('.gitignore Hardening');
   });
 
-  it('verifies marketing log records active hygiene and discoverability status', () => {
+  it('enforces zero-vulnerability dependency versions and license inventory alignment', () => {
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+    const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
+
+    // Dependencies patched against high/moderate advisories
+    expect(pkg.dependencies['adm-zip']).toBe('^0.6.1');
+    expect(pkg.dependencies['js-yaml']).toBe('^4.3.2');
+    expect(pkg.dependencies['smol-toml']).toBe('^1.8.0');
+    expect(pkg.overrides['hono']).toBe('^4.13.8');
+    expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
+
+    // Third-party licenses inventory synced
+    expect(lic).toContain('Stand: 2026-09-19');
+    expect(lic).toContain('adm-zip');
+    expect(lic).toContain('^0.6.1');
+    expect(lic).toContain('js-yaml');
+    expect(lic).toContain('^4.3.2');
+    expect(lic).toContain('smol-toml');
+    expect(lic).toContain('^1.8.0');
+    expect(lic).toContain('vitest');
+    expect(lic).toContain('^4.1.11');
+  });
+
+  it('verifies marketing log records active hygiene, discoverability and security audit status', () => {
     const mkt = readFileSync(marketingLogPath, 'utf-8');
     expect(mkt).toContain('Audit Date: 2026-09-13');
+    expect(mkt).toContain('Audit Date: 2026-09-19');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
+    expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
     expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
     expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
     expect(mkt).toContain('291 automated tests');
+    expect(mkt).toContain('292 passed tests');
   });
 
   it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {
