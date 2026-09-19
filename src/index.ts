@@ -9,7 +9,7 @@
  * See LICENSE file for details.
  *
  * @author Lukas (BACH)
- * @version 1.11.3
+ * @version 1.11.4
  * @license MIT
  */
 
@@ -62,7 +62,7 @@ const nodeRequire = createRequire(import.meta.url);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.11.3"
+  version: "1.11.4"
 });
 
 // ============================================================================
@@ -2284,8 +2284,9 @@ Examples:
         };
       }
 
-      // Perform replacement
-      const newContent = content.replace(params.old_str, params.new_str);
+      // Perform replacement (literal replacement, preventing JS replacement pattern expansion such as $`, $', $&, $1)
+      const changeIndex = content.indexOf(params.old_str);
+      const newContent = content.substring(0, changeIndex) + params.new_str + content.substring(changeIndex + params.old_str.length);
       await fs.writeFile(filePath, newContent, "utf-8");
 
       // Calculate change info
@@ -2296,7 +2297,6 @@ Examples:
                        lineChange > 0 ? t().fc_str_replace.addedLines(lineChange) : t().fc_str_replace.removedLines(lineChange);
 
       // Show context around the change
-      const changeIndex = content.indexOf(params.old_str);
       const contextStart = Math.max(0, changeIndex - 50);
       const contextEnd = Math.min(content.length, changeIndex + params.old_str.length + 50);
       const beforeContext = content.substring(contextStart, changeIndex);

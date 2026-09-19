@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.11.4] - 2026-09-19
+
+### Bugfix: fc_str_replace Literal String Replacement (T-20260919-384678872)
+- **Literal String Replacement in `fc_str_replace`:**
+  - Fixed an issue where `String.prototype.replace(old_str, new_str)` interpreted special JavaScript replacement patterns in `new_str` (e.g., `$\`` inserting the prefix before match, `$'` inserting suffix, `$&` inserting matched string, `$1..$n` inserting captures).
+  - When replacing with Windows administrative share paths (such as `C$`) or expressions containing dollar-backtick, entire file contents preceding the match were unintentionally duplicated into the replacement line.
+  - Replaced naive string replacement with exact substring slicing (`content.substring(0, changeIndex) + params.new_str + content.substring(...)`), guaranteeing 100% literal replacement for all dollar signs, special characters, and code snippets.
+  - Added regression test suite asserting literal preservation of `$\``, `$'`, `$&`, `$$`, and `$1` without regex or pattern expansion.
+
 ## [1.11.3] - 2026-09-19
 
 ### AI Security & Dependency Audit, Supply-Chain Hardening & 30-Day SLA

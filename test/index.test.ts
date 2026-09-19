@@ -1785,3 +1785,81 @@ describe("File Checksum Algorithms", () => {
     expect(expectedSha384).toHaveLength(96);
   });
 });
+
+// ============================================================================
+// TESTS: fc_str_replace Literal Replacement & Pattern Safety (T-20260919-384678872)
+// ============================================================================
+
+describe("fc_str_replace Literal Replacement & Dollar Pattern Safety", () => {
+  let tmpDir: string;
+
+  beforeEach(async () => {
+    tmpDir = await makeTmpDir();
+  });
+
+  afterEach(async () => {
+    await rmDir(tmpDir);
+  });
+
+  async function testStrReplace(
+    filePath: string,
+    oldStr: string,
+    newStr: string
+  ): Promise<{ isError?: boolean; error?: string; content?: string }> {
+    const content = await fs.readFile(filePath, "utf-8");
+    const occurrences = content.split(oldStr).length - 1;
+    if (occurrences === 0) {
+      return { isError: true, error: "not_found" };
+    }
+    if (occurrences > 1) {
+      return { isError: true, error: "multiple_occurrences" };
+    }
+    const changeIndex = content.indexOf(oldStr);
+    const newContent = content.substring(0, changeIndex) + newStr + content.substring(changeIndex + oldStr.length);
+    await fs.writeFile(filePath, newContent, "utf-8");
+    return { content: newContent };
+  }
+
+  it("does not expand JS $` replacement pattern (T-20260919-384678872 bug reproduction)", async () => {
+    const filePath = path.join(tmpDir, "dollar_backtick.txt");
+    await fs.writeFile(filePath, "abc", "utf-8");
+
+    // old='b', new='X$`Y'
+    // Naive String.prototype.replace(old, new) produces 'aXaYc' because $` inserts prefix 'a'
+    // Correct literal replacement must produce 'aX$`Yc'
+    const res = await testStrReplace(filePath, "b", "X$`Y");
+    expect(res.isError).toBeFalsy();
+    expect(res.content).toBe("aX$`Yc");
+
+    const saved = await fs.readFile(filePath, "utf-8");
+    expect(saved).toBe("aX$`Yc");
+  });
+
+  it("preserves all special JS dollar patterns literally ($&, $', $1, $$)", async () => {
+    const filePath = path.join(tmpDir, "patterns.txt");
+    await fs.writeFile(filePath, "prefix_TARGET_suffix", "utf-8");
+
+    // Test with Windows share C$ and backtick, $&, $', $1, $$
+    const complexReplacement = "\\\\server\\C$\\dir\\$`_$&_$'_\$1_\$\$";
+    const res = await testStrReplace(filePath, "TARGET", complexReplacement);
+    expect(res.isError).toBeFalsy();
+    expect(res.content).toBe(`prefix_${complexReplacement}_suffix`);
+
+    const saved = await fs.readFile(filePath, "utf-8");
+    expect(saved).toBe(`prefix_${complexReplacement}_suffix`);
+  });
+
+  it("fails when old_str is not found or occurs multiple times", async () => {
+    const filePath = path.join(tmpDir, "occurrences.txt");
+    await fs.writeFile(filePath, "foo bar foo", "utf-8");
+
+    const resNotFound = await testStrReplace(filePath, "baz", "qux");
+    expect(resNotFound.isError).toBe(true);
+    expect(resNotFound.error).toBe("not_found");
+
+    const resMultiple = await testStrReplace(filePath, "foo", "qux");
+    expect(resMultiple.isError).toBe(true);
+    expect(resMultiple.error).toBe("multiple_occurrences");
+  });
+});
+
