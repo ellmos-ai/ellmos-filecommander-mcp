@@ -13,7 +13,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-292%20passed%20(221%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-299%20passed%20(228%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -21,7 +21,7 @@
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
 
-> **Quick Navigation:** [Tools Overview](#tools-overview) | [System Architecture](#system-architecture) | [Core Capabilities & Safety Invariants](#core-capabilities--safety-invariants) | [Target Personas](#target-personas--discoverability) | [Available Tools](#tools-overview) | [Installation](#installation) | [Configuration](#configuration) | [Comparative Matrix](#comparative-matrix--alternatives) | [Testing & Verification](#testing) | [Governance & Runtime Invariants](#governance--runtime-invariants) | [Security](#security) | [Ecosystem](#ellmos-ai-ecosystem) | [Security Policy](SECURITY.md) | [Third-Party Licenses](THIRD_PARTY_LICENSES.md) | [Marketing Log](MARKETING-LOG.txt) | [llms.txt](llms.txt)
+> **Quick Navigation:** [Tools Overview](#tools-overview) | [System Architecture](#system-architecture) | [Core Capabilities & Safety Invariants](#core-capabilities--safety-invariants) | [Target Personas](#target-personas--discoverability) | [Available Tools](#tools-overview) | [Installation](#installation) | [Configuration](#configuration) | [Comparative Matrix](#comparative-matrix--alternatives) | [Testing & Verification](#testing) | [Governance & Runtime Invariants](#governance--runtime-invariants) | [Security](#security) | [Ecosystem](#ellmos-ai-ecosystem) | [Security Policy](SECURITY.md) | [Third-Party Licenses](THIRD_PARTY_LICENSES.md) | [Marketing Log](MARKETING-LOG.txt) | [NOTICE](NOTICE) | [llms.txt](llms.txt)
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, bounded multi-file content search, process management, interactive shell sessions, and async filename search capabilities.
 
@@ -489,7 +489,7 @@ npm test
 
 ### Testing
 
-The project includes **221 Vitest tests plus 71 standalone i18n checks (292 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+The project includes **228 Vitest tests plus 71 standalone i18n checks (299 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
 
 ```bash
 npm test              # Run all tests
@@ -511,9 +511,9 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 ---
 
-## License
+## License & Legal Attribution
 
-[MIT](LICENSE) - Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai))
+[MIT](LICENSE) - Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). See [NOTICE](NOTICE) for open-bricks umbrella attribution and [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for Level 1 SBOM.
 
 ---
 

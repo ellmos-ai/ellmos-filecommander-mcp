@@ -1,6 +1,11 @@
-# Third-Party License Inventory
+# Third-Party License Inventory & Open-Source Transparency Notice
 
-Stand: 2026-09-19.
+Stand: 2026-09-20.
+
+> **Project:** `ellmos-ai/ellmos-filecommander-mcp` (FileCommander)<br>
+> **Audited:** 2026-09-20<br>
+> **Repository License:** [MIT License](LICENSE)<br>
+> **Architecture & Privacy:** 100% Local-First, Zero-Egress by default (explicit `fc_web_fetch` only), Unprivileged User-Mode (`RunAsInvoker`), Level 1 SBOM Transparency
 
 This document inventories all direct third-party runtime and development dependencies used by `ellmos-filecommander-mcp`.
 

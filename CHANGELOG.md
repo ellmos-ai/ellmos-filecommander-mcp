@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.11.5] - 2026-09-20
+
+### Repository Hygiene, CI Timeout Hardening & Multi-Host Defense (Pfad A)
+- **CI Workflow Timeout & Concurrency Hardening:**
+  - Hardened all 5 GitHub Actions workflows (`tests.yml`, `stale.yml`, `welcome.yml`, `auto-assign.yml`, `label-sync.yml`) with explicit job `timeout-minutes` (15m for tests, 10m for stale, 5m for welcome/auto-assign/label-sync).
+  - Added workflow-level `concurrency` controls with `cancel-in-progress: true` across `welcome.yml`, `auto-assign.yml`, and `label-sync.yml` to prevent stale queued runs from wasting GitHub Actions runner minutes.
+- **Canonical Lock System & Multi-Host Cloud-Sync Defense in `.gitignore`:**
+  - Integrated canonical multi-agent lock patterns (`LOCK`, `LOCK.*`, `LOCK*.txt`, `LOCK.user.*`, `LOCK.until.*`, `LOCK.condition.*`, `LOCK.permissions.json`, `.automation-lock`) and multi-host conflict patterns (`*conflicted copy*`, `* (Kopie)*`, `* (Copy)*`, `*-WORKSTATION*`, `*-WORKSTATION-LG*`, `*-LAPTOP*`, `*-ASUS*`, `*-ASUS-GEI*`, `*-Mac Studio*`, `*-MacBook*`).
+  - Added build/cache ignore patterns (`.hypothesis/`, `.turbo/`, `.nyc_output/`).
+- **Open-Source Legal Attribution (`NOTICE`):**
+  - Added canonical `NOTICE` attribution file anchored under the `open-bricks` open-source umbrella with Level 1 SBOM reference and included it in the `package.json` `files` whitelist for npm distribution.
+- **Synchronized Version Bump (v1.11.5):**
+  - Synchronized semantic version `1.11.5` across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`.
+- **Third-Party Licensing Inventory (`THIRD_PARTY_LICENSES.md`):**
+  - Updated inventory audit stamp to `2026-09-20` and re-audited Level 1 SBOM transparency and unprivileged RunAsInvoker non-elevation guarantees.
+- **Contract Test Suite Expansion (`test/metadata-parity.test.ts`):**
+  - Added automated contract tests asserting all 5 CI workflows enforce timeout limits and concurrency guards, verifying `NOTICE` presence and attribution, testing canonical lock system and conflict ignore patterns in `.gitignore`, and asserting version `1.11.5` parity across all manifests. Total test suite verified at 299 tests (228 Vitest + 71 standalone i18n checks) | 100% green.
+
 ## [1.11.4] - 2026-09-19
 
 ### Bugfix: fc_str_replace Literal String Replacement (T-20260919-384678872)

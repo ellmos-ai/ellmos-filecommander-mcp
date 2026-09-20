@@ -58,11 +58,15 @@ Ideen.md
 .mcpregistry_*
 
 # lock system (multi-agent coordination, host-local, never commit)
-LOCK*.txt
-LOCK.*
 LOCK
+LOCK.*
+LOCK*.txt
+LOCK.user.*
+LOCK.until.*
+LOCK.condition.*
 LOCK.permissions.json
 *.lock
+.automation-lock
 !package-lock.json
 uv.lock
 
@@ -71,11 +75,18 @@ uv.lock
 *.conflict
 *-CONFLIT-*
 *-conflict-*
-*-ASUS-GEI.*
-*-WORKSTATION-LG.*
-*-WORKSTATION.*
+*conflicted copy*
+* (Kopie)*
+* (Copy)*
 * (kopie)*
 * (copy)*
+*-WORKSTATION*
+*-WORKSTATION-LG*
+*-LAPTOP*
+*-ASUS*
+*-ASUS-GEI*
+*-Mac Studio*
+*-MacBook*
 
 # Temporary files, patch residues & editor backups
 *.tmp
@@ -93,6 +104,9 @@ uv.lock
 coverage/
 htmlcov/
 .wheel-smoke/
+.hypothesis/
+.turbo/
+.nyc_output/
 
 # Lokale Ablage verworfener Artefakte
 _archive/

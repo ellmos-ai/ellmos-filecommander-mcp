@@ -16,6 +16,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   const securityPath = resolve(ROOT, 'SECURITY.md');
   const marketingLogPath = resolve(ROOT, 'MARKETING-LOG.txt');
   const thirdPartyLicensesPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.md');
+  const noticePath = resolve(ROOT, 'NOTICE');
 
   it('all required manifests and discoverability files exist', () => {
     expect(existsSync(pkgPath)).toBe(true);
@@ -29,6 +30,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(existsSync(securityPath)).toBe(true);
     expect(existsSync(marketingLogPath)).toBe(true);
     expect(existsSync(thirdPartyLicensesPath)).toBe(true);
+    expect(existsSync(noticePath)).toBe(true);
   });
 
   it('maintains exact version parity across package.json, server.json, glama.json, package-lock.json, and src/index.ts', () => {
@@ -71,11 +73,12 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('llms.txt');
     expect(files).toContain('MARKETING-LOG.txt');
     expect(files).toContain('THIRD_PARTY_LICENSES.md');
+    expect(files).toContain('NOTICE');
   });
 
-  it('llms.txt is synchronized with 2026-09-19 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-20 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-19');
+    expect(llms).toContain('## Last-checked: 2026-09-20');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -84,6 +87,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(llms).toContain('CHANGELOG.md');
     expect(llms).toContain('MARKETING-LOG.txt');
     expect(llms).toContain('THIRD_PARTY_LICENSES.md');
+    expect(llms).toContain('NOTICE');
     expect(llms).toContain('INV-LOCAL-01');
     expect(llms).toContain('INV-SLA-10');
     expect(llms).toContain('ellmos-controlcenter-mcp');
@@ -144,9 +148,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*.conflict');
     expect(gitignore).toContain('*-CONFLIT-*');
     expect(gitignore).toContain('*-conflict-*');
-    expect(gitignore).toContain('*-ASUS-GEI.*');
-    expect(gitignore).toContain('*-WORKSTATION-LG.*');
-    expect(gitignore).toContain('*-WORKSTATION.*');
+    expect(gitignore).toContain('*-ASUS-GEI*');
+    expect(gitignore).toContain('*-WORKSTATION-LG*');
+    expect(gitignore).toContain('*-WORKSTATION*');
     expect(gitignore).toContain('* (kopie)*');
     expect(gitignore).toContain('* (copy)*');
     expect(gitignore).toContain('LOCK.*');
@@ -162,6 +166,20 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('.pytest_cache/');
     expect(gitignore).toContain('.ruff_cache/');
     expect(gitignore).toContain('.coverage.*');
+    expect(gitignore).toContain('LOCK.user.*');
+    expect(gitignore).toContain('LOCK.until.*');
+    expect(gitignore).toContain('LOCK.condition.*');
+    expect(gitignore).toContain('.automation-lock');
+    expect(gitignore).toContain('*conflicted copy*');
+    expect(gitignore).toContain('* (Kopie)*');
+    expect(gitignore).toContain('* (Copy)*');
+    expect(gitignore).toContain('*-LAPTOP*');
+    expect(gitignore).toContain('*-ASUS*');
+    expect(gitignore).toContain('*-Mac Studio*');
+    expect(gitignore).toContain('*-MacBook*');
+    expect(gitignore).toContain('.hypothesis/');
+    expect(gitignore).toContain('.turbo/');
+    expect(gitignore).toContain('.nyc_output/');
 
     // TODO.md must NOT be ignored
     expect(lines).not.toContain('TODO.md');
@@ -179,6 +197,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(ci).toContain('cache: npm');
     expect(ci).toContain('concurrency:');
     expect(ci).toContain('cancel-in-progress: true');
+    expect(ci).toContain('timeout-minutes: 15');
     expect(ci).toContain('npm test');
     expect(ci).toContain('npm run build');
     expect(ci).toContain('npm pack --dry-run');
@@ -192,9 +211,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-292%20passed');
+    expect(en).toContain('tests-299%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
+    expect(en).toContain('[NOTICE](NOTICE)');
     expect(en).toContain('#core-capabilities--safety-invariants');
     expect(en).toContain('## Core Capabilities & Safety Invariants');
     expect(en).toContain('#target-personas--discoverability');
@@ -206,9 +226,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-292%20passed');
+    expect(de).toContain('tests-299%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
+    expect(de).toContain('[NOTICE](NOTICE)');
     expect(de).toContain('#kernfähigkeiten--sicherheitsinvarianten');
     expect(de).toContain('## Kernfähigkeiten & Sicherheitsinvarianten');
     expect(de).toContain('#zielgruppen--auffindbarkeit');
@@ -336,6 +357,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies changelog records recent release history and version consistency', () => {
     const cl = readFileSync(changelogPath, 'utf-8');
+    expect(cl).toContain('## [1.11.5] - 2026-09-20');
+    expect(cl).toContain('Repository Hygiene, CI Timeout Hardening & Multi-Host Defense (Pfad A)');
+    expect(cl).toContain('## [1.11.4] - 2026-09-19');
+    expect(cl).toContain('Bugfix: fc_str_replace Literal String Replacement');
     expect(cl).toContain('## [1.11.3] - 2026-09-19');
     expect(cl).toContain('AI Security & Dependency Audit, Supply-Chain Hardening & 30-Day SLA');
     expect(cl).toContain('## [1.11.2] - 2026-09-13');
@@ -356,7 +381,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
 
     // Third-party licenses inventory synced
-    expect(lic).toContain('Stand: 2026-09-19');
+    expect(lic).toContain('Stand: 2026-09-20');
     expect(lic).toContain('adm-zip');
     expect(lic).toContain('^0.6.1');
     expect(lic).toContain('js-yaml');
@@ -371,12 +396,15 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     const mkt = readFileSync(marketingLogPath, 'utf-8');
     expect(mkt).toContain('Audit Date: 2026-09-13');
     expect(mkt).toContain('Audit Date: 2026-09-19');
+    expect(mkt).toContain('Audit Date: 2026-09-20');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
     expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
+    expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)');
     expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
     expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
     expect(mkt).toContain('291 automated tests');
     expect(mkt).toContain('292 passed tests');
+    expect(mkt).toContain('299 passed tests');
   });
 
   it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {
@@ -387,5 +415,58 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     // Ensure diagrams have balanced code blocks
     expect((en.match(/```mermaid/g) || []).length).toBeGreaterThan(0);
     expect((de.match(/```mermaid/g) || []).length).toBeGreaterThan(0);
+  });
+
+  it('verifies all 5 GitHub Actions workflows enforce timeout-minutes and concurrency boundaries', () => {
+    const workflowsDir = resolve(ROOT, '.github/workflows');
+    const testsWf = readFileSync(resolve(workflowsDir, 'tests.yml'), 'utf-8');
+    const staleWf = readFileSync(resolve(workflowsDir, 'stale.yml'), 'utf-8');
+    const welcomeWf = readFileSync(resolve(workflowsDir, 'welcome.yml'), 'utf-8');
+    const autoAssignWf = readFileSync(resolve(workflowsDir, 'auto-assign.yml'), 'utf-8');
+    const labelSyncWf = readFileSync(resolve(workflowsDir, 'label-sync.yml'), 'utf-8');
+
+    expect(testsWf).toContain('timeout-minutes: 15');
+    expect(staleWf).toContain('timeout-minutes: 10');
+    expect(welcomeWf).toContain('timeout-minutes: 5');
+    expect(autoAssignWf).toContain('timeout-minutes: 5');
+    expect(labelSyncWf).toContain('timeout-minutes: 5');
+
+    expect(welcomeWf).toContain('concurrency:');
+    expect(welcomeWf).toContain('cancel-in-progress: true');
+    expect(autoAssignWf).toContain('concurrency:');
+    expect(autoAssignWf).toContain('cancel-in-progress: true');
+    expect(labelSyncWf).toContain('concurrency:');
+    expect(labelSyncWf).toContain('cancel-in-progress: true');
+  });
+
+  it('verifies NOTICE file contains legal attribution, umbrella governance, and SBOM reference', () => {
+    expect(existsSync(noticePath)).toBe(true);
+    const notice = readFileSync(noticePath, 'utf-8');
+    expect(notice).toContain('ellmos-filecommander-mcp');
+    expect(notice).toContain('Copyright (c) 2026 Lukas Geiger');
+    expect(notice).toContain('open-bricks open-source umbrella');
+    expect(notice).toContain('THIRD_PARTY_LICENSES.md');
+  });
+
+  it('verifies canonical lock system and multi-host conflict defense patterns in .gitignore', () => {
+    const gitignore = readFileSync(resolve(ROOT, '.gitignore'), 'utf-8');
+    expect(gitignore).toContain('LOCK.user.*');
+    expect(gitignore).toContain('LOCK.until.*');
+    expect(gitignore).toContain('LOCK.condition.*');
+    expect(gitignore).toContain('.automation-lock');
+    expect(gitignore).toContain('*conflicted copy*');
+    expect(gitignore).toContain('*-WORKSTATION-LG*');
+    expect(gitignore).toContain('*-LAPTOP*');
+    expect(gitignore).toContain('*-ASUS*');
+    expect(gitignore).toContain('*-Mac Studio*');
+    expect(gitignore).toContain('*-MacBook*');
+  });
+
+  it('verifies Level 1 SBOM and unprivileged RunAsInvoker governance integrity in THIRD_PARTY_LICENSES.md', () => {
+    const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
+    expect(lic).toContain('Stand: 2026-09-20');
+    expect(lic).toContain('Level 1 SBOM Transparency');
+    expect(lic).toContain('Unprivileged User-Mode (`RunAsInvoker`)');
+    expect(lic).toContain('License Compatibility');
   });
 });

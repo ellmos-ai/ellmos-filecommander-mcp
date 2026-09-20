@@ -13,7 +13,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-292%20passed%20(221%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-299%20passed%20(228%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -21,7 +21,7 @@
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
 
-> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Zielgruppen](#zielgruppen--auffindbarkeit) | [Verfügbare Werkzeuge](#tools-übersicht) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleichsmatrix](#vergleichsmatrix--alternativen) | [Entwicklung & Tests](#entwicklung) | [Governance & Laufzeit-Invarianten](#governance--laufzeit-invarianten) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) | [Marketing-Log](MARKETING-LOG.txt) | [llms.txt](llms.txt)
+> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Zielgruppen](#zielgruppen--auffindbarkeit) | [Verfügbare Werkzeuge](#tools-übersicht) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleichsmatrix](#vergleichsmatrix--alternativen) | [Entwicklung & Tests](#entwicklung) | [Governance & Laufzeit-Invarianten](#governance--laufzeit-invarianten) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) | [Marketing-Log](MARKETING-LOG.txt) | [NOTICE](NOTICE) | [llms.txt](llms.txt)
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -489,7 +489,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **221 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (292 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **228 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (299 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen
@@ -510,9 +510,9 @@ Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
 
 ---
 
-## Lizenz
+## Lizenz & Rechtliche Hinweise
 
-[MIT](LICENSE) — Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai))
+[MIT](LICENSE) — Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). Siehe [NOTICE](NOTICE) für Dachorganisation und Attribution sowie [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) für die Level-1-SBOM.
 
 ---
 

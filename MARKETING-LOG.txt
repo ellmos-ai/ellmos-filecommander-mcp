@@ -200,5 +200,31 @@ Measures Applied:
      - Synchronized THIRD_PARTY_LICENSES.md audit date (2026-09-19) and version ranges.
   4. Contract Test Verification:
      - Expanded test/metadata-parity.test.ts to 292 passed tests (221 Vitest + 71 i18n).
-================================================================================
 
+10. REPOSITORY HYGIENE & CI TIMEOUT HARDENING SUMMARY (2026-09-20)
+--------------------------------------------------------------------------------
+Audit Date: 2026-09-20
+Actor: Antigravity (Gemini 3.8 / WORKSTATION-LG)
+Status: ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)
+Measures Applied:
+  1. GitHub Actions CI Workflow Hardening:
+     - Enforced explicit job timeout-minutes across all 5 workflows:
+       tests.yml (15m), stale.yml (10m), welcome.yml (5m), auto-assign.yml (5m), label-sync.yml (5m).
+     - Enforced workflow-level concurrency control with cancel-in-progress: true
+       across welcome.yml, auto-assign.yml, and label-sync.yml.
+  2. Multi-Host Cloud-Sync & Canonical Lock System Defense in .gitignore:
+     - Canonical lock patterns: LOCK, LOCK.*, LOCK*.txt, LOCK.user.*, LOCK.until.*,
+       LOCK.condition.*, LOCK.permissions.json, .automation-lock, !package-lock.json.
+     - Multi-host conflict patterns: *conflicted copy*, * (Kopie)*, * (Copy)*,
+       *-WORKSTATION*, *-WORKSTATION-LG*, *-LAPTOP*, *-ASUS*, *-ASUS-GEI*,
+       *-Mac Studio*, *-MacBook*.
+     - Cache ignore patterns: .hypothesis/, .turbo/, .nyc_output/.
+  3. Legal Open-Source Attribution & SBOM Transparency:
+     - Added canonical NOTICE attribution file under open-bricks open-source umbrella.
+     - Added NOTICE to package.json "files" whitelist for distribution tarball.
+     - Re-audited Level 1 SBOM in THIRD_PARTY_LICENSES.md (Stand: 2026-09-20).
+  4. Synchronized Version Bump to v1.11.5:
+     - package.json, package-lock.json, server.json, glama.json, src/index.ts.
+  5. Contract Test Verification:
+     - Expanded test/metadata-parity.test.ts to 299 passed tests (228 Vitest + 71 i18n checks).
+================================================================================
