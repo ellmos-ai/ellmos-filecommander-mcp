@@ -1,5 +1,23 @@
 # Changelog
 
+## [Unreleased]
+
+### Discoverability, Visual Architecture & 18-Point Bilingual Navigation Parity (Pfad B)
+- **18-Point Bilingual Navigation Parity & Dual Reciprocal Anchors:**
+  - Synchronized comprehensive 18-point navigation structure across English (`README.md`) and German (`README_de.md`) documentation with reciprocal `<a id="sec-01">` .. `<a id="sec-18">` HTML anchor aliases and semantic fallbacks.
+- **Persona Profiles & High-Intent SEO Queries:**
+  - Codified explicit operational profiles, pain points, and tool solutions for `[PERSONA-01]` Autonomous AI Coding Agents & LLM Swarms, `[PERSONA-02]` DevOps & Multi-Host Automation Engineers, `[PERSONA-03]` SecOps & Compliance Officers, and `[PERSONA-04]` Enterprise Platform Architects alongside targeted discovery queries.
+- **5-Way Comparative Matrix & Invariant Cross-References:**
+  - Explicitly mapped the 10 comparative dimensions to system runtime invariants (`INV-LOCAL-01` through `INV-SLA-10`) contrasting FileCommander (50 tools) against Official Filesystem MCP, Desktop Commander, Direct Host Shell, and Ad-Hoc Scripts.
+- **Level 1 SBOM Transparency & Invariant Matrix (`THIRD_PARTY_LICENSES.md`):**
+  - Updated inventory audit stamp to `Stand: 2026-09-23`, added the Level 1 SBOM Invariant Cross-Reference Matrix table, and re-certified unprivileged user-mode `RunAsInvoker` execution and Zero-Copyleft isolation (100% permissive licenses).
+- **Machine-Readable Documentation (`llms.txt`):**
+  - Updated context manifest audit date to `Last-checked: 2026-09-23` asserting 299 passed tests baseline across Node 20-24.
+- **Statutory Notice (§ 521 BGB) & 48h Security Response SLA:**
+  - Codified German statutory notice under § 521 BGB Gefälligkeitsrecht and binding 48h initial security response commitment across Section 18 of both READMEs.
+- **Automated Contract Test Suite Expansion (`test/metadata-parity.test.ts`):**
+  - Expanded contract assertions to strictly validate the 18-point bilingual navigation parity, dual HTML anchor aliases, persona tags, § 521 BGB disclaimers, and Stand 2026-09-23 audit timestamps.
+
 ## [1.11.5] - 2026-09-20
 
 ### Repository Hygiene, CI Timeout Hardening & Multi-Host Defense (Pfad A)

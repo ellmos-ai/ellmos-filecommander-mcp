@@ -227,4 +227,34 @@ Measures Applied:
      - package.json, package-lock.json, server.json, glama.json, src/index.ts.
   5. Contract Test Verification:
      - Expanded test/metadata-parity.test.ts to 299 passed tests (228 Vitest + 71 i18n checks).
+
+11. DISCOVERABILITY, VISUAL ARCHITECTURE & 18-POINT NAVIGATION PARITY (2026-09-23)
+--------------------------------------------------------------------------------
+Audit Date: 2026-09-23
+Actor: Antigravity (Gemini 3.8 / WORKSTATION-LG)
+Status: ACTIVE / PFAD B DISCOVERABILITY & VISUAL ARCHITECTURE STAND VERIFIED (v1.11.5 frozen)
+Measures Applied:
+  1. 18-Point Bilingual Navigation Parity & Dual Reciprocal Anchors:
+     - Established 18 numbered quick navigation links across README.md and README_de.md.
+     - Implemented reciprocal dual HTML anchors (<a id="sec-01"></a>..<a id="sec-18"></a>)
+       with descriptive fallback IDs ensuring unbroken deep links for all sections.
+  2. Persona Segmentation & High-Intent SEO Queries:
+     - Codified [PERSONA-01] to [PERSONA-04] with dedicated operational pain points,
+       tailored FileCommander solutions, and curated high-intent search queries.
+  3. 10-Dimension 5-Way Comparative Architecture Matrix:
+     - Mapped comparative dimensions explicitly to system invariants (INV-LOCAL-01..INV-SLA-10)
+       against Official Filesystem MCP, Desktop Commander, Direct Host Shell, and Ad-Hoc Scripts.
+  4. Level 1 SBOM Transparency & RunAsInvoker Invariant Matrix:
+     - Updated THIRD_PARTY_LICENSES.md to Stand 2026-09-23 with full Level 1 SBOM Invariant
+       Cross-Reference Matrix table, RunAsInvoker non-elevation certification, and Zero-Copyleft guarantee.
+  5. Legal Notice, Statutory Disclaimer (§ 521 BGB) & 48h Security SLA:
+     - Codified German statutory notice (§ 521 BGB Gefälligkeitsrecht) and 48h Security SLA
+       in Section 18 of README.md, README_de.md, and SECURITY.md.
+  6. Strict Version Freeze Discipline (T-20260920-167562623):
+     - Version 1.11.5 preserved strictly unchanged across package.json, server.json,
+       glama.json, package-lock.json, and src/index.ts.
+  7. Automated Contract Test Verification:
+     - Updated test/metadata-parity.test.ts verifying 18-point bilingual navigation parity,
+       dual HTML anchors, personas, comparative matrix, § 521 BGB disclaimer, and Stand 2026-09-23.
 ================================================================================
+

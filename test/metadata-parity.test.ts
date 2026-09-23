@@ -76,9 +76,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('NOTICE');
   });
 
-  it('llms.txt is synchronized with 2026-09-20 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-23 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-20');
+    expect(llms).toContain('## Last-checked: 2026-09-23');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -215,11 +215,14 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
-    expect(en).toContain('#core-capabilities--safety-invariants');
+    expect(en).toContain('#sec-04');
+    expect(en).toContain('id="core-capabilities--safety-invariants"');
     expect(en).toContain('## Core Capabilities & Safety Invariants');
-    expect(en).toContain('#target-personas--discoverability');
+    expect(en).toContain('#sec-05');
+    expect(en).toContain('id="target-personas--discoverability"');
     expect(en).toContain('## Target Personas & Discoverability');
-    expect(en).toContain('#comparative-matrix--alternatives');
+    expect(en).toContain('#sec-09');
+    expect(en).toContain('id="comparative-matrix--alternatives"');
     expect(en).toContain('## Comparative Matrix & Alternatives');
 
     expect(de).toContain('ellmos-ai');
@@ -230,11 +233,14 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
-    expect(de).toContain('#kernfähigkeiten--sicherheitsinvarianten');
+    expect(de).toContain('#sec-04');
+    expect(de).toContain('id="kernfähigkeiten--sicherheitsinvarianten"');
     expect(de).toContain('## Kernfähigkeiten & Sicherheitsinvarianten');
-    expect(de).toContain('#zielgruppen--auffindbarkeit');
+    expect(de).toContain('#sec-05');
+    expect(de).toContain('id="zielgruppen--auffindbarkeit"');
     expect(de).toContain('## Zielgruppen & Auffindbarkeit');
-    expect(de).toContain('#vergleichsmatrix--alternativen');
+    expect(de).toContain('#sec-09');
+    expect(de).toContain('id="vergleichsmatrix--alternativen"');
     expect(de).toContain('## Vergleichsmatrix & Alternativen');
 
     // Sibling server tools counts
@@ -381,7 +387,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
 
     // Third-party licenses inventory synced
-    expect(lic).toContain('Stand: 2026-09-20');
+    expect(lic).toContain('Stand: 2026-09-23');
     expect(lic).toContain('adm-zip');
     expect(lic).toContain('^0.6.1');
     expect(lic).toContain('js-yaml');
@@ -397,6 +403,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(mkt).toContain('Audit Date: 2026-09-13');
     expect(mkt).toContain('Audit Date: 2026-09-19');
     expect(mkt).toContain('Audit Date: 2026-09-20');
+    expect(mkt).toContain('Audit Date: 2026-09-23');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
     expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
     expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)');
@@ -464,9 +471,43 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies Level 1 SBOM and unprivileged RunAsInvoker governance integrity in THIRD_PARTY_LICENSES.md', () => {
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
-    expect(lic).toContain('Stand: 2026-09-20');
+    expect(lic).toContain('Stand: 2026-09-23');
     expect(lic).toContain('Level 1 SBOM Transparency');
     expect(lic).toContain('Unprivileged User-Mode (`RunAsInvoker`)');
     expect(lic).toContain('License Compatibility');
+    expect(lic).toContain('INV-LOCAL-01');
+    expect(lic).toContain('INV-SAFE-02');
+    expect(lic).toContain('INV-SLA-10');
+  });
+
+  it('verifies 18-point reciprocal navigation parity, persona definitions and statutory notice', () => {
+    const en = readFileSync(readmeEnPath, 'utf-8');
+    const de = readFileSync(readmeDePath, 'utf-8');
+    const llms = readFileSync(resolve(ROOT, 'llms.txt'), 'utf-8');
+
+    // 18-point anchors in both languages
+    for (let i = 1; i <= 18; i++) {
+      const pad = String(i).padStart(2, '0');
+      expect(en).toContain(`id="sec-${pad}"`);
+      expect(de).toContain(`id="sec-${pad}"`);
+      expect(en).toContain(`#sec-${pad}`);
+      expect(de).toContain(`#sec-${pad}`);
+    }
+
+    // Persona identifiers
+    const personas = ['[PERSONA-01]', '[PERSONA-02]', '[PERSONA-03]', '[PERSONA-04]'];
+    for (const p of personas) {
+      expect(en).toContain(p);
+      expect(de).toContain(p);
+    }
+
+    // llms.txt audit timestamp
+    expect(llms).toContain('Last-checked: 2026-09-23');
+
+    // § 521 BGB statutory notice and 48h SLA in both languages
+    expect(en).toContain('§ 521 German Civil Code');
+    expect(en).toContain('security@open-bricks.org');
+    expect(de).toContain('§ 521 BGB');
+    expect(de).toContain('security@open-bricks.org');
   });
 });

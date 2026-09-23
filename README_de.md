@@ -17,11 +17,15 @@
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
-[![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
-[![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
-[![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
+[![Notice](https://img.shields.io/badge/NOTICE-open--bricks%20umbrella-blue.svg)](NOTICE)
+[![Security: RunAsInvoker](https://img.shields.io/badge/security-unprivileged%20RunAsInvoker-green.svg)](SECURITY.md)
+[![SBOM: Audited](https://img.shields.io/badge/SBOM-Level%201%20audited-success.svg)](THIRD_PARTY_LICENSES.md)
+[![Verified](https://img.shields.io/badge/verified-2026--09--23-blue.svg)](llms.txt)
 
-> **Schnellnavigation:** [Tools-Übersicht](#tools-übersicht) | [Systemarchitektur](#systemarchitektur) | [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten) | [Zielgruppen](#zielgruppen--auffindbarkeit) | [Verfügbare Werkzeuge](#tools-übersicht) | [Installation](#installation) | [Konfiguration](#konfiguration) | [Vergleichsmatrix](#vergleichsmatrix--alternativen) | [Entwicklung & Tests](#entwicklung) | [Governance & Laufzeit-Invarianten](#governance--laufzeit-invarianten) | [Sicherheit](#sicherheit) | [Ökosystem](#ellmos-ai-ökosystem) | [Sicherheitsrichtlinie](SECURITY.md) | [Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) | [Marketing-Log](MARKETING-LOG.txt) | [NOTICE](NOTICE) | [llms.txt](llms.txt)
+> **Schnellnavigation:**
+> 1. [Überblick](#sec-01) | 2. [Systemarchitektur](#sec-02) | 3. [End-to-End Ausführungszyklus](#sec-03) | 4. [Kernfähigkeiten & Sicherheitsinvarianten](#sec-04) | 5. [Zielgruppen & Auffindbarkeit](#sec-05) | 6. [Installation & Voraussetzungen](#sec-06) | 7. [Konfiguration & Client-Einrichtung](#sec-07) | 8. [Tools-Übersicht (50 Tools)](#sec-08) | 9. [Vergleichsmatrix & Alternativen](#sec-09) | 10. [Tool-Präfix & Namenskonvention](#sec-10) | 11. [Governance & Laufzeit-Invarianten](#sec-11) | 12. [Sicherheitsarchitektur & Risiken](#sec-12) | 13. [Entwicklung, Tests & Verifikation](#sec-13) | 14. [Changelog & Versionierung](#sec-14) | 15. [Level 1 SBOM & Drittanbieter-Lizenzen](#sec-15) | 16. [Historie & Evolution](#sec-16) | 17. [ellmos-ai Ökosystem & Partnermatrix](#sec-17) | 18. [Gesetzlicher Hinweis (§ 521 BGB) & Haftung](#sec-18)
+>
+> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📜 Marketing-Log](MARKETING-LOG.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -37,6 +41,7 @@ Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten voll
 
 ---
 
+<a id="sec-01"></a><a id="overview"></a><a id="why-filecommander"></a><a id="ueberblick"></a><a id="überblick"></a><a id="warum-filecommander"></a>
 ## Warum FileCommander?
 
 Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperationen ab. FileCommander geht weiter:
@@ -59,6 +64,7 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 
 ---
 
+<a id="sec-02"></a><a id="system-architecture"></a><a id="systemarchitektur"></a>
 ## Systemarchitektur
 
 ```mermaid
@@ -90,6 +96,11 @@ flowchart TD
     Core --> Export
     Core --> Sys
 ```
+
+---
+
+<a id="sec-03"></a><a id="end-to-end-execution-lifecycle"></a><a id="execution-lifecycle"></a><a id="end-to-end-ausfuehrungszyklus"></a>
+## End-to-End Ausführungszyklus
 
 ```mermaid
 sequenceDiagram
@@ -129,6 +140,7 @@ sequenceDiagram
 
 ---
 
+<a id="sec-04"></a><a id="core-capabilities--safety-invariants"></a><a id="core-capabilities"></a><a id="kernfaehigkeiten--sicherheitsinvarianten"></a><a id="kernfähigkeiten--sicherheitsinvarianten"></a>
 ## Kernfähigkeiten & Sicherheitsinvarianten
 
 | Fähigkeit / Invariante | Garantie & Implementierungsdetails | Sicherheits- & Betriebsvorteil |
@@ -148,12 +160,12 @@ sequenceDiagram
 
 ---
 
+<a id="sec-05"></a><a id="target-personas--discoverability"></a><a id="target-personas"></a><a id="zielgruppen--auffindbarkeit"></a>
 ## Zielgruppen & Auffindbarkeit
-<a id="zielgruppen--auffindbarkeit"></a>
 
 FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgruppen konzipiert und verifiziert:
 
-### 1. Autonome KI-Coding-Agenten & LLM-Schwärme
+### [PERSONA-01] Autonome KI-Coding-Agenten & LLM-Schwärme
 - **Profil:** Multi-Agenten-Architekturen und autonome Agenten-Laufzeiten (Claude Code, Antigravity/Gemini, OpenAI Codex, AutoGen, CrewAI), die selbstständig Refactorings, Fehlerbehebungen und Code-Explorationen durchführen.
 - **Zentrale Pain Points:** Kontextfenster-Überlauf durch ungefiltertes Lesen großer Dateien, Prozessabbrüche durch Dateisperren (`EPERM`/`EBUSY`) in Cloud-Ordnern und irreversibler Datenverlust bei automatisierten Aufräumarbeiten.
 - **FileCommander-Lösung:**
@@ -162,7 +174,7 @@ FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgrup
   - `fc_safe_delete` & `fc_set_safe_mode`: Verschiebt gelöschte Dateien in den Papierkorb (Recycle Bin / Trash) für risikolose Dateioperationen.
   - `fc_move` & `fc_check_cloud_lock`: Automatischer Kopier-, Prüf- und Entfernungsfallback bei Dateisperren, verhindert Agenten-Crashes.
 
-### 2. DevOps-, Toolchain- & Multi-Host-Automatisierungs-Ingenieure
+### [PERSONA-02] DevOps-, Toolchain- & Multi-Host-Automatisierungs-Ingenieure
 - **Profil:** Systemingenieure und Automatisierer, die plattformübergreifende CLI-Tools, CI/CD-Pipelines und Multi-Rechner-Workflows unter Windows, Linux und macOS pflegen.
 - **Zentrale Pain Points:** Divergierende Plattform-Syntax (Windows-Backslashes vs POSIX-Slashes, Zeilenumbruchfehler), Zombie-Prozesse durch verwaiste Subprozesse und blockierende Dateisperren in geteilten Cloud-Verzeichnissen.
 - **FileCommander-Lösung:**
@@ -171,7 +183,7 @@ FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgrup
   - Massenumbenennung (`fc_batch_rename`) und asynchrone Hintergrundsuche (`fc_start_search`, `fc_get_search_results`).
   - Umfassendes Prozess-Lifecycle-Management (`fc_execute_command`, `fc_start_process`, `fc_kill_process`) ohne Prozesslecks.
 
-### 3. SecOps-, Governance- & Compliance-Verantwortliche
+### [PERSONA-03] SecOps-, Governance- & Compliance-Verantwortliche
 - **Profil:** Sicherheitsteams und Auditoren, die Zero-Trust-Datenschutz und Governance-Richtlinien auf Entwickler-Workstations durchsetzen.
 - **Zentrale Pain Points:** Undokumentierte Telemetrie-Verbindungen von KI-Erweiterungen, unabsichtliches Einschleusen von API-Keys/Tokens in LLM-Prompts und unkontrollierter Netzwerk-Egress.
 - **FileCommander-Lösung:**
@@ -180,7 +192,7 @@ FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgrup
   - Automatische Geheimnis- und Bearer-Token-Schwärzung in Suchergebnissen (`INV-MASK-06`).
   - Strikte unprivilegierte Benutzer-Ausführung (`INV-PROC-09`) und verbindliche 48h-Sicherheits-SLA (`security@open-bricks.org`, `security@ellmos.ai`).
 
-### 4. Enterprise-Plattform-Architekten & Daten-Pipeline-Entwickler
+### [PERSONA-04] Enterprise-Plattform-Architekten & Daten-Pipeline-Entwickler
 - **Profil:** Software-Architekten und Dateningenieure, die heterogene Datenformate vereinheitlichen, Archivintegrität sichern und automatisierte Berichte erzeugen.
 - **Zentrale Pain Points:** Tool-Wildwuchs durch zahlreiche Einzel-MCP-Server, beschädigte UTF-8-Kodierungen (Mojibake) und fehleranfällige manuelle Konvertierungsskripte.
 - **FileCommander-Lösung:**
@@ -189,8 +201,15 @@ FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgrup
   - Integrierte Dateireparatur-Engines (`fc_fix_encoding`, `fc_fix_json`, `fc_cleanup_file`) für selbstheilende Pipelines.
   - Kryptografische Hash-Prüfungen (`fc_checksum`: SHA-256, SHA-512, MD5, SHA-1) und Markdown-zu-PDF/HTML-Export (`fc_md_to_pdf`, `fc_md_to_html`).
 
+### High-Intent-Suchbegriffe & Auffindbarkeit
+
+- **Primäre Suchbegriffe:** `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `multi-file content search MCP`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
+- **Maschinenlesbare Metadaten:** Strukturierter Kontext für KI-Agenten wird in [`llms.txt`](llms.txt), [`server.json`](server.json) und [`glama.json`](glama.json) gepflegt.
+- **Compliance & Attribution:** Geprüft gemäß [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) und [`NOTICE`](NOTICE).
+
 ---
 
+<a id="sec-06"></a><a id="installation"></a><a id="installation-prerequisites"></a><a id="installation--voraussetzungen"></a>
 ## Installation
 
 ### Voraussetzungen
@@ -215,6 +234,7 @@ npm run build
 
 ---
 
+<a id="sec-07"></a><a id="configuration"></a><a id="client-setup"></a><a id="konfiguration"></a>
 ## Konfiguration
 
 ### Claude Desktop
@@ -257,6 +277,7 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 
 ---
 
+<a id="sec-08"></a><a id="tools-overview"></a><a id="available-tools"></a><a id="tools-uebersicht"></a><a id="tools-übersicht"></a>
 ## Tools-Übersicht
 
 ### Dateisystemoperationen (15 Tools)
@@ -379,24 +400,23 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 
 ---
 
+<a id="sec-09"></a><a id="comparative-matrix--alternatives"></a><a id="comparative-matrix"></a><a id="comparison-with-alternatives"></a><a id="vergleichsmatrix--alternativen"></a>
 ## Vergleichsmatrix & Alternativen
-<a id="vergleichsmatrix--alternativen"></a>
-<a id="vergleich-mit-alternativen"></a>
 
 FileCommander vereint Dateisystem-Manipulation, begrenzte Suche, Prozesssteuerung, Datenreparatur, Formatkonvertierung und Dokumenten-Rendering in einer einzigen einheitlichen MCP-Schnittstelle. Die folgende Architekturmatrix stellt FileCommander gängigen Alternativen über 10 zentrale operationale Dimensionen gegenüber:
 
 | Operationale Dimension | ellmos FileCommander MCP (50 Tools) | Offizielles Filesystem MCP (`@modelcontextprotocol/server-filesystem`) | Desktop Commander MCP | Direkte Host-Shell (`bash` / PowerShell) | Ad-Hoc-Skripte & Cloud-APIs |
 |------------------------|:-----------------------------------:|:---------------------------------------------------------------------:|:---------------------:|:---------------------------------------:|:---------------------------:|
-| **Werkzeug-Breite & Umfang** | **50 einheitliche Tools** in 6 Domänen | ~11 Basis-Datei-Tools | ~15 Tools (Datei + Prozess) | Unbegrenzte CLI-Befehle | Fragmentierte Einzellösungen |
-| **Sicheres Löschen & Recovery** | **Nativer Papierkorb** (`fc_safe_delete`, Sicherheitsmodus) | Nur permanente Löschung (`unlink`) | Nur permanente Löschung | Irreversibles `rm -rf` / `Remove-Item` | Eigene Papierkorb-Routinen |
-| **Cloud-Lock- & Sync-Resilienz** | **Automatischer Fallback** (Kopieren + SHA-256 + Löschen bei EPERM) | Schlägt bei gesperrten Dateien fehl | Schlägt bei Sperren fehl | Bricht ab oder blockiert | Synchronisationskonflikte |
-| **Begrenzte Suche & Token-Schwärzung** | **Begrenzte Suche** (max 50 Dateien, 10 MB, Auto-Token-Schwärzung) | Nur Verzeichnisauflistung | Unbegrenzte Regex-Suche | Unbegrenztes `grep` (Gefahr von Token-Leaks) | Eigene Regex ohne Maskierung |
-| **Asynchrone Hintergrundsuche** | **Token-paginierte Hintergrundscans** (`fc_start_search`) | Nur synchron (blockiert Agenten) | Nur synchron | Hintergrundjobs (`&`) | Polling-Schleifen |
-| **Interaktive REPL & Sitzungssteuerung** | **Zustandsbehaftete REPLs** (Node, Python, Shell) mit Ringpuffer | Nicht unterstützt | Einfache Terminalsitzungen | Rohe Subprozesse (Zombie-Risiko) | Komplexe IPC-Pipes |
-| **Selbstheilung & Datenreparatur** | **Integrierter** Mojibake-Fix (27+ Muster) & JSON-Reparatur | Nicht unterstützt | Nicht unterstützt | Manuelle `iconv`- / `sed`-Pipelines | Eigener Reparaturcode |
-| **Multi-Format-Transformation** | **Deklarative Konvertierung** (JSON, YAML, TOML, XML, CSV, INI, TOON) | Nicht unterstützt | Nicht unterstützt | Erfordert externe `jq` / `yq` CLI-Tools | Externe Python-Pakete |
-| **Dokument- & Archiv-Werkzeuge** | **Integriert:** ZIP, OCR (Tesseract), Markdown zu HTML/PDF | Nicht unterstützt | Excel/PDF über Desktop-App | Erfordert `pandoc`, `zip`, `tesseract` | Fragmentierte Bibliotheken |
-| **Governance & Sicherheits-SLAs** | **Lokales stdio**, null Telemetrie, expliziter Egress, 48h SLA | Standard-stdio, Community-SLA | Stdio ohne formale SLA | Uneingeschränktes Ausführungsrisiko | Ad-hoc Cloud-Datenabfluss |
+| **Werkzeug-Breite & Umfang** [INV-PROC-09] | **50 einheitliche Tools** in 6 Domänen | ~11 Basis-Datei-Tools | ~15 Tools (Datei + Prozess) | Unbegrenzte CLI-Befehle | Fragmentierte Einzellösungen |
+| **Sicheres Löschen & Recovery** [INV-SAFE-02] | **Nativer Papierkorb** (`fc_safe_delete`, Sicherheitsmodus) | Nur permanente Löschung (`unlink`) | Nur permanente Löschung | Irreversibles `rm -rf` / `Remove-Item` | Eigene Papierkorb-Routinen |
+| **Cloud-Lock- & Sync-Resilienz** [INV-LOCK-03] | **Automatischer Fallback** (Kopieren + SHA-256 + Löschen bei EPERM) | Schlägt bei gesperrten Dateien fehl | Schlägt bei Sperren fehl | Bricht ab oder blockiert | Synchronisationskonflikte |
+| **Begrenzte Suche & Token-Schwärzung** [INV-SRCH-05 / INV-MASK-06] | **Begrenzte Suche** (max 50 Dateien, 10 MB, Auto-Token-Schwärzung) | Nur Verzeichnisauflistung | Unbegrenzte Regex-Suche | Unbegrenztes `grep` (Gefahr von Token-Leaks) | Eigene Regex ohne Maskierung |
+| **Asynchrone Hintergrundsuche** [INV-SRCH-05] | **Token-paginierte Hintergrundscans** (`fc_start_search`) | Nur synchron (blockiert Agenten) | Nur synchron | Hintergrundjobs (`&`) | Polling-Schleifen |
+| **Interaktive REPL & Sitzungssteuerung** [INV-REPL-08] | **Zustandsbehaftete REPLs** (Node, Python, Shell) mit Ringpuffer | Nicht unterstützt | Einfache Terminalsitzungen | Rohe Subprozesse (Zombie-Risiko) | Komplexe IPC-Pipes |
+| **Selbstheilung & Datenreparatur** [INV-DIAG-04] | **Integrierter** Mojibake-Fix (27+ Muster) & JSON-Reparatur | Nicht unterstützt | Nicht unterstützt | Manuelle `iconv`- / `sed`-Pipelines | Eigener Reparaturcode |
+| **Multi-Format-Transformation** [INV-PREV-07] | **Deklarative Konvertierung** (JSON, YAML, TOML, XML, CSV, INI, TOON) | Nicht unterstützt | Nicht unterstützt | Erfordert externe `jq` / `yq` CLI-Tools | Externe Python-Pakete |
+| **Dokument- & Archiv-Werkzeuge** [INV-PREV-07] | **Integriert:** ZIP, OCR (Tesseract), Markdown zu HTML/PDF | Nicht unterstützt | Excel/PDF über Desktop-App | Erfordert `pandoc`, `zip`, `tesseract` | Fragmentierte Bibliotheken |
+| **Governance & Sicherheits-SLAs** [INV-LOCAL-01 / INV-SLA-10] | **Lokales stdio**, null Telemetrie, expliziter Egress, 48h SLA | Standard-stdio, Community-SLA | Stdio ohne formale SLA | Uneingeschränktes Ausführungsrisiko | Ad-hoc Cloud-Datenabfluss |
 
 **Wesentliche Differenzierungsmerkmale:**
 - Einziger MCP-Server mit **wiederherstellbarem Löschen** (Papierkorb / Trash) und globalem **Sicherheitsmodus**
@@ -408,29 +428,14 @@ FileCommander vereint Dateisystem-Manipulation, begrenzte Suche, Prozesssteuerun
 
 ---
 
+<a id="sec-10"></a><a id="tool-prefix"></a><a id="tool-praefix"></a><a id="tool-präfix"></a>
 ## Tool-Präfix
 
 Alle Tools verwenden das `fc_`-Präfix (FileCommander), um Konflikte mit anderen MCP-Servern zu vermeiden.
 
 ---
 
-## Auffindbarkeit
-
-FileCommander ist so dokumentiert, dass Menschen, LLMs und MCP-Verzeichnisse ihn eindeutig einordnen können:
-
-- `package.json` enthält den offiziellen `mcpName` (`io.github.ellmos-ai/ellmos-filecommander-mcp`) und MCP-spezifische npm-Keywords.
-- [`server.json`](server.json) folgt dem offiziellen MCP-Registry-Schema und verweist auf das npm-Paket.
-- [`glama.json`](glama.json) liefert Metadaten für Glama-kompatible MCP-Verzeichnisse.
-- [`llms.txt`](llms.txt) bietet kompakten Kontext für LLMs, Agentenkataloge und Dokumentations-Crawler.
-- [`MARKETING-LOG.txt`](MARKETING-LOG.txt) dokumentiert Auffindbarkeit, 4 Ziel-Personas und Verifikationsverträge.
-- [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) inventarisiert Lizenzen aller Laufzeit- und Entwicklungsabhängigkeiten.
-
-Primäre Suchbegriffe: `ellmos-filecommander-mcp`, `FileCommander MCP`, `filesystem MCP server`, `multi-file content search MCP`, `safe delete MCP`, `async file search MCP`, `process management MCP`, `Markdown PDF MCP`.
-
-Externe Auffindbarkeit: npm und jsDelivr können dem aktuellen Release kurzzeitig hinterherhinken. LobeHub indexiert das GitHub-Repo als MCP-Server. Die Paketbeschreibung und diese README sind die kanonische 50-Tool-Referenz für den aktuellen Repository-Stand.
-
----
-
+<a id="sec-11"></a><a id="governance--runtime-invariants"></a><a id="governance-invariants"></a><a id="governance--laufzeit-invarianten"></a>
 ## Governance & Laufzeit-Invarianten
 
 Der Server erzwingt 10 strikte Laufzeit-Invarianten, die Sicherheit, Vorhersehbarkeit und das Least-Privilege-Prinzip garantieren:
@@ -450,6 +455,7 @@ Der Server erzwingt 10 strikte Laufzeit-Invarianten, die Sicherheit, Vorhersehba
 
 ---
 
+<a id="sec-12"></a><a id="security"></a><a id="security-architecture"></a><a id="sicherheit"></a>
 ## Sicherheit
 
 **Dieser Server hat vollen Dateisystemzugriff mit den Berechtigungen des ausführenden Benutzers.**
@@ -468,7 +474,8 @@ Wichtige Punkte:
 
 ---
 
-## Entwicklung
+<a id="sec-13"></a><a id="development"></a><a id="testing"></a><a id="testing--verification"></a><a id="entwicklung"></a>
+## Entwicklung, Tests & Verifikation
 
 ```bash
 # Abhängigkeiten installieren
@@ -504,19 +511,22 @@ Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für Richtlinien zur Mitwirkung.
 
 ---
 
-## Änderungsprotokoll
+<a id="sec-14"></a><a id="changelog"></a>
+## Changelog & Versionierung
 
 Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
 
 ---
 
-## Lizenz & Rechtliche Hinweise
+<a id="sec-15"></a><a id="license--legal-attribution"></a><a id="third-party-licenses"></a><a id="drittanbieter-lizenzen"></a>
+## Level 1 SBOM, Lizenz & Rechtliche Hinweise
 
 [MIT](LICENSE) — Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). Siehe [NOTICE](NOTICE) für Dachorganisation und Attribution sowie [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) für die Level-1-SBOM.
 
 ---
 
-## Geschichte
+<a id="sec-16"></a><a id="history"></a><a id="historie"></a>
+## Geschichte & Evolution
 
 Dieses Projekt wurde ursprünglich als **BACH FileCommander** (`bach-filecommander-mcp`) entwickelt. Es wurde im Rahmen der [ellmos-ai](https://github.com/ellmos-ai) Organisation in **ellmos FileCommander** (`ellmos-filecommander-mcp`) umbenannt.
 
@@ -529,7 +539,8 @@ npm install -g ellmos-filecommander-mcp
 
 ---
 
-## ellmos-ai-Ökosystem
+<a id="sec-17"></a><a id="ellmos-ai-ecosystem"></a><a id="ecosystem"></a><a id="ellmos-ai-oekosystem"></a><a id="ellmos-ai-ökosystem"></a>
+## ellmos-ai Ökosystem & Partnermatrix
 
 Dieser MCP-Server ist Teil des **[ellmos-ai](https://github.com/ellmos-ai)**-Ökosystems — KI-Infrastruktur, MCP-Server und intelligente Werkzeuge.
 
@@ -579,13 +590,15 @@ Unsere Partnerorganisation **[open-bricks](https://github.com/open-bricks)** und
 | [safe-start-for-codex](https://github.com/dev-bricks/safe-start-for-codex) | Sicherheit & Audit | dev-bricks | Gehärtete Laufzeitumgebung & Pre-Flight-Prüfer für Codex |
 | [automation-master](https://github.com/dev-bricks/automation-master) | Aufgaben-Automatisierung | dev-bricks | Hochzuverlässiger Hintergrund-Automations-Runner & Scheduler |
 
+---
 
-## Haftung / Liability
+<a id="sec-18"></a><a id="liability"></a><a id="statutory-notice--liability"></a><a id="haftung--liability"></a><a id="haftung"></a>
+## Gesetzlicher Hinweis (§ 521 BGB), Attribution & Haftung / Liability
 
 Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß **§ 521 BGB** auf **Vorsatz und grobe Fahrlässigkeit** beschränkt. Ergänzend gilt der Haftungsausschluss der MIT-Lizenz.
 
-Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
+Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck. Sicherheitsvorfälle werden verbindlich innerhalb von **48 Stunden** über `security@open-bricks.org` und `security@ellmos.ai` gemäß unserer Sicherheitsrichtlinie bearbeitet.
 
-This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). The MIT license disclaimer also applies. Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
+This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). The MIT license disclaimer also applies. Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed. Security reports receive a binding 48-hour SLA response via `security@open-bricks.org` and `security@ellmos.ai`.
 
 
