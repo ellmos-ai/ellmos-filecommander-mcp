@@ -12,6 +12,7 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+ehthumbs.db
 desktop.ini
 
 # Environment
@@ -81,8 +82,13 @@ uv.lock
 * (kopie)*
 * (copy)*
 *-WORKSTATION*
+*_WORKSTATION*
 *-WORKSTATION-LG*
+*_WORKSTATION-LG*
+*-WORKSTATION.*
+*-WORKSTATION-LG.*
 *-LAPTOP*
+*-IDEAPAD*
 *-ASUS*
 *-ASUS-GEI*
 *-Mac Studio*
@@ -92,12 +98,15 @@ uv.lock
 *.tmp
 *.bak
 *.swp
+*.swo
 *.orig
 *.rej
 *~
 
 # Test & coverage caches
 .pytest_cache/
+.pytest_temp/
+.pytest_tmp*/
 .ruff_cache/
 .coverage
 .coverage.*

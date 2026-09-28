@@ -13,19 +13,21 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-299%20passed%20(228%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-303%20passed%20(232%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
 [![Notice](https://img.shields.io/badge/NOTICE-open--bricks%20umbrella-blue.svg)](NOTICE)
 [![Security: RunAsInvoker](https://img.shields.io/badge/security-unprivileged%20RunAsInvoker-green.svg)](SECURITY.md)
 [![SBOM: Audited](https://img.shields.io/badge/SBOM-Level%201%20audited-success.svg)](THIRD_PARTY_LICENSES.md)
-[![Verified](https://img.shields.io/badge/verified-2026--09--23-blue.svg)](llms.txt)
+[![Level 1 SBOM: Plain Text](https://img.shields.io/badge/Level%201%20SBOM-Plain%20Text-blue.svg)](THIRD_PARTY_LICENSES.txt)
+[![Last-Checked](https://img.shields.io/badge/last--checked-2026--09--28-blue.svg)](llms.txt)
+[![Verified](https://img.shields.io/badge/verified-2026--09--28-blue.svg)](llms.txt)
 
 > **Schnellnavigation:**
 > 1. [Überblick](#sec-01) | 2. [Systemarchitektur](#sec-02) | 3. [End-to-End Ausführungszyklus](#sec-03) | 4. [Kernfähigkeiten & Sicherheitsinvarianten](#sec-04) | 5. [Zielgruppen & Auffindbarkeit](#sec-05) | 6. [Installation & Voraussetzungen](#sec-06) | 7. [Konfiguration & Client-Einrichtung](#sec-07) | 8. [Tools-Übersicht (50 Tools)](#sec-08) | 9. [Vergleichsmatrix & Alternativen](#sec-09) | 10. [Tool-Präfix & Namenskonvention](#sec-10) | 11. [Governance & Laufzeit-Invarianten](#sec-11) | 12. [Sicherheitsarchitektur & Risiken](#sec-12) | 13. [Entwicklung, Tests & Verifikation](#sec-13) | 14. [Changelog & Versionierung](#sec-14) | 15. [Level 1 SBOM & Drittanbieter-Lizenzen](#sec-15) | 16. [Historie & Evolution](#sec-16) | 17. [ellmos-ai Ökosystem & Partnermatrix](#sec-17) | 18. [Gesetzlicher Hinweis (§ 521 BGB) & Haftung](#sec-18)
 >
-> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📜 Marketing-Log](MARKETING-LOG.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
+> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📄 Level 1 SBOM Text](THIRD_PARTY_LICENSES.txt) • [📜 Marketing-Log](MARKETING-LOG.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -496,7 +498,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **228 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (299 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **232 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (303 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen
@@ -521,7 +523,7 @@ Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
 <a id="sec-15"></a><a id="license--legal-attribution"></a><a id="third-party-licenses"></a><a id="drittanbieter-lizenzen"></a>
 ## Level 1 SBOM, Lizenz & Rechtliche Hinweise
 
-[MIT](LICENSE) — Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). Siehe [NOTICE](NOTICE) für Dachorganisation und Attribution sowie [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) für die Level-1-SBOM.
+[MIT](LICENSE) — Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). Siehe [NOTICE](NOTICE) für Dachorganisation und Attribution, [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) für die Level-1-SBOM sowie [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt) für die Plain-Text-Begleitdatei.
 
 ---
 

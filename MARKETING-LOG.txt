@@ -257,4 +257,34 @@ Measures Applied:
      - Updated test/metadata-parity.test.ts verifying 18-point bilingual navigation parity,
        dual HTML anchors, personas, comparative matrix, § 521 BGB disclaimer, and Stand 2026-09-23.
 ================================================================================
-
+12. REPOSITORY HYGIENE, LEVEL 1 SBOM TEXT COMPANION & CONTRACT TEST EXTENSION (2026-09-28)
+--------------------------------------------------------------------------------
+Audit Date: 2026-09-28
+Actor: Antigravity (Gemini 3.8 / WORKSTATION-LG)
+Status: ACTIVE / PFAD A REPOSITORY HYGIENE & SBOM TEXT COMPANION VERIFIED (v1.11.5 frozen)
+Measures Applied:
+  1. Plain-Text Level 1 SBOM Companion (THIRD_PARTY_LICENSES.txt):
+     - Created canonical plain-text companion file mirroring THIRD_PARTY_LICENSES.md for
+       air-gapped and headless environments, AI agent RAG ingest, and CLI license inspection.
+     - Documented Executive Summary, Level 1 SBOM Invariant Cross-Reference Matrix
+       (INV-LOCAL-01..INV-SLA-10), Zero-Copyleft Isolation Guarantee, RunAsInvoker
+       certification, runtime dependencies, dev dependencies, Node.js built-ins, and full
+       SPDX permissive license texts (MIT, BSD-2-Clause, Apache-2.0).
+     - Synchronized references across NOTICE, package.json files array, THIRD_PARTY_LICENSES.md,
+       README.md, README_de.md, and llms.txt.
+  2. Multi-Host Cloud-Sync & Lock Defense Hardening in .gitignore:
+     - Extended multi-host conflict tokens (*-IDEAPAD*, *_WORKSTATION*, *_WORKSTATION-LG*,
+       *-WORKSTATION.*, *-WORKSTATION-LG.*).
+     - Added OS/editor temporary artifacts (ehthumbs.db, *.swo) and test runner temporary
+       directories (.pytest_temp/, .pytest_tmp*/).
+  3. CI/CD Lifecycle Workflow and Multi-OS Matrix Verification:
+     - Confirmed multi-OS test matrix across Node 20, 22, and 24 on ubuntu-latest, windows-latest,
+       and macos-latest with strict 15m timeout and packaging dry-runs.
+     - Confirmed automated PR assignment (auto-assign.yml) and label synchronization (label-sync.yml)
+       concurrency and timeout guards.
+  4. Strict Version Freeze Discipline (T-20260920-167562623):
+     - Preserved semantic version 1.11.5 strictly unchanged across package.json, server.json,
+       glama.json, package-lock.json, and src/index.ts.
+  5. Contract Test Suite Expansion:
+     - Expanded test/metadata-parity.test.ts to 303 passed tests (232 Vitest + 71 standalone i18n checks).
+================================================================================

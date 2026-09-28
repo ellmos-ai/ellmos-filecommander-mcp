@@ -16,6 +16,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   const securityPath = resolve(ROOT, 'SECURITY.md');
   const marketingLogPath = resolve(ROOT, 'MARKETING-LOG.txt');
   const thirdPartyLicensesPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.md');
+  const thirdPartyLicensesTxtPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.txt');
   const noticePath = resolve(ROOT, 'NOTICE');
 
   it('all required manifests and discoverability files exist', () => {
@@ -30,6 +31,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(existsSync(securityPath)).toBe(true);
     expect(existsSync(marketingLogPath)).toBe(true);
     expect(existsSync(thirdPartyLicensesPath)).toBe(true);
+    expect(existsSync(thirdPartyLicensesTxtPath)).toBe(true);
     expect(existsSync(noticePath)).toBe(true);
   });
 
@@ -73,12 +75,13 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('llms.txt');
     expect(files).toContain('MARKETING-LOG.txt');
     expect(files).toContain('THIRD_PARTY_LICENSES.md');
+    expect(files).toContain('THIRD_PARTY_LICENSES.txt');
     expect(files).toContain('NOTICE');
   });
 
-  it('llms.txt is synchronized with 2026-09-23 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-09-28 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-23');
+    expect(llms).toContain('## Last-checked: 2026-09-28');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -87,6 +90,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(llms).toContain('CHANGELOG.md');
     expect(llms).toContain('MARKETING-LOG.txt');
     expect(llms).toContain('THIRD_PARTY_LICENSES.md');
+    expect(llms).toContain('THIRD_PARTY_LICENSES.txt');
     expect(llms).toContain('NOTICE');
     expect(llms).toContain('INV-LOCAL-01');
     expect(llms).toContain('INV-SLA-10');
@@ -150,7 +154,13 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*-conflict-*');
     expect(gitignore).toContain('*-ASUS-GEI*');
     expect(gitignore).toContain('*-WORKSTATION-LG*');
+    expect(gitignore).toContain('*_WORKSTATION-LG*');
     expect(gitignore).toContain('*-WORKSTATION*');
+    expect(gitignore).toContain('*_WORKSTATION*');
+    expect(gitignore).toContain('*-WORKSTATION.*');
+    expect(gitignore).toContain('*-WORKSTATION-LG.*');
+    expect(gitignore).toContain('*-IDEAPAD*');
+    expect(gitignore).toContain('ehthumbs.db');
     expect(gitignore).toContain('* (kopie)*');
     expect(gitignore).toContain('* (copy)*');
     expect(gitignore).toContain('LOCK.*');
@@ -160,10 +170,13 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*.tmp');
     expect(gitignore).toContain('*.bak');
     expect(gitignore).toContain('*.swp');
+    expect(gitignore).toContain('*.swo');
     expect(gitignore).toContain('*.orig');
     expect(gitignore).toContain('*.rej');
     expect(gitignore).toContain('*~');
     expect(gitignore).toContain('.pytest_cache/');
+    expect(gitignore).toContain('.pytest_temp/');
+    expect(gitignore).toContain('.pytest_tmp*/');
     expect(gitignore).toContain('.ruff_cache/');
     expect(gitignore).toContain('.coverage.*');
     expect(gitignore).toContain('LOCK.user.*');
@@ -211,7 +224,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-299%20passed');
+    expect(en).toContain('tests-303%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -229,7 +242,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-299%20passed');
+    expect(de).toContain('tests-303%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
@@ -387,7 +400,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
 
     // Third-party licenses inventory synced
-    expect(lic).toContain('Stand: 2026-09-23');
+    expect(lic).toContain('Stand: 2026-09-28');
     expect(lic).toContain('adm-zip');
     expect(lic).toContain('^0.6.1');
     expect(lic).toContain('js-yaml');
@@ -404,14 +417,17 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(mkt).toContain('Audit Date: 2026-09-19');
     expect(mkt).toContain('Audit Date: 2026-09-20');
     expect(mkt).toContain('Audit Date: 2026-09-23');
+    expect(mkt).toContain('Audit Date: 2026-09-28');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
     expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
     expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)');
+    expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & SBOM TEXT COMPANION VERIFIED (v1.11.5 frozen)');
     expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
     expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
     expect(mkt).toContain('291 automated tests');
     expect(mkt).toContain('292 passed tests');
     expect(mkt).toContain('299 passed tests');
+    expect(mkt).toContain('303 passed tests');
   });
 
   it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {
@@ -453,6 +469,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(notice).toContain('Copyright (c) 2026 Lukas Geiger');
     expect(notice).toContain('open-bricks open-source umbrella');
     expect(notice).toContain('THIRD_PARTY_LICENSES.md');
+    expect(notice).toContain('THIRD_PARTY_LICENSES.txt');
   });
 
   it('verifies canonical lock system and multi-host conflict defense patterns in .gitignore', () => {
@@ -471,13 +488,14 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies Level 1 SBOM and unprivileged RunAsInvoker governance integrity in THIRD_PARTY_LICENSES.md', () => {
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
-    expect(lic).toContain('Stand: 2026-09-23');
+    expect(lic).toContain('Stand: 2026-09-28');
     expect(lic).toContain('Level 1 SBOM Transparency');
     expect(lic).toContain('Unprivileged User-Mode (`RunAsInvoker`)');
     expect(lic).toContain('License Compatibility');
     expect(lic).toContain('INV-LOCAL-01');
     expect(lic).toContain('INV-SAFE-02');
     expect(lic).toContain('INV-SLA-10');
+    expect(lic).toContain('THIRD_PARTY_LICENSES.txt');
   });
 
   it('verifies 18-point reciprocal navigation parity, persona definitions and statutory notice', () => {
@@ -502,12 +520,71 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     }
 
     // llms.txt audit timestamp
-    expect(llms).toContain('Last-checked: 2026-09-23');
+    expect(llms).toContain('Last-checked: 2026-09-28');
 
     // § 521 BGB statutory notice and 48h SLA in both languages
     expect(en).toContain('§ 521 German Civil Code');
     expect(en).toContain('security@open-bricks.org');
     expect(de).toContain('§ 521 BGB');
     expect(de).toContain('security@open-bricks.org');
+  });
+
+  it('verifies plain-text Level 1 SBOM companion (THIRD_PARTY_LICENSES.txt) completeness, invariant matrix, and permissive licensing', () => {
+    expect(existsSync(thirdPartyLicensesTxtPath)).toBe(true);
+    const txt = readFileSync(thirdPartyLicensesTxtPath, 'utf-8');
+
+    expect(txt).toContain('THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE');
+    expect(txt).toContain('Project: ellmos-ai/ellmos-filecommander-mcp (FileCommander)');
+    expect(txt).toContain('Audited: 2026-09-28');
+    expect(txt).toContain('Repository Version: 1.11.5');
+    expect(txt).toContain('Repository License: MIT License');
+    expect(txt).toContain('RunAsInvoker');
+    expect(txt).toContain('Zero-Copyleft Isolation Guarantee');
+
+    // Invariants present in plain text matrix
+    expect(txt).toContain('INV-LOCAL-01');
+    expect(txt).toContain('INV-SAFE-02');
+    expect(txt).toContain('INV-LOCK-03');
+    expect(txt).toContain('INV-DIAG-04');
+    expect(txt).toContain('INV-SRCH-05');
+    expect(txt).toContain('INV-MASK-06');
+    expect(txt).toContain('INV-PREV-07');
+    expect(txt).toContain('INV-REPL-08');
+    expect(txt).toContain('INV-PROC-09');
+    expect(txt).toContain('INV-SLA-10');
+
+    // License texts included
+    expect(txt).toContain('--- MIT License (MIT) ---');
+    expect(txt).toContain('--- BSD 2-Clause License ---');
+    expect(txt).toContain('--- Apache License, Version 2.0 ---');
+  });
+
+  it('verifies Level 1 SBOM text companion badges and documentation sync across README.md and README_de.md', () => {
+    const en = readFileSync(readmeEnPath, 'utf-8');
+    const de = readFileSync(readmeDePath, 'utf-8');
+
+    expect(en).toContain('Level%201%20SBOM-Plain%20Text');
+    expect(de).toContain('Level%201%20SBOM-Plain%20Text');
+    expect(en).toContain('last--checked-2026--09--28');
+    expect(de).toContain('last--checked-2026--09--28');
+    expect(en).toContain('verified-2026--09--28');
+    expect(de).toContain('verified-2026--09--28');
+    expect(en).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
+    expect(de).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
+  });
+
+  it('verifies CI workflow lifecycle hardening for concurrency, timeouts, and multi-OS matrix', () => {
+    const workflowsDir = resolve(ROOT, '.github/workflows');
+    const testsWf = readFileSync(resolve(workflowsDir, 'tests.yml'), 'utf-8');
+    const autoAssignWf = readFileSync(resolve(workflowsDir, 'auto-assign.yml'), 'utf-8');
+    const labelSyncWf = readFileSync(resolve(workflowsDir, 'label-sync.yml'), 'utf-8');
+
+    expect(testsWf).toContain('timeout-minutes: 15');
+    expect(testsWf).toContain('ubuntu-latest');
+    expect(testsWf).toContain('windows-latest');
+    expect(testsWf).toContain('macos-latest');
+    expect(autoAssignWf).toContain('actions/github-script@v7');
+    expect(labelSyncWf).toContain('EndBug/label-sync@v2');
+    expect(existsSync(resolve(ROOT, '.github/labels.yml'))).toBe(true);
   });
 });

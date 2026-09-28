@@ -2,6 +2,21 @@
 
 ## [Unreleased]
 
+### Repository Hygiene, Level 1 SBOM Text Companion & Contract Tests (Pfad A)
+- **CI/CD Lifecycle Workflows & Multi-OS Matrix Verification:**
+  - Verified and asserted GitHub Actions CI matrix coverage across Node 20, 22, and 24 on `ubuntu-latest`, `windows-latest`, and `macos-latest` with build, test, and dry-run packaging checks.
+  - Verified automated PR assignment (`auto-assign.yml` with `actions/github-script@v7`) and governance label synchronization (`label-sync.yml` with `EndBug/label-sync@v2`).
+- **Canonical Lock System & Multi-Host Cloud-Sync Defense in `.gitignore`:**
+  - Extended multi-host conflict patterns (`*-IDEAPAD*`, `*_WORKSTATION*`, `*_WORKSTATION-LG*`, `*-WORKSTATION.*`, `*-WORKSTATION-LG.*`).
+  - Added OS and editor temporary artifact patterns (`ehthumbs.db`, `*.swo`) and test caches (`.pytest_temp/`, `.pytest_tmp*/`).
+- **Level 1 SBOM Plain-Text Companion (`THIRD_PARTY_LICENSES.txt`):**
+  - Generated and verified canonical plain-text Level 1 SBOM companion file for air-gapped deployments, RAG ingestion, and terminal audits.
+  - Linked `THIRD_PARTY_LICENSES.txt` in `NOTICE`, `package.json` (`files` whitelist), `THIRD_PARTY_LICENSES.md`, `README.md`, `README_de.md`, and `llms.txt`.
+- **Strict Version Freeze Discipline (T-20260920-167562623):**
+  - Preserved semantic version `1.11.5` strictly unchanged across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`.
+- **Automated Contract Test Suite Expansion (`test/metadata-parity.test.ts`):**
+  - Expanded contract test suite with assertions validating plain-text SBOM presence and completeness, extended `.gitignore` patterns, and bilingual documentation badges, bringing the test baseline to 303 passed tests (232 Vitest + 71 standalone i18n checks) | 100% green.
+
 ### Discoverability, Visual Architecture & 18-Point Bilingual Navigation Parity (Pfad B)
 - **18-Point Bilingual Navigation Parity & Dual Reciprocal Anchors:**
   - Synchronized comprehensive 18-point navigation structure across English (`README.md`) and German (`README_de.md`) documentation with reciprocal `<a id="sec-01">` .. `<a id="sec-18">` HTML anchor aliases and semantic fallbacks.

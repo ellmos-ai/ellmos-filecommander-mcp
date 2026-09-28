@@ -13,22 +13,24 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-299%20passed%20(228%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-303%20passed%20(232%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
 [![Attribution: NOTICE](https://img.shields.io/badge/attribution-NOTICE-blue.svg)](NOTICE)
 [![Unprivileged RunAsInvoker](https://img.shields.io/badge/security-unprivileged%20%7C%20RunAsInvoker-blue.svg)](SECURITY.md)
 [![Third-Party Audited](https://img.shields.io/badge/third--party-audited%20%7C%20100%25%20permissive-brightgreen.svg)](THIRD_PARTY_LICENSES.md)
+[![Level 1 SBOM: Plain Text](https://img.shields.io/badge/Level%201%20SBOM-Plain%20Text-blue.svg)](THIRD_PARTY_LICENSES.txt)
 [![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
-[![Verified](https://img.shields.io/badge/verified-2026--09--23-blue.svg)](llms.txt)
+[![Last-Checked](https://img.shields.io/badge/last--checked-2026--09--28-blue.svg)](llms.txt)
+[![Verified](https://img.shields.io/badge/verified-2026--09--28-blue.svg)](llms.txt)
 
 > **Quick Navigation:**
 > 1. [Overview](#sec-01) | 2. [System Architecture](#sec-02) | 3. [End-to-End Execution Lifecycle](#sec-03) | 4. [Core Capabilities & Safety Invariants](#sec-04) | 5. [Target Personas & Discoverability](#sec-05) | 6. [Installation & Prerequisites](#sec-06) | 7. [Configuration & Client Setup](#sec-07) | 8. [Tools Overview (50 Tools)](#sec-08) | 9. [Comparative Matrix & Alternatives](#sec-09) | 10. [Tool Prefix & Naming Convention](#sec-10) | 11. [Governance & Runtime Invariants](#sec-11) | 12. [Security Architecture & Tool Risks](#sec-12) | 13. [Testing, Quality Gates & Verification](#sec-13) | 14. [Changelog & Versioning](#sec-14) | 15. [Level 1 SBOM & Third-Party Licenses](#sec-15) | 16. [History & Evolution](#sec-16) | 17. [ellmos-ai Ecosystem & Partner Matrix](#sec-17) | 18. [Statutory Notice (§ 521 BGB) & Liability Disclaimer](#sec-18)
 >
-> | Direct References: [🛡️ Security Policy](SECURITY.md) • [⚖️ Third-Party Licenses](THIRD_PARTY_LICENSES.md) • [📜 Marketing Log](MARKETING-LOG.txt) • [🤖 LLM Context (llms.txt)](llms.txt) • [📋 Canonical Notice](NOTICE) |
+> | Direct References: [🛡️ Security Policy](SECURITY.md) • [⚖️ Third-Party Licenses](THIRD_PARTY_LICENSES.md) • [📄 Plain Text SBOM](THIRD_PARTY_LICENSES.txt) • [📜 Marketing Log](MARKETING-LOG.txt) • [🤖 LLM Context (llms.txt)](llms.txt) • [📋 Canonical Notice](NOTICE) |
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, bounded multi-file content search, process management, interactive shell sessions, and async filename search capabilities.
 
@@ -499,7 +501,7 @@ npm test
 
 ### Testing
 
-The project includes **228 Vitest tests plus 71 standalone i18n checks (299 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+The project includes **232 Vitest tests plus 71 standalone i18n checks (303 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
 
 ```bash
 npm test              # Run all tests
@@ -525,7 +527,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 <a id="sec-15"></a><a id="license--legal-attribution"></a><a id="third-party-licenses"></a><a id="drittanbieter-lizenzen"></a>
 ## License & Legal Attribution
 
-[MIT](LICENSE) - Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). See [NOTICE](NOTICE) for open-bricks umbrella attribution and [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for Level 1 SBOM.
+[MIT](LICENSE) - Lukas Geiger ([ellmos-ai](https://github.com/ellmos-ai)). See [NOTICE](NOTICE) for open-bricks umbrella attribution, [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for Level 1 SBOM, and [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt) for plain-text SBOM.
 
 ---
 

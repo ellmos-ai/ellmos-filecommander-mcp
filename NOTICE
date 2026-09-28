@@ -3,4 +3,4 @@ Copyright (c) 2026 Lukas Geiger
 
 This product is developed as part of the ellmos-ai family under the open-bricks open-source umbrella.
 Licensed under the MIT License. See the LICENSE file in this repository for full license details.
-Third-party dependency licenses and Level 1 SBOM transparency inventory are documented in THIRD_PARTY_LICENSES.md.
+Third-party dependency licenses and Level 1 SBOM transparency inventory are documented in THIRD_PARTY_LICENSES.md and THIRD_PARTY_LICENSES.txt.
