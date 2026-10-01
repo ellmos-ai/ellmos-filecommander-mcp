@@ -79,9 +79,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('NOTICE');
   });
 
-  it('llms.txt is synchronized with 2026-09-28 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-10-01 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-09-28');
+    expect(llms).toContain('## Last-checked: 2026-10-01');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -224,7 +224,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-303%20passed');
+    expect(en).toContain('tests-304%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -242,7 +242,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-303%20passed');
+    expect(de).toContain('tests-304%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
@@ -400,7 +400,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
 
     // Third-party licenses inventory synced
-    expect(lic).toContain('Stand: 2026-09-28');
+    expect(lic).toContain('Stand: 2026-10-01');
     expect(lic).toContain('adm-zip');
     expect(lic).toContain('^0.6.1');
     expect(lic).toContain('js-yaml');
@@ -418,16 +418,19 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(mkt).toContain('Audit Date: 2026-09-20');
     expect(mkt).toContain('Audit Date: 2026-09-23');
     expect(mkt).toContain('Audit Date: 2026-09-28');
+    expect(mkt).toContain('Audit Date: 2026-10-01');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
     expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
     expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)');
     expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & SBOM TEXT COMPANION VERIFIED (v1.11.5 frozen)');
+    expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ASCII 4-VIEW TOPOLOGY VERIFIED (v1.11.5 frozen)');
     expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
     expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
     expect(mkt).toContain('291 automated tests');
     expect(mkt).toContain('292 passed tests');
     expect(mkt).toContain('299 passed tests');
     expect(mkt).toContain('303 passed tests');
+    expect(mkt).toContain('304 passed tests');
   });
 
   it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {
@@ -488,7 +491,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies Level 1 SBOM and unprivileged RunAsInvoker governance integrity in THIRD_PARTY_LICENSES.md', () => {
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
-    expect(lic).toContain('Stand: 2026-09-28');
+    expect(lic).toContain('Stand: 2026-10-01');
     expect(lic).toContain('Level 1 SBOM Transparency');
     expect(lic).toContain('Unprivileged User-Mode (`RunAsInvoker`)');
     expect(lic).toContain('License Compatibility');
@@ -520,7 +523,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     }
 
     // llms.txt audit timestamp
-    expect(llms).toContain('Last-checked: 2026-09-28');
+    expect(llms).toContain('Last-checked: 2026-10-01');
 
     // § 521 BGB statutory notice and 48h SLA in both languages
     expect(en).toContain('§ 521 German Civil Code');
@@ -535,7 +538,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     expect(txt).toContain('THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE');
     expect(txt).toContain('Project: ellmos-ai/ellmos-filecommander-mcp (FileCommander)');
-    expect(txt).toContain('Audited: 2026-09-28');
+    expect(txt).toContain('Audited: 2026-10-01');
     expect(txt).toContain('Repository Version: 1.11.5');
     expect(txt).toContain('Repository License: MIT License');
     expect(txt).toContain('RunAsInvoker');
@@ -565,10 +568,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     expect(en).toContain('Level%201%20SBOM-Plain%20Text');
     expect(de).toContain('Level%201%20SBOM-Plain%20Text');
-    expect(en).toContain('last--checked-2026--09--28');
-    expect(de).toContain('last--checked-2026--09--28');
-    expect(en).toContain('verified-2026--09--28');
-    expect(de).toContain('verified-2026--09--28');
+    expect(en).toContain('last--checked-2026--10--01');
+    expect(de).toContain('last--checked-2026--10--01');
+    expect(en).toContain('verified-2026--10--01');
+    expect(de).toContain('verified-2026--10--01');
     expect(en).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
     expect(de).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
   });
@@ -586,5 +589,24 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(autoAssignWf).toContain('actions/github-script@v7');
     expect(labelSyncWf).toContain('EndBug/label-sync@v2');
     expect(existsSync(resolve(ROOT, '.github/labels.yml'))).toBe(true);
+  });
+
+  it('verifies ASCII Four-View Architectural Topology presence in README.md and README_de.md', () => {
+    const en = readFileSync(readmeEnPath, 'utf-8');
+    const de = readFileSync(readmeDePath, 'utf-8');
+
+    // English 4-view topology
+    expect(en).toContain('ASCII Four-View Architectural Topology');
+    expect(en).toContain('[VIEW 1: CALLER RUNTIMES & AGENT CLIENTS]');
+    expect(en).toContain('[VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]');
+    expect(en).toContain('[VIEW 3: FILESYSTEM RUNTIME, FORMAT REPAIR & PROCESS ISOLATION]');
+    expect(en).toContain('[VIEW 4: AIR-GAP DEFENSE PERIMETER, RUNASINVOKER & CONTROLLED EGRESS]');
+
+    // German 4-view topology
+    expect(de).toContain('ASCII Vier-Sichten-Architekturtopologie');
+    expect(de).toContain('[SICHT 1: AUFRUFER-LAUFZEITEN & AGENTEN-CLIENTS]');
+    expect(de).toContain('[SICHT 2: FILECOMMANDER MCP KERN-ENGINE & DISPATCH-ORCHESTRATOR]');
+    expect(de).toContain('[SICHT 3: DATEISYSTEM-LAUFZEIT, FORMAT-REPARATUR & PROZESS-ISOLATION]');
+    expect(de).toContain('[SICHT 4: AIR-GAP SCHUTZPERIMETER, RUNASINVOKER & KONTROLLIERTER NETZWERKAUSSTRITT]');
   });
 });

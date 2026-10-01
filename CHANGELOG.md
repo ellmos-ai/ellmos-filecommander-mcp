@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+### Discoverability, ASCII Four-View Architectural Topology & Level 1 SBOM Stand 2026-10-01 (Pfad B)
+- **ASCII Four-View Architectural Topology:**
+  - Integrated comprehensive ASCII Four-View Architectural Topology into Section 02 (`System Architecture` / `Systemarchitektur`) across English (`README.md`) and German (`README_de.md`) documentation.
+  - Formatted 4 architectural layers: `[VIEW 1: CALLER RUNTIMES & AGENT CLIENTS]`, `[VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]`, `[VIEW 3: FILESYSTEM RUNTIME, FORMAT REPAIR & PROCESS ISOLATION]`, and `[VIEW 4: AIR-GAP DEFENSE PERIMETER, RUNASINVOKER & CONTROLLED EGRESS]` with German equivalent (`[SICHT 1]`..`[SICHT 4]`).
+- **Synchronized Badges & Level 1 SBOM Stand 2026-10-01:**
+  - Synchronized `Last-Checked` and `Verified` badges to `2026-10-01` across `README.md` and `README_de.md`.
+  - Re-audited Level 1 SBOM in `THIRD_PARTY_LICENSES.md` (Stand: 2026-10-01) and plain-text companion `THIRD_PARTY_LICENSES.txt` (Audited: 2026-10-01).
+  - Synchronized `llms.txt` header to `Last-checked: 2026-10-01`.
+- **Strict Version Freeze Discipline (T-20260920-167562623):**
+  - Semantic version `1.11.5` maintained strictly unchanged across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`.
+- **Marketing Log & Contract Test Suite Extension:**
+  - Recorded Section 13 in `MARKETING-LOG.txt`.
+  - Expanded `test/metadata-parity.test.ts` with assertions validating ASCII 4-View Architectural Topology, Stand 2026-10-01 audit timestamps, and Section 13 in marketing log.
+
 ### Repository Hygiene, Level 1 SBOM Text Companion & Contract Tests (Pfad A)
 - **CI/CD Lifecycle Workflows & Multi-OS Matrix Verification:**
   - Verified and asserted GitHub Actions CI matrix coverage across Node 20, 22, and 24 on `ubuntu-latest`, `windows-latest`, and `macos-latest` with build, test, and dry-run packaging checks.

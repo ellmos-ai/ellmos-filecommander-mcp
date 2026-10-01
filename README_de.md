@@ -13,7 +13,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-303%20passed%20(232%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-304%20passed%20(233%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -21,8 +21,8 @@
 [![Security: RunAsInvoker](https://img.shields.io/badge/security-unprivileged%20RunAsInvoker-green.svg)](SECURITY.md)
 [![SBOM: Audited](https://img.shields.io/badge/SBOM-Level%201%20audited-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Level 1 SBOM: Plain Text](https://img.shields.io/badge/Level%201%20SBOM-Plain%20Text-blue.svg)](THIRD_PARTY_LICENSES.txt)
-[![Last-Checked](https://img.shields.io/badge/last--checked-2026--09--28-blue.svg)](llms.txt)
-[![Verified](https://img.shields.io/badge/verified-2026--09--28-blue.svg)](llms.txt)
+[![Last-Checked](https://img.shields.io/badge/last--checked-2026--10--01-blue.svg)](llms.txt)
+[![Verified](https://img.shields.io/badge/verified-2026--10--01-blue.svg)](llms.txt)
 
 > **Schnellnavigation:**
 > 1. [Überblick](#sec-01) | 2. [Systemarchitektur](#sec-02) | 3. [End-to-End Ausführungszyklus](#sec-03) | 4. [Kernfähigkeiten & Sicherheitsinvarianten](#sec-04) | 5. [Zielgruppen & Auffindbarkeit](#sec-05) | 6. [Installation & Voraussetzungen](#sec-06) | 7. [Konfiguration & Client-Einrichtung](#sec-07) | 8. [Tools-Übersicht (50 Tools)](#sec-08) | 9. [Vergleichsmatrix & Alternativen](#sec-09) | 10. [Tool-Präfix & Namenskonvention](#sec-10) | 11. [Governance & Laufzeit-Invarianten](#sec-11) | 12. [Sicherheitsarchitektur & Risiken](#sec-12) | 13. [Entwicklung, Tests & Verifikation](#sec-13) | 14. [Changelog & Versionierung](#sec-14) | 15. [Level 1 SBOM & Drittanbieter-Lizenzen](#sec-15) | 16. [Historie & Evolution](#sec-16) | 17. [ellmos-ai Ökosystem & Partnermatrix](#sec-17) | 18. [Gesetzlicher Hinweis (§ 521 BGB) & Haftung](#sec-18)
@@ -68,6 +68,56 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 
 <a id="sec-02"></a><a id="system-architecture"></a><a id="systemarchitektur"></a>
 ## Systemarchitektur
+
+### ASCII Vier-Sichten-Architekturtopologie
+
+```text
++--------------------------------------------------------------------------------------------------+
+|                         ELLMOS FILECOMMANDER MCP VIER-SICHTEN-ARCHITEKTURTOPOLOGIE               |
++--------------------------------------------------------------------------------------------------+
+| [SICHT 1: AUFRUFER-LAUFZEITEN & AGENTEN-CLIENTS]                                                 |
+|   * Autonome Agenten    : Claude Code, OpenAI Codex, Antigravity / Gemini, Kimi, Cursor          |
+|   * Agenten-Frameworks  : AutoGen, CrewAI, LangChain, LlamaIndex, eigene Python / TS Clients    |
+|   * Transportprotokolle : Model Context Protocol (MCP stdio), JSON-RPC 2.0 Framing               |
+|   * Werkzeug-Oberfläche : 50 vereinheitlichte Spezialwerkzeuge (fc_* Namensraum-Isolation)        |
+|   * Schema-Vertrag      : Stdio-Transport, dynamisches Laufzeit-i18n-Parsing (Zod-validiert)     |
++--------------------------------------------------------------------------------------------------+
+|                                                |                                                 |
+|                                                v                                                 |
++--------------------------------------------------------------------------------------------------+
+| [SICHT 2: FILECOMMANDER MCP KERN-ENGINE & DISPATCH-ORCHESTRATOR]                                 |
+|   * Protokoll-Dispatch  : ESM Stdio-Router mit Zod-Schema-Validierung & Parameterprüfung         |
+|   * Mehrsprachiger Kern : Dynamische 6-Sprachen-Laufzeit-Engine (de, en, es, zh, ja, ru)        |
+|   * Sicherheits-Guard   : Globaler Safety-Mode (fc_set_safe_mode) leitet Löschungen in Papierkorb|
+|   * Sync-Diagnostik     : Reparse-Point-Erkennung & Cloud-Filter-Diagnose (fc_check_cloud_lock)   |
+|   * Prozess-Supervisor  : Begrenztes Kindprozess-Lebenszyklusmanagement & interaktive REPL-      |
+|                           Sitzungsverwaltung mit Ringpuffern                                     |
++--------------------------------------------------------------------------------------------------+
+|                                                |                                                 |
+|                                                v                                                 |
++--------------------------------------------------------------------------------------------------+
+| [SICHT 3: DATEISYSTEM-LAUFZEIT, FORMAT-REPARATUR & PROZESS-ISOLATION]                            |
+|   * Atomare Datei-Ops   : Lesen, Schreiben, Zeilen-Edit, exakter String-Ersatz (fc_str_replace)  |
+|   * Cloud-Lock-Fallback : Automatisches copyFileSync + SHA-256-Prüfung + unlinkSync bei EPERM/BUSY|
+|   * Begrenzte Vorschau  : Metadaten-zuerst Vorschau (fc_preview_file, 1 MiB Inline-Inhaltsgrenze)|
+|   * Begrenzte Suche     : Max. 50 explizite Dateien, 10 MB Obergrenze, Token-Schwärzung (INV-MASK)|
+|   * Selbstheilung       : Mojibake-Reparatur (27+ UTF-8-Muster), JSON-Syntax-Fix, Bereinigung    |
+|   * Formatkonvertierung : Verlustfreie Deklaration über 7 Formate (JSON, YAML, TOML, XML...)     |
+|   * Medien & Dokumente  : Headless Markdown zu PDF/HTML, ZIP-Archiv-Engine, optionale OCR (Tess)  |
++--------------------------------------------------------------------------------------------------+
+|                                                |                                                 |
+|                                                v                                                 |
++--------------------------------------------------------------------------------------------------+
+| [SICHT 4: AIR-GAP SCHUTZPERIMETER, RUNASINVOKER & KONTROLLIERTER NETZWERKAUSSTRITT]              |
+|   * Ausführungsprivileg : RunAsInvoker unprivilegierter Benutzermodus (0 administrative Rechte)  |
+|   * Transportgrenze     : 100% lokaler Stdio-Transport, 0 Telemetrie, 0 offene Netzwerk-Ports     |
+|   * Kontrollierter Egress: Ausgehende HTTP(S)-Aufrufe strikt auf explizites fc_web_fetch begrenzt|
+|   * Netzwerksicherheit  : SSRF-Schutz blockiert private/interne IP-Bereiche standardmäßig         |
+|   * Governance & Supply : Level 1 SBOM, 100% freizügige Laufzeit (MIT/BSD), 48h Sicherheits-SLA  |
++--------------------------------------------------------------------------------------------------+
+```
+
+### Komponenten-Flussdiagramm
 
 ```mermaid
 flowchart TD
@@ -498,7 +548,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **232 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (303 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **233 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (304 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen
