@@ -36,6 +36,10 @@ desktop.ini
 *.secret
 credentials.json
 secrets.json
+*secret*.json
+*token*.json
+token.json
+tokens.json
 id_rsa*
 id_ed25519*
 id_ecdsa*
@@ -89,10 +93,14 @@ uv.lock
 *-WORKSTATION-LG.*
 *-LAPTOP*
 *-IDEAPAD*
+*-IDEAPAD-GEI*
+*-IDEAPAD-GEI.*
 *-ASUS*
 *-ASUS-GEI*
+*-ASUS-GEI.*
 *-Mac Studio*
 *-MacBook*
+CONFLICT_REVIEW_LOG*
 
 # Temporary files, patch residues & editor backups
 *.tmp

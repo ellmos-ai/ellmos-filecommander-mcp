@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+### AI Security & Dependency Audit, Supply-Chain Hardening & Fleet Token Defense (2026-10-02)
+- **Supply-Chain Hardening & Dependency Overrides:**
+  - Updated dependency overrides for `fast-uri` (`^3.1.8`), `ip-address` (`^10.7.2`), and `qs` (`^6.16.0`) resolving 2 moderate security advisories (GHSA-hrr3-gc8f-f4qj, GHSA-rpw4-54j3-4h4q, GHSA-2vr4-cq9g-pvrc, GHSA-j6r3-76f7-8jcv, GHSA-h3mg-xc3c-68pw).
+  - Validated **0 vulnerabilities** across 215 audited packages via `npm audit`.
+- **Repository Hygiene & Fleet Token Defense in `.gitignore`:**
+  - Hardened `.gitignore` against fleet host tokens (`*-IDEAPAD-GEI*`, `*-IDEAPAD-GEI.*`, `*-ASUS-GEI.*`).
+  - Added multi-host conflict review log exclusion (`CONFLICT_REVIEW_LOG*`).
+  - Hardened against local secret/token credential files (`*secret*.json`, `*token*.json`, `token.json`, `tokens.json`).
+- **Contract Test Suite Expansion (`test/metadata-parity.test.ts`):**
+  - Expanded assertions validating zero-vulnerability dependency overrides, fleet token ignore patterns, and zero hardcoded secrets/personal developer paths in tracked repository files (305 passed tests baseline).
+- **Strict Version Freeze Discipline (T-20260920-167562623):**
+  - Semantic version `1.11.5` maintained strictly unchanged across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`.
+
 ### Discoverability, ASCII Four-View Architectural Topology & Level 1 SBOM Stand 2026-10-01 (Pfad B)
 - **ASCII Four-View Architectural Topology:**
   - Integrated comprehensive ASCII Four-View Architectural Topology into Section 02 (`System Architecture` / `Systemarchitektur`) across English (`README.md`) and German (`README_de.md`) documentation.

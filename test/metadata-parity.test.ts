@@ -141,6 +141,11 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*.token');
     expect(gitignore).toContain('*.secret');
     expect(gitignore).toContain('credentials.json');
+    expect(gitignore).toContain('secrets.json');
+    expect(gitignore).toContain('*secret*.json');
+    expect(gitignore).toContain('*token*.json');
+    expect(gitignore).toContain('token.json');
+    expect(gitignore).toContain('tokens.json');
     expect(gitignore).toContain('.pypirc');
     expect(gitignore).toContain('id_rsa*');
     expect(gitignore).toContain('id_ed25519*');
@@ -153,6 +158,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*-CONFLIT-*');
     expect(gitignore).toContain('*-conflict-*');
     expect(gitignore).toContain('*-ASUS-GEI*');
+    expect(gitignore).toContain('*-ASUS-GEI.*');
     expect(gitignore).toContain('*-WORKSTATION-LG*');
     expect(gitignore).toContain('*_WORKSTATION-LG*');
     expect(gitignore).toContain('*-WORKSTATION*');
@@ -160,6 +166,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('*-WORKSTATION.*');
     expect(gitignore).toContain('*-WORKSTATION-LG.*');
     expect(gitignore).toContain('*-IDEAPAD*');
+    expect(gitignore).toContain('*-IDEAPAD-GEI*');
+    expect(gitignore).toContain('*-IDEAPAD-GEI.*');
+    expect(gitignore).toContain('CONFLICT_REVIEW_LOG*');
     expect(gitignore).toContain('ehthumbs.db');
     expect(gitignore).toContain('* (kopie)*');
     expect(gitignore).toContain('* (copy)*');
@@ -397,6 +406,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.dependencies['js-yaml']).toBe('^4.3.2');
     expect(pkg.dependencies['smol-toml']).toBe('^1.8.0');
     expect(pkg.overrides['hono']).toBe('^4.13.8');
+    expect(pkg.overrides['fast-uri']).toBe('^3.1.8');
+    expect(pkg.overrides['ip-address']).toBe('^10.7.2');
+    expect(pkg.overrides['qs']).toBe('^6.16.0');
     expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
 
     // Third-party licenses inventory synced
@@ -608,5 +620,38 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('[SICHT 2: FILECOMMANDER MCP KERN-ENGINE & DISPATCH-ORCHESTRATOR]');
     expect(de).toContain('[SICHT 3: DATEISYSTEM-LAUFZEIT, FORMAT-REPARATUR & PROZESS-ISOLATION]');
     expect(de).toContain('[SICHT 4: AIR-GAP SCHUTZPERIMETER, RUNASINVOKER & KONTROLLIERTER NETZWERKAUSSTRITT]');
+  });
+
+  it('verifies repository hygiene: zero hardcoded secrets, private keys and personal developer paths', () => {
+    const sensitivePatterns = [
+      /BEGIN (?:RSA|OPENSSH|DSA|EC|PGP)?\s*PRIVATE KEY/,
+      /ghp_[A-Za-z0-9]{36}/,
+      /AIza[0-9A-Za-z\-_]{35}/,
+      /sk-[A-Za-z0-9]{32,}/,
+      /[a-zA-Z]:\\Users\\(?:lukas|User)\\/i,
+    ];
+
+    const filesToAudit = [
+      pkgPath,
+      serverPath,
+      glamaPath,
+      llmsPath,
+      srcIndexPath,
+      readmeEnPath,
+      readmeDePath,
+      changelogPath,
+      securityPath,
+      marketingLogPath,
+      thirdPartyLicensesPath,
+      thirdPartyLicensesTxtPath,
+      noticePath,
+    ];
+
+    for (const filePath of filesToAudit) {
+      const content = readFileSync(filePath, 'utf-8');
+      for (const pattern of sensitivePatterns) {
+        expect(pattern.test(content), `${filePath} matched sensitive pattern ${pattern}`).toBe(false);
+      }
+    }
   });
 });
