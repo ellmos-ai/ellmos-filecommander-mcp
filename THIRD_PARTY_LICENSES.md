@@ -1,9 +1,9 @@
 # Third-Party License Inventory & Open-Source Transparency Notice
 
-Stand: 2026-10-01.
+Stand: 2026-10-03.
 
 > **Project:** `ellmos-ai/ellmos-filecommander-mcp` (FileCommander)<br>
-> **Audited:** 2026-10-01 (Plain text companion: [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt))<br>
+> **Audited:** 2026-10-03 (Plain text companion: [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt))<br>
 > **Repository License:** [MIT License](LICENSE)<br>
 > **Architecture & Privacy:** 100% Local-First, Zero-Egress by default (explicit `fc_web_fetch` only), Unprivileged User-Mode (`RunAsInvoker`), Level 1 SBOM Transparency
 

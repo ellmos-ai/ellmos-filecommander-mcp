@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+### Repository Hygiene, Bilingual CONTRIBUTING & Quality Gates, Level 1 SBOM Re-Audit Stand 2026-10-03 (Pfad A)
+- **Bilingual Contributing Guidelines (`CONTRIBUTING.md`):**
+  - Restructured `CONTRIBUTING.md` with complete bilingual (English / Deutsch) parity, 10 architectural and governance invariants (`INV-LOCAL-01` through `INV-SLA-10`), Plan D local development workflow (`C:\_Local_DEV\repos\ellmos-filecommander-mcp` as authoritative Source of Truth), strict version freeze discipline (`T-20260920-167562623`), local quality gates (`npm test`, `npm run build`, whitespace/EOF validation), and statutory liability limitation (§ 521 BGB Gefälligkeitsrecht).
+  - Added `CONTRIBUTING.md` to `files` whitelist in `package.json` and linked across `README.md`, `README_de.md`, and `llms.txt`.
+- **Repository Hygiene & Multi-Host Sync Defense in `.gitignore`:**
+  - Hardened `.gitignore` against Windows shell artifacts (`Desktop.ini`), cross-host task plans (`TASKPLAN_*.md`, `*-TASKPLAN*`), and explicit agent-framework locks (`LOCK.dev.*`, `LOCK.antigravity.*`, `LOCK.bugsearch.*`).
+- **Level 1 SBOM Stand 2026-10-03 Re-Audit & Badges Synchronization:**
+  - Re-audited Level 1 SBOM in `THIRD_PARTY_LICENSES.md` (Stand: 2026-10-03) and plain-text companion `THIRD_PARTY_LICENSES.txt` (Audited: 2026-10-03) with 100% permissive open-source stack, Zero-Copyleft isolation, and unprivileged user-mode `RunAsInvoker` certification.
+  - Synchronized `Last-Checked` and `Verified` badges to `2026-10-03` across English and German documentation and updated `llms.txt` header.
+- **Strict Version Freeze Discipline (`T-20260920-167562623`):**
+  - Semantic version `1.11.5` maintained strictly unchanged across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`.
+- **Contract Test Suite Expansion (`test/metadata-parity.test.ts`):**
+  - Expanded automated contract test suite asserting `CONTRIBUTING.md` presence, bilingual anchors, 10 invariants, Plan D workflow, § 521 BGB notice, extended `.gitignore` patterns, Stand 2026-10-03 audit timestamps, and Section 14 marketing log recency.
+
 ### AI Security & Dependency Audit, Supply-Chain Hardening & Fleet Token Defense (2026-10-02)
 - **Supply-Chain Hardening & Dependency Overrides:**
   - Updated dependency overrides for `fast-uri` (`^3.1.8`), `ip-address` (`^10.7.2`), and `qs` (`^6.16.0`) resolving 2 moderate security advisories (GHSA-hrr3-gc8f-f4qj, GHSA-rpw4-54j3-4h4q, GHSA-2vr4-cq9g-pvrc, GHSA-j6r3-76f7-8jcv, GHSA-h3mg-xc3c-68pw).

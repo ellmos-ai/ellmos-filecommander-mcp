@@ -313,3 +313,31 @@ Measures Applied:
      - Updated test/metadata-parity.test.ts to validate the ASCII Four-View Architectural Topology,
        audit dates, and Section 13 marketing log recency, expanding to 304 passed tests (233 Vitest + 71 standalone i18n checks).
 ================================================================================
+14. REPOSITORY HYGIENE, BILINGUAL CONTRIBUTING & LEVEL 1 SBOM STAND 2026-10-03 (2026-10-03)
+--------------------------------------------------------------------------------
+Audit Date: 2026-10-03
+Actor: Antigravity (Gemini 3.8 / WORKSTATION-LG)
+Status: ACTIVE / PFAD A REPOSITORY HYGIENE & BILINGUAL CONTRIBUTING VERIFIED (v1.11.5 frozen)
+Measures Applied:
+  1. Bilingual Contributing Guidelines (CONTRIBUTING.md):
+     - Restructured CONTRIBUTING.md with full bilingual (English / Deutsch) parity,
+       10 governance invariants (INV-LOCAL-01..INV-SLA-10), Plan D local development workflow
+       (Source of Truth at C:\_Local_DEV\repos\ellmos-filecommander-mcp), strict version freeze
+       discipline (T-20260920-167562623), local quality gates, and statutory disclaimer (§ 521 BGB).
+     - Whitelisted CONTRIBUTING.md in package.json files array and linked across README.md,
+       README_de.md, and llms.txt.
+  2. Multi-Host Sync & Lock Defense Hardening in .gitignore:
+     - Hardened .gitignore against Desktop.ini, TASKPLAN_*.md, *-TASKPLAN*, LOCK.dev.*,
+       LOCK.antigravity.*, LOCK.bugsearch.*.
+  3. Synchronized Level 1 SBOM Stand 2026-10-03 & Badges:
+     - Re-audited Level 1 SBOM in THIRD_PARTY_LICENSES.md (Stand: 2026-10-03) and plain-text companion
+       THIRD_PARTY_LICENSES.txt (Audited: 2026-10-03).
+     - Synchronized Last-Checked and Verified Shields.io badges to 2026-10-03 across README.md and README_de.md.
+     - Synchronized llms.txt Last-checked header to 2026-10-03.
+  4. Strict Version Freeze Discipline (T-20260920-167562623):
+     - Preserved version 1.11.5 strictly unchanged across package.json, server.json, glama.json,
+       package-lock.json, and src/index.ts.
+  5. Contract Test Suite Expansion:
+     - Expanded test/metadata-parity.test.ts to validate bilingual CONTRIBUTING.md,
+       audit timestamps (2026-10-03), and Section 14 marketing log recency.
+================================================================================

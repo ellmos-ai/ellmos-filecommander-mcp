@@ -18,6 +18,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   const thirdPartyLicensesPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.md');
   const thirdPartyLicensesTxtPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.txt');
   const noticePath = resolve(ROOT, 'NOTICE');
+  const contributingPath = resolve(ROOT, 'CONTRIBUTING.md');
 
   it('all required manifests and discoverability files exist', () => {
     expect(existsSync(pkgPath)).toBe(true);
@@ -33,6 +34,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(existsSync(thirdPartyLicensesPath)).toBe(true);
     expect(existsSync(thirdPartyLicensesTxtPath)).toBe(true);
     expect(existsSync(noticePath)).toBe(true);
+    expect(existsSync(contributingPath)).toBe(true);
   });
 
   it('maintains exact version parity across package.json, server.json, glama.json, package-lock.json, and src/index.ts', () => {
@@ -70,6 +72,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('README_de.md');
     expect(files).toContain('CHANGELOG.md');
     expect(files).toContain('SECURITY.md');
+    expect(files).toContain('CONTRIBUTING.md');
     expect(files).toContain('server.json');
     expect(files).toContain('glama.json');
     expect(files).toContain('llms.txt');
@@ -79,9 +82,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('NOTICE');
   });
 
-  it('llms.txt is synchronized with 2026-10-01 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-10-03 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-10-01');
+    expect(llms).toContain('## Last-checked: 2026-10-03');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -202,6 +205,12 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(gitignore).toContain('.hypothesis/');
     expect(gitignore).toContain('.turbo/');
     expect(gitignore).toContain('.nyc_output/');
+    expect(gitignore).toContain('Desktop.ini');
+    expect(gitignore).toContain('TASKPLAN_*.md');
+    expect(gitignore).toContain('*-TASKPLAN*');
+    expect(gitignore).toContain('LOCK.dev.*');
+    expect(gitignore).toContain('LOCK.antigravity.*');
+    expect(gitignore).toContain('LOCK.bugsearch.*');
 
     // TODO.md must NOT be ignored
     expect(lines).not.toContain('TODO.md');
@@ -412,7 +421,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
 
     // Third-party licenses inventory synced
-    expect(lic).toContain('Stand: 2026-10-01');
+    expect(lic).toContain('Stand: 2026-10-03');
     expect(lic).toContain('adm-zip');
     expect(lic).toContain('^0.6.1');
     expect(lic).toContain('js-yaml');
@@ -431,11 +440,13 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(mkt).toContain('Audit Date: 2026-09-23');
     expect(mkt).toContain('Audit Date: 2026-09-28');
     expect(mkt).toContain('Audit Date: 2026-10-01');
+    expect(mkt).toContain('Audit Date: 2026-10-03');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
     expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
     expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)');
     expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & SBOM TEXT COMPANION VERIFIED (v1.11.5 frozen)');
     expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ASCII 4-VIEW TOPOLOGY VERIFIED (v1.11.5 frozen)');
+    expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & BILINGUAL CONTRIBUTING VERIFIED (v1.11.5 frozen)');
     expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
     expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
     expect(mkt).toContain('291 automated tests');
@@ -503,7 +514,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies Level 1 SBOM and unprivileged RunAsInvoker governance integrity in THIRD_PARTY_LICENSES.md', () => {
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
-    expect(lic).toContain('Stand: 2026-10-01');
+    expect(lic).toContain('Stand: 2026-10-03');
     expect(lic).toContain('Level 1 SBOM Transparency');
     expect(lic).toContain('Unprivileged User-Mode (`RunAsInvoker`)');
     expect(lic).toContain('License Compatibility');
@@ -535,7 +546,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     }
 
     // llms.txt audit timestamp
-    expect(llms).toContain('Last-checked: 2026-10-01');
+    expect(llms).toContain('Last-checked: 2026-10-03');
 
     // § 521 BGB statutory notice and 48h SLA in both languages
     expect(en).toContain('§ 521 German Civil Code');
@@ -550,7 +561,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     expect(txt).toContain('THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE');
     expect(txt).toContain('Project: ellmos-ai/ellmos-filecommander-mcp (FileCommander)');
-    expect(txt).toContain('Audited: 2026-10-01');
+    expect(txt).toContain('Audited: 2026-10-03');
     expect(txt).toContain('Repository Version: 1.11.5');
     expect(txt).toContain('Repository License: MIT License');
     expect(txt).toContain('RunAsInvoker');
@@ -580,10 +591,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     expect(en).toContain('Level%201%20SBOM-Plain%20Text');
     expect(de).toContain('Level%201%20SBOM-Plain%20Text');
-    expect(en).toContain('last--checked-2026--10--01');
-    expect(de).toContain('last--checked-2026--10--01');
-    expect(en).toContain('verified-2026--10--01');
-    expect(de).toContain('verified-2026--10--01');
+    expect(en).toContain('last--checked-2026--10--03');
+    expect(de).toContain('last--checked-2026--10--03');
+    expect(en).toContain('verified-2026--10--03');
+    expect(de).toContain('verified-2026--10--03');
     expect(en).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
     expect(de).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
   });
@@ -622,6 +633,51 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('[SICHT 4: AIR-GAP SCHUTZPERIMETER, RUNASINVOKER & KONTROLLIERTER NETZWERKAUSSTRITT]');
   });
 
+  it('verifies bilingual CONTRIBUTING.md guidelines, 10 invariants, Plan D workflow, and quality gates', () => {
+    expect(existsSync(contributingPath)).toBe(true);
+    const contributing = readFileSync(contributingPath, 'utf-8');
+
+    // Language anchors
+    expect(contributing).toContain('# Contributing to ellmos-filecommander-mcp / Mitwirken an ellmos-filecommander-mcp');
+    expect(contributing).toContain('[English](#english)');
+    expect(contributing).toContain('[Deutsch](#deutsch)');
+    expect(contributing).toContain('id="english"');
+    expect(contributing).toContain('id="deutsch"');
+
+    // 10 Invariants in both languages
+    const invariants = [
+      'INV-LOCAL-01',
+      'INV-SAFE-02',
+      'INV-LOCK-03',
+      'INV-DIAG-04',
+      'INV-SRCH-05',
+      'INV-MASK-06',
+      'INV-PREV-07',
+      'INV-REPL-08',
+      'INV-PROC-09',
+      'INV-SLA-10',
+    ];
+    for (const inv of invariants) {
+      expect(contributing).toContain(inv);
+    }
+
+    // Plan D Source of Truth workflow
+    expect(contributing).toContain('C:\\_Local_DEV\\repos\\ellmos-filecommander-mcp');
+    expect(contributing).toContain('Source of Truth');
+
+    // Version freeze discipline
+    expect(contributing).toContain('T-20260920-167562623');
+    expect(contributing).toContain('1.11.5');
+
+    // Quality gates and statutory disclaimer
+    expect(contributing).toContain('npm test');
+    expect(contributing).toContain('npm run build');
+    expect(contributing).toContain('§ 521 BGB');
+    expect(contributing).toContain('Gefälligkeitsrecht');
+    expect(contributing).toContain('security@open-bricks.org');
+    expect(contributing).toContain('security@ellmos.ai');
+  });
+
   it('verifies repository hygiene: zero hardcoded secrets, private keys and personal developer paths', () => {
     const sensitivePatterns = [
       /BEGIN (?:RSA|OPENSSH|DSA|EC|PGP)?\s*PRIVATE KEY/,
@@ -645,6 +701,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
       thirdPartyLicensesPath,
       thirdPartyLicensesTxtPath,
       noticePath,
+      contributingPath,
     ];
 
     for (const filePath of filesToAudit) {

@@ -24,13 +24,13 @@
 [![ellmos-ai](https://img.shields.io/badge/organization-ellmos--ai-purple.svg)](https://github.com/ellmos-ai)
 [![open-bricks](https://img.shields.io/badge/ecosystem-open--bricks-blue.svg)](https://github.com/open-bricks)
 [![Discovery: llms.txt](https://img.shields.io/badge/discovery-llms.txt-blue.svg)](llms.txt)
-[![Last-Checked](https://img.shields.io/badge/last--checked-2026--10--01-blue.svg)](llms.txt)
-[![Verified](https://img.shields.io/badge/verified-2026--10--01-blue.svg)](llms.txt)
+[![Last-Checked](https://img.shields.io/badge/last--checked-2026--10--03-blue.svg)](llms.txt)
+[![Verified](https://img.shields.io/badge/verified-2026--10--03-blue.svg)](llms.txt)
 
 > **Quick Navigation:**
 > 1. [Overview](#sec-01) | 2. [System Architecture](#sec-02) | 3. [End-to-End Execution Lifecycle](#sec-03) | 4. [Core Capabilities & Safety Invariants](#sec-04) | 5. [Target Personas & Discoverability](#sec-05) | 6. [Installation & Prerequisites](#sec-06) | 7. [Configuration & Client Setup](#sec-07) | 8. [Tools Overview (50 Tools)](#sec-08) | 9. [Comparative Matrix & Alternatives](#sec-09) | 10. [Tool Prefix & Naming Convention](#sec-10) | 11. [Governance & Runtime Invariants](#sec-11) | 12. [Security Architecture & Tool Risks](#sec-12) | 13. [Testing, Quality Gates & Verification](#sec-13) | 14. [Changelog & Versioning](#sec-14) | 15. [Level 1 SBOM & Third-Party Licenses](#sec-15) | 16. [History & Evolution](#sec-16) | 17. [ellmos-ai Ecosystem & Partner Matrix](#sec-17) | 18. [Statutory Notice (§ 521 BGB) & Liability Disclaimer](#sec-18)
 >
-> | Direct References: [🛡️ Security Policy](SECURITY.md) • [⚖️ Third-Party Licenses](THIRD_PARTY_LICENSES.md) • [📄 Plain Text SBOM](THIRD_PARTY_LICENSES.txt) • [📜 Marketing Log](MARKETING-LOG.txt) • [🤖 LLM Context (llms.txt)](llms.txt) • [📋 Canonical Notice](NOTICE) |
+> | Direct References: [🛡️ Security Policy](SECURITY.md) • [🤝 Contributing](CONTRIBUTING.md) • [⚖️ Third-Party Licenses](THIRD_PARTY_LICENSES.md) • [📄 Plain Text SBOM](THIRD_PARTY_LICENSES.txt) • [📜 Marketing Log](MARKETING-LOG.txt) • [🤖 LLM Context (llms.txt)](llms.txt) • [📋 Canonical Notice](NOTICE) |
 
 A comprehensive **Model Context Protocol (MCP) server** that gives AI assistants full filesystem access, bounded multi-file content search, process management, interactive shell sessions, and async filename search capabilities.
 

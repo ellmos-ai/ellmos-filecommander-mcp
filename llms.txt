@@ -1,4 +1,4 @@
-## Last-checked: 2026-10-01
+## Last-checked: 2026-10-03
 
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
@@ -18,6 +18,7 @@ Node.js >= 20, MIT. Published as `ellmos-filecommander-mcp` on npm and indexed b
 - [README (Deutsch)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/README_de.md): German version
 - [SECURITY.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/SECURITY.md): Bilingual security policy for local stdio, explicit `fc_web_fetch` egress, process risks, and safe-mode boundaries
 - [CHANGELOG.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/CHANGELOG.md): Release history and audit log
+- [CONTRIBUTING.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/CONTRIBUTING.md): Bilingual development guide, quality gates, and Plan D workflow
 - [MARKETING-LOG.txt](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/MARKETING-LOG.txt): Discoverability, target personas, 10 runtime invariants, and verification matrix
 - [THIRD_PARTY_LICENSES.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/THIRD_PARTY_LICENSES.md): Third-party dependencies and licensing review
 - [THIRD_PARTY_LICENSES.txt](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/THIRD_PARTY_LICENSES.txt): Plain-text Level 1 SBOM companion and invariant matrix

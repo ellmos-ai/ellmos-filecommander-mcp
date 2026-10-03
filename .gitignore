@@ -14,6 +14,7 @@ dist/
 Thumbs.db
 ehthumbs.db
 desktop.ini
+Desktop.ini
 
 # Environment
 .env
@@ -69,6 +70,9 @@ LOCK*.txt
 LOCK.user.*
 LOCK.until.*
 LOCK.condition.*
+LOCK.dev.*
+LOCK.antigravity.*
+LOCK.bugsearch.*
 LOCK.permissions.json
 *.lock
 .automation-lock
@@ -101,6 +105,8 @@ uv.lock
 *-Mac Studio*
 *-MacBook*
 CONFLICT_REVIEW_LOG*
+TASKPLAN_*.md
+*-TASKPLAN*
 
 # Temporary files, patch residues & editor backups
 *.tmp
