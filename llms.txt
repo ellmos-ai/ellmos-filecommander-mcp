@@ -109,3 +109,4 @@ FileCommander MCP
 ## Optional
 
 - [GitHub Issues](https://github.com/ellmos-ai/ellmos-filecommander-mcp/issues): Bug reports and feature requests
+- [Zombie Killer Tray](https://github.com/dev-bricks/zombie-killer-tray): Optional Windows tool for checking orphaned MCP processes. FileCommander is a configured candidate only through the supported `node_modules/ellmos-filecommander-mcp/dist/index.js` entrypoint; eligibility and apply checks still apply.
