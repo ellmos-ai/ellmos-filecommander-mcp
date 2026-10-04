@@ -641,6 +641,7 @@ Unsere Partnerorganisation **[open-bricks](https://github.com/open-bricks)** und
 | [CodeBox](https://github.com/dev-bricks/CodeBox) | Code-Editor | dev-bricks | Mehrsprachiger Code-Editor mit LLM-Unterstützung |
 | [safe-start-for-codex](https://github.com/dev-bricks/safe-start-for-codex) | Sicherheit & Audit | dev-bricks | Gehärtete Laufzeitumgebung & Pre-Flight-Prüfer für Codex |
 | [automation-master](https://github.com/dev-bricks/automation-master) | Aufgaben-Automatisierung | dev-bricks | Hochzuverlässiger Hintergrund-Automations-Runner & Scheduler |
+| [Zombie Killer Tray](https://github.com/dev-bricks/zombie-killer-tray) | Prozessverwaltung | dev-bricks | Optionales Windows-Werkzeug zur Prüfung verwaister MCP-Prozesse. FileCommander ist beim Start über den unterstützten Einstiegspunkt `node_modules/ellmos-filecommander-mcp/dist/index.js` ein konfigurierter Kandidat; alle weiteren Prozess- und Apply-Schutzprüfungen gelten weiterhin. |
 
 ---
 
