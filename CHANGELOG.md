@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Reproducible development and workflow maintenance (2026-10-18)
+- Use `npm ci` in the English and German source/development instructions so local installs use the same lockfile as CI.
+- Add weekly GitHub Actions dependency checks with at most three open maintenance PRs; npm updates remain security-only.
+- Correct the bilingual README and LLM context test totals to 306 (235 Vitest + 71 i18n), measured locally; align the existing documentation checks.
+- Keep package and registry versions at `1.11.5`; no release or publication.
+
 ### Repository Hygiene, Bilingual CONTRIBUTING & Quality Gates, Level 1 SBOM Re-Audit Stand 2026-10-03 (Pfad A)
 - **Bilingual Contributing Guidelines (`CONTRIBUTING.md`):**
   - Restructured `CONTRIBUTING.md` with complete bilingual (English / Deutsch) parity, 10 architectural and governance invariants (`INV-LOCAL-01` through `INV-SLA-10`), Plan D local development workflow (`C:\_Local_DEV\repos\ellmos-filecommander-mcp` as authoritative Source of Truth), strict version freeze discipline (`T-20260920-167562623`), local quality gates (`npm test`, `npm run build`, whitespace/EOF validation), and statutory liability limitation (§ 521 BGB Gefälligkeitsrecht).

@@ -34,7 +34,7 @@ git clone https://github.com/ellmos-ai/ellmos-filecommander-mcp.git C:\_Local_DE
 cd C:\_Local_DEV\repos\ellmos-filecommander-mcp
 
 # Install pinned dependencies
-npm install
+npm ci
 
 # Compile TypeScript
 npm run build
@@ -92,7 +92,7 @@ git clone https://github.com/ellmos-ai/ellmos-filecommander-mcp.git C:\_Local_DE
 cd C:\_Local_DEV\repos\ellmos-filecommander-mcp
 
 # Abhängigkeiten installieren
-npm install
+npm ci
 
 # TypeScript kompilieren
 npm run build

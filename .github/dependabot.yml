@@ -1,4 +1,4 @@
-# Security-only: keine version-updates (limit 0), Security-Fixes gruppiert
+# npm stays security-only; GitHub Actions receive bounded maintenance PRs.
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -11,3 +11,8 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
