@@ -224,7 +224,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(ci).toContain('windows-latest');
     expect(ci).toContain('macos-latest');
     expect(ci).toContain('actions/checkout@v4');
-    expect(ci).toContain('actions/setup-node@v4');
+    expect(ci).toContain('actions/setup-node@v7');
     expect(ci).toContain('cache: npm');
     expect(ci).toContain('concurrency:');
     expect(ci).toContain('cancel-in-progress: true');
