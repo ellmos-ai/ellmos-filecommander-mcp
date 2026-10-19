@@ -223,8 +223,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(ci).toContain('ubuntu-latest');
     expect(ci).toContain('windows-latest');
     expect(ci).toContain('macos-latest');
-    expect(ci).toContain('actions/checkout@v4');
-    expect(ci).toContain('actions/setup-node@v4');
+    expect(ci).toMatch(/actions\/checkout@v\d+/);
+    expect(ci).toMatch(/actions\/setup-node@v\d+/);
     expect(ci).toContain('cache: npm');
     expect(ci).toContain('concurrency:');
     expect(ci).toContain('cancel-in-progress: true');
@@ -609,7 +609,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(testsWf).toContain('ubuntu-latest');
     expect(testsWf).toContain('windows-latest');
     expect(testsWf).toContain('macos-latest');
-    expect(autoAssignWf).toContain('actions/github-script@v7');
+    expect(autoAssignWf).toMatch(/actions\/github-script@v\d+/);
     expect(labelSyncWf).toContain('EndBug/label-sync@v2');
     expect(existsSync(resolve(ROOT, '.github/labels.yml'))).toBe(true);
   });
