@@ -1,11 +1,11 @@
-<!-- worldset: {"translated_from_sha256": "9630d9e7c40ee64dd237211fe37faef99c9791362a3f1f0712b5f78fa43a41f8", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:18.788189+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:18.788189+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
 # ellmos FileCommander MCP 服务器
 
-[English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | **简体中文** | [日本語](README_ja.md) | [Русский](README_ru.md)
+[English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | **简体中文** | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 README 导航会列出本仓库提供的文档语言。 FileCommander 运行时消息支持德语 (de)、英语 (en)、西班牙语 (es)、中文 (zh)、日语 (ja) 和俄语 (ru)。此运行时语言列表与 README 文档翻译语言分开说明。 在启动服务器前设置 `FC_LANGUAGE`，或在活动的 MCP 会话中调用 `fc_set_language`。使用 `fc_get_language` 查看当前语言和支持的语言代码。 如果未设置 `FC_LANGUAGE` 或其值不受支持，运行时默认使用德语 (de)。
 

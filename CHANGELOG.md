@@ -3,8 +3,8 @@
 ## [Unreleased]
 
 ### World-Set documentation (2026-10-25)
-- Add full Spanish, Simplified Chinese, Japanese and Russian READMEs alongside English and German.
-- Synchronize six-language documentation navigation and describe actual runtime selection/defaults separately.
+- Add full Spanish, Simplified Chinese, Japanese, Russian, French, Hindi, Arabic, Bengali and Portuguese READMEs alongside English and German.
+- Synchronize eleven-language documentation navigation and describe actual runtime selection/defaults separately.
 - Include all linked README editions in the npm files allowlist. Runtime locales and package version remain unchanged.
 
 ### Reproducible development and workflow maintenance (2026-10-18)

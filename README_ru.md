@@ -1,11 +1,11 @@
-<!-- worldset: {"translated_from_sha256": "9630d9e7c40ee64dd237211fe37faef99c9791362a3f1f0712b5f78fa43a41f8", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:43:05.467386+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:43:05.467386+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
 # ellmos FileCommander MCP-сервер
 
-[English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | **Русский**
+[English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | **Русский** | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 В навигации README перечислены доступные в этом репозитории языки документации. Сообщения FileCommander во время выполнения доступны на немецком (de), английском (en), испанском (es), китайском (zh), японском (ja) и русском (ru). Этот список языков среды выполнения отделён от языков перевода README. Задайте `FC_LANGUAGE` до запуска сервера или вызовите `fc_set_language` в активном сеансе MCP. С помощью `fc_get_language` можно узнать активный язык и поддерживаемые коды. Если переменная `FC_LANGUAGE` не задана или содержит неподдерживаемый код, по умолчанию используется немецкий (de).
 

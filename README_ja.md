@@ -1,11 +1,11 @@
-<!-- worldset: {"translated_from_sha256": "9630d9e7c40ee64dd237211fe37faef99c9791362a3f1f0712b5f78fa43a41f8", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:21.351455+00:00"} -->
+<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:21.351455+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
 
 # ellmos FileCommander MCP サーバー
 
-[English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | **日本語** | [Русский](README_ru.md)
+[English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | **日本語** | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 README のナビゲーションに、このリポジトリで利用できるドキュメント言語が一覧表示されます。 FileCommander のランタイムメッセージはドイツ語 (de)、英語 (en)、スペイン語 (es)、中国語 (zh)、日本語 (ja)、ロシア語 (ru) に対応します。このランタイム言語一覧は README の翻訳言語とは別です。 サーバーの起動前に `FC_LANGUAGE` を設定するか、実行中の MCP セッションで `fc_set_language` を呼び出します。`fc_get_language` で有効な言語と対応する言語コードを確認できます。 `FC_LANGUAGE` が未設定または未対応のコードの場合、ランタイムはドイツ語 (de) を既定値として使用します。
 

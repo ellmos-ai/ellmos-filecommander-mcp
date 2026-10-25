@@ -4,7 +4,7 @@
 
 # ellmos FileCommander MCP Server
 
-[English](README.md) | **Deutsch** | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md)
+[English](README.md) | **Deutsch** | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 Die README-Navigation listet die in diesem Repository verfügbaren Dokumentationssprachen auf. FileCommander-Runtime-Meldungen unterstützen Deutsch (de), Englisch (en), Spanisch (es), Chinesisch (zh), Japanisch (ja) und Russisch (ru). Diese Runtime-Liste ist von den README-Übersetzungssprachen getrennt. Setze `FC_LANGUAGE` vor dem Serverstart oder rufe `fc_set_language` während einer aktiven MCP-Sitzung auf. Mit `fc_get_language` kannst du die aktive Sprache und die unterstützten Sprachcodes abfragen. Wenn `FC_LANGUAGE` nicht gesetzt ist oder einen nicht unterstützten Code enthält, verwendet die Runtime standardmäßig Deutsch (de).
 
