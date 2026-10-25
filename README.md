@@ -4,7 +4,9 @@
 
 # ellmos FileCommander MCP Server
 
-**🇩🇪 [Deutsche Version](README_de.md)**
+**English** | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md)
+
+The README navigation lists the documentation languages available in this repository. FileCommander runtime messages support German (de), English (en), Spanish (es), Chinese (zh), Japanese (ja), and Russian (ru). This runtime list is separate from README translation availability. Set `FC_LANGUAGE` before starting the server, or call `fc_set_language` during an active MCP session. Use `fc_get_language` to see the active language and supported codes. If `FC_LANGUAGE` is unset or contains an unsupported code, the runtime defaults to German (de).
 
 *Part of the [ellmos-ai](https://github.com/ellmos-ai) family.*
 

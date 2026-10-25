@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### World-Set documentation (2026-10-25)
+- Add full Spanish, Simplified Chinese, Japanese and Russian READMEs alongside English and German.
+- Synchronize six-language documentation navigation and describe actual runtime selection/defaults separately.
+- Include all linked README editions in the npm files allowlist. Runtime locales and package version remain unchanged.
+
 ### Reproducible development and workflow maintenance (2026-10-18)
 - Use `npm ci` in the English and German source/development instructions so local installs use the same lockfile as CI.
 - Add weekly GitHub Actions dependency checks with at most three open maintenance PRs; npm updates remain security-only.
