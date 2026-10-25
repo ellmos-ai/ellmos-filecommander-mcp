@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | **Français** | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-La navigation du README répertorie les langues de documentation disponibles dans ce dépôt. Les messages d'exécution de FileCommander prennent en charge l'allemand (de), l'anglais (en), l'espagnol (es), le chinois (zh), le japonais (ja) et le russe (ru). Cette liste d'exécution est distincte de la disponibilité des traductions du README. Définissez `FC_LANGUAGE` avant de démarrer le serveur, ou appelez `fc_set_language` pendant une session MCP active. Utilisez `fc_get_language` pour afficher la langue active et les codes pris en charge. Si `FC_LANGUAGE` n'est pas défini ou contient un code non pris en charge, l'exécution utilise l'allemand (de) par défaut.
+La navigation du README répertorie les langues de documentation disponibles dans ce dépôt. Les messages d’exécution et les réponses formatées de FileCommander sont disponibles en allemand (de), anglais (en), espagnol (es), chinois (zh), japonais (ja), russe (ru), français (fr), hindi (hi), arabe (ar), bengali (bn) et portugais (pt). Cette liste de langues d’exécution est distincte des langues de traduction du README. Elle concerne les messages générés à l’exécution et les résultats formatés des outils ; les titres des outils MCP, les descriptions de découverte et les descriptions de schéma restent statiques en anglais. Définissez `FC_LANGUAGE` sur un code pris en charge avant de démarrer le serveur, ou appelez `fc_set_language` pendant une session MCP active. `fc_get_language` indique la langue active et les onze codes pris en charge. Si la variable `FC_LANGUAGE` n’est pas définie ou contient un code non pris en charge, l’allemand (de) est utilisé par défaut. Les formats de date et d’heure suivent la langue active.
 
 *Fait partie de la famille [ellmos-ai](https://github.com/ellmos-ai).*
 
@@ -16,7 +16,7 @@ La navigation du README répertorie les langues de documentation disponibles dan
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@ La plupart des serveurs MCP de système de fichiers ne couvrent que les opérati
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **Moteur de conversion multi-format sans perte** | Conversion déclarative (`fc_convert_format`) entre 7 formats structurés (JSON, YAML, TOML, XML, CSV, INI, TOON). | Normalisation propre des données entre des formats de configuration hétérogènes, sans perte de données. |
 | **Moteur de réparation Mojibake et de fichiers** | `fc_fix_encoding`, `fc_fix_json` et `fc_cleanup_file` réparent les encodages UTF-8 cassés (plus de 27 motifs), la syntaxe JSON malformée, les BOM et les octets NUL. | Pipelines auto-réparateurs pour les fichiers corrompus générés sur des plateformes d'exploitation divergentes. |
 | **Exécution sans privilèges et sans élévation** | Conçu et vérifié pour fonctionner en mode utilisateur standard non privilégié. Ne nécessite jamais de privilèges administrateur ou root. | Surface d'attaque minimale ; respecte le principe du moindre privilège. |
-| **Moteur i18n d'exécution à six langues** | Changement dynamique de langue et introspection (`fc_set_language`, `fc_get_language`) pour l'allemand (`de`), l'anglais (`en`), l'espagnol (`es`), le chinois (`zh`), le japonais (`ja`) et le russe (`ru`). | Expérience multilingue native pour les développeurs et signalement d'erreurs localisé. |
+| **Moteur i18n d’exécution à onze langues** | Changement dynamique et consultation de la langue (`fc_set_language`, `fc_get_language`) pour les 11 codes pris en charge : `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` et `pt`. | Expérience multilingue native pour les développeurs et signalement d'erreurs localisé. |
 | **Matrice multi-OS vérifiée** | Testé sous Windows, Ubuntu Linux et macOS avec Node.js 20, 22 et 24, avec 292 assertions automatisées. | Parité et fiabilité multiplateformes continues. |
 
 ---
@@ -438,8 +438,8 @@ Le serveur communique via le **transport stdio**. Pointez votre client MCP vers 
 |------|-------------|
 | `fc_get_time` | Obtenir l'heure système actuelle avec les informations de fuseau horaire |
 | `fc_set_safe_mode` | Activer ou désactiver le mode sécurisé : toutes les suppressions passent par la Corbeille |
-| `fc_set_language` | Définir la langue d'exécution (`de`, `en`, `es`, `zh`, `ja` ou `ru`) |
-| `fc_get_language` | Lire la langue d'exécution active et tous les codes de langue pris en charge |
+| `fc_set_language` | Définir la langue d’exécution (`de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` ou `pt`) |
+| `fc_get_language` | Lire la langue d’exécution active et les 11 codes pris en charge |
 
 ### Export (2 outils)
 
@@ -554,7 +554,7 @@ npm test
 
 ### Tests
 
-Le projet comprend **235 tests Vitest et 71 vérifications i18n autonomes (306 au total)** couvrant les opérations sur le système de fichiers, l'aperçu intégré privilégiant les métadonnées, la recherche de contenu bornée, le lancement natif via l'application par défaut, la conversion de format, la réparation d'encodage, la gestion des archives, la détection des doublons, les packs de langues, les annotations d'outils, le comportement réel du stdio et les limites de sécurité.
+Le projet comprend **249 tests Vitest et 71 vérifications i18n autonomes (320 au total)** couvrant les opérations sur le système de fichiers, l'aperçu intégré privilégiant les métadonnées, la recherche de contenu bornée, le lancement natif via l'application par défaut, la conversion de format, la réparation d'encodage, la gestion des archives, la détection des doublons, les packs de langues, les annotations d'outils, le comportement réel du stdio et les limites de sécurité.
 
 ```bash
 npm test              # Run all tests

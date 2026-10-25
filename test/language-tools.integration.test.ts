@@ -4,7 +4,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { getDefaultEnvironment, StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 
 const ROOT = resolve(__dirname, "..");
-const LANGUAGES = ["de", "en", "es", "zh", "ja", "ru"] as const;
+const LANGUAGES = ["de", "en", "es", "zh", "ja", "ru", "fr", "hi", "ar", "bn", "pt"] as const;
 
 let client: Client;
 
@@ -46,6 +46,13 @@ describe("language tools over real stdio MCP transport", () => {
     const getLanguageTool = listed.tools.find((tool) => tool.name === "fc_get_language");
     expect(getLanguageTool).toBeDefined();
     expect(getLanguageTool?.inputSchema).toMatchObject({ type: "object" });
+
+    const setLanguageTool = listed.tools.find((tool) => tool.name === "fc_set_language");
+    expect(setLanguageTool?.inputSchema).toMatchObject({
+      type: "object",
+      properties: { language: { enum: [...LANGUAGES] } },
+      required: ["language"],
+    });
     expect(getLanguageTool?.annotations).toMatchObject({
       readOnlyHint: true,
       destructiveHint: false,
@@ -130,6 +137,32 @@ describe("language tools over real stdio MCP transport", () => {
       error_code: "PATH_NOT_FOUND",
       fallback: null,
     });
+  });
+
+  it("rejects unsupported language codes at the MCP boundary", async () => {
+    const invalid = await client.callTool({ name: "fc_set_language", arguments: { language: "xx" } });
+    expect("isError" in invalid && invalid.isError).toBe(true);
+    const current = await client.callTool({ name: "fc_get_language", arguments: {} });
+    expect(textContent(current)).toContain("Aktuelle Sprache: de");
+  });
+
+  it("uses FC_LANGUAGE at process startup before any language-tool call", async () => {
+    const startupClient = new Client({ name: "filecommander-startup-language-contract", version: "1.0.0" });
+    const startupTransport = new StdioClientTransport({
+      command: process.execPath,
+      args: [resolve(ROOT, "dist/index.js")],
+      cwd: ROOT,
+      env: { ...getDefaultEnvironment(), FC_LANGUAGE: "fr", NO_UPDATE_NOTIFIER: "1" },
+      stderr: "pipe",
+    });
+    try {
+      await startupClient.connect(startupTransport);
+      const current = await startupClient.callTool({ name: "fc_get_language", arguments: {} });
+      expect(textContent(current)).toContain("Langue actuelle : fr");
+      expect(textContent(current)).toContain(LANGUAGES.join(", "));
+    } finally {
+      await startupClient.close();
+    }
   });
 
   it("reports the active language after every supported runtime switch", async () => {

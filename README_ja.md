@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:21.351455+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:21.351455+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | **日本語** | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-README のナビゲーションに、このリポジトリで利用できるドキュメント言語が一覧表示されます。 FileCommander のランタイムメッセージはドイツ語 (de)、英語 (en)、スペイン語 (es)、中国語 (zh)、日本語 (ja)、ロシア語 (ru) に対応します。このランタイム言語一覧は README の翻訳言語とは別です。 サーバーの起動前に `FC_LANGUAGE` を設定するか、実行中の MCP セッションで `fc_set_language` を呼び出します。`fc_get_language` で有効な言語と対応する言語コードを確認できます。 `FC_LANGUAGE` が未設定または未対応のコードの場合、ランタイムはドイツ語 (de) を既定値として使用します。
+README のナビゲーションには、このリポジトリで利用できるドキュメント言語が一覧表示されます。FileCommander のランタイムメッセージと書式化された応答は、ドイツ語 (de)、英語 (en)、スペイン語 (es)、中国語 (zh)、日本語 (ja)、ロシア語 (ru)、フランス語 (fr)、ヒンディー語 (hi)、アラビア語 (ar)、ベンガル語 (bn)、ポルトガル語 (pt) に対応します。このランタイム言語一覧は README の翻訳言語とは別です。対象はランタイムで生成されるメッセージと書式化されたツール結果です。MCP ツールのタイトル、ディスカバリー説明、スキーマ説明は英語のままです。サーバー起動前に `FC_LANGUAGE` に対応コードを設定するか、実行中の MCP セッションで `fc_set_language` を呼び出します。`fc_get_language` は有効な言語と 11 個すべての対応コードを返します。`FC_LANGUAGE` が未設定または未対応のコードの場合、ランタイムはドイツ語 (de) を既定値として使用します。日付と時刻の書式は選択中の言語に従います。
 
 *[ellmos-ai](https://github.com/ellmos-ai) ファミリーの一員です。*
 
@@ -16,7 +16,7 @@ README のナビゲーションに、このリポジトリで利用できるド�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@ AI アシスタントに完全なファイルシステムアクセスを提供�
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **無損失の多形式エンジン** | 7 種類の構造化形式(JSON、YAML、TOML、XML、CSV、INI、TOON)にわたる宣言的な変換(`fc_convert_format`)。 | 異種の設定形式間で、データを失うことなく明確なデータ正規化を行います。 |
 | **文字化けとファイルの修復エンジン** | `fc_fix_encoding`、`fc_fix_json`、`fc_cleanup_file` が、壊れた UTF-8 エンコーディング(27 種以上のパターン)、不正な JSON 構文、BOM、NUL バイトを修復します。 | 異なる OS プラットフォームで生成された破損ファイルに対する自己修復型のパイプラインを提供します。 |
 | **非特権・非昇格での実行** | 標準の非特権ユーザーモードで実行できるように設計・検証されています。管理者権限またはルート権限を必要とすることはありません。 | 攻撃対象領域を最小化し、最小権限の原則に従います。 |
-| **6 言語のランタイム i18n エンジン** | 動的な言語切り替えと内省(`fc_set_language`、`fc_get_language`)により、ドイツ語(`de`)、英語(`en`)、スペイン語(`es`)、中国語(`zh`)、日本語(`ja`)、ロシア語(`ru`)をサポートします。 | ネイティブな多言語の開発者体験と、ローカライズされたエラー報告を提供します。 |
+| **11 言語のランタイム i18n エンジン** | `fc_set_language` と `fc_get_language` による動的な言語切り替えと照会に対応します。対応コードは次の 11 個です：`de`、`en`、`es`、`zh`、`ja`、`ru`、`fr`、`hi`、`ar`、`bn`、`pt`。 | ネイティブな多言語の開発者体験と、ローカライズされたエラー報告を提供します。 |
 | **マルチ OS 検証マトリックス** | Node.js 20、22、24 上で、Windows、Ubuntu Linux、macOS にわたってテストされ、292 件の自動アサーションを実施しています。 | 継続的なクロスプラットフォームの同等性と信頼性を提供します。 |
 
 ---
@@ -438,8 +438,8 @@ npm run build
 |------|-------------|
 | `fc_get_time` | タイムゾーン情報を含む現在のシステム時刻を取得する |
 | `fc_set_safe_mode` | 安全モードを切り替える:すべての削除はごみ箱/ゴミ箱を経由する |
-| `fc_set_language` | 実行時の言語を設定する(`de`、`en`、`es`、`zh`、`ja`、または `ru`) |
-| `fc_get_language` | 有効な実行時の言語とサポートされているすべての言語コードを読み取る |
+| `fc_set_language` | 実行時の言語を設定する（`de`、`en`、`es`、`zh`、`ja`、`ru`、`fr`、`hi`、`ar`、`bn`、または `pt`） |
+| `fc_get_language` | 有効な実行時の言語と、対応する 11 個すべての言語コードを読み取る |
 
 ### エクスポート(2ツール)
 
@@ -554,7 +554,7 @@ npm test
 
 ### テスト
 
-このプロジェクトには、**Vitest テスト 235 件に加え、スタンドアロンの i18n チェック 71 件（合計 306 件）**が含まれています。ファイルシステム操作、メタデータ優先のインラインプレビュー、境界付きの内容検索、ネイティブの既定ハンドラー起動、形式変換、エンコーディング修復、アーカイブ処理、重複検出、言語パック、ツールの注釈、実際の stdio の動作、およびセキュリティ境界を対象としています。
+このプロジェクトには、**Vitest テスト 249 件に加え、スタンドアロンの i18n チェック 71 件（合計 320 件）**が含まれています。ファイルシステム操作、メタデータ優先のインラインプレビュー、境界付きの内容検索、ネイティブの既定ハンドラー起動、形式変換、エンコーディング修復、アーカイブ処理、重複検出、言語パック、ツールの注釈、実際の stdio の動作、およびセキュリティ境界を対象としています。
 
 ```bash
 npm test              # Run all tests

@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:18.788189+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:56:51.271355+00:00", "reviewed_by": "gpt-6-luna", "review_manifest_sha256": "8f8d60530b2c2262d1f65f226d7c19b614f154bf7bf509af34edb77abc564dff", "operator_assembled_at": "2026-10-25T06:40:18.788189+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | **简体中文** | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-README 导航会列出本仓库提供的文档语言。 FileCommander 运行时消息支持德语 (de)、英语 (en)、西班牙语 (es)、中文 (zh)、日语 (ja) 和俄语 (ru)。此运行时语言列表与 README 文档翻译语言分开说明。 在启动服务器前设置 `FC_LANGUAGE`，或在活动的 MCP 会话中调用 `fc_set_language`。使用 `fc_get_language` 查看当前语言和支持的语言代码。 如果未设置 `FC_LANGUAGE` 或其值不受支持，运行时默认使用德语 (de)。
+README 导航会列出本仓库提供的文档语言。FileCommander 的运行时消息和格式化响应支持德语 (de)、英语 (en)、西班牙语 (es)、中文 (zh)、日语 (ja)、俄语 (ru)、法语 (fr)、印地语 (hi)、阿拉伯语 (ar)、孟加拉语 (bn) 和葡萄牙语 (pt)。此运行时语言列表与 README 文档翻译语言分开说明。它适用于运行时生成的消息和格式化工具结果；MCP 工具标题、发现说明和模式字段说明仍为静态英文。启动服务器前，将 `FC_LANGUAGE` 设置为受支持的代码；也可以在活动的 MCP 会话中调用 `fc_set_language`。`fc_get_language` 会报告当前语言和全部 11 个受支持代码。若未设置 `FC_LANGUAGE` 或其值不受支持，运行时默认使用德语 (de)。日期和时间格式遵循当前语言区域。
 
 *属于 [ellmos-ai](https://github.com/ellmos-ai) 系列。*
 
@@ -16,7 +16,7 @@ README 导航会列出本仓库提供的文档语言。 FileCommander 运行时�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@ README 导航会列出本仓库提供的文档语言。 FileCommander 运行时�
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **无损多格式引擎** | 通过声明式转换(`fc_convert_format`)支持 7 种结构化格式(JSON、YAML、TOML、XML、CSV、INI、TOON)。 | 在异构配置格式之间实现清晰的数据规范化,且不丢失数据。 |
 | **乱码与文件修复引擎** | `fc_fix_encoding`、`fc_fix_json` 和 `fc_cleanup_file` 可修复损坏的 UTF-8 编码(27 种以上模式)、格式错误的 JSON 语法、BOM 以及 NUL 字节。 | 为不同操作系统平台生成的损坏文件提供自修复流水线。 |
 | **无权限、非提权执行** | 经设计并验证可在标准的非特权用户模式下运行。从不需要管理员或 root 权限。 | 攻击面最小;遵循最小权限原则。 |
-| **六语言运行时 i18n 引擎** | 动态语言切换与自省(`fc_set_language`、`fc_get_language`),支持德语(`de`)、英语(`en`)、西班牙语(`es`)、中文(`zh`)、日语(`ja`)和俄语(`ru`)。 | 原生多语言开发者体验与本地化错误报告。 |
+| **十一语言运行时 i18n 引擎** | 通过 `fc_set_language` 和 `fc_get_language` 动态切换和查询语言，支持以下 11 个代码：`de`、`en`、`es`、`zh`、`ja`、`ru`、`fr`、`hi`、`ar`、`bn` 和 `pt`。 | 原生多语言开发者体验与本地化错误报告。 |
 | **多操作系统验证矩阵** | 在 Windows、Ubuntu Linux 和 macOS 上,基于 Node.js 20、22 和 24 测试,包含 292 项自动化断言。 | 持续的跨平台一致性与可靠性。 |
 
 ---
@@ -438,8 +438,8 @@ npm run build
 |------|-------------|
 | `fc_get_time` | 获取当前系统时间及时区信息 |
 | `fc_set_safe_mode` | 切换安全模式:所有删除操作均经由回收站/废纸篓 |
-| `fc_set_language` | 设置运行时语言(`de`、`en`、`es`、`zh`、`ja` 或 `ru`) |
-| `fc_get_language` | 读取当前运行时语言及所有受支持的语言代码 |
+| `fc_set_language` | 设置运行时语言（`de`、`en`、`es`、`zh`、`ja`、`ru`、`fr`、`hi`、`ar`、`bn` 或 `pt`） |
+| `fc_get_language` | 读取当前运行时语言及全部 11 个受支持的语言代码 |
 
 ### 导出(2 个工具)
 
@@ -554,7 +554,7 @@ npm test
 
 ### 测试
 
-本项目包含 **235 个 Vitest 测试以及 71 个独立的 i18n 检查(共 306 项)**,涵盖文件系统操作、以元数据优先的内联预览、有界内容搜索、原生默认处理程序启动、格式转换、编码修复、归档处理、重复检测、语言包、工具注解、真实 stdio 行为以及安全边界。
+本项目包含 **249 个 Vitest 测试以及 71 个独立的 i18n 检查(共 320 项)**,涵盖文件系统操作、以元数据优先的内联预览、有界内容搜索、原生默认处理程序启动、格式转换、编码修复、归档处理、重复检测、语言包、工具注解、真实 stdio 行为以及安全边界。
 
 ```bash
 npm test              # Run all tests

@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:43:05.467386+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T05:43:05.467386+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | **Русский** | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-В навигации README перечислены доступные в этом репозитории языки документации. Сообщения FileCommander во время выполнения доступны на немецком (de), английском (en), испанском (es), китайском (zh), японском (ja) и русском (ru). Этот список языков среды выполнения отделён от языков перевода README. Задайте `FC_LANGUAGE` до запуска сервера или вызовите `fc_set_language` в активном сеансе MCP. С помощью `fc_get_language` можно узнать активный язык и поддерживаемые коды. Если переменная `FC_LANGUAGE` не задана или содержит неподдерживаемый код, по умолчанию используется немецкий (de).
+В навигации README перечислены доступные в этом репозитории языки документации. Сообщения времени выполнения и форматированные ответы FileCommander доступны на немецком (de), английском (en), испанском (es), китайском (zh), японском (ja), русском (ru), французском (fr), хинди (hi), арабском (ar), бенгальском (bn) и португальском (pt). Этот список языков среды выполнения отделён от языков перевода README. Он относится к сообщениям, создаваемым во время выполнения, и форматированным результатам инструментов; названия инструментов MCP, описания для обнаружения инструментов и описания полей схем остаются статическими и англоязычными. До запуска сервера задайте `FC_LANGUAGE` одним из поддерживаемых кодов или вызовите `fc_set_language` в активном сеансе MCP. `fc_get_language` сообщает активный язык и все одиннадцать поддерживаемых кодов. Если `FC_LANGUAGE` не задана или содержит неподдерживаемый код, по умолчанию используется немецкий (de). Форматы даты и времени соответствуют активной локали.
 
 *Часть семейства [ellmos-ai](https://github.com/ellmos-ai).*
 
@@ -16,7 +16,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **Движок многоформатного преобразования без потерь** | Декларативное преобразование (`fc_convert_format`) для 7 структурированных форматов (JSON, YAML, TOML, XML, CSV, INI, TOON). | Чистая нормализация данных между разнородными форматами конфигураций без потери данных. |
 | **Движок исправления кодировки и файлов** | `fc_fix_encoding`, `fc_fix_json` и `fc_cleanup_file` исправляют повреждённое кодирование UTF-8 (более 27 шаблонов), некорректный синтаксис JSON, BOM и байты NUL. | Самовосстанавливающиеся конвейеры для повреждённых файлов, созданных на разных ОС. |
 | **Выполнение без повышения привилегий** | Спроектирован и проверен для работы в стандартном пользовательском режиме без привилегий. Никогда не требует административных прав или прав root. | Минимальная поверхность атаки; соблюдение принципа наименьших привилегий. |
-| **Шестиязычный движок i18n времени выполнения** | Динамическое переключение языков и интроспекция (`fc_set_language`, `fc_get_language`) для немецкого (`de`), английского (`en`), испанского (`es`), китайского (`zh`), японского (`ja`) и русского (`ru`). | Нативный многоязычный опыт разработчика и локализованные отчёты об ошибках. |
+| **Одиннадцатиязычный движок i18n времени выполнения** | Динамическое переключение языка и просмотр его параметров (`fc_set_language`, `fc_get_language`) для всех 11 поддерживаемых кодов: `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` и `pt`. | Нативный многоязычный опыт разработчика и локализованные отчёты об ошибках. |
 | **Многоплатформенная проверенная матрица** | Протестировано в Windows, Ubuntu Linux и macOS на Node.js 20, 22 и 24 с 292 автоматическими проверками. | Непрерывное кроссплатформенное соответствие и надёжность. |
 
 ---
@@ -438,8 +438,8 @@ npm run build
 |------|-------------|
 | `fc_get_time` | Получение текущего системного времени с информацией о часовом поясе |
 | `fc_set_safe_mode` | Переключение режима безопасности: все удаления идут через Корзину / Trash |
-| `fc_set_language` | Установка языка выполнения (`de`, `en`, `es`, `zh`, `ja` или `ru`) |
-| `fc_get_language` | Чтение активного языка выполнения и всех поддерживаемых кодов языков |
+| `fc_set_language` | Установка языка выполнения (`de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` или `pt`) |
+| `fc_get_language` | Чтение активного языка выполнения и всех 11 поддерживаемых кодов языков |
 
 ### Экспорт (2 инструмента)
 
@@ -554,7 +554,7 @@ npm test
 
 ### Тестирование
 
-Проект включает **235 тестов Vitest и 71 автономную проверку i18n (всего 306)**, охватывающих операции с файловой системой, предпросмотр встроенного содержимого, начинающийся с метаданных, ограниченный поиск содержимого, запуск нативного обработчика по умолчанию, преобразование форматов, восстановление кодировки, работу с архивами, поиск дубликатов, языковые пакеты, аннотации инструментов, реальное поведение stdio и границы безопасности.
+Проект включает **249 тестов Vitest и 71 автономную проверку i18n (всего 320)**, охватывающих операции с файловой системой, предпросмотр встроенного содержимого, начинающийся с метаданных, ограниченный поиск содержимого, запуск нативного обработчика по умолчанию, преобразование форматов, восстановление кодировки, работу с архивами, поиск дубликатов, языковые пакеты, аннотации инструментов, реальное поведение stdio и границы безопасности.
 
 ```bash
 npm test              # Run all tests

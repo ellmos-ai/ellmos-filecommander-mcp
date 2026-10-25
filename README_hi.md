@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | **हिन्दी** | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-README की नेविगेशन सूची में वे दस्तावेज़ीकरण भाषाएँ दी गई हैं जो इस रिपॉज़िटरी में उपलब्ध हैं। FileCommander रनटाइम संदेश जर्मन (de), अंग्रेज़ी (en), स्पेनिश (es), चीनी (zh), जापानी (ja) और रूसी (ru) का समर्थन करते हैं। यह रनटाइम सूची README अनुवाद की उपलब्धता से अलग है। सर्वर शुरू करने से पहले `FC_LANGUAGE` सेट करें, या सक्रिय MCP सत्र के दौरान `fc_set_language` को कॉल करें। सक्रिय भाषा और समर्थित कोड देखने के लिए `fc_get_language` का उपयोग करें। यदि `FC_LANGUAGE` सेट नहीं है या असमर्थित कोड रखता है, तो रनटाइम डिफ़ॉल्ट रूप से जर्मन (de) का उपयोग करता है।
+README नेविगेशन इस रिपॉज़िटरी में उपलब्ध दस्तावेज़ीकरण भाषाओं की सूची देता है। FileCommander के रनटाइम संदेश और स्वरूपित प्रतिक्रियाएँ जर्मन (de), अंग्रेज़ी (en), स्पेनिश (es), चीनी (zh), जापानी (ja), रूसी (ru), फ़्रेंच (fr), हिंदी (hi), अरबी (ar), बंगाली (bn) और पुर्तगाली (pt) में उपलब्ध हैं। यह रनटाइम सूची README अनुवाद की उपलब्धता से अलग है। यह रनटाइम में बनाए गए संदेशों और स्वरूपित टूल परिणामों पर लागू होती है; MCP टूल शीर्षक, डिस्कवरी विवरण और स्कीमा विवरण स्थिर रूप से अंग्रेज़ी में रहते हैं। सर्वर शुरू करने से पहले `FC_LANGUAGE` को किसी समर्थित कोड पर सेट करें, या सक्रिय MCP सत्र के दौरान `fc_set_language` कॉल करें। `fc_get_language` सक्रिय भाषा और सभी ग्यारह समर्थित कोड बताता है। `FC_LANGUAGE` सेट न होने या असमर्थित कोड होने पर जर्मन (de) का उपयोग होता है। तारीख और समय के प्रारूप सक्रिय भाषा के अनुसार होते हैं।
 
 *[ellmos-ai](https://github.com/ellmos-ai) परिवार का हिस्सा।*
 
@@ -16,7 +16,7 @@ README की नेविगेशन सूची में वे दस्�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@ README की नेविगेशन सूची में वे दस्�
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **लॉसलेस बहु-प्रारूप इंजन** | 7 संरचित प्रारूपों (JSON, YAML, TOML, XML, CSV, INI, TOON) में घोषणात्मक रूपांतरण (`fc_convert_format`)। | डेटा हानि के बिना विषम कॉन्फ़िगरेशन प्रारूपों में स्वच्छ डेटा सामान्यीकरण। |
 | **Mojibake और फ़ाइल मरम्मत इंजन** | `fc_fix_encoding`, `fc_fix_json` और `fc_cleanup_file` टूटे UTF-8 एन्कोडिंग (27+ पैटर्न), विकृत JSON सिंटैक्स, BOMs और NUL bytes की मरम्मत करते हैं। | विभिन्न OS प्लेटफ़ॉर्म पर उत्पन्न भ्रष्ट फ़ाइलों के लिए स्व-उपचारी पाइपलाइन। |
 | **अविशेषाधिकृत, गैर-उन्नयन निष्पादन** | सामान्य अविशेषाधिकृत user-mode में चलने के लिए डिज़ाइन और सत्यापित। कभी भी प्रशासनिक या root विशेषाधिकारों की आवश्यकता नहीं होती। | न्यूनतम attack surface; न्यूनतम विशेषाधिकार के सिद्धांत का पालन। |
-| **छह-भाषा रनटाइम i18n इंजन** | गतिशील भाषा स्विचिंग और introspection (`fc_set_language`, `fc_get_language`) जर्मन (`de`), अंग्रेज़ी (`en`), स्पेनिश (`es`), चीनी (`zh`), जापानी (`ja`) और रूसी (`ru`) के लिए। | मूल बहुभाषी डेवलपर अनुभव और स्थानीयकृत त्रुटि रिपोर्टिंग। |
+| **ग्यारह-भाषा रनटाइम i18n इंजन** | सभी 11 समर्थित कोड के लिए गतिशील भाषा स्विचिंग और जानकारी (`fc_set_language`, `fc_get_language`): `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn`, और `pt`। | मूल बहुभाषी डेवलपर अनुभव और स्थानीयकृत त्रुटि रिपोर्टिंग। |
 | **बहु-OS सत्यापित मैट्रिक्स** | Node.js 20, 22 और 24 पर Windows, Ubuntu Linux और macOS में परीक्षित, 292 स्वचालित assertions के साथ। | निरंतर क्रॉस-प्लेटफ़ॉर्म समानता और विश्वसनीयता। |
 
 ---
@@ -438,8 +438,8 @@ npm run build
 |------|-------------|
 | `fc_get_time` | टाइमज़ोन जानकारी के साथ वर्तमान सिस्टम समय प्राप्त करें |
 | `fc_set_safe_mode` | सेफ़ मोड टॉगल करें: सभी डिलीट Recycle Bin / Trash के माध्यम से जाएँगे |
-| `fc_set_language` | रनटाइम भाषा सेट करें (`de`, `en`, `es`, `zh`, `ja`, या `ru`) |
-| `fc_get_language` | सक्रिय रनटाइम भाषा और सभी समर्थित भाषा कोड पढ़ें |
+| `fc_set_language` | रनटाइम भाषा सेट करें (`de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn`, या `pt`) |
+| `fc_get_language` | सक्रिय रनटाइम भाषा और सभी 11 समर्थित भाषा कोड पढ़ें |
 
 ### निर्यात (2 उपकरण)
 
@@ -554,7 +554,7 @@ npm test
 
 ### परीक्षण
 
-इस परियोजना में **235 Vitest परीक्षण और 71 स्वतंत्र i18n जाँच (कुल 306)** शामिल हैं, जो फ़ाइल सिस्टम संचालन, मेटाडेटा-प्रथम इनलाइन पूर्वावलोकन, सीमित सामग्री खोज, मूल डिफ़ॉल्ट-हैंडलर लॉन्चिंग, प्रारूप रूपांतरण, एन्कोडिंग मरम्मत, आर्काइव हैंडलिंग, डुप्लीकेट पहचान, भाषा पैक, टूल एनोटेशन, वास्तविक stdio व्यवहार और सुरक्षा सीमाओं को कवर करते हैं।
+इस परियोजना में **249 Vitest परीक्षण और 71 स्वतंत्र i18n जाँच (कुल 320)** शामिल हैं, जो फ़ाइल सिस्टम संचालन, मेटाडेटा-प्रथम इनलाइन पूर्वावलोकन, सीमित सामग्री खोज, मूल डिफ़ॉल्ट-हैंडलर लॉन्चिंग, प्रारूप रूपांतरण, एन्कोडिंग मरम्मत, आर्काइव हैंडलिंग, डुप्लीकेट पहचान, भाषा पैक, टूल एनोटेशन, वास्तविक stdio व्यवहार और सुरक्षा सीमाओं को कवर करते हैं।
 
 ```bash
 npm test              # Run all tests

@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | **العربية** | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-تسرد قائمة التنقل في ملف README لغات الوثائق المتاحة في هذا المستودع. تدعم رسائل وقت التشغيل في FileCommander اللغات الألمانية (de) والإنجليزية (en) والإسبانية (es) والصينية (zh) واليابانية (ja) والروسية (ru). وتنفصل قائمة وقت التشغيل هذه عن توافر ترجمات ملف README. اضبط `FC_LANGUAGE` قبل بدء الخادم، أو استدعِ `fc_set_language` أثناء جلسة MCP نشطة. استخدم `fc_get_language` لعرض اللغة النشطة ورموز اللغات المدعومة. إذا كان `FC_LANGUAGE` غير مضبوط أو يحتوي على رمز غير مدعوم، فإن وقت التشغيل يعتمد الألمانية (de) افتراضيًا.
+تسرد قائمة التنقل في README لغات الوثائق المتاحة في هذا المستودع. تدعم رسائل وقت التشغيل والردود المنسقة في FileCommander الألمانية (de) والإنجليزية (en) والإسبانية (es) والصينية (zh) واليابانية (ja) والروسية (ru) والفرنسية (fr) والهندية (hi) والعربية (ar) والبنغالية (bn) والبرتغالية (pt). هذه القائمة منفصلة عن لغات ترجمة README. وهي تخص الرسائل التي تُنشأ وقت التشغيل ونتائج الأدوات المنسقة؛ أما عناوين أدوات MCP وأوصاف الاكتشاف وأوصاف المخطط فتبقى ثابتة باللغة الإنجليزية. اضبط `FC_LANGUAGE` على رمز مدعوم قبل بدء الخادم، أو استدعِ `fc_set_language` أثناء جلسة MCP نشطة. يعرض `fc_get_language` اللغة النشطة وجميع الرموز الإحدى عشرة المدعومة. إذا لم تُضبط `FC_LANGUAGE` أو احتوت على رمز غير مدعوم، فستُستخدم الألمانية (de) افتراضيًا. تتبع تنسيقات التاريخ والوقت اللغة النشطة.
 
 *جزء من عائلة [ellmos-ai](https://github.com/ellmos-ai).*
 
@@ -16,7 +16,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **محرك التحويل متعدد الصيغ دون فقدان** | تحويل تصريحي (`fc_convert_format`) عبر 7 صيغ مهيكلة (JSON وYAML وTOML وXML وCSV وINI وTOON). | توحيد نظيف للبيانات عبر ملفات الإعداد المتباينة دون فقدان للبيانات. |
 | **محرك إصلاح الترميز والملفات (Mojibake)** | يُصلح `fc_fix_encoding` و`fc_fix_json` و`fc_cleanup_file` ترميز UTF-8 التالف (أكثر من 27 نمطًا)، وأخطاء بنية JSON المشوهة، وعلامات BOM، وبايتات NUL. | خطوط معالجة ذاتية الإصلاح للملفات التالفة المُنشأة عبر أنظمة تشغيل مختلفة. |
 | **التنفيذ غير المُصعَّد دون صلاحيات مرتفعة** | مصمم ومُتحقَّق منه للعمل في وضع المستخدم العادي غير المميز. لا يتطلب أبدًا صلاحيات المسؤول أو root. | حد أدنى من سطح الهجوم؛ ويلتزم بمبدأ أقل الامتيازات. |
-| **محرك الترجمة الفورية للبيئة التشغيلية بست لغات** | تبديل ديناميكي للغة واستبطان لها (`fc_set_language` و`fc_get_language`) للألمانية (`de`) والإنجليزية (`en`) والإسبانية (`es`) والصينية (`zh`) واليابانية (`ja`) والروسية (`ru`). | تجربة مطور متعددة اللغات أصيلة، وتقارير أخطاء مترجمة محليًا. |
+| **محرك i18n لوقت التشغيل بإحدى عشرة لغة** | تبديل اللغة والاستعلام عنها ديناميكيًا (`fc_set_language` و`fc_get_language`) لجميع الرموز الإحدى عشرة المدعومة: `de`، `en`، `es`، `zh`، `ja`، `ru`، `fr`، `hi`، `ar`، `bn` و`pt`. | تجربة مطور متعددة اللغات أصيلة، وتقارير أخطاء مترجمة محليًا. |
 | **مصفوفة متعددة الأنظمة المُتحقَّق منها** | مُختبرة على Windows وUbuntu Linux وmacOS مع Node.js 20 و22 و24، مع 292 تأكيدًا آليًا. | توافق مستمر عبر المنصات وموثوقية. |
 
 ---
@@ -438,8 +438,8 @@ npm run build
 |------|-------------|
 | `fc_get_time` | الحصول على الوقت الحالي للنظام مع معلومات المنطقة الزمنية |
 | `fc_set_safe_mode` | تبديل الوضع الآمن: تمر جميع عمليات الحذف عبر سلة المحذوفات / سلة المهملات |
-| `fc_set_language` | تعيين لغة وقت التشغيل (`de`، أو `en`، أو `es`، أو `zh`، أو `ja`، أو `ru`) |
-| `fc_get_language` | قراءة لغة وقت التشغيل النشطة وجميع رموز اللغات المدعومة |
+| `fc_set_language` | تعيين لغة وقت التشغيل (`de`، `en`، `es`، `zh`، `ja`، `ru`، `fr`، `hi`، `ar`، `bn` أو `pt`) |
+| `fc_get_language` | قراءة لغة وقت التشغيل النشطة ورموز اللغات الإحدى عشرة المدعومة |
 
 ### التصدير (أداتان)
 
@@ -557,7 +557,7 @@ npm test
 
 ### الاختبار
 
-يتضمن المشروع **235 اختبار Vitest إضافياً و71 فحص i18n مستقلاً (306 إجمالاً)** تغطي عمليات نظام الملفات، والمعاينة المضمّنة المعتمدة على البيانات الوصفية أولاً، والبحث المحدود عن المحتوى، وتشغيل المعالج الافتراضي الأصلي، وتحويل التنسيقات، وإصلاح الترميز، ومعالجة الأرشيفات، وكشف التكرارات، وحزم اللغات، وتعليقات الأدوات التوضيحية، والسلوك الفعلي لـ stdio، وحدود الأمان.
+يتضمن المشروع **249 اختبار Vitest إضافياً و71 فحص i18n مستقلاً (320 إجمالاً)** تغطي عمليات نظام الملفات، والمعاينة المضمّنة المعتمدة على البيانات الوصفية أولاً، والبحث المحدود عن المحتوى، وتشغيل المعالج الافتراضي الأصلي، وتحويل التنسيقات، وإصلاح الترميز، ومعالجة الأرشيفات، وكشف التكرارات، وحزم اللغات، وتعليقات الأدوات التوضيحية، والسلوك الفعلي لـ stdio، وحدود الأمان.
 
 ```bash
 npm test              # Run all tests

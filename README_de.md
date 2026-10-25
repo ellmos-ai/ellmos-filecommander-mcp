@@ -6,7 +6,7 @@
 
 [English](README.md) | **Deutsch** | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
-Die README-Navigation listet die in diesem Repository verfügbaren Dokumentationssprachen auf. FileCommander-Runtime-Meldungen unterstützen Deutsch (de), Englisch (en), Spanisch (es), Chinesisch (zh), Japanisch (ja) und Russisch (ru). Diese Runtime-Liste ist von den README-Übersetzungssprachen getrennt. Setze `FC_LANGUAGE` vor dem Serverstart oder rufe `fc_set_language` während einer aktiven MCP-Sitzung auf. Mit `fc_get_language` kannst du die aktive Sprache und die unterstützten Sprachcodes abfragen. Wenn `FC_LANGUAGE` nicht gesetzt ist oder einen nicht unterstützten Code enthält, verwendet die Runtime standardmäßig Deutsch (de).
+Die README-Navigation listet die in diesem Repository verfügbaren Dokumentationssprachen auf. FileCommander-Runtime-Meldungen und formatierte Antworten unterstützen Deutsch (de), Englisch (en), Spanisch (es), Chinesisch (zh), Japanisch (ja), Russisch (ru), Französisch (fr), Hindi (hi), Arabisch (ar), Bengalisch (bn) und Portugiesisch (pt). Diese Laufzeitsprachenliste ist von den README-Übersetzungssprachen getrennt. Sie gilt für dynamisch erzeugte Runtime-Meldungen und formatierte Tool-Ergebnisse; MCP-Tool-Titel, Discovery-Beschreibungen und Schema-Beschreibungen bleiben statisch auf Englisch. Setze `FC_LANGUAGE` vor dem Serverstart auf einen unterstützten Code oder rufe `fc_set_language` während einer aktiven MCP-Sitzung auf. `fc_get_language` meldet die aktive Sprache und alle elf unterstützten Codes. Wenn `FC_LANGUAGE` nicht gesetzt ist oder einen nicht unterstützten Code enthält, verwendet die Runtime standardmäßig Deutsch (de). Datums- und Zeitformate richten sich nach der aktiven Sprache.
 
 *Teil der [ellmos-ai](https://github.com/ellmos-ai) Familie.*
 
@@ -15,7 +15,7 @@ Die README-Navigation listet die in diesem Repository verfügbaren Dokumentation
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -89,7 +89,7 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 +--------------------------------------------------------------------------------------------------+
 | [SICHT 2: FILECOMMANDER MCP KERN-ENGINE & DISPATCH-ORCHESTRATOR]                                 |
 |   * Protokoll-Dispatch  : ESM Stdio-Router mit Zod-Schema-Validierung & Parameterprüfung         |
-|   * Mehrsprachiger Kern : Dynamische 6-Sprachen-Laufzeit-Engine (de, en, es, zh, ja, ru)        |
+|   * Mehrsprachiger Kern : Dynamische 11-Sprachen-Laufzeit-i18n-Engine        |
 |   * Sicherheits-Guard   : Globaler Safety-Mode (fc_set_safe_mode) leitet Löschungen in Papierkorb|
 |   * Sync-Diagnostik     : Reparse-Point-Erkennung & Cloud-Filter-Diagnose (fc_check_cloud_lock)   |
 |   * Prozess-Supervisor  : Begrenztes Kindprozess-Lebenszyklusmanagement & interaktive REPL-      |
@@ -209,7 +209,7 @@ sequenceDiagram
 | **Verlustfreie Multi-Format-Engine** | Deklarative Konvertierung (`fc_convert_format`) über 7 strukturierte Formate (JSON, YAML, TOML, XML, CSV, INI, TOON). | Saubere Datenharmonisierung heterogener Konfigurationsformate ohne Informationsverlust. |
 | **Mojibake- & Dateireparatur-Engine** | `fc_fix_encoding`, `fc_fix_json` und `fc_cleanup_file` reparieren fehlerhafte UTF-8-Codierungen (27+ Muster), defekte JSON-Syntax, BOMs und NUL-Bytes. | Selbstheilende Dateipipelines bei plattformübergreifend beschädigten Text- und Datendateien. |
 | **Unprivilegierter Non-Elevation-Betrieb** | Ausgelegt und verifiziert für den Betrieb im unprivilegierten Standard-Benutzerkontext ohne Root-/Admin-Rechte. | Minimale Angriffsfläche nach dem Prinzip der geringsten Rechte (Least Privilege). |
-| **Sechssprachige Laufzeit-i18n-Engine** | Dynamische Sprachumschaltung und -abfrage (`fc_set_language`, `fc_get_language`) für Deutsch (`de`), Englisch (`en`), Spanisch (`es`), Chinesisch (`zh`), Japanisch (`ja`) und Russisch (`ru`). | Native mehrsprachige Entwicklererfahrung und verständliche Fehlerdiagnostik. |
+| **Elfsprachige Laufzeit-i18n-Engine** | Dynamische Sprachumschaltung und Abfrage (`fc_set_language`, `fc_get_language`) für alle 11 unterstützten Codes: `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` und `pt`. | Native mehrsprachige Entwicklererfahrung und verständliche Fehlerdiagnostik. |
 | **Multi-OS verifizierte CI-Matrix** | Vollständig getestet auf Windows, Ubuntu Linux und macOS unter Node.js 20, 22 und 24 mit 292 automatisierten Assertionen. | Durchgehende Plattformparität und Zuverlässigkeit. |
 
 ---
@@ -434,8 +434,8 @@ Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Clien
 |------|-------------|
 | `fc_get_time` | Aktuelle Systemzeit mit Zeitzoneninformation abrufen |
 | `fc_set_safe_mode` | Safety Mode umschalten: alle Löschvorgänge über Papierkorb / Trash |
-| `fc_set_language` | Laufzeitsprache auf `de`, `en`, `es`, `zh`, `ja` oder `ru` umschalten |
-| `fc_get_language` | Aktive Laufzeitsprache und alle unterstützten Sprachcodes abfragen |
+| `fc_set_language` | Laufzeitsprache auf `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` oder `pt` umschalten |
+| `fc_get_language` | Aktive Laufzeitsprache und alle 11 unterstützten Sprachcodes abfragen |
 
 ### Export (2 Tools)
 
@@ -550,7 +550,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **235 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (306 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **249 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (320 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen

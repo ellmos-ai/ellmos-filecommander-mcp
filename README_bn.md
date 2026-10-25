@@ -1,4 +1,4 @@
-<!-- worldset: {"translated_from_sha256": "b14c4d90b205afeb948351c40f5ee76737faae530da0e8c3cec486fbe24661fa", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
+<!-- worldset: {"translated_from_sha256": "310943b7f88d776f409deb86f0a6536cfe6e4f73674f992af028f8173869755c", "translator": "claude-haiku-5-5", "translated_at": "2026-10-25T07:17:11.496324+00:00", "reviewer": "gpt-6-luna/max; Root independent structure and risk samples"} -->
 <p align="center">
   <img src="assets/filecommander_banner.jpg" alt="FileCommander banner" width="700">
 </p>
@@ -7,7 +7,7 @@
 
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | **বাংলা** | [Português](README_pt.md)
 
-README নেভিগেশনে এই রিপোজিটরিতে উপলব্ধ ডকুমেন্টেশনের ভাষাগুলো তালিকাভুক্ত রয়েছে। FileCommander রানটাইম বার্তাগুলো জার্মান (de), ইংরেজি (en), স্প্যানিশ (es), চীনা (zh), জাপানি (ja) এবং রুশ (ru) সমর্থন করে। এই রানটাইম তালিকা README অনুবাদের উপলব্ধতা থেকে আলাদা। সার্ভার শুরু করার আগে `FC_LANGUAGE` সেট করুন, অথবা একটি সক্রিয় MCP সেশন চলাকালীন `fc_set_language` কল করুন। সক্রিয় ভাষা এবং সমর্থিত কোডগুলো দেখতে `fc_get_language` ব্যবহার করুন। যদি `FC_LANGUAGE` সেট করা না থাকে বা একটি অসমর্থিত কোড থাকে, তাহলে রানটাইম ডিফল্টভাবে জার্মান (de) ব্যবহার করে।
+README নেভিগেশনে এই রিপোজিটরিতে উপলব্ধ ডকুমেন্টেশনের ভাষাগুলো তালিকাভুক্ত রয়েছে। FileCommander-এর রানটাইম বার্তা ও বিন্যাস করা প্রতিক্রিয়া জার্মান (de), ইংরেজি (en), স্প্যানিশ (es), চীনা (zh), জাপানি (ja), রুশ (ru), ফরাসি (fr), হিন্দি (hi), আরবি (ar), বাংলা (bn) এবং পর্তুগিজ (pt) ভাষায় পাওয়া যায়। এই রানটাইম তালিকা README অনুবাদের উপলব্ধতা থেকে আলাদা। এটি রানটাইমে তৈরি বার্তা ও বিন্যাস করা টুল ফলাফলের ক্ষেত্রে প্রযোজ্য; MCP টুলের শিরোনাম, ডিসকভারি বিবরণ এবং স্কিমা বিবরণ স্থিরভাবে ইংরেজিতে থাকে। সার্ভার শুরু করার আগে `FC_LANGUAGE`-এ সমর্থিত একটি কোড সেট করুন, অথবা সক্রিয় MCP সেশনে `fc_set_language` কল করুন। `fc_get_language` সক্রিয় ভাষা ও সমর্থিত এগারোটি কোড জানায়। `FC_LANGUAGE` সেট না থাকলে বা অসমর্থিত কোড থাকলে রানটাইম ডিফল্টভাবে জার্মান (de) ব্যবহার করে। তারিখ ও সময়ের বিন্যাস সক্রিয় ভাষা অনুযায়ী হয়।
 
 *[ellmos-ai](https://github.com/ellmos-ai) পরিবারের অংশ।*
 
@@ -16,7 +16,7 @@ README নেভিগেশনে এই রিপোজিটরিতে উ�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-306%20passed%20(235%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -93,7 +93,7 @@ README নেভিগেশনে এই রিপোজিটরিতে উ�
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -213,7 +213,7 @@ sequenceDiagram
 | **ক্ষতিহীন বহু-বিন্যাস ইঞ্জিন** | 7টি কাঠামোগত বিন্যাস (JSON, YAML, TOML, XML, CSV, INI, TOON) জুড়ে ঘোষণামূলক রূপান্তর (`fc_convert_format`)। | ডেটা ক্ষতি ছাড়াই বিষমধর্মী কনফিগারেশন বিন্যাসের মধ্যে পরিষ্কার ডেটা স্বাভাবিকীকরণ। |
 | **মোজিবেক ও ফাইল মেরামত ইঞ্জিন** | `fc_fix_encoding`, `fc_fix_json` ও `fc_cleanup_file` ভাঙা UTF-8 এনকোডিং (27+ প্যাটার্ন), ত্রুটিপূর্ণ JSON সিনট্যাক্স, BOM এবং NUL বাইট মেরামত করে। | ভিন্ন ভিন্ন OS প্ল্যাটফর্মে তৈরি দূষিত ফাইলের জন্য স্ব-নিরাময়কারী পাইপলাইন। |
 | **সুবিধাবিহীন নন-এলিভেশন এক্সিকিউশন** | স্ট্যান্ডার্ড সুবিধাবিহীন ব্যবহারকারী-মোডে চলার জন্য ডিজাইন ও যাচাইকৃত। কখনো প্রশাসনিক বা root সুবিধার প্রয়োজন হয় না। | ন্যূনতম আক্রমণ পৃষ্ঠ; ন্যূনতম সুবিধার নীতি মেনে চলে। |
-| **ছয়-ভাষার রানটাইম i18n ইঞ্জিন** | গতিশীল ভাষা পরিবর্তন ও ভাষা-তথ্য জানার সুবিধা (`fc_set_language`, `fc_get_language`) জার্মান (`de`), ইংরেজি (`en`), স্প্যানিশ (`es`), চীনা (`zh`), জাপানি (`ja`) ও রুশ (`ru`) ভাষায় পাওয়া যায়। | স্থানীয় বহুভাষিক ডেভেলপার অভিজ্ঞতা এবং স্থানীয়কৃত ত্রুটি প্রতিবেদন। |
+| **এগারো-ভাষার রানটাইম i18n ইঞ্জিন** | সমর্থিত ১১টি কোডে গতিশীল ভাষা পরিবর্তন ও তথ্য দেখা (`fc_set_language`, `fc_get_language`): `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn` এবং `pt`। | স্থানীয় বহুভাষিক ডেভেলপার অভিজ্ঞতা এবং স্থানীয়কৃত ত্রুটি প্রতিবেদন। |
 | **বহু-OS যাচাইকৃত ম্যাট্রিক্স** | Node.js 20, 22 ও 24-এ Windows, Ubuntu Linux ও macOS জুড়ে 292টি স্বয়ংক্রিয় অ্যাসারশন সহ পরীক্ষিত। | ধারাবাহিক ক্রস-প্ল্যাটফর্ম সমতা ও নির্ভরযোগ্যতা। |
 
 ---
@@ -438,8 +438,8 @@ npm run build
 |------|-------------|
 | `fc_get_time` | টাইমজোন তথ্যসহ বর্তমান সিস্টেম সময় পান |
 | `fc_set_safe_mode` | নিরাপদ মোড টগল করুন: সব মুছে ফেলা Recycle Bin / Trash-এর মাধ্যমে হবে |
-| `fc_set_language` | রানটাইম ভাষা সেট করুন (`de`, `en`, `es`, `zh`, `ja`, বা `ru`) |
-| `fc_get_language` | সক্রিয় রানটাইম ভাষা এবং সমর্থিত সব ভাষা কোড পড়ুন |
+| `fc_set_language` | রানটাইম ভাষা সেট করুন (`de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn`, বা `pt`) |
+| `fc_get_language` | সক্রিয় রানটাইম ভাষা ও সমর্থিত ১১টি ভাষার কোড পড়ুন |
 
 ### এক্সপোর্ট (২টি সরঞ্জাম)
 
@@ -554,7 +554,7 @@ npm test
 
 ### পরীক্ষা
 
-প্রকল্পটিতে **২৩৫টি Vitest পরীক্ষা এবং আলাদা ৭১টি i18n যাচাই (মোট ৩০৬টি)** রয়েছে। এগুলো ফাইল-সিস্টেমের কাজ, metadata-প্রথম inline preview, সীমাবদ্ধ content অনুসন্ধান, native default-handler চালু করা, format conversion, encoding মেরামত, archive handling, duplicate শনাক্তকরণ, language pack, tool annotation, বাস্তব stdio আচরণ এবং নিরাপত্তার সীমানা পরীক্ষা করে।
+প্রকল্পটিতে **২৪৯টি Vitest পরীক্ষা এবং আলাদা ৭১টি i18n যাচাই (মোট ৩২০টি)** রয়েছে। এগুলো ফাইল-সিস্টেমের কাজ, metadata-প্রথম inline preview, সীমাবদ্ধ content অনুসন্ধান, native default-handler চালু করা, format conversion, encoding মেরামত, archive handling, duplicate শনাক্তকরণ, language pack, tool annotation, বাস্তব stdio আচরণ এবং নিরাপত্তার সীমানা পরীক্ষা করে।
 
 ```bash
 npm test              # Run all tests
