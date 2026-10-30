@@ -19,7 +19,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import updateNotifier from "update-notifier";
 import { createRequire } from "node:module";
 import { z } from "zod";
-import { t, setLanguage, getLanguage, getSupportedLanguages } from './i18n/index.js';
+import { t, setLanguage, getLanguage, getSupportedLanguages, SUPPORTED_LANGUAGE_CODES, getIntlLocale } from './i18n/index.js';
 import type { Lang } from './i18n/index.js';
 import * as fs from "fs/promises";
 import * as fsSync from "fs";
@@ -1030,7 +1030,7 @@ Returns:
 
       const stats = await fs.stat(targetPath);
       const fileType = stats.isDirectory() ? t().fc_file_info.typeDirectory : stats.isFile() ? t().fc_file_info.typeFile : t().fc_file_info.typeOther;
-      const locale = getLanguage() === 'de' ? 'de-DE' : 'en-US';
+      const locale = getIntlLocale();
 
       const info = [
         t().fc_file_info.header(path.basename(targetPath)),
@@ -1966,7 +1966,7 @@ Returns:
   },
   async () => {
     const now = new Date();
-    const locale = getLanguage() === 'de' ? 'de-DE' : 'en-US';
+    const locale = getIntlLocale();
 
     const output = [
       t().fc_get_time.header,
@@ -4820,7 +4820,7 @@ server.registerTool(
     title: "Set Language",
     description: "Set the output language for FileCommander tools",
     inputSchema: {
-      language: z.enum(["de", "en", "es", "zh", "ja", "ru"]).describe("Language code"),
+      language: z.enum(SUPPORTED_LANGUAGE_CODES).describe("Language code"),
     },
     annotations: {
       readOnlyHint: false,

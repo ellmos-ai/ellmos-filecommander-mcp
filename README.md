@@ -4,7 +4,9 @@
 
 # ellmos FileCommander MCP Server
 
-**🇩🇪 [Deutsche Version](README_de.md)**
+**English** | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
+
+The README navigation lists the documentation languages available in this repository. FileCommander runtime messages and formatted responses support German (de), English (en), Spanish (es), Chinese (zh), Japanese (ja), Russian (ru), French (fr), Hindi (hi), Arabic (ar), Bengali (bn), and Portuguese (pt). This runtime list is separate from README translation availability. It covers generated runtime messages and formatted tool responses; MCP tool titles, discovery descriptions, and schema descriptions remain static English. Set `FC_LANGUAGE` to one of the supported codes before starting the server, or call `fc_set_language` during an active MCP session. `fc_get_language` reports the active language and all eleven supported codes. Unset or unsupported `FC_LANGUAGE` values fall back to German (de). Date and time formatting follows the active locale.
 
 *Part of the [ellmos-ai](https://github.com/ellmos-ai) family.*
 
@@ -13,7 +15,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-307%20passed%20(236%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -90,7 +92,7 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 2: FILECOMMANDER MCP CORE ENGINE & DISPATCH ORCHESTRATOR]                                  |
 |   * Protocol Dispatch   : ESM stdio router with Zod schema validation & parameter checking      |
-|   * Multilingual Core   : 6-language dynamic runtime i18n (de, en, es, zh, ja, ru) engine       |
+|   * Multilingual Core   : 11-language dynamic runtime i18n engine       |
 |   * Safety Interceptor  : Global Safety Mode (fc_set_safe_mode) routing deletes to Recycle Bin   |
 |   * Sync Diagnostics    : Reparse point detection & cloud filter diagnostics (fc_check_cloud_lock)|
 |   * Process Supervisor  : Bounded child process lifecycle management & interactive REPL session  |
@@ -210,7 +212,7 @@ sequenceDiagram
 | **Lossless Multi-Format Engine** | Declarative conversion (`fc_convert_format`) across 7 structured formats (JSON, YAML, TOML, XML, CSV, INI, TOON). | Clean data normalization across heterogeneous configuration formats without data loss. |
 | **Mojibake & File Repair Engine** | `fc_fix_encoding`, `fc_fix_json`, and `fc_cleanup_file` repair broken UTF-8 encoding (27+ patterns), malformed JSON syntax, BOMs, and NUL bytes. | Self-healing pipelines for corrupted files generated across divergent OS platforms. |
 | **Unprivileged Non-Elevation Execution** | Designed and verified to run in standard unprivileged user-mode. Never requires administrative or root privileges. | Minimal attack surface; adheres to the principle of least privilege. |
-| **Six-language Runtime i18n Engine** | Dynamic language switching and introspection (`fc_set_language`, `fc_get_language`) for German (`de`), English (`en`), Spanish (`es`), Chinese (`zh`), Japanese (`ja`), and Russian (`ru`). | Native multilingual developer experience and localized error reporting. |
+| **Eleven-language Runtime i18n Engine** | Dynamic language switching and reporting (`fc_set_language`, `fc_get_language`) for all 11 supported codes: `de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn`, and `pt`. | Native multilingual developer experience and localized error reporting. |
 | **Multi-OS Verified Matrix** | Tested across Windows, Ubuntu Linux, and macOS on Node.js 20, 22, and 24 with 292 automated assertions. | Continuous cross-platform parity and reliability. |
 
 ---
@@ -435,8 +437,8 @@ The server communicates via **stdio transport**. Point your MCP client to the `d
 |------|-------------|
 | `fc_get_time` | Get current system time with timezone info |
 | `fc_set_safe_mode` | Toggle safe mode: all deletes go through Recycle Bin / Trash |
-| `fc_set_language` | Set the runtime language (`de`, `en`, `es`, `zh`, `ja`, or `ru`) |
-| `fc_get_language` | Read the active runtime language and all supported language codes |
+| `fc_set_language` | Set the runtime language (`de`, `en`, `es`, `zh`, `ja`, `ru`, `fr`, `hi`, `ar`, `bn`, or `pt`) |
+| `fc_get_language` | Read the active runtime language and all 11 supported language codes |
 
 ### Export (2 tools)
 
@@ -551,7 +553,7 @@ npm test
 
 ### Testing
 
-The project includes **236 Vitest tests plus 71 standalone i18n checks (307 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+The project includes **250 Vitest tests plus 71 standalone i18n checks (321 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
 
 ```bash
 npm test              # Run all tests

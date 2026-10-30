@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### World-Set documentation (2026-10-25)
+- Add full Spanish, Simplified Chinese, Japanese, Russian, French, Hindi, Arabic, Bengali and Portuguese READMEs alongside English and German.
+- Synchronize eleven-language documentation navigation and describe actual runtime selection/defaults separately.
+- Include all linked README editions in the npm files allowlist. Runtime locales and package version remain unchanged.
+
 ### Dependency security refresh (2026-10-24)
 - Integrate the Hono/Vite lockfile fixes from #18 on current master and refresh the remaining audited body-parser, fast-uri, ip-address and Vitest resolutions.
 - Require Zod 4.6.6 or newer within major version 4 for the published constrained-collection memory advisory. MCP SDK 1.32.1 supports Zod 4; its own version remains unchanged.

@@ -242,7 +242,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-307%20passed');
+    expect(en).toContain('tests-321%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -260,7 +260,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-307%20passed');
+    expect(de).toContain('tests-321%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
