@@ -89,10 +89,10 @@
     "express-rate-limit": "^8.6.2",
     "nanoid": "^3.3.17",
     "fast-uri": "^3.1.9",
-    "@hono/node-server": "^2.0.12",
+    "@hono/node-server": "^2.1.5",
     "ip-address": "^10.7.4",
     "fast-xml-builder": "^1.1.7",
-    "qs": "^6.16.0"
+    "qs": "^6.17.1"
   },
   "devDependencies": {
     "@emnapi/core": "^1.10.0",
