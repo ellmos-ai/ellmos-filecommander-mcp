@@ -16,7 +16,7 @@ README のナビゲーションには、このリポジトリで利用できる�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### テスト
 
-このプロジェクトには、**Vitest テスト 249 件に加え、スタンドアロンの i18n チェック 71 件（合計 320 件）**が含まれています。ファイルシステム操作、メタデータ優先のインラインプレビュー、境界付きの内容検索、ネイティブの既定ハンドラー起動、形式変換、エンコーディング修復、アーカイブ処理、重複検出、言語パック、ツールの注釈、実際の stdio の動作、およびセキュリティ境界を対象としています。
+このプロジェクトには、**Vitest テスト 250 件に加え、スタンドアロンの i18n チェック 71 件（合計 321 件）**が含まれています。ファイルシステム操作、メタデータ優先のインラインプレビュー、境界付きの内容検索、ネイティブの既定ハンドラー起動、形式変換、エンコーディング修復、アーカイブ処理、重複検出、言語パック、ツールの注釈、実際の stdio の動作、およびセキュリティ境界を対象としています。
 
 ```bash
 npm test              # Run all tests

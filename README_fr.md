@@ -16,7 +16,7 @@ La navigation du README répertorie les langues de documentation disponibles dan
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### Tests
 
-Le projet comprend **249 tests Vitest et 71 vérifications i18n autonomes (320 au total)** couvrant les opérations sur le système de fichiers, l'aperçu intégré privilégiant les métadonnées, la recherche de contenu bornée, le lancement natif via l'application par défaut, la conversion de format, la réparation d'encodage, la gestion des archives, la détection des doublons, les packs de langues, les annotations d'outils, le comportement réel du stdio et les limites de sécurité.
+Le projet comprend **250 tests Vitest et 71 vérifications i18n autonomes (321 au total)** couvrant les opérations sur le système de fichiers, l'aperçu intégré privilégiant les métadonnées, la recherche de contenu bornée, le lancement natif via l'application par défaut, la conversion de format, la réparation d'encodage, la gestion des archives, la détection des doublons, les packs de langues, les annotations d'outils, le comportement réel du stdio et les limites de sécurité.
 
 ```bash
 npm test              # Run all tests

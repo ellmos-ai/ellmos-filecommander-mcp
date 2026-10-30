@@ -16,7 +16,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -557,7 +557,7 @@ npm test
 
 ### الاختبار
 
-يتضمن المشروع **249 اختبار Vitest إضافياً و71 فحص i18n مستقلاً (320 إجمالاً)** تغطي عمليات نظام الملفات، والمعاينة المضمّنة المعتمدة على البيانات الوصفية أولاً، والبحث المحدود عن المحتوى، وتشغيل المعالج الافتراضي الأصلي، وتحويل التنسيقات، وإصلاح الترميز، ومعالجة الأرشيفات، وكشف التكرارات، وحزم اللغات، وتعليقات الأدوات التوضيحية، والسلوك الفعلي لـ stdio، وحدود الأمان.
+يتضمن المشروع **250 اختبار Vitest إضافياً و71 فحص i18n مستقلاً (321 إجمالاً)** تغطي عمليات نظام الملفات، والمعاينة المضمّنة المعتمدة على البيانات الوصفية أولاً، والبحث المحدود عن المحتوى، وتشغيل المعالج الافتراضي الأصلي، وتحويل التنسيقات، وإصلاح الترميز، ومعالجة الأرشيفات، وكشف التكرارات، وحزم اللغات، وتعليقات الأدوات التوضيحية، والسلوك الفعلي لـ stdio، وحدود الأمان.
 
 ```bash
 npm test              # Run all tests

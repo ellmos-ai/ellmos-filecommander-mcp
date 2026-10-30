@@ -16,7 +16,7 @@ README 导航会列出本仓库提供的文档语言。FileCommander 的运行�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### 测试
 
-本项目包含 **249 个 Vitest 测试以及 71 个独立的 i18n 检查(共 320 项)**,涵盖文件系统操作、以元数据优先的内联预览、有界内容搜索、原生默认处理程序启动、格式转换、编码修复、归档处理、重复检测、语言包、工具注解、真实 stdio 行为以及安全边界。
+本项目包含 **250 个 Vitest 测试以及 71 个独立的 i18n 检查(共 321 项)**,涵盖文件系统操作、以元数据优先的内联预览、有界内容搜索、原生默认处理程序启动、格式转换、编码修复、归档处理、重复检测、语言包、工具注解、真实 stdio 行为以及安全边界。
 
 ```bash
 npm test              # Run all tests

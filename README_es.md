@@ -16,7 +16,7 @@ La navegación del README enumera los idiomas de documentación disponibles en e
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### Pruebas
 
-El proyecto incluye **249 pruebas de Vitest más 71 comprobaciones de i18n independientes (320 en total)** que cubren operaciones de sistema de archivos, vista previa en línea basada primero en metadatos, búsqueda de contenido acotada, lanzamiento nativo con el controlador predeterminado, conversión de formatos, reparación de codificación, gestión de archivos comprimidos, detección de duplicados, paquetes de idioma, anotaciones de herramientas, comportamiento real de stdio y límites de seguridad.
+El proyecto incluye **250 pruebas de Vitest más 71 comprobaciones de i18n independientes (321 en total)** que cubren operaciones de sistema de archivos, vista previa en línea basada primero en metadatos, búsqueda de contenido acotada, lanzamiento nativo con el controlador predeterminado, conversión de formatos, reparación de codificación, gestión de archivos comprimidos, detección de duplicados, paquetes de idioma, anotaciones de herramientas, comportamiento real de stdio y límites de seguridad.
 
 ```bash
 npm test              # Run all tests

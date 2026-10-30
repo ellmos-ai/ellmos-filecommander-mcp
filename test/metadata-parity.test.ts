@@ -242,7 +242,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-320%20passed');
+    expect(en).toContain('tests-321%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -260,7 +260,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-320%20passed');
+    expect(de).toContain('tests-321%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
@@ -406,19 +406,19 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(cl).toContain('.gitignore Hardening');
   });
 
-  it('enforces zero-vulnerability dependency versions and license inventory alignment', () => {
+  it('checks declared security dependency floors and license inventory alignment', () => {
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
 
-    // Dependencies patched against high/moderate advisories
+    // Declared floors are a static contract; npm audit is checked separately.
     expect(pkg.dependencies['adm-zip']).toBe('^0.6.1');
     expect(pkg.dependencies['js-yaml']).toBe('^4.3.2');
     expect(pkg.dependencies['smol-toml']).toBe('^1.8.0');
-    expect(pkg.overrides['hono']).toBe('^4.13.8');
-    expect(pkg.overrides['fast-uri']).toBe('^3.1.8');
-    expect(pkg.overrides['ip-address']).toBe('^10.7.2');
+    expect(pkg.overrides['hono']).toBe('^4.13.13');
+    expect(pkg.overrides['fast-uri']).toBe('^3.1.9');
+    expect(pkg.overrides['ip-address']).toBe('^10.7.4');
     expect(pkg.overrides['qs']).toBe('^6.16.0');
-    expect(pkg.devDependencies['vitest']).toBe('^4.1.11');
+    expect(pkg.devDependencies['vitest']).toBe('^4.1.12');
 
     // Third-party licenses inventory synced
     expect(lic).toContain('Stand: 2026-10-03');
@@ -429,7 +429,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(lic).toContain('smol-toml');
     expect(lic).toContain('^1.8.0');
     expect(lic).toContain('vitest');
-    expect(lic).toContain('^4.1.11');
+    expect(lic).toContain('^4.1.12');
   });
 
   it('verifies marketing log records active hygiene, discoverability and security audit status', () => {

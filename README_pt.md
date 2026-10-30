@@ -16,7 +16,7 @@ A navegação do README lista os idiomas de documentação disponíveis neste re
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### Testes
 
-O projeto inclui **249 testes Vitest mais 71 verificações i18n independentes (320 no total)** cobrindo operações de sistema de arquivos, pré-visualização inline orientada a metadados, busca de conteúdo limitada, abertura nativa pelo aplicativo padrão, conversão de formato, reparo de codificação, manipulação de arquivos compactados, detecção de duplicatas, pacotes de idiomas, anotações de ferramentas, comportamento real do stdio e limites de segurança.
+O projeto inclui **250 testes Vitest mais 71 verificações i18n independentes (321 no total)** cobrindo operações de sistema de arquivos, pré-visualização inline orientada a metadados, busca de conteúdo limitada, abertura nativa pelo aplicativo padrão, conversão de formato, reparo de codificação, manipulação de arquivos compactados, detecção de duplicatas, pacotes de idiomas, anotações de ferramentas, comportamento real do stdio e limites de segurança.
 
 ```bash
 npm test              # Run all tests

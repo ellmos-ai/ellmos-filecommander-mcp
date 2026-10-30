@@ -7,6 +7,13 @@
 - Synchronize eleven-language documentation navigation and describe actual runtime selection/defaults separately.
 - Include all linked README editions in the npm files allowlist. Runtime locales and package version remain unchanged.
 
+### Dependency security refresh (2026-10-24)
+- Integrate the Hono/Vite lockfile fixes from #18 on current master and refresh the remaining audited body-parser, fast-uri, ip-address and Vitest resolutions.
+- Require Zod 4.6.6 or newer within major version 4 for the published constrained-collection memory advisory. MCP SDK 1.32.1 supports Zod 4; its own version remains unchanged.
+- Zod 4 exposes safe-integer bounds in tool schemas; the SDK omits some implicit additionalProperties=false flags while retaining unknown-key stripping at runtime. Real stdio regression coverage checks invalid argument types, enum values and unsafe integers.
+- Update declared security floors and dependency inventory ranges; a static metadata test is not an npm audit guarantee.
+- Anwendungsversion 1.11.5 bleibt eingefroren. Die Abhängigkeiten und Lizenzinventare sind aktualisiert; Veröffentlichung und unabhängige Abnahme erfolgen separat.
+
 ### Reproducible development and workflow maintenance (2026-10-18)
 - Use `npm ci` in the English and German source/development instructions so local installs use the same lockfile as CI.
 - Add weekly GitHub Actions dependency checks with at most three open maintenance PRs; npm updates remain security-only.

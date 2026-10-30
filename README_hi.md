@@ -16,7 +16,7 @@ README नेविगेशन इस रिपॉज़िटरी में 
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-320%20passed%20(249%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### परीक्षण
 
-इस परियोजना में **249 Vitest परीक्षण और 71 स्वतंत्र i18n जाँच (कुल 320)** शामिल हैं, जो फ़ाइल सिस्टम संचालन, मेटाडेटा-प्रथम इनलाइन पूर्वावलोकन, सीमित सामग्री खोज, मूल डिफ़ॉल्ट-हैंडलर लॉन्चिंग, प्रारूप रूपांतरण, एन्कोडिंग मरम्मत, आर्काइव हैंडलिंग, डुप्लीकेट पहचान, भाषा पैक, टूल एनोटेशन, वास्तविक stdio व्यवहार और सुरक्षा सीमाओं को कवर करते हैं।
+इस परियोजना में **250 Vitest परीक्षण और 71 स्वतंत्र i18n जाँच (कुल 321)** शामिल हैं, जो फ़ाइल सिस्टम संचालन, मेटाडेटा-प्रथम इनलाइन पूर्वावलोकन, सीमित सामग्री खोज, मूल डिफ़ॉल्ट-हैंडलर लॉन्चिंग, प्रारूप रूपांतरण, एन्कोडिंग मरम्मत, आर्काइव हैंडलिंग, डुप्लीकेट पहचान, भाषा पैक, टूल एनोटेशन, वास्तविक stdio व्यवहार और सुरक्षा सीमाओं को कवर करते हैं।
 
 ```bash
 npm test              # Run all tests
