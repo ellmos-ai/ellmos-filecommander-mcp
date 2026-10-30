@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { getDefaultEnvironment, StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 
@@ -130,6 +131,24 @@ describe("language tools over real stdio MCP transport", () => {
       error_code: "PATH_NOT_FOUND",
       fallback: null,
     });
+  });
+
+  it("validates types, enum values and safe integers over real stdio", async () => {
+    for (const request of [
+      { name: "fc_read_file", arguments: { path: 123 } },
+      { name: "fc_set_language", arguments: { language: "invalid" } },
+      { name: "fc_read_file", arguments: { path: resolve(ROOT, "README.md"), max_lines: Number.MAX_SAFE_INTEGER + 1 } },
+    ]) {
+      const result = await client.callTool(request);
+      expect("isError" in result && result.isError).toBe(true);
+    }
+    // Ordinary fields still work; unknown keys retain the SDK's stripping behavior.
+    const valid = await client.callTool({
+      name: "fc_read_file",
+      arguments: { path: resolve(ROOT, "README.md"), max_lines: 1, unknown_field: "ignored" },
+    });
+    expect("isError" in valid && valid.isError).not.toBe(true);
+    expect(textContent(valid)).toContain(readFileSync(resolve(ROOT, "README.md"), "utf-8").split(/\r?\n/, 1)[0]);
   });
 
   it("reports the active language after every supported runtime switch", async () => {
