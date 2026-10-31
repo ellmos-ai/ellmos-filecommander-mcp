@@ -417,7 +417,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.overrides['hono']).toBe('^4.13.13');
     expect(pkg.overrides['fast-uri']).toBe('^3.1.9');
     expect(pkg.overrides['ip-address']).toBe('^10.7.4');
-    expect(pkg.overrides['qs']).toBe('^6.16.0');
+    expect(pkg.overrides['qs']).toBe('^6.17.1');
     expect(pkg.devDependencies['vitest']).toBe('^4.1.12');
 
     // Third-party licenses inventory synced
