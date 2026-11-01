@@ -134,3 +134,5 @@ htmlcov/
 # Lokale Ablage verworfener Artefakte
 _archive/
 
+# Internes Automationsdokument (Nutzerentscheid 2026-09-26): nie veroeffentlichen
+MARKETING-LOG.txt

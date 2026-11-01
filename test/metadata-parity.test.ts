@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
+import { execSync } from 'child_process';
 
 const ROOT = resolve(__dirname, '..');
 
@@ -14,7 +15,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   const readmeDePath = resolve(ROOT, 'README_de.md');
   const changelogPath = resolve(ROOT, 'CHANGELOG.md');
   const securityPath = resolve(ROOT, 'SECURITY.md');
-  const marketingLogPath = resolve(ROOT, 'MARKETING-LOG.txt');
   const thirdPartyLicensesPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.md');
   const thirdPartyLicensesTxtPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.txt');
   const noticePath = resolve(ROOT, 'NOTICE');
@@ -30,7 +30,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(existsSync(readmeDePath)).toBe(true);
     expect(existsSync(changelogPath)).toBe(true);
     expect(existsSync(securityPath)).toBe(true);
-    expect(existsSync(marketingLogPath)).toBe(true);
     expect(existsSync(thirdPartyLicensesPath)).toBe(true);
     expect(existsSync(thirdPartyLicensesTxtPath)).toBe(true);
     expect(existsSync(noticePath)).toBe(true);
@@ -76,7 +75,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('server.json');
     expect(files).toContain('glama.json');
     expect(files).toContain('llms.txt');
-    expect(files).toContain('MARKETING-LOG.txt');
     expect(files).toContain('THIRD_PARTY_LICENSES.md');
     expect(files).toContain('THIRD_PARTY_LICENSES.txt');
     expect(files).toContain('NOTICE');
@@ -91,7 +89,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(llms).toContain('safe-delete');
     expect(llms).toContain('SECURITY.md');
     expect(llms).toContain('CHANGELOG.md');
-    expect(llms).toContain('MARKETING-LOG.txt');
     expect(llms).toContain('THIRD_PARTY_LICENSES.md');
     expect(llms).toContain('THIRD_PARTY_LICENSES.txt');
     expect(llms).toContain('NOTICE');
@@ -367,7 +364,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('INV-REPL-08');
     expect(en).toContain('INV-PROC-09');
     expect(en).toContain('INV-SLA-10');
-    expect(en).toContain('MARKETING-LOG.txt');
     expect(en).toContain('THIRD_PARTY_LICENSES.md');
 
     expect(de).toContain('Lokales stdio & expliziter Egress');
@@ -388,7 +384,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('INV-REPL-08');
     expect(de).toContain('INV-PROC-09');
     expect(de).toContain('INV-SLA-10');
-    expect(de).toContain('MARKETING-LOG.txt');
     expect(de).toContain('THIRD_PARTY_LICENSES.md');
   });
 
@@ -432,29 +427,38 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(lic).toContain('^4.1.12');
   });
 
-  it('verifies marketing log records active hygiene, discoverability and security audit status', () => {
-    const mkt = readFileSync(marketingLogPath, 'utf-8');
-    expect(mkt).toContain('Audit Date: 2026-09-13');
-    expect(mkt).toContain('Audit Date: 2026-09-19');
-    expect(mkt).toContain('Audit Date: 2026-09-20');
-    expect(mkt).toContain('Audit Date: 2026-09-23');
-    expect(mkt).toContain('Audit Date: 2026-09-28');
-    expect(mkt).toContain('Audit Date: 2026-10-01');
-    expect(mkt).toContain('Audit Date: 2026-10-03');
-    expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ARCHITECTURE PARITY VERIFIED');
-    expect(mkt).toContain('ACTIVE / 0 VULNERABILITIES VERIFIED & 30-DAY SLA CODIFIED');
-    expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & CI HARDENING VERIFIED (v1.11.5)');
-    expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & SBOM TEXT COMPANION VERIFIED (v1.11.5 frozen)');
-    expect(mkt).toContain('ACTIVE / PFAD B DISCOVERABILITY & ASCII 4-VIEW TOPOLOGY VERIFIED (v1.11.5 frozen)');
-    expect(mkt).toContain('ACTIVE / PFAD A REPOSITORY HYGIENE & BILINGUAL CONTRIBUTING VERIFIED (v1.11.5 frozen)');
-    expect(mkt).toContain('HIGH-INTENT KEYWORD MATRIX & DISCOVERABILITY TARGETS');
-    expect(mkt).toContain('5-WAY COMPARATIVE ARCHITECTURE MATRIX (10 OPERATIONAL DIMENSIONS)');
-    expect(mkt).toContain('291 automated tests');
-    expect(mkt).toContain('292 passed tests');
-    expect(mkt).toContain('299 passed tests');
-    expect(mkt).toContain('303 passed tests');
-    expect(mkt).toContain('304 passed tests');
-  });
+  it('tracks and packs no internal agent files (forbidden-file gate)', () => {
+    // Mirrors FORBIDDEN_INTERNAL_FILENAME_PATTERNS of the central repo_privacy_gate.py. MARKETING-LOG.txt is an
+    // internal automation record (user decision 2026-09-26): it must be neither tracked nor published.
+    const forbidden = [
+      /(?:^|\/)BEFUNDE\.md$/i,
+      /(?:^|\/)[A-Z0-9_-]*(?:MARKETING|STATUS)-LOG\.txt$/i,
+      /(?:^|\/)[A-Z0-9_]*_DAILY_CARE\.md$/i,
+      /(?:^|\/)TASKPLAN_STATUS_.*\.md$/i,
+      /(?:^|\/)STORE_(?:CONTRACT|READINESS)\.md$/i,
+      /(?:^|\/)_STAGING\//i,
+      /(?:^|\/)LOCK(?:\.[^/]*)?\.txt$/i,
+      /(?:^|\/)PRIVATE\.txt$/i,
+    ];
+    const hits = (paths: string[]) =>
+      paths.filter((p) => forbidden.some((re) => re.test(p.replace(/\\/g, '/'))));
+
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+    expect(hits(pkg.files ?? [])).toEqual([]);
+
+    const packed = JSON.parse(
+      execSync('npm pack --dry-run --json --ignore-scripts', { cwd: ROOT, encoding: 'utf-8', maxBuffer: 16 * 1024 * 1024 }),
+    );
+    expect(hits(packed[0].files.map((f: { path: string }) => f.path))).toEqual([]);
+
+    let tracked: string[] | null = null;
+    try {
+      tracked = execSync('git ls-files', { cwd: ROOT, encoding: 'utf-8' }).split(/\r?\n/).filter(Boolean);
+    } catch {
+      // not a git checkout (for example a source tarball): the pack list above still applies
+    }
+    if (tracked) expect(hits(tracked)).toEqual([]);
+  }, 60000);
 
   it('verifies mermaid diagrams in documentation follow parse-safe syntax without bare special characters', () => {
     const en = readFileSync(readmeEnPath, 'utf-8');
@@ -697,7 +701,6 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
       readmeDePath,
       changelogPath,
       securityPath,
-      marketingLogPath,
       thirdPartyLicensesPath,
       thirdPartyLicensesTxtPath,
       noticePath,

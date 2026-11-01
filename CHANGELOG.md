@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Remove internal MARKETING-LOG.txt from the published surface (2026-11-01)
+- `MARKETING-LOG.txt` is an internal automation record, not part of the product. It is no longer tracked, packed (`files`), linked from the READMEs or `llms.txt`, and the metadata tests no longer require it.
+- Add a forbidden-file test: the tracked tree and the npm pack list must contain none of the internal agent file patterns (marketing/status logs, findings logs, staging directories, lock and private marker files).
+- Older history and already published npm versions still contain the file; no history rewrite.
+
 ### World-Set documentation (2026-10-25)
 - Add full Spanish, Simplified Chinese, Japanese, Russian, French, Hindi, Arabic, Bengali and Portuguese READMEs alongside English and German.
 - Synchronize eleven-language documentation navigation and describe actual runtime selection/defaults separately.
