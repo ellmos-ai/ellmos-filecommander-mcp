@@ -193,6 +193,18 @@ sequenceDiagram
         FS-->>FC: Done
         FC-->>AI: Move succeeded
     end
+
+    Note over AI,FC: 3. Bounded Preview & Remote Safety (fc_preview_file)
+    AI->>FC: fc_preview_file(path, include_content=false)
+    FC->>FS: Metadata-only inspection (size, MIME type, preview kind)
+    FS-->>FC: File stat (e.g. 500 KB, text/plain)
+    FC-->>AI: Structured preview descriptor (1 MiB ceiling enforced)
+    opt Explicit Content Retrieval
+        AI->>FC: fc_preview_file(path, include_content=true)
+        FC->>FS: Read bounded content block
+        FS-->>FC: Raw content bytes
+        FC-->>AI: Standard MCP text/image content block
+    end
 ```
 
 ---
@@ -327,6 +339,44 @@ Add to your `claude_desktop_config.json`:
 ```
 
 Restart Claude Desktop after saving.
+
+### Claude Code CLI
+
+Add FileCommander to Claude Code via CLI:
+
+```bash
+claude mcp add filecommander -- ellmos-filecommander
+```
+
+Or configure directly in `~/.claude.json` under `mcpServers`.
+
+### Antigravity & Gemini CLI
+
+Configure in `%USERPROFILE%\.gemini\antigravity\mcp_config.json` or your project's `.gemini/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Cursor IDE
+
+Add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
 
 ### Other MCP Clients
 

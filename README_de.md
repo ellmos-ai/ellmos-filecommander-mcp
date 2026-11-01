@@ -190,6 +190,18 @@ sequenceDiagram
         FS-->>FC: Fertiggestellt
         FC-->>AI: Verschiebevorgang geglückt
     end
+
+    Note over AI,FC: 3. Begrenzte Vorschau & Remote-Schutz (fc_preview_file)
+    AI->>FC: fc_preview_file(path, include_content=false)
+    FC->>FS: Reine Metadaten-Prüfung (Größe, MIME-Typ, Vorschau-Art)
+    FS-->>FC: Dateistatus (z. B. 500 KB, text/plain)
+    FC-->>AI: Strukturierter Vorschau-Deskriptor (1-MiB-Obergrenze garantiert)
+    opt Expliziter Inhaltsabruf
+        AI->>FC: fc_preview_file(path, include_content=true)
+        FC->>FS: Begrenzten Inhaltsblock einlesen
+        FS-->>FC: Rohdaten-Bytes
+        FC-->>AI: Standardisierter MCP text/image Inhaltsblock
+    end
 ```
 
 ---
@@ -324,6 +336,44 @@ Zur `claude_desktop_config.json` hinzufügen:
 ```
 
 Claude Desktop nach dem Speichern neu starten.
+
+### Claude Code CLI
+
+FileCommander zu Claude Code über die Befehlszeile hinzufügen:
+
+```bash
+claude mcp add filecommander -- ellmos-filecommander
+```
+
+Oder direkt in `~/.claude.json` unter `mcpServers` eintragen.
+
+### Antigravity & Gemini CLI
+
+In `%USERPROFILE%\.gemini\antigravity\mcp_config.json` oder der projektbezogenen `.gemini/mcp_config.json` hinterlegen:
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Cursor IDE
+
+In `.cursor/mcp.json` eintragen:
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
 
 ### Andere MCP-Clients
 

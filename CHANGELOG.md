@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Discoverability, Bounded Preview Sequence Flow & Multi-Client Configuration (Pfad B - 2026-11-01)
+- **End-to-End Execution Lifecycle Sequence Flow Expansion:**
+  - Expanded Mermaid sequence diagram in both `README.md` and `README_de.md` (Section 03) to include Phase 3: Bounded Preview & Remote Safety (`fc_preview_file`), illustrating metadata-first inspection (1 MiB ceiling) and explicit content retrieval blocks.
+  - Verified syntactical validity via `_tools/lint_mermaid.py` with 0 warnings across all Markdown files.
+- **Multi-Client Agent Configuration Architecture:**
+  - Expanded Section 07 (Configuration / Konfiguration) across bilingual documentation with turnkey configuration snippets for Claude Code CLI (`claude mcp add`), Antigravity & Gemini CLI (`mcp_config.json`), Cursor IDE (`.cursor/mcp.json`), and general stdio MCP runtimes.
+- **Strict Version Freeze Discipline (`T-20260920-167562623`):**
+  - Package and registry version preserved at `1.11.5` across all manifests and source code.
+
 ### World-Set documentation (2026-10-25)
 - Add full Spanish, Simplified Chinese, Japanese, Russian, French, Hindi, Arabic, Bengali and Portuguese READMEs alongside English and German.
 - Synchronize eleven-language documentation navigation and describe actual runtime selection/defaults separately.
