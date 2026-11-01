@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fix `fc_open_path` on Windows: default handlers that are packaged apps now start (2026-11-01)
+- The Windows launcher was spawned `detached`. A detached PowerShell accepted the request (`launcher_accepted: true`) but never started a packaged (MSIX) default handler, so no window appeared. Measured on Windows 11 with a `.md` file whose handler is a Store-packaged app: the same ShellExecute script started the handler when attached and did not when detached. The launcher is no longer detached on Windows; macOS and Linux are unchanged.
+- `user_visible` stays `"unknown"`: the tool still does not claim to have seen a window.
+
 ### Remove internal MARKETING-LOG.txt from the published surface (2026-11-01)
 - `MARKETING-LOG.txt` is an internal automation record, not part of the product. It is no longer tracked, packed (`files`), linked from the READMEs or `llms.txt`, and the metadata tests no longer require it.
 - Add a forbidden-file test: the tracked tree and the npm pack list must contain none of the internal agent file patterns (marketing/status logs, findings logs, staging directories, lock and private marker files).

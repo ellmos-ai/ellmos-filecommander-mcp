@@ -9,7 +9,7 @@ export type OpenPathErrorCode =
   | "LAUNCH_FAILED";
 
 export interface OpenPathSpawnOptions {
-  detached: true;
+  detached: boolean;
   stdio: "ignore";
   shell: false;
   windowsHide?: boolean;
@@ -202,6 +202,11 @@ export async function openPath(
     launcher = "powershell.exe";
     spawnOptions = {
       ...commonOptions,
+      // Not detached on Windows: a DETACHED_PROCESS launcher starts the default handler
+      // only for classic Win32 apps. A packaged (MSIX) handler is accepted but never
+      // started (measured with .md -> a Store app; same script is fine when attached).
+      // The launcher exits right after ShellExecute and unref() keeps node from waiting.
+      detached: false,
       windowsHide: true,
       env: {
         ...environment,

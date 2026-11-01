@@ -90,7 +90,9 @@ describe("openPath", () => {
     expect(launcher.calls).toHaveLength(1);
     expect(launcher.calls[0].command).toBe("C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe");
     expect(launcher.calls[0].options).toMatchObject({
-      detached: true,
+      // A detached (DETACHED_PROCESS) PowerShell launcher is accepted but never starts
+      // a packaged (MSIX) default handler, so no window appears (T-20261031-149274563).
+      detached: false,
       stdio: "ignore",
       shell: false,
       windowsHide: true,
