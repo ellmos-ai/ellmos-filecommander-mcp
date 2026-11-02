@@ -193,6 +193,18 @@ sequenceDiagram
         FS-->>FC: Done
         FC-->>AI: Move succeeded
     end
+
+    Note over AI,FC: 3. Bounded Preview & Remote Safety (fc_preview_file)
+    AI->>FC: fc_preview_file(path, include_content=false)
+    FC->>FS: Metadata-only inspection (size, MIME type, preview kind)
+    FS-->>FC: File stat (e.g. 500 KB, text/plain)
+    FC-->>AI: Structured preview descriptor (1 MiB ceiling enforced)
+    opt Explicit Content Retrieval
+        AI->>FC: fc_preview_file(path, include_content=true)
+        FC->>FS: Read bounded content block
+        FS-->>FC: Raw content bytes
+        FC-->>AI: Standard MCP text/image content block
+    end
 ```
 
 ---
@@ -327,6 +339,58 @@ Add to your `claude_desktop_config.json`:
 ```
 
 Restart Claude Desktop after saving.
+
+### Claude Code CLI
+
+Add FileCommander to Claude Code via CLI:
+
+```bash
+claude mcp add filecommander -- ellmos-filecommander
+```
+
+Or configure directly in `~/.claude.json` under `mcpServers`.
+
+### Gemini CLI
+
+Merge the following `mcpServers` entry into `~/.gemini/settings.json` for the current user, or `.gemini/settings.json` in your project. On Windows, `~` is `%USERPROFILE%`. Preserve other settings and existing servers. See the [official Gemini CLI configuration reference](https://geminicli.com/docs/reference/configuration/).
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Antigravity
+
+Merge the same server entry into `~/.gemini/config/mcp_config.json` globally, or `.agents/mcp_config.json` in your workspace. These paths differ from Gemini CLI settings. Preserve existing entries; for the IDE you can also open **MCP Servers → Manage MCP Servers → View raw config**. See the [official Antigravity MCP reference](https://antigravity.google/docs/mcp).
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Cursor IDE
+
+Add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
 
 ### Other MCP Clients
 

@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+### Client configuration corrections and current-master integration (2026-11-02)
+- Separate Gemini CLI settings.json instructions from Antigravity mcp_config.json instructions, linking each client's official configuration reference.
+- Integrate current master while preserving the Windows default-handler fix and removal of internal marketing logs from the published surface.
+- Documentation correction only relative to master; no runtime, dependency, workflow or product-version change.
+
+### Discoverability, Bounded Preview Sequence Flow & Multi-Client Configuration (Pfad B - 2026-11-01)
+- **End-to-End Execution Lifecycle Sequence Flow Expansion:**
+  - Expanded Mermaid sequence diagram in both `README.md` and `README_de.md` (Section 03) to include Phase 3: Bounded Preview & Remote Safety (`fc_preview_file`), illustrating metadata-first inspection (1 MiB ceiling) and explicit content retrieval blocks.
+  - Verified syntactical validity via `_tools/lint_mermaid.py` with 0 warnings across all Markdown files.
+- **Multi-Client Agent Configuration Architecture:**
+  - Expanded Section 07 (Configuration / Konfiguration) across bilingual documentation with configuration snippets for Claude Code CLI (`claude mcp add`), Gemini CLI (`settings.json`), Antigravity (`mcp_config.json`), Cursor IDE (`.cursor/mcp.json`), and general stdio MCP runtimes.
+- **Strict Version Freeze Discipline (`T-20260920-167562623`):**
+  - Package and registry version preserved at `1.11.5` across all manifests and source code.
+
 ### Fix `fc_open_path` on Windows: default handlers that are packaged apps now start (2026-11-01)
 - The Windows launcher was spawned `detached`. A detached PowerShell accepted the request (`launcher_accepted: true`) but never started a packaged (MSIX) default handler, so no window appeared. Measured on Windows 11 with a `.md` file whose handler is a Store-packaged app: the same ShellExecute script started the handler when attached and did not when detached. The launcher is no longer detached on Windows; macOS and Linux are unchanged.
 - `user_visible` stays `"unknown"`: the tool still does not claim to have seen a window.

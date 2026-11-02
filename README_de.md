@@ -190,6 +190,18 @@ sequenceDiagram
         FS-->>FC: Fertiggestellt
         FC-->>AI: Verschiebevorgang geglückt
     end
+
+    Note over AI,FC: 3. Begrenzte Vorschau & Remote-Schutz (fc_preview_file)
+    AI->>FC: fc_preview_file(path, include_content=false)
+    FC->>FS: Reine Metadaten-Prüfung (Größe, MIME-Typ, Vorschau-Art)
+    FS-->>FC: Dateistatus (z. B. 500 KB, text/plain)
+    FC-->>AI: Strukturierter Vorschau-Deskriptor (1-MiB-Obergrenze garantiert)
+    opt Expliziter Inhaltsabruf
+        AI->>FC: fc_preview_file(path, include_content=true)
+        FC->>FS: Begrenzten Inhaltsblock einlesen
+        FS-->>FC: Rohdaten-Bytes
+        FC-->>AI: Standardisierter MCP text/image Inhaltsblock
+    end
 ```
 
 ---
@@ -324,6 +336,58 @@ Zur `claude_desktop_config.json` hinzufügen:
 ```
 
 Claude Desktop nach dem Speichern neu starten.
+
+### Claude Code CLI
+
+FileCommander zu Claude Code über die Befehlszeile hinzufügen:
+
+```bash
+claude mcp add filecommander -- ellmos-filecommander
+```
+
+Oder direkt in `~/.claude.json` unter `mcpServers` eintragen.
+
+### Gemini CLI
+
+Den folgenden `mcpServers`-Eintrag für den aktuellen Benutzer in `~/.gemini/settings.json` oder projektbezogen in `.gemini/settings.json` ergänzen. Unter Windows entspricht `~` dem Verzeichnis `%USERPROFILE%`. Andere Einstellungen und vorhandene Server erhalten. Siehe die [offizielle Gemini-CLI-Konfigurationsreferenz](https://geminicli.com/docs/reference/configuration/).
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Antigravity
+
+Denselben Servereintrag global in `~/.gemini/config/mcp_config.json` oder im Workspace in `.agents/mcp_config.json` ergänzen. Diese Pfade unterscheiden sich von den Gemini-CLI-Einstellungen. Vorhandene Einträge erhalten; in der IDE lässt sich die Datei auch über **MCP Servers → Manage MCP Servers → View raw config** öffnen. Siehe die [offizielle Antigravity-MCP-Referenz](https://antigravity.google/docs/mcp).
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Cursor IDE
+
+In `.cursor/mcp.json` eintragen:
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
 
 ### Andere MCP-Clients
 
