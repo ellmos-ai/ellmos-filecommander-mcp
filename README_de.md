@@ -29,7 +29,7 @@ Die README-Navigation listet die in diesem Repository verfügbaren Dokumentation
 > **Schnellnavigation:**
 > 1. [Überblick](#sec-01) | 2. [Systemarchitektur](#sec-02) | 3. [End-to-End Ausführungszyklus](#sec-03) | 4. [Kernfähigkeiten & Sicherheitsinvarianten](#sec-04) | 5. [Zielgruppen & Auffindbarkeit](#sec-05) | 6. [Installation & Voraussetzungen](#sec-06) | 7. [Konfiguration & Client-Einrichtung](#sec-07) | 8. [Tools-Übersicht (50 Tools)](#sec-08) | 9. [Vergleichsmatrix & Alternativen](#sec-09) | 10. [Tool-Präfix & Namenskonvention](#sec-10) | 11. [Governance & Laufzeit-Invarianten](#sec-11) | 12. [Sicherheitsarchitektur & Risiken](#sec-12) | 13. [Entwicklung, Tests & Verifikation](#sec-13) | 14. [Changelog & Versionierung](#sec-14) | 15. [Level 1 SBOM & Drittanbieter-Lizenzen](#sec-15) | 16. [Historie & Evolution](#sec-16) | 17. [ellmos-ai Ökosystem & Partnermatrix](#sec-17) | 18. [Gesetzlicher Hinweis (§ 521 BGB) & Haftung](#sec-18)
 >
-> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [🤝 Mitwirken](CONTRIBUTING.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📄 Level 1 SBOM Text](THIRD_PARTY_LICENSES.txt) • [📜 Marketing-Log](MARKETING-LOG.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
+> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [🤝 Mitwirken](CONTRIBUTING.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📄 Level 1 SBOM Text](THIRD_PARTY_LICENSES.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -347,9 +347,23 @@ claude mcp add filecommander -- ellmos-filecommander
 
 Oder direkt in `~/.claude.json` unter `mcpServers` eintragen.
 
-### Antigravity & Gemini CLI
+### Gemini CLI
 
-In `%USERPROFILE%\.gemini\antigravity\mcp_config.json` oder der projektbezogenen `.gemini/mcp_config.json` hinterlegen:
+Den folgenden `mcpServers`-Eintrag für den aktuellen Benutzer in `~/.gemini/settings.json` oder projektbezogen in `.gemini/settings.json` ergänzen. Unter Windows entspricht `~` dem Verzeichnis `%USERPROFILE%`. Andere Einstellungen und vorhandene Server erhalten. Siehe die [offizielle Gemini-CLI-Konfigurationsreferenz](https://geminicli.com/docs/reference/configuration/).
+
+```json
+{
+  "mcpServers": {
+    "filecommander": {
+      "command": "ellmos-filecommander"
+    }
+  }
+}
+```
+
+### Antigravity
+
+Denselben Servereintrag global in `~/.gemini/config/mcp_config.json` oder im Workspace in `.agents/mcp_config.json` ergänzen. Diese Pfade unterscheiden sich von den Gemini-CLI-Einstellungen. Vorhandene Einträge erhalten; in der IDE lässt sich die Datei auch über **MCP Servers → Manage MCP Servers → View raw config** öffnen. Siehe die [offizielle Antigravity-MCP-Referenz](https://antigravity.google/docs/mcp).
 
 ```json
 {

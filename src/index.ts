@@ -28,6 +28,8 @@ import * as crypto from "crypto";
 import { createHash } from "crypto";
 import * as os from "os";
 import * as dns from "dns/promises";
+import * as http from "node:http";
+import * as https from "node:https";
 import * as net from "net";
 import { exec, execSync, spawn } from "child_process";
 import { promisify } from "util";
@@ -4580,8 +4582,8 @@ function fcWebIsBlockedIp(ip: string): boolean {
   return true; // not a valid IP literal -> block
 }
 
-async function fcWebGuardTarget(rawUrl: string, allowPrivate: boolean): Promise<URL> {
-  let u: URL;
+async function fcWebGuardTarget(rawUrl: string, allowPrivate: boolean): Promise<URL & { __pinnedIp?: string }> {
+  let u: URL & { __pinnedIp?: string };
   try {
     u = new URL(rawUrl);
   } catch {
@@ -4593,8 +4595,9 @@ async function fcWebGuardTarget(rawUrl: string, allowPrivate: boolean): Promise<
   if (allowPrivate) return u;
   const host = u.hostname;
   if (!host) throw new Error('No host in URL');
-  if (host.toLowerCase() === 'localhost') {
-    throw new Error('Blocked internal target: localhost (set allow_private to override)');
+  const lowerHost = host.toLowerCase().replace(/\.$/, '');
+  if (lowerHost === 'localhost' || lowerHost === 'metadata.google.internal' || lowerHost === 'metadata' || lowerHost === 'instance-data') {
+    throw new Error(`Blocked internal target: ${host} (set allow_private to override)`);
   }
   let ips: string[];
   if (net.isIP(host)) {
@@ -4613,6 +4616,7 @@ async function fcWebGuardTarget(rawUrl: string, allowPrivate: boolean): Promise<
       throw new Error(`Blocked internal/private target: ${host} -> ${ip} (set allow_private to override)`);
     }
   }
+  u.__pinnedIp = ips[0];
   return u;
 }
 
@@ -4681,33 +4685,91 @@ function fcWebParseForms(html: string): { action: string; method: string; fields
   return forms;
 }
 
-async function fcWebDoFetch(startUrl: URL, timeoutMs: number, allowPrivate: boolean): Promise<{ status: number; headers: Headers; body: string; contentType: string; finalUrl: string }> {
+function fcWebSinglePinnedGet(
+  target: URL & { __pinnedIp?: string },
+  signal: AbortSignal,
+): Promise<{ status: number; headers: Headers; bodyBuffer: Buffer }> {
+  return new Promise((resolve, reject) => {
+    const isHttps = target.protocol === 'https:';
+    const mod = isHttps ? https : http;
+    const pinnedIp = target.__pinnedIp;
+    const options: https.RequestOptions = {
+      protocol: target.protocol,
+      hostname: target.hostname,
+      port: target.port || (isHttps ? 443 : 80),
+      path: `${target.pathname}${target.search}`,
+      method: 'GET',
+      headers: {
+        'User-Agent': FC_WEB_USER_AGENT,
+        'Host': target.host,
+        'Accept-Encoding': 'identity',
+      },
+      servername: target.hostname,
+      signal,
+    };
+    if (pinnedIp) {
+      // DNS-Pinning (SentinelFleet pattern, MIT licensed by Lukas Geiger 2026-10-25):
+      // Pin the already-validated IP at socket creation so DNS rebinding cannot switch to 127.0.0.1/169.254.169.254.
+      options.lookup = (_hostname, opts, cb) => {
+        const family = net.isIP(pinnedIp) || 4;
+        if (opts && typeof opts === 'object' && 'all' in opts && (opts as { all?: boolean }).all) {
+          (cb as (err: NodeJS.ErrnoException | null, addresses: Array<{ address: string; family: number }>) => void)(
+            null, [{ address: pinnedIp, family }]
+          );
+          return;
+        }
+        (cb as (err: NodeJS.ErrnoException | null, address: string, family: number) => void)(null, pinnedIp, family);
+      };
+    }
+    const req = mod.request(options, (res) => {
+      const headers = new Headers();
+      for (const [k, v] of Object.entries(res.headers)) {
+        if (Array.isArray(v)) headers.set(k, v.join(', '));
+        else if (typeof v === 'string') headers.set(k, v);
+      }
+      const cl = headers.get('content-length');
+      if (cl && Number(cl) > FC_WEB_MAX_BYTES) {
+        res.destroy();
+        reject(new Error(`Response too large: ${cl} bytes (limit ${FC_WEB_MAX_BYTES})`));
+        return;
+      }
+      const chunks: Buffer[] = [];
+      let total = 0;
+      res.on('data', (chunk: Buffer) => {
+        if (total < FC_WEB_MAX_BYTES) {
+          const remaining = FC_WEB_MAX_BYTES - total;
+          chunks.push(chunk.length > remaining ? chunk.subarray(0, remaining) : chunk);
+        }
+        total += chunk.length;
+      });
+      res.on('end', () => {
+        resolve({ status: res.statusCode ?? 0, headers, bodyBuffer: Buffer.concat(chunks) });
+      });
+      res.on('error', reject);
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+async function fcWebDoFetch(startUrl: URL & { __pinnedIp?: string }, timeoutMs: number, allowPrivate: boolean): Promise<{ status: number; headers: Headers; body: string; contentType: string; finalUrl: string }> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   const MAX_REDIRECTS = 5;
   try {
-    let current = startUrl;
+    let current: URL & { __pinnedIp?: string } = startUrl;
     for (let hop = 0; ; hop++) {
-      const resp = await fetch(current, {
-        redirect: 'manual',
-        signal: controller.signal,
-        headers: { 'User-Agent': FC_WEB_USER_AGENT },
-      });
+      const resp = await fcWebSinglePinnedGet(current, controller.signal);
       const location = resp.headers.get('location');
       if (resp.status >= 300 && resp.status < 400 && location) {
-        // Re-guard EVERY hop so a public URL cannot redirect into an internal target.
+        // Re-guard and re-pin EVERY hop so a public URL cannot redirect into an internal or DNS-rebound target.
         if (hop >= MAX_REDIRECTS) throw new Error(`Too many redirects (>${MAX_REDIRECTS})`);
         const next = new URL(location, current);
         current = await fcWebGuardTarget(next.toString(), allowPrivate);
         continue;
       }
       const contentType = resp.headers.get('content-type') || '';
-      const cl = resp.headers.get('content-length');
-      if (cl && Number(cl) > FC_WEB_MAX_BYTES) {
-        throw new Error(`Response too large: ${cl} bytes (limit ${FC_WEB_MAX_BYTES})`);
-      }
-      const buf = Buffer.from(await resp.arrayBuffer());
-      const body = buf.subarray(0, FC_WEB_MAX_BYTES).toString('utf-8');
+      const body = resp.bodyBuffer.subarray(0, FC_WEB_MAX_BYTES).toString('utf-8');
       return { status: resp.status, headers: resp.headers, body, contentType, finalUrl: current.toString() };
     }
   } finally {

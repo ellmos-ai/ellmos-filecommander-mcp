@@ -33,7 +33,7 @@ README 导航会列出本仓库提供的文档语言。FileCommander 的运行�
 > **快速导航：**
 > 1. [概述](#sec-01) | 2. [系统架构](#sec-02) | 3. [端到端执行生命周期](#sec-03) | 4. [核心能力与安全不变量](#sec-04) | 5. [目标用户画像与可发现性](#sec-05) | 6. [安装与前置条件](#sec-06) | 7. [配置与客户端设置](#sec-07) | 8. [工具概览（50 个工具）](#sec-08) | 9. [对比矩阵与替代方案](#sec-09) | 10. [工具前缀与命名约定](#sec-10) | 11. [治理与运行时不变量](#sec-11) | 12. [安全架构与工具风险](#sec-12) | 13. [测试、质量门禁与验证](#sec-13) | 14. [变更日志与版本控制](#sec-14) | 15. [一级 SBOM 与第三方许可证](#sec-15) | 16. [历史与演进](#sec-16) | 17. [ellmos-ai 生态系统与合作伙伴矩阵](#sec-17) | 18. [法定声明（德国民法典第 521 条）与责任免责声明](#sec-18)
 >
-> | 直接链接：[🛡️ 安全政策](SECURITY.md) • [🤝 贡献指南](CONTRIBUTING.md) • [⚖️ 第三方许可证](THIRD_PARTY_LICENSES.md) • [📄 纯文本 SBOM](THIRD_PARTY_LICENSES.txt) • [📜 营销日志](MARKETING-LOG.txt) • [🤖 LLM 上下文（llms.txt）](llms.txt) • [📋 标准声明](NOTICE) |
+> | 直接链接：[🛡️ 安全政策](SECURITY.md) • [🤝 贡献指南](CONTRIBUTING.md) • [⚖️ 第三方许可证](THIRD_PARTY_LICENSES.md) • [📄 纯文本 SBOM](THIRD_PARTY_LICENSES.txt) • [🤖 LLM 上下文（llms.txt）](llms.txt) • [📋 标准声明](NOTICE) |
 
 一个功能全面的 **模型上下文协议（MCP）服务器**，为 AI 助手提供完整的文件系统访问、有界的多文件内容搜索、进程管理、交互式 Shell 会话以及异步文件名搜索能力。
 
