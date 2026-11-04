@@ -50,6 +50,24 @@ claimed or tested.
       re-run the bilingual heading and content-parity checks. Current measured
       structure: 45 English headings versus 45 German headings (synchronized).
 
+## AI Security & Dependency Audit (2026-11-04)
+
+- [x] Comprehensive supply-chain and vulnerability audit (`npm audit` -> 0 vulnerabilities across 215 packages).
+- [x] Upgrade `@modelcontextprotocol/sdk` to `^1.32.2` (resolving upstream advisories GHSA-6qxp-vccf-f47h, GHSA-22jm-h49p-29qw, GHSA-6prh-2h8m-c8cw, GHSA-46jr-4wx8-v453, GHSA-rvq5-wwqv-78pq, GHSA-f897-62hf-6gxq).
+- [x] Harden `zod` to `^4.6.7` (mitigating memory exhaustion vulnerability GHSA-mrhx-c7xc-m3w5).
+- [x] Align and pin supply-chain security overrides in `package.json` with sibling MCP servers:
+  - `proxy-addr` (`^2.0.8`, critical GHSA-jqcg-44mw-7w3h)
+  - `body-parser` (`^2.4.0`, high GHSA-27r3-jxmh-p828)
+  - `ip-address` (`^10.7.5`, updated from `^10.7.4`)
+  - `vitest` (`^4.1.12`)
+  - `@vitest/mocker` (`^4.1.12`)
+  - `source-map-js` (`^1.2.2`)
+  - `postcss` (`^8.5.18`)
+- [x] Harmonize Level 1 SBOM documents (`THIRD_PARTY_LICENSES.md` & `THIRD_PARTY_LICENSES.txt`) to audit date 2026-11-04.
+- [x] AST/Regex secrets and privacy scan: 0 hardcoded personal developer homepaths (`C:\Users\lukas\...`), 0 credentials/tokens, 0 private keys (except synthetic INV-MASK-06 test fixture).
+- [x] Extend automated contract test suite (`test/metadata-parity.test.ts`) verifying hardened overrides, SBOM date, and TODO register parity.
+- [x] Synchronize Plan D OneDrive mirror via `repo_mirror.py --apply`.
+
 ## AI Security & Dependency Audit (2026-09-19)
 
 - [x] Comprehensive supply-chain and vulnerability audit (`npm audit` -> 0 vulnerabilities).

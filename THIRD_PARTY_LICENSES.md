@@ -1,6 +1,6 @@
 # Third-Party License Inventory & Open-Source Transparency Notice
 
-Dependency ranges refreshed 2026-10-24: SDK ^1.32.1, Zod ^4.6.6, Vitest ^4.1.12. This range update is not a new legal or complete SBOM audit.
+Dependency ranges refreshed 2026-11-04: SDK ^1.32.2, Zod ^4.6.7, Vitest ^4.1.12. Hardened supply-chain overrides pinned. This range update is not a new legal or complete SBOM audit.
 
 Stand: 2026-10-03.
 
@@ -15,8 +15,8 @@ This document inventories all direct third-party runtime and development depende
 
 | Package | Version Range | License | Primary Purpose | Repository / Source |
 |---------|---------------|---------|-----------------|---------------------|
-| `@modelcontextprotocol/sdk` | `^1.32.1` | MIT | Core Model Context Protocol stdio transport & schema binding | https://github.com/modelcontextprotocol/typescript-sdk |
-| `zod` | `^4.6.6` | MIT | Tool argument schema validation & parsing | https://github.com/colinhacks/zod |
+| `@modelcontextprotocol/sdk` | `^1.32.2` | MIT | Core Model Context Protocol stdio transport & schema binding | https://github.com/modelcontextprotocol/typescript-sdk |
+| `zod` | `^4.6.7` | MIT | Tool argument schema validation & parsing | https://github.com/colinhacks/zod |
 | `adm-zip` | `^0.6.1` | MIT | ZIP archive creation, extraction, and inspection | https://github.com/cthackers/adm-zip |
 | `js-yaml` | `^4.3.2` | MIT | YAML document serialization and parsing | https://github.com/nodeca/js-yaml |
 | `smol-toml` | `^1.8.0` | MIT | TOML parsing and serialization | https://github.com/nicolo-ribaudo/smol-toml |

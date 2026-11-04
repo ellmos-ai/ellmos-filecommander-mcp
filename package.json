@@ -74,14 +74,14 @@
   },
   "homepage": "https://github.com/ellmos-ai/ellmos-filecommander-mcp#readme",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "@toon-format/toon": "^2.1.0",
     "adm-zip": "^0.6.1",
     "fast-xml-parser": "^5.10.1",
     "js-yaml": "^4.3.2",
     "smol-toml": "^1.8.0",
     "update-notifier": "^7.3.1",
-    "zod": "^4.6.6"
+    "zod": "^4.6.7"
   },
   "overrides": {
     "hono": "^4.13.13",
@@ -89,9 +89,15 @@
     "nanoid": "^3.3.17",
     "fast-uri": "^3.1.9",
     "@hono/node-server": "^2.1.5",
-    "ip-address": "^10.7.4",
+    "ip-address": "^10.7.5",
     "fast-xml-builder": "^1.1.7",
-    "qs": "^6.17.1"
+    "qs": "^6.17.1",
+    "vitest": "^4.1.12",
+    "@vitest/mocker": "^4.1.12",
+    "proxy-addr": "^2.0.8",
+    "source-map-js": "^1.2.2",
+    "body-parser": "^2.4.0",
+    "postcss": "^8.5.18"
   },
   "devDependencies": {
     "@emnapi/core": "^1.10.0",

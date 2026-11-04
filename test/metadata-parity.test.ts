@@ -404,19 +404,28 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   it('checks declared security dependency floors and license inventory alignment', () => {
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
+    const todo = readFileSync(resolve(ROOT, 'TODO.md'), 'utf-8');
 
     // Declared floors are a static contract; npm audit is checked separately.
+    expect(pkg.dependencies['@modelcontextprotocol/sdk']).toBe('^1.32.2');
+    expect(pkg.dependencies['zod']).toBe('^4.6.7');
     expect(pkg.dependencies['adm-zip']).toBe('^0.6.1');
     expect(pkg.dependencies['js-yaml']).toBe('^4.3.2');
     expect(pkg.dependencies['smol-toml']).toBe('^1.8.0');
     expect(pkg.overrides['hono']).toBe('^4.13.13');
     expect(pkg.overrides['fast-uri']).toBe('^3.1.9');
-    expect(pkg.overrides['ip-address']).toBe('^10.7.4');
+    expect(pkg.overrides['ip-address']).toBe('^10.7.5');
     expect(pkg.overrides['qs']).toBe('^6.17.1');
+    expect(pkg.overrides['proxy-addr']).toBe('^2.0.8');
+    expect(pkg.overrides['body-parser']).toBe('^2.4.0');
+    expect(pkg.overrides['source-map-js']).toBe('^1.2.2');
+    expect(pkg.overrides['postcss']).toBe('^8.5.18');
     expect(pkg.devDependencies['vitest']).toBe('^4.1.12');
 
     // Third-party licenses inventory synced
     expect(lic).toContain('Stand: 2026-10-03');
+    expect(lic).toContain('^1.32.2');
+    expect(lic).toContain('^4.6.7');
     expect(lic).toContain('adm-zip');
     expect(lic).toContain('^0.6.1');
     expect(lic).toContain('js-yaml');
@@ -425,6 +434,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(lic).toContain('^1.8.0');
     expect(lic).toContain('vitest');
     expect(lic).toContain('^4.1.12');
+
+    // TODO.md registers the AI Security Audit
+    expect(todo).toContain('## AI Security & Dependency Audit (2026-11-04)');
+    expect(todo).toContain('GHSA-jqcg-44mw-7w3h');
   });
 
   it('tracks and packs no internal agent files (forbidden-file gate)', () => {

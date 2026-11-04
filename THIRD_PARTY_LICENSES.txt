@@ -6,7 +6,7 @@ Repository License: MIT License (see LICENSE)
 Repository Attribution Notice: NOTICE (see NOTICE)
 Architecture & Privacy: 100% Local-First, Zero-Egress by default (explicit fc_web_fetch only), Unprivileged User-Mode (RunAsInvoker), Level 1 SBOM Transparency
 
-Dependency ranges refreshed 2026-10-24: SDK ^1.32.1, Zod ^4.6.6, Vitest ^4.1.12. This range update is not a new legal or complete SBOM audit.
+Dependency ranges refreshed 2026-11-04: SDK ^1.32.2, Zod ^4.6.7, Vitest ^4.1.12. Hardened supply-chain overrides pinned. This range update is not a new legal or complete SBOM audit.
 
 ================================================================================
 1. EXECUTIVE SUMMARY & COMPLIANCE ASSURANCE
@@ -72,8 +72,8 @@ INV-SLA-10    | 48h Security & 5-Day Triage SLA     | SECURITY.md (security@open
 
 Package                  | Version Range  | SPDX License   | Purpose / Functional Scope
 -------------------------+----------------+----------------+---------------------------------------------------
-@modelcontextprotocol/sdk| ^1.32.1        | MIT            | Core MCP stdio transport & schema binding
-zod                      | ^4.6.6        | MIT            | Tool argument schema validation & parsing
+@modelcontextprotocol/sdk| ^1.32.2        | MIT            | Core MCP stdio transport & schema binding
+zod                      | ^4.6.7         | MIT            | Tool argument schema validation & parsing
 adm-zip                  | ^0.6.1         | MIT            | ZIP archive creation, extraction, and inspection
 js-yaml                  | ^4.3.2         | MIT            | YAML document serialization and parsing
 smol-toml                | ^1.8.0         | MIT            | TOML parsing and serialization
