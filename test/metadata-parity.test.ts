@@ -389,6 +389,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
   it('verifies changelog records recent release history and version consistency', () => {
     const cl = readFileSync(changelogPath, 'utf-8');
+    expect(cl).toContain('## [1.11.6] - 2026-11-09');
     expect(cl).toContain('## [1.11.5] - 2026-09-20');
     expect(cl).toContain('Repository Hygiene, CI Timeout Hardening & Multi-Host Defense (Pfad A)');
     expect(cl).toContain('## [1.11.4] - 2026-09-19');

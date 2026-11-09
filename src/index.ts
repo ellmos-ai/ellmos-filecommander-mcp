@@ -9,7 +9,7 @@
  * See LICENSE file for details.
  *
  * @author Lukas (BACH)
- * @version 1.11.5
+ * @version 1.11.6
  * @license MIT
  */
 
@@ -64,7 +64,7 @@ const nodeRequire = createRequire(import.meta.url);
 
 const server = new McpServer({
   name: "ellmos-filecommander-mcp",
-  version: "1.11.5"
+  version: "1.11.6"
 });
 
 // ============================================================================

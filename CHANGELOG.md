@@ -2,6 +2,24 @@
 
 ## [Unreleased]
 
+## [1.11.6] - 2026-11-09
+
+### Fixed
+- **Windows 11 Default Handler & File Launching (`fc_open_path`):**
+  - Do not detach the Windows launcher (`detached: false`): attached PowerShell ensures default handlers that are packaged apps (MSIX / Windows Store) and default-associated files (such as `.md`) start and open visibly in foreground.
+
+### Changed
+- **Client Configuration Reference & Paths:**
+  - Updated Gemini CLI and Antigravity configuration paths: Separated `settings.json` instructions from `mcp_config.json` instructions, linking each client's official configuration reference.
+
+### Security
+- **Dependency & Supply-Chain Hardening / SBOM Updates:**
+  - Supply-chain hardening, Level 1 SBOM sync, and dependency range updates (`@modelcontextprotocol/sdk` ^1.32.2, `zod` ^4.6.7, `vitest` ^4.1.12), ensuring zero-vulnerability posture and strict supply-chain security.
+
+### Docs
+- **Documentation & Discoverability Updates:**
+  - Pfad B discoverability, bounded preview sequence flow (`fc_preview_file`), multi-client agent configuration architecture, 11-language documentation alignment, and removal of internal marketing logs from the published package surface.
+
 ### Client configuration corrections and current-master integration (2026-11-02)
 - Separate Gemini CLI settings.json instructions from Antigravity mcp_config.json instructions, linking each client's official configuration reference.
 - Integrate current master while preserving the Windows default-handler fix and removal of internal marketing logs from the published surface.
