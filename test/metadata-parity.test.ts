@@ -62,6 +62,12 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(pkg.description).toContain('50 tools');
   });
 
+  it('server.json description fits the MCP registry limit of 100 characters', () => {
+    // The registry rejects longer descriptions with HTTP 422; 1.11.5 and 1.11.6 never reached it because of this.
+    const server = JSON.parse(readFileSync(serverPath, 'utf-8'));
+    expect(server.description.length).toBeLessThanOrEqual(100);
+  });
+
   it('package.json files array includes all essential artifacts and manifests', () => {
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
     const files = pkg.files || [];
