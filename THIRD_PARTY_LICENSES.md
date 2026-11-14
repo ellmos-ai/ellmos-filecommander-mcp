@@ -20,7 +20,7 @@ This document inventories all direct third-party runtime and development depende
 | `adm-zip` | `^0.6.1` | MIT | ZIP archive creation, extraction, and inspection | https://github.com/cthackers/adm-zip |
 | `js-yaml` | `^4.3.2` | MIT | YAML document serialization and parsing | https://github.com/nodeca/js-yaml |
 | `smol-toml` | `^1.8.0` | MIT | TOML parsing and serialization | https://github.com/nicolo-ribaudo/smol-toml |
-| `fast-xml-parser` | `^5.10.1` | MIT | Fast XML parser and validator | https://github.com/NaturalIntelligence/fast-xml-parser |
+| `fast-xml-parser` | `^5.12.0` | MIT | Fast XML parser and validator | https://github.com/NaturalIntelligence/fast-xml-parser |
 | `@toon-format/toon` | `^2.1.0` | MIT | TOON format serialization and conversion | https://github.com/nicfontaine/toon |
 | `update-notifier` | `^7.3.1` | BSD-2-Clause | Non-intrusive interactive CLI update notification | https://github.com/yeoman/update-notifier |
 

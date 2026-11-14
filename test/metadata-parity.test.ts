@@ -413,21 +413,36 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     const lic = readFileSync(thirdPartyLicensesPath, 'utf-8');
     const todo = readFileSync(resolve(ROOT, 'TODO.md'), 'utf-8');
 
-    // Declared floors are a static contract; npm audit is checked separately.
-    expect(pkg.dependencies['@modelcontextprotocol/sdk']).toBe('^1.32.2');
-    expect(pkg.dependencies['zod']).toBe('^4.6.7');
-    expect(pkg.dependencies['adm-zip']).toBe('^0.6.1');
-    expect(pkg.dependencies['js-yaml']).toBe('^4.3.2');
-    expect(pkg.dependencies['smol-toml']).toBe('^1.8.0');
-    expect(pkg.overrides['hono']).toBe('^4.13.13');
-    expect(pkg.overrides['fast-uri']).toBe('^3.1.9');
-    expect(pkg.overrides['ip-address']).toBe('^10.7.5');
-    expect(pkg.overrides['qs']).toBe('^6.17.1');
-    expect(pkg.overrides['proxy-addr']).toBe('^2.0.8');
-    expect(pkg.overrides['body-parser']).toBe('^2.4.0');
-    expect(pkg.overrides['source-map-js']).toBe('^1.2.2');
-    expect(pkg.overrides['postcss']).toBe('^8.5.18');
-    expect(pkg.devDependencies['vitest']).toBe('^4.1.12');
+    const expectCaretFloor = (actual: unknown, floor: string) => {
+      expect(typeof actual).toBe('string');
+      const mAct = /^\^(\d+)\.(\d+)\.(\d+)$/.exec(actual as string);
+      const mFlr = /^\^(\d+)\.(\d+)\.(\d+)$/.exec(floor);
+      expect(mAct).not.toBeNull();
+      expect(mFlr).not.toBeNull();
+      const [aMaj, aMin, aPat] = [Number(mAct![1]), Number(mAct![2]), Number(mAct![3])];
+      const [fMaj, fMin, fPat] = [Number(mFlr![1]), Number(mFlr![2]), Number(mFlr![3])];
+      expect(aMaj).toBe(fMaj);
+      expect(aMin > fMin || (aMin === fMin && aPat >= fPat)).toBe(true);
+    };
+
+    // Declared Caret-SemVer floors enforce minimum patched versions while allowing non-breaking security bumps.
+    expectCaretFloor(pkg.dependencies['@modelcontextprotocol/sdk'], '^1.32.2');
+    expectCaretFloor(pkg.dependencies['zod'], '^4.6.7');
+    expectCaretFloor(pkg.dependencies['adm-zip'], '^0.6.1');
+    expectCaretFloor(pkg.dependencies['fast-xml-parser'], '^5.12.0');
+    expectCaretFloor(pkg.dependencies['js-yaml'], '^4.3.2');
+    expectCaretFloor(pkg.dependencies['smol-toml'], '^1.8.0');
+    expectCaretFloor(pkg.overrides['hono'], '^4.13.16');
+    expectCaretFloor(pkg.overrides['@hono/node-server'], '^2.1.6');
+    expectCaretFloor(pkg.overrides['fast-xml-builder'], '^1.3.1');
+    expectCaretFloor(pkg.overrides['fast-uri'], '^3.1.9');
+    expectCaretFloor(pkg.overrides['ip-address'], '^10.7.5');
+    expectCaretFloor(pkg.overrides['qs'], '^6.17.1');
+    expectCaretFloor(pkg.overrides['proxy-addr'], '^2.0.8');
+    expectCaretFloor(pkg.overrides['body-parser'], '^2.4.0');
+    expectCaretFloor(pkg.overrides['source-map-js'], '^1.2.2');
+    expectCaretFloor(pkg.overrides['postcss'], '^8.5.18');
+    expectCaretFloor(pkg.devDependencies['vitest'], '^4.1.12');
 
     // Third-party licenses inventory synced
     expect(lic).toContain('Stand: 2026-10-03');
