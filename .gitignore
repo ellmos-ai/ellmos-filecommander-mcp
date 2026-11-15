@@ -73,6 +73,11 @@ LOCK.condition.*
 LOCK.dev.*
 LOCK.antigravity.*
 LOCK.bugsearch.*
+LOCK.orchestrator.*
+LOCK.operator.*
+LOCK.worker.*
+LOCK.thinker.*
+LOCK.reviewer.*
 LOCK.permissions.json
 *.lock
 .automation-lock
@@ -122,6 +127,7 @@ TASKPLAN_*.md
 .pytest_temp/
 .pytest_tmp*/
 .ruff_cache/
+.mypy_cache/
 .coverage
 .coverage.*
 coverage/

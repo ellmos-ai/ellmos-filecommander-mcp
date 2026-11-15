@@ -45,12 +45,12 @@ npm test
 
 ### 3. Version Freeze Discipline (`T-20260920-167562623`)
 
-ellmos-filecommander-mcp operates under strict version-freeze discipline. Version identifiers (`1.11.5` across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`) must not be arbitrarily incremented. All improvements, bug fixes, and hygiene adjustments are documented under `## [Unreleased]` in `CHANGELOG.md`.
+ellmos-filecommander-mcp operates under strict version-freeze discipline. Version identifiers (`1.11.6` across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`) must not be arbitrarily incremented. All improvements, bug fixes, and hygiene adjustments are documented under `## [Unreleased]` in `CHANGELOG.md`.
 
 ### 4. Quality Gates
 
 Before submitting a pull request, verify all local quality gates:
-1. `npm test`: 100% green test execution across all Vitest suites and standalone i18n checks (305+ tests).
+1. `npm test`: 100% green test execution across all Vitest suites and standalone i18n checks (320+ tests).
 2. `npm run build`: Zero TypeScript compilation errors.
 3. `git diff --check`: Zero whitespace or line-ending anomalies.
 4. `git diff -G'"version": '`: Zero unauthorized version bumps.
@@ -103,12 +103,12 @@ npm test
 
 ### 3. Version-Freeze-Disziplin (`T-20260920-167562623`)
 
-ellmos-filecommander-mcp unterliegt strikter Version-Freeze-Disziplin. Die Versionskennung (`1.11.5` in `package.json`, `package-lock.json`, `server.json`, `glama.json` und `src/index.ts`) darf nicht eigenmächtig erhöht werden. Sämtliche Verbesserungen, Fehlerbehebungen und Hygiene-Anpassungen werden unter `## [Unreleased]` in `CHANGELOG.md` dokumentiert.
+ellmos-filecommander-mcp unterliegt strikter Version-Freeze-Disziplin. Die Versionskennung (`1.11.6` in `package.json`, `package-lock.json`, `server.json`, `glama.json` und `src/index.ts`) darf nicht eigenmächtig erhöht werden. Sämtliche Verbesserungen, Fehlerbehebungen und Hygiene-Anpassungen werden unter `## [Unreleased]` in `CHANGELOG.md` dokumentiert.
 
 ### 4. Qualitäts-Tore
 
 Vor dem Einreichen eines Pull Requests müssen alle lokalen Qualitäts-Tore erfüllt sein:
-1. `npm test`: 100% grüne Testergebnisse über alle Vitest-Suiten und Standalone-i18n-Prüfungen (305+ Tests).
+1. `npm test`: 100% grüne Testergebnisse über alle Vitest-Suiten und Standalone-i18n-Prüfungen (320+ Tests).
 2. `npm run build`: 0 TypeScript-Kompilierungsfehler.
 3. `git diff --check`: 0 Whitespace- oder Zeilenumbruchfehler.
 4. `git diff -G'"version": '`: 0 unautorisierte Versionsänderungen.

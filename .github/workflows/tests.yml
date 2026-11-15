@@ -29,6 +29,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      - name: Verify whitespace and line endings
+        run: git diff --check
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:

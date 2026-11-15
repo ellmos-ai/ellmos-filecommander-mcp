@@ -15,7 +15,7 @@ Die README-Navigation listet die in diesem Repository verfügbaren Dokumentation
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-325%20passed%20(254%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -23,13 +23,13 @@ Die README-Navigation listet die in diesem Repository verfügbaren Dokumentation
 [![Security: RunAsInvoker](https://img.shields.io/badge/security-unprivileged%20RunAsInvoker-green.svg)](SECURITY.md)
 [![SBOM: Audited](https://img.shields.io/badge/SBOM-Level%201%20audited-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Level 1 SBOM: Plain Text](https://img.shields.io/badge/Level%201%20SBOM-Plain%20Text-blue.svg)](THIRD_PARTY_LICENSES.txt)
-[![Last-Checked](https://img.shields.io/badge/last--checked-2026--10--03-blue.svg)](llms.txt)
-[![Verified](https://img.shields.io/badge/verified-2026--10--03-blue.svg)](llms.txt)
+[![Last-Checked](https://img.shields.io/badge/last--checked-2026--11--15-blue.svg)](llms.txt)
+[![Verified](https://img.shields.io/badge/verified-2026--11--15-blue.svg)](llms.txt)
 
 > **Schnellnavigation:**
 > 1. [Überblick](#sec-01) | 2. [Systemarchitektur](#sec-02) | 3. [End-to-End Ausführungszyklus](#sec-03) | 4. [Kernfähigkeiten & Sicherheitsinvarianten](#sec-04) | 5. [Zielgruppen & Auffindbarkeit](#sec-05) | 6. [Installation & Voraussetzungen](#sec-06) | 7. [Konfiguration & Client-Einrichtung](#sec-07) | 8. [Tools-Übersicht (50 Tools)](#sec-08) | 9. [Vergleichsmatrix & Alternativen](#sec-09) | 10. [Tool-Präfix & Namenskonvention](#sec-10) | 11. [Governance & Laufzeit-Invarianten](#sec-11) | 12. [Sicherheitsarchitektur & Risiken](#sec-12) | 13. [Entwicklung, Tests & Verifikation](#sec-13) | 14. [Changelog & Versionierung](#sec-14) | 15. [Level 1 SBOM & Drittanbieter-Lizenzen](#sec-15) | 16. [Historie & Evolution](#sec-16) | 17. [ellmos-ai Ökosystem & Partnermatrix](#sec-17) | 18. [Gesetzlicher Hinweis (§ 521 BGB) & Haftung](#sec-18)
 >
-> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [🤝 Mitwirken](CONTRIBUTING.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📄 Level 1 SBOM Text](THIRD_PARTY_LICENSES.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
+> | Direkte Referenzen: [🛡️ Sicherheitsrichtlinie](SECURITY.md) • [🤝 Mitwirken](CONTRIBUTING.md) • [📜 Verhaltenskodex](CODE_OF_CONDUCT.md) • [⚖️ Drittanbieter-Lizenzen](THIRD_PARTY_LICENSES.md) • [📄 Level 1 SBOM Text](THIRD_PARTY_LICENSES.txt) • [🤖 LLM-Kontext (llms.txt)](llms.txt) • [📋 Kanonischer Hinweis](NOTICE) |
 
 Ein umfassender **Model Context Protocol (MCP) Server**, der KI-Assistenten vollen Dateisystemzugriff, begrenzte Mehrdatei-Inhaltssuche, Prozessverwaltung, interaktive Shell-Sitzungen und asynchrone Dateinamensuche bietet.
 
@@ -614,7 +614,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **250 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (321 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **254 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (325 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen

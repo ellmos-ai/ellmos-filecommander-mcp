@@ -19,6 +19,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   const thirdPartyLicensesTxtPath = resolve(ROOT, 'THIRD_PARTY_LICENSES.txt');
   const noticePath = resolve(ROOT, 'NOTICE');
   const contributingPath = resolve(ROOT, 'CONTRIBUTING.md');
+  const codeOfConductPath = resolve(ROOT, 'CODE_OF_CONDUCT.md');
 
   it('all required manifests and discoverability files exist', () => {
     expect(existsSync(pkgPath)).toBe(true);
@@ -34,6 +35,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(existsSync(thirdPartyLicensesTxtPath)).toBe(true);
     expect(existsSync(noticePath)).toBe(true);
     expect(existsSync(contributingPath)).toBe(true);
+    expect(existsSync(codeOfConductPath)).toBe(true);
   });
 
   it('maintains exact version parity across package.json, server.json, glama.json, package-lock.json, and src/index.ts', () => {
@@ -78,6 +80,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('CHANGELOG.md');
     expect(files).toContain('SECURITY.md');
     expect(files).toContain('CONTRIBUTING.md');
+    expect(files).toContain('CODE_OF_CONDUCT.md');
     expect(files).toContain('server.json');
     expect(files).toContain('glama.json');
     expect(files).toContain('llms.txt');
@@ -86,9 +89,11 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(files).toContain('NOTICE');
   });
 
-  it('llms.txt is synchronized with 2026-10-03 and accurate ecosystem tools', () => {
+  it('llms.txt is synchronized with 2026-11-15 and accurate ecosystem tools', () => {
     const llms = readFileSync(llmsPath, 'utf-8');
-    expect(llms).toContain('## Last-checked: 2026-10-03');
+    expect(llms).toContain('## Last-checked: 2026-11-15');
+    expect(llms).toContain('325 checks (254 Vitest + 71 standalone i18n checks)');
+    expect(llms).toContain('CODE_OF_CONDUCT.md');
     expect(llms).toContain('50 tools');
     expect(llms).toContain('fc_preview_file');
     expect(llms).toContain('fc_search_content');
@@ -232,6 +237,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(ci).toContain('concurrency:');
     expect(ci).toContain('cancel-in-progress: true');
     expect(ci).toContain('timeout-minutes: 15');
+    expect(ci).toContain('git diff --check');
     expect(ci).toContain('npm test');
     expect(ci).toContain('npm run build');
     expect(ci).toContain('npm pack --dry-run');
@@ -245,7 +251,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-321%20passed');
+    expect(en).toContain('tests-325%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -263,7 +269,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-321%20passed');
+    expect(de).toContain('tests-325%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
@@ -432,8 +438,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expectCaretFloor(pkg.dependencies['fast-xml-parser'], '^5.12.0');
     expectCaretFloor(pkg.dependencies['js-yaml'], '^4.3.2');
     expectCaretFloor(pkg.dependencies['smol-toml'], '^1.8.0');
-    expectCaretFloor(pkg.overrides['hono'], '^4.13.16');
-    expectCaretFloor(pkg.overrides['@hono/node-server'], '^2.1.6');
+    expectCaretFloor(pkg.overrides['hono'], '^4.13.18');
+    expectCaretFloor(pkg.overrides['@hono/node-server'], '^2.1.8');
+    expectCaretFloor(pkg.overrides['express-rate-limit'], '^8.6.2');
+    expectCaretFloor(pkg.overrides['nanoid'], '^3.3.17');
     expectCaretFloor(pkg.overrides['fast-xml-builder'], '^1.3.1');
     expectCaretFloor(pkg.overrides['fast-uri'], '^3.1.9');
     expectCaretFloor(pkg.overrides['ip-address'], '^10.7.5');
@@ -519,6 +527,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(autoAssignWf).toContain('timeout-minutes: 5');
     expect(labelSyncWf).toContain('timeout-minutes: 5');
 
+    expect(staleWf).toContain('concurrency:');
+    expect(staleWf).toContain('cancel-in-progress: true');
     expect(welcomeWf).toContain('concurrency:');
     expect(welcomeWf).toContain('cancel-in-progress: true');
     expect(autoAssignWf).toContain('concurrency:');
@@ -585,7 +595,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     }
 
     // llms.txt audit timestamp
-    expect(llms).toContain('Last-checked: 2026-10-03');
+    expect(llms).toContain('Last-checked: 2026-11-15');
 
     // § 521 BGB statutory notice and 48h SLA in both languages
     expect(en).toContain('§ 521 German Civil Code');
@@ -597,11 +607,12 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
   it('verifies plain-text Level 1 SBOM companion (THIRD_PARTY_LICENSES.txt) completeness, invariant matrix, and permissive licensing', () => {
     expect(existsSync(thirdPartyLicensesTxtPath)).toBe(true);
     const txt = readFileSync(thirdPartyLicensesTxtPath, 'utf-8');
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 
     expect(txt).toContain('THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE');
     expect(txt).toContain('Project: ellmos-ai/ellmos-filecommander-mcp (FileCommander)');
     expect(txt).toContain('Audited: 2026-10-03');
-    expect(txt).toContain('Repository Version: 1.11.5');
+    expect(txt).toContain(`Repository Version: ${pkg.version}`);
     expect(txt).toContain('Repository License: MIT License');
     expect(txt).toContain('RunAsInvoker');
     expect(txt).toContain('Zero-Copyleft Isolation Guarantee');
@@ -630,10 +641,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     expect(en).toContain('Level%201%20SBOM-Plain%20Text');
     expect(de).toContain('Level%201%20SBOM-Plain%20Text');
-    expect(en).toContain('last--checked-2026--10--03');
-    expect(de).toContain('last--checked-2026--10--03');
-    expect(en).toContain('verified-2026--10--03');
-    expect(de).toContain('verified-2026--10--03');
+    expect(en).toContain('last--checked-2026--11--15');
+    expect(de).toContain('last--checked-2026--11--15');
+    expect(en).toContain('verified-2026--11--15');
+    expect(de).toContain('verified-2026--11--15');
     expect(en).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
     expect(de).toContain('[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)');
   });
@@ -705,8 +716,9 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(contributing).toContain('Source of Truth');
 
     // Version freeze discipline
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
     expect(contributing).toContain('T-20260920-167562623');
-    expect(contributing).toContain('1.11.5');
+    expect(contributing).toContain(pkg.version);
 
     // Quality gates and statutory disclaimer
     expect(contributing).toContain('npm test');
@@ -740,12 +752,64 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
       thirdPartyLicensesTxtPath,
       noticePath,
       contributingPath,
+      codeOfConductPath,
     ];
 
     for (const filePath of filesToAudit) {
       const content = readFileSync(filePath, 'utf-8');
       for (const pattern of sensitivePatterns) {
         expect(pattern.test(content), `${filePath} matched sensitive pattern ${pattern}`).toBe(false);
+      }
+    }
+  });
+
+  it('verifies bilingual CODE_OF_CONDUCT.md completeness and maintainer reporting channels', () => {
+    const coc = readFileSync(codeOfConductPath, 'utf-8');
+    expect(coc).toContain('## Deutsch');
+    expect(coc).toContain('## English');
+    expect(coc).toContain('Contributor Covenant v2.1');
+    expect(coc).toContain('security@open-bricks.org');
+    expect(coc).toContain('security@ellmos.ai');
+    expect(coc).toContain('support@lukasgeiger.com');
+  });
+
+  it('verifies GitHub issue templates and private security advisory routing config', () => {
+    const templatesDir = resolve(ROOT, '.github/ISSUE_TEMPLATE');
+    const bugPath = resolve(templatesDir, 'bug_report.md');
+    const featurePath = resolve(templatesDir, 'feature_request.md');
+    const configPath = resolve(templatesDir, 'config.yml');
+
+    expect(existsSync(bugPath)).toBe(true);
+    expect(existsSync(featurePath)).toBe(true);
+    expect(existsSync(configPath)).toBe(true);
+
+    const bug = readFileSync(bugPath, 'utf-8');
+    const feature = readFileSync(featurePath, 'utf-8');
+    const config = readFileSync(configPath, 'utf-8');
+
+    expect(bug).toContain('title: "[BUG] "');
+    expect(bug).toContain('needs-triage');
+    expect(bug).toContain('Node.js');
+    expect(feature).toContain('title: "[FEATURE] "');
+    expect(feature).toContain('needs-triage');
+    expect(config).toContain('blank_issues_enabled: true');
+    expect(config).toContain('https://github.com/ellmos-ai/ellmos-filecommander-mcp/security/advisories/new');
+  });
+
+  it('verifies multi-agent role lock ignores and absence of relative pytest --basetemp config', () => {
+    const gitignore = readFileSync(resolve(ROOT, '.gitignore'), 'utf-8');
+    expect(gitignore).toContain('LOCK.orchestrator.*');
+    expect(gitignore).toContain('LOCK.operator.*');
+    expect(gitignore).toContain('LOCK.worker.*');
+    expect(gitignore).toContain('LOCK.thinker.*');
+    expect(gitignore).toContain('LOCK.reviewer.*');
+    expect(gitignore).toContain('.mypy_cache/');
+
+    for (const pyCfg of ['pyproject.toml', 'pytest.ini', 'setup.cfg']) {
+      const cfgPath = resolve(ROOT, pyCfg);
+      if (existsSync(cfgPath)) {
+        const cfg = readFileSync(cfgPath, 'utf-8');
+        expect(cfg).not.toMatch(/--basetemp\s*=\s*\.pytest_te?mp/);
       }
     }
   });

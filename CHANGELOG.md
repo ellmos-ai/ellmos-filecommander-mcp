@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+### Hygiene & Governance (Pfad A - 2026-11-15)
+- **Community Health & Issue Templates (`CODE_OF_CONDUCT.md`, `.github/ISSUE_TEMPLATE/`):**
+  - Added bilingual `CODE_OF_CONDUCT.md` (Contributor Covenant v2.1 DE/EN) and included it in `package.json` `"files"`.
+  - Added tailored bilingual `.github/ISSUE_TEMPLATE/bug_report.md`, `feature_request.md`, and `config.yml` routing security reports to GitHub Security Advisories.
+- **CI & Multi-Host `.gitignore` Hardening:**
+  - Added missing `concurrency` (`cancel-in-progress: true`) boundary to `.github/workflows/stale.yml` and `git diff --check` whitespace/EOL verification to `.github/workflows/tests.yml`.
+  - Added role-specific multi-agent lock ignores (`LOCK.orchestrator.*`, `LOCK.operator.*`, `LOCK.worker.*`, `LOCK.thinker.*`, `LOCK.reviewer.*`) and `.mypy_cache/` to `.gitignore`.
+- **Metadata & Contract Test Parity (Version frozen at `1.11.6`):**
+  - Synchronized stale `1.11.5` references in `CONTRIBUTING.md` and `THIRD_PARTY_LICENSES.txt` to `1.11.6` (matching `package.json`, `server.json`, `glama.json`, and `src/index.ts`), and updated test counts/verification dates across `README.md`, `README_de.md`, and `llms.txt` (325 checks: 254 Vitest + 71 i18n, verified 2026-11-15).
+  - Expanded `test/metadata-parity.test.ts` with dynamic version parity checks, updated Caret-SemVer override floors (`hono` `^4.13.18`, `@hono/node-server` `^2.1.8`, `express-rate-limit` `^8.6.2`, `nanoid` `^3.3.17`), `stale.yml` concurrency checks, and 3 new governance/template/lock-ignore contract tests.
+
 ## [1.11.6] - 2026-11-09
 
 ### Fixed
