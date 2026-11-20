@@ -13,7 +13,7 @@ Thank you for your interest in contributing to **ellmos-filecommander-mcp** (`el
 
 All contributions must strictly adhere to our core architectural invariants:
 
-1. **Local Stdio & Explicit Egress (`INV-LOCAL-01`)**: 100% offline-ready by default. All communication operates over local standard input/output (stdio) JSON-RPC without telemetry, analytics, or background open listening ports. Outbound network egress occurs strictly via explicit client calls to `fc_web_fetch`.
+1. **Local Stdio & Explicit Egress (`INV-LOCAL-01`)**: 100% offline-ready by default. Default communication uses local standard input/output (stdio) JSON-RPC without telemetry, analytics, or listening ports. The explicitly selected `bridge` mode may expose only its authenticated loopback UI API; preserve exact Host/Origin checks, capability authentication, CSRF protection, and bounded jobs. `fc_web_fetch` is the explicit built-in HTTP fetch boundary; process tools are not network sandboxes. External MCP tunnels remain separately configured client infrastructure.
 2. **Safe Deletion & Trash Protection (`INV-SAFE-02`)**: Deletions are safeguarded against catastrophic permanent data loss. `fc_safe_delete` and global safety mode (`fc_set_safe_mode`) route removals to the operating system Recycle Bin (Windows) or Trash (macOS/Linux).
 3. **Cloud-Lock Resilient Move (`INV-LOCK-03`)**: Resilient cross-device file moves. `fc_move` automatically executes copy + SHA-256 integrity verification + source unlink fallback when cloud-sync filters (OneDrive, Dropbox, iCloud) cause EPERM/EBUSY locking.
 4. **Cloud-Lock Diagnosis (`INV-DIAG-04`)**: Read-only static path inspection and reparse point detection via `fc_check_cloud_lock` without mutating local filesystem state.
@@ -50,7 +50,7 @@ ellmos-filecommander-mcp operates under strict version-freeze discipline. Versio
 ### 4. Quality Gates
 
 Before submitting a pull request, verify all local quality gates:
-1. `npm test`: 100% green test execution across all Vitest suites and standalone i18n checks (305+ tests).
+1. `npm test`: 100% green test execution across all Vitest suites, standalone i18n checks, and the Node.js bridge integration/lifecycle suite. Build first so integration tests exercise the current package entry point.
 2. `npm run build`: Zero TypeScript compilation errors.
 3. `git diff --check`: Zero whitespace or line-ending anomalies.
 4. `git diff -G'"version": '`: Zero unauthorized version bumps.
@@ -71,7 +71,7 @@ Vielen Dank für dein Interesse an einer Mitwirkung bei **ellmos-filecommander-m
 
 Alle Beiträge müssen unsere verbindlichen Kern-Invarianten strikt einhalten:
 
-1. **Lokales Stdio & Expliziter Egress (`INV-LOCAL-01`)**: Standardmäßig zu 100% offline-fähig. Die gesamte Kommunikation erfolgt über lokalen Standard-I/O (stdio) JSON-RPC ohne Telemetrie, Analyse-Tracker oder offene Netzwerk-Ports. Ausgehender Netzwerkverkehr findet ausschließlich über explizite Client-Aufrufe von `fc_web_fetch` statt.
+1. **Lokales Stdio & Expliziter Egress (`INV-LOCAL-01`)**: Standardmäßig zu 100% offline-fähig. Die Standardkommunikation erfolgt über lokalen Standard-I/O (stdio) JSON-RPC ohne Telemetrie, Analyse-Tracker oder offene Netzwerk-Ports. Der ausdrücklich gewählte `bridge`-Modus darf nur seine authentifizierte Bedien-API auf Loopback bereitstellen; exakte Host-/Origin-Prüfung, Verbindungstoken, CSRF-Schutz und begrenzte Aufträge bleiben verbindlich. `fc_web_fetch` ist die explizite eingebaute HTTP-Abrufgrenze; Prozesswerkzeuge sind keine Netzwerk-Sandbox. Externe MCP-Tunnel bleiben separat eingerichtete Client-Infrastruktur.
 2. **Sicheres Löschen & Papierkorb-Schutz (`INV-SAFE-02`)**: Schutz vor katastrophalem permanentem Datenverlust. `fc_safe_delete` und der globale Sicherheitsmodus (`fc_set_safe_mode`) leiten Löschungen in den Betriebssystem-Papierkorb (Recycle Bin / Trash).
 3. **Cloud-Lock-robuste Verschiebung (`INV-LOCK-03`)**: Robuste geräteübergreifende Dateiübertragung. `fc_move` führt automatisch Kopieren + SHA-256-Integritätsprüfung + Quell-Löschung aus, wenn Cloud-Synchronisationsfilter (OneDrive, Dropbox, iCloud) EPERM/EBUSY-Sperren verursachen.
 4. **Cloud-Lock-Diagnose (`INV-DIAG-04`)**: Rein lesende statische Pfadprüfung und Reparse-Point-Erkennung via `fc_check_cloud_lock` ohne Veränderung des lokalen Dateisystemzustands.
@@ -108,7 +108,7 @@ ellmos-filecommander-mcp unterliegt strikter Version-Freeze-Disziplin. Die Versi
 ### 4. Qualitäts-Tore
 
 Vor dem Einreichen eines Pull Requests müssen alle lokalen Qualitäts-Tore erfüllt sein:
-1. `npm test`: 100% grüne Testergebnisse über alle Vitest-Suiten und Standalone-i18n-Prüfungen (305+ Tests).
+1. `npm test`: 100% grüne Testergebnisse über alle Vitest-Suiten, Standalone-i18n-Prüfungen und die Node.js-Bridge-Integrations- und Lebenszyklustests. Vorher bauen, damit Integrationstests den aktuellen Paket-Einstiegspunkt ausführen.
 2. `npm run build`: 0 TypeScript-Kompilierungsfehler.
 3. `git diff --check`: 0 Whitespace- oder Zeilenumbruchfehler.
 4. `git diff -G'"version": '`: 0 unautorisierte Versionsänderungen.

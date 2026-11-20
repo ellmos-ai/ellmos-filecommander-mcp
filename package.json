@@ -32,14 +32,18 @@
     "server.json",
     "glama.json",
     "smithery.yaml",
-    "llms.txt"
+    "llms.txt",
+    "docs/bridge.md",
+    "docs/chatgpt-tunnel.md"
   ],
   "scripts": {
     "build": "node node_modules/typescript/bin/tsc",
     "start": "node dist/index.js",
     "dev": "tsc --watch",
-    "test": "vitest run && node test-i18n.mjs",
-    "prepublishOnly": "npm run build"
+    "test": "vitest run && node test-i18n.mjs && npm run test:bridge",
+    "prepublishOnly": "npm run build",
+    "bridge": "node dist/index.js bridge",
+    "test:bridge": "node --test test/bridge/integration.test.mjs test/bridge/mcp-restart.test.mjs test/bridge/lifecycle.test.mjs test/bridge/cli.test.mjs"
   },
   "keywords": [
     "mcp",

@@ -5,6 +5,8 @@
 
 # ellmos FileCommander MCP サーバー
 
+> **Transport scope (English):** The stdio/no-listening-port descriptions below refer to the default server mode. The unreleased, explicitly selected [`bridge` mode](docs/bridge.md#english) adds an authenticated browser UI on `127.0.0.1` only. Native ChatGPT access uses a separate [MCP tunnel setup](docs/chatgpt-tunnel.md#english). Neither connection starts automatically. Test counts below describe the core suite; the bridge suite runs in addition.
+
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | **日本語** | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 README のナビゲーションには、このリポジトリで利用できるドキュメント言語が一覧表示されます。FileCommander のランタイムメッセージと書式化された応答は、ドイツ語 (de)、英語 (en)、スペイン語 (es)、中国語 (zh)、日本語 (ja)、ロシア語 (ru)、フランス語 (fr)、ヒンディー語 (hi)、アラビア語 (ar)、ベンガル語 (bn)、ポルトガル語 (pt) に対応します。このランタイム言語一覧は README の翻訳言語とは別です。対象はランタイムで生成されるメッセージと書式化されたツール結果です。MCP ツールのタイトル、ディスカバリー説明、スキーマ説明は英語のままです。サーバー起動前に `FC_LANGUAGE` に対応コードを設定するか、実行中の MCP セッションで `fc_set_language` を呼び出します。`fc_get_language` は有効な言語と 11 個すべての対応コードを返します。`FC_LANGUAGE` が未設定または未対応のコードの場合、ランタイムはドイツ語 (de) を既定値として使用します。日付と時刻の書式は選択中の言語に従います。
@@ -16,7 +18,7 @@ README のナビゲーションには、このリポジトリで利用できる�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +556,7 @@ npm test
 
 ### テスト
 
-このプロジェクトには、**Vitest テスト 250 件に加え、スタンドアロンの i18n チェック 71 件（合計 321 件）**が含まれています。ファイルシステム操作、メタデータ優先のインラインプレビュー、境界付きの内容検索、ネイティブの既定ハンドラー起動、形式変換、エンコーディング修復、アーカイブ処理、重複検出、言語パック、ツールの注釈、実際の stdio の動作、およびセキュリティ境界を対象としています。
+このプロジェクトには、**Vitest テスト 251 件に加え、スタンドアロンの i18n チェック 71 件（合計 322 件）**が含まれています。ファイルシステム操作、メタデータ優先のインラインプレビュー、境界付きの内容検索、ネイティブの既定ハンドラー起動、形式変換、エンコーディング修復、アーカイブ処理、重複検出、言語パック、ツールの注釈、実際の stdio の動作、およびセキュリティ境界を対象としています。
 
 ```bash
 npm test              # Run all tests

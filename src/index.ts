@@ -5025,6 +5025,11 @@ server.registerTool(
 // ============================================================================
 
 async function main(): Promise<void> {
+  if (process.argv[2] === "bridge") {
+    const { runBridge } = await import("./bridge/cli.mjs");
+    await runBridge(process.argv.slice(3));
+    return;
+  }
   // Update-Hinweis nur im interaktiven Terminal — niemals im stdio-/MCP-Betrieb (Protokoll-Schutz)
   if (process.stdout.isTTY) {
     try {

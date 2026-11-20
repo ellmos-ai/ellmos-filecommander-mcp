@@ -5,6 +5,8 @@
 
 # ellmos FileCommander MCP Server
 
+> **Transport scope (English):** The stdio/no-listening-port descriptions below refer to the default server mode. The unreleased, explicitly selected [`bridge` mode](docs/bridge.md#english) adds an authenticated browser UI on `127.0.0.1` only. Native ChatGPT access uses a separate [MCP tunnel setup](docs/chatgpt-tunnel.md#english). Neither connection starts automatically. Test counts below describe the core suite; the bridge suite runs in addition.
+
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | **العربية** | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 تسرد قائمة التنقل في README لغات الوثائق المتاحة في هذا المستودع. تدعم رسائل وقت التشغيل والردود المنسقة في FileCommander الألمانية (de) والإنجليزية (en) والإسبانية (es) والصينية (zh) واليابانية (ja) والروسية (ru) والفرنسية (fr) والهندية (hi) والعربية (ar) والبنغالية (bn) والبرتغالية (pt). هذه القائمة منفصلة عن لغات ترجمة README. وهي تخص الرسائل التي تُنشأ وقت التشغيل ونتائج الأدوات المنسقة؛ أما عناوين أدوات MCP وأوصاف الاكتشاف وأوصاف المخطط فتبقى ثابتة باللغة الإنجليزية. اضبط `FC_LANGUAGE` على رمز مدعوم قبل بدء الخادم، أو استدعِ `fc_set_language` أثناء جلسة MCP نشطة. يعرض `fc_get_language` اللغة النشطة وجميع الرموز الإحدى عشرة المدعومة. إذا لم تُضبط `FC_LANGUAGE` أو احتوت على رمز غير مدعوم، فستُستخدم الألمانية (de) افتراضيًا. تتبع تنسيقات التاريخ والوقت اللغة النشطة.
@@ -16,7 +18,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -557,7 +559,7 @@ npm test
 
 ### الاختبار
 
-يتضمن المشروع **250 اختبار Vitest إضافياً و71 فحص i18n مستقلاً (321 إجمالاً)** تغطي عمليات نظام الملفات، والمعاينة المضمّنة المعتمدة على البيانات الوصفية أولاً، والبحث المحدود عن المحتوى، وتشغيل المعالج الافتراضي الأصلي، وتحويل التنسيقات، وإصلاح الترميز، ومعالجة الأرشيفات، وكشف التكرارات، وحزم اللغات، وتعليقات الأدوات التوضيحية، والسلوك الفعلي لـ stdio، وحدود الأمان.
+يتضمن المشروع **251 اختبار Vitest إضافياً و71 فحص i18n مستقلاً (322 إجمالاً)** تغطي عمليات نظام الملفات، والمعاينة المضمّنة المعتمدة على البيانات الوصفية أولاً، والبحث المحدود عن المحتوى، وتشغيل المعالج الافتراضي الأصلي، وتحويل التنسيقات، وإصلاح الترميز، ومعالجة الأرشيفات، وكشف التكرارات، وحزم اللغات، وتعليقات الأدوات التوضيحية، والسلوك الفعلي لـ stdio، وحدود الأمان.
 
 ```bash
 npm test              # Run all tests

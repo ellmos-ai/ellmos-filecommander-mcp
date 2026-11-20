@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+### Added
+- Optional `bridge` CLI mode and `npm run bridge`: a local browser UI for the existing 50-tool FileCommander server, with persistent process sessions, asynchronous jobs, readable native tool errors, and bounded output/history. Uses the same installed package over stdio, without a second backend installation or additional runtime dependencies.
+- English/German guides for the browser bridge and direct ChatGPT access through the official Secure MCP Tunnel client. The tunnel connects the existing stdio server and requires separate per-user account setup.
+- Bridge integration and lifecycle coverage in the default test command, including real file operations, stateful sessions, request deduplication, and restart/shutdown behavior.
+
+### Security
+- The explicitly selected bridge binds only to `127.0.0.1`, authenticates a random capability token into an HttpOnly SameSite session, checks the exact Host/Origin, and requires CSRF tokens for mutations. Default stdio operation still opens no listening port.
+- Document the distinction between the local UI API and an MCP transport, plus the limits of process cleanup and the absence of an operating-system sandbox.
+
+### Changed
+- Scope stdio/no-port documentation to default operation and preserve Cowork Protocol's MIT attribution for reused client code. Cowork is not a runtime dependency.
+- Keep package and registry versions at `1.11.6` under the version freeze. This change does not publish an npm release.
+
 ## [1.11.6] - 2026-11-09
 
 ### Fixed
