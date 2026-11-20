@@ -15,7 +15,7 @@ Die README-Navigation listet die in diesem Repository verfügbaren Dokumentation
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -71,6 +71,8 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 <a id="sec-02"></a><a id="system-architecture"></a><a id="systemarchitektur"></a>
 ## Systemarchitektur
 
+Die folgenden Diagramme beschreiben den standardmäßigen stdio-Server. Die optionale [Browser-Bridge](docs/bridge.md#deutsch) ergänzt eine authentifizierte Bedienseite ausschließlich auf Loopback; [direkter ChatGPT-Zugriff](docs/chatgpt-tunnel.md#deutsch) nutzt einen separat eingerichteten MCP-Tunnel. Beide Zugänge werden ausdrücklich gestartet.
+
 ### ASCII Vier-Sichten-Architekturtopologie
 
 ```text
@@ -112,7 +114,7 @@ Die meisten Dateisystem-MCP-Server decken nur grundlegende Lese-/Schreiboperatio
 +--------------------------------------------------------------------------------------------------+
 | [SICHT 4: AIR-GAP SCHUTZPERIMETER, RUNASINVOKER & KONTROLLIERTER NETZWERKAUSSTRITT]              |
 |   * Ausführungsprivileg : RunAsInvoker unprivilegierter Benutzermodus (0 administrative Rechte)  |
-|   * Transportgrenze     : 100% lokaler Stdio-Transport, 0 Telemetrie, 0 offene Netzwerk-Ports     |
+|   * Transportgrenze     : Standard: lokales stdio, 0 Telemetrie, 0 offene Netzwerk-Ports          |
 |   * Kontrollierter Egress: Ausgehende HTTP(S)-Aufrufe strikt auf explizites fc_web_fetch begrenzt|
 |   * Netzwerksicherheit  : SSRF-Schutz blockiert private/interne IP-Bereiche standardmäßig         |
 |   * Governance & Supply : Level 1 SBOM, 100% freizügige Laufzeit (MIT/BSD), 48h Sicherheits-SLA  |
@@ -211,7 +213,7 @@ sequenceDiagram
 
 | Fähigkeit / Invariante | Garantie & Implementierungsdetails | Sicherheits- & Betriebsvorteil |
 |------------------------|-----------------------------------|--------------------------------|
-| **Lokales stdio & expliziter Egress** | Der MCP-Transport arbeitet lokal über stdio, ohne Telemetrie und ohne automatischen Netzwerk-Egress. `fc_web_fetch` sendet HTTP(S)-Anfragen nur nach einem ausdrücklichen Client-Aufruf; private Ziele sind standardmäßig gesperrt, sofern `allow_private` nicht aktiviert wird. | Macht die Netzwerkgrenze für Clients sichtbar und behält einen lokalen Servertransport ohne offene Ports bei. |
+| **Lokales stdio & expliziter Egress** | Der MCP-Transport arbeitet standardmäßig lokal über stdio, ohne Telemetrie und ohne automatischen Netzwerk-Egress. `fc_web_fetch` sendet HTTP(S)-Anfragen nur nach einem ausdrücklichen Client-Aufruf; private Ziele sind standardmäßig gesperrt, sofern `allow_private` nicht aktiviert wird. | Macht die Netzwerkgrenze für Clients sichtbar und behält einen lokalen Servertransport ohne offene Ports bei. |
 | **Sicheres Löschen & Papierkorb-Schutz** | `fc_safe_delete` verschiebt Objekte in den Windows-Papierkorb / macOS Trash / Linux FreeDesktop Trash. `fc_set_safe_mode` schützt alle Löschoperationen. | Verhindert irreversiblen Datenverlust bei versehentlichen rekursiven Löschungen. |
 | **Cloud-Lock-robuste Verschiebung (`fc_move`)** | Automatische Erkennung von Cloud-Sync-Filter-Sperren (OneDrive, Dropbox, iCloud) mit nahtlosem Copy+Verify+Delete-Fallback. | Beseitigt `EPERM`- und `EBUSY`-Abbrüche bei agentischen Dateioperationen in synchronisierten Ordnern. |
 | **Cloud-Lock-Diagnose (`fc_check_cloud_lock`)** | Lesender Bericht über statischen Cloud-Pfadkontext sowie Existenz/Typ des Ziels; Cloud-Files-Hydration und Prozess-Handles werden bei fehlender Prüfung ausdrücklich markiert. | Agenten unterscheiden statisches OneDrive-Risiko von einer tatsächlich erkannten Rename-Sperre. |
@@ -253,7 +255,7 @@ FileCommander ist für vier zentrale Entwickler-, Agenten- und Betriebs-Zielgrup
 - **Profil:** Sicherheitsteams und Auditoren, die Zero-Trust-Datenschutz und Governance-Richtlinien auf Entwickler-Workstations durchsetzen.
 - **Zentrale Pain Points:** Undokumentierte Telemetrie-Verbindungen von KI-Erweiterungen, unabsichtliches Einschleusen von API-Keys/Tokens in LLM-Prompts und unkontrollierter Netzwerk-Egress.
 - **FileCommander-Lösung:**
-  - Lokaler stdio-Transport mit null Telemetrie und null offenen Netzwerk-Ports.
+  - Standardmäßig lokaler stdio-Transport mit null Telemetrie und null offenen Netzwerk-Ports; der ausdrücklich gestartete `bridge`-Modus ergänzt eine geschützte Bedienseite auf Loopback.
   - Expliziter Egress ausschließlich bei Client-Aufruf von `fc_web_fetch` (private/interne IP-Adressen standardmäßig blockiert).
   - Automatische Geheimnis- und Bearer-Token-Schwärzung in Suchergebnissen (`INV-MASK-06`).
   - Strikte unprivilegierte Benutzer-Ausführung (`INV-PROC-09`) und verbindliche 48h-Sicherheits-SLA (`security@open-bricks.org`, `security@ellmos.ai`).
@@ -391,7 +393,23 @@ In `.cursor/mcp.json` eintragen:
 
 ### Andere MCP-Clients
 
-Der Server kommuniziert über **stdio transport**. Verweisen Sie Ihren MCP-Client auf den `dist/index.js` Einstiegspunkt oder die `ellmos-filecommander` Binary.
+Der Server kommuniziert standardmäßig über **stdio transport**. Verweisen Sie Ihren MCP-Client auf den `dist/index.js` Einstiegspunkt oder die `ellmos-filecommander` Binary ohne Unterbefehl.
+
+### Optionale Browser-Bridge und direkter ChatGPT-Zugriff
+
+Der optionale Unterbefehl `bridge` stellt eine lokale Browserseite für dieselben FileCommander-Werkzeuge bereit, einschließlich fortlaufender Prozesssitzungen. Er startet den Server aus demselben installierten Paket und benötigt keine zusätzliche Laufzeitabhängigkeit, zweite Engine oder Cowork-Installation.
+
+Aus einem Quellcode-Checkout, der diese Änderung enthält:
+
+```bash
+npm ci
+npm run build
+npm run bridge -- --cwd "."
+```
+
+Das Terminal offen lassen und den dort ausgegebenen vollständigen lokalen Link öffnen. Standardadresse ist `http://127.0.0.1:47832`; ein zufälliger Token im Link-Fragment verbindet die Browsersitzung. Für einen freien Port und manuelles Öffnen des Browsers: `node dist/index.js bridge --no-open --port 0`.
+
+Diese Option ist **noch nicht veröffentlicht** und fehlt im derzeit veröffentlichten npm-Paket `1.11.6`. Die [Bridge-Anleitung](docs/bridge.md#deutsch) erklärt Optionen, Sitzungsverhalten und die lokale HTTP-Schnittstelle. Die Bedienseite registriert sich nicht selbst in ChatGPT. Für native FileCommander-Werkzeugaufrufe aus ChatGPT gibt es die separate [Anleitung für Secure MCP Tunnels](docs/chatgpt-tunnel.md#deutsch); sie verbindet den vorhandenen stdio-Server direkt.
 
 ---
 
@@ -560,7 +578,7 @@ Der Server erzwingt 10 strikte Laufzeit-Invarianten, die Sicherheit, Vorhersehba
 
 | Invarianten-ID | Bezeichnung | Garantie & Implementierungsdetails | Sicherheits- & Betriebsnutzen |
 |----------------|-------------|-----------------------------------|-------------------------------|
-| **INV-LOCAL-01** | **Lokales stdio & expliziter Egress** | Lokaler stdio-Transport, null Telemetrie, keine offenen Netzwerkports. Ausgehende HTTP(S)-Anfragen erfolgen ausschließlich über explizite Client-Aufrufe an `fc_web_fetch`. | Kein unautorisierter Netzwerk-Datenabfluss; strikte Local-First-Isolation. |
+| **INV-LOCAL-01** | **Lokales stdio & expliziter Egress** | Standardmäßig lokaler stdio-Transport, null Telemetrie, keine offenen Netzwerkports. Der explizite `bridge`-Modus ergänzt eine authentifizierte Bedienseite auf Loopback. Das eingebaute HTTP-Werkzeug sendet nur bei Aufrufen von `fc_web_fetch`; Prozesswerkzeuge sind keine Netzwerk-Sandbox. | Kein unautorisierter Netzwerk-Datenabfluss; strikte Local-First-Isolation. |
 | **INV-SAFE-02** | **Sicheres Löschen & Papierkorb-Schutz** | `fc_safe_delete` und globaler `fc_set_safe_mode` leiten Datei- und Verzeichnis-Löschungen über den System-Papierkorb (Windows) / Trash (macOS/Linux). | Verhindert irreversiblen Datenverlust durch autonome Agentenaktionen. |
 | **INV-LOCK-03** | **Cloud-Lock-robuste Verschiebung** | `fc_move` führt automatisch copy + SHA-256 Validierung + Quell-Unlink aus, wenn Sync-Filter (OneDrive, Dropbox, iCloud) EPERM/EBUSY auslösen. | Zuverlässige Dateioperationen auch in synchronisierten Cloud-Verzeichnissen. |
 | **INV-DIAG-04** | **Cloud-Lock-Diagnose** | `fc_check_cloud_lock` liefert rein lesende Pfadanalysen und Reparse-Point-Erkennung ohne Seiteneffekte auf das Dateisystem. | Ermöglicht Agenten die Prüfung von Sperrrisiken vor Ausführung von Änderungen. |
@@ -587,7 +605,8 @@ Wichtige Punkte:
 - `fc_start_session` startet einen beliebigen interaktiven Befehl; nachfolgende `fc_send_input`-Aufrufe können weitere Aktionen ausführen
 - `fc_delete_*` Tools löschen standardmäßig permanent (verwenden Sie `fc_safe_delete` oder aktivieren Sie den **Safety Mode** über `fc_set_safe_mode`, um alle Löschvorgänge über den Papierkorb / Trash zu leiten)
 - Der Safety Mode schützt ausschließlich `fc_delete_file` und `fc_delete_directory`; er schränkt Befehle oder interaktive Sitzungen nicht ein
-- Der Servertransport ist lokales stdio ohne Telemetrie; ein expliziter `fc_web_fetch`-Aufruf führt jedoch ausgehenden HTTP(S)-Zugriff aus
+- Der Servertransport ist standardmäßig lokales stdio ohne Telemetrie; ein expliziter `fc_web_fetch`-Aufruf führt ausgehenden HTTP(S)-Zugriff aus
+- Die optionale Browser-Bridge bindet ausschließlich an `127.0.0.1` und benötigt einen Verbindungstoken, eine authentifizierte Sitzung, eine exakte Herkunft und einen CSRF-Token für Änderungen; siehe [Bridge-Sicherheitsgrenze](docs/bridge.md#deutsch)
 - Kein eingebautes Sandboxing — die Sicherheit wird an die MCP-Client-Schicht delegiert
 
 ---
@@ -614,11 +633,14 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **250 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (321 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Die Kern-Suite enthält **251 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (322 Kernprüfungen)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+
+Die zusätzliche Node.js-Bridge-Suite prüft authentifizierten HTTP-Zugriff, echte FileCommander-Dateioperationen und Prozesssitzungen, Schutz vor doppelten Aufträgen und das Backend-Sitzungsverhalten. `npm test` führt beide Suiten aus.
 
 ```bash
 npm test              # Alle Tests ausführen
 node test-i18n.mjs    # Eigenständige i18n-Prüfungen ausführen
+npm run test:bridge # Bridge-Tests nach dem Build ausführen
 npx vitest --watch    # Watch-Modus
 ```
 

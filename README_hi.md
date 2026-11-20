@@ -5,6 +5,8 @@
 
 # ellmos FileCommander MCP Server
 
+> **Transport scope (English):** The stdio/no-listening-port descriptions below refer to the default server mode. The unreleased, explicitly selected [`bridge` mode](docs/bridge.md#english) adds an authenticated browser UI on `127.0.0.1` only. Native ChatGPT access uses a separate [MCP tunnel setup](docs/chatgpt-tunnel.md#english). Neither connection starts automatically. Test counts below describe the core suite; the bridge suite runs in addition.
+
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | **हिन्दी** | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 README नेविगेशन इस रिपॉज़िटरी में उपलब्ध दस्तावेज़ीकरण भाषाओं की सूची देता है। FileCommander के रनटाइम संदेश और स्वरूपित प्रतिक्रियाएँ जर्मन (de), अंग्रेज़ी (en), स्पेनिश (es), चीनी (zh), जापानी (ja), रूसी (ru), फ़्रेंच (fr), हिंदी (hi), अरबी (ar), बंगाली (bn) और पुर्तगाली (pt) में उपलब्ध हैं। यह रनटाइम सूची README अनुवाद की उपलब्धता से अलग है। यह रनटाइम में बनाए गए संदेशों और स्वरूपित टूल परिणामों पर लागू होती है; MCP टूल शीर्षक, डिस्कवरी विवरण और स्कीमा विवरण स्थिर रूप से अंग्रेज़ी में रहते हैं। सर्वर शुरू करने से पहले `FC_LANGUAGE` को किसी समर्थित कोड पर सेट करें, या सक्रिय MCP सत्र के दौरान `fc_set_language` कॉल करें। `fc_get_language` सक्रिय भाषा और सभी ग्यारह समर्थित कोड बताता है। `FC_LANGUAGE` सेट न होने या असमर्थित कोड होने पर जर्मन (de) का उपयोग होता है। तारीख और समय के प्रारूप सक्रिय भाषा के अनुसार होते हैं।
@@ -16,7 +18,7 @@ README नेविगेशन इस रिपॉज़िटरी में 
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +556,7 @@ npm test
 
 ### परीक्षण
 
-इस परियोजना में **250 Vitest परीक्षण और 71 स्वतंत्र i18n जाँच (कुल 321)** शामिल हैं, जो फ़ाइल सिस्टम संचालन, मेटाडेटा-प्रथम इनलाइन पूर्वावलोकन, सीमित सामग्री खोज, मूल डिफ़ॉल्ट-हैंडलर लॉन्चिंग, प्रारूप रूपांतरण, एन्कोडिंग मरम्मत, आर्काइव हैंडलिंग, डुप्लीकेट पहचान, भाषा पैक, टूल एनोटेशन, वास्तविक stdio व्यवहार और सुरक्षा सीमाओं को कवर करते हैं।
+इस परियोजना में **251 Vitest परीक्षण और 71 स्वतंत्र i18n जाँच (कुल 322)** शामिल हैं, जो फ़ाइल सिस्टम संचालन, मेटाडेटा-प्रथम इनलाइन पूर्वावलोकन, सीमित सामग्री खोज, मूल डिफ़ॉल्ट-हैंडलर लॉन्चिंग, प्रारूप रूपांतरण, एन्कोडिंग मरम्मत, आर्काइव हैंडलिंग, डुप्लीकेट पहचान, भाषा पैक, टूल एनोटेशन, वास्तविक stdio व्यवहार और सुरक्षा सीमाओं को कवर करते हैं।
 
 ```bash
 npm test              # Run all tests

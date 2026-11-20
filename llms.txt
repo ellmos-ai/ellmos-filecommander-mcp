@@ -2,7 +2,7 @@
 
 # ellmos-filecommander-mcp - MCP Server for Filesystem and Process Access
 
-> FileCommander is a comprehensive MCP (Model Context Protocol) server that gives AI assistants full filesystem access, bounded metadata-first inline preview, multi-file content search, default-app path opening, process management, interactive shell sessions, and async filename search capabilities. 50 tools in a single server -- everything an AI agent needs to interact with the local system. Part of the ellmos MCP family alongside codecommander and clatcher. The automated suite contains 307 checks (236 Vitest + 71 standalone i18n checks). CI defines Node 20-24 jobs; consult the exact commit results for platform acceptance.
+> FileCommander is a comprehensive MCP (Model Context Protocol) server that gives AI assistants full filesystem access, bounded metadata-first inline preview, multi-file content search, default-app path opening, process management, interactive shell sessions, and async filename search capabilities. 50 tools in a single server -- everything an AI agent needs to interact with the local system. Part of the ellmos MCP family alongside codecommander and clatcher. The core automated suite contains 322 checks (251 Vitest + 71 standalone i18n checks), with an additional Node.js bridge integration/lifecycle suite. CI defines Node 20-24 jobs; consult the exact commit results for platform acceptance.
 
 Why it exists: most filesystem MCP servers only cover basic read/write. FileCommander goes further with Safe Delete (Recycle Bin on Windows, Trash on macOS/Linux instead of permanent deletion), a metadata-first 1 MiB-bounded remote preview using standard MCP content blocks (`fc_preview_file`), read-only literal or regex search across an explicit ordered list of files, validated local file/directory opening through the operating system default application (`fc_open_path`), interactive REPL sessions (Python, Node.js, shells) accessible through the MCP protocol, async search of large directory trees running in the background while the AI continues other work, process management (list, start, terminate), string-replace editing with context validation, format conversion across JSON / CSV / INI / YAML / TOML / XML / TOON, ZIP archive create/extract/list, SHA-256 / MD5 / SHA-1 / SHA-512 checksums with compare, optional tesseract.js OCR for image text extraction, runtime language selection and introspection (i18n de/en/es/zh/ja/ru), global safety mode to route all deletes through Recycle Bin / Trash, and Markdown-to-HTML/PDF export. Cross-platform with platform-specific optimizations.
 
@@ -12,10 +12,14 @@ Node.js >= 20, MIT. Published as `ellmos-filecommander-mcp` on npm and indexed b
 
 `fc_search_content` searches at most 50 explicit UTF-8 text files in input order. Literal matching is the default; regex, case sensitivity, context lines, global limits, and per-file limits are optional. It performs no recursion or glob expansion, skips binary and files over 10 MB, reports partial per-file errors, redacts common secret formats, and returns deterministic bounded JSON.
 
+Optional unreleased connection mode: `node dist/index.js bridge` starts an authenticated browser UI on `127.0.0.1`, using the same package's persistent stdio backend. Default invocation still uses stdio without listening ports. The UI API is not an HTTP MCP endpoint and does not register a ChatGPT plugin. Direct ChatGPT MCP calls use the existing stdio server through a separately configured official Secure MCP Tunnel. Source checkout/build is required until a release includes the bridge.
+
 ## Docs
 
 - [README (English)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/README.md): Tools, installation, configuration for Claude Desktop / Claude Code
 - [README (Deutsch)](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/README_de.md): German version
+- [Browser bridge](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/docs/bridge.md): Optional loopback UI, CLI options, process-session behavior, and HTTP access boundary
+- [Direct ChatGPT access](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/docs/chatgpt-tunnel.md): Per-user Secure MCP Tunnel setup for the existing stdio server
 - [SECURITY.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/SECURITY.md): Bilingual security policy for local stdio, explicit `fc_web_fetch` egress, process risks, and safe-mode boundaries
 - [CHANGELOG.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/CHANGELOG.md): Release history and audit log
 - [CONTRIBUTING.md](https://github.com/ellmos-ai/ellmos-filecommander-mcp/blob/master/CONTRIBUTING.md): Bilingual development guide, quality gates, and Plan D workflow
@@ -29,7 +33,7 @@ Node.js >= 20, MIT. Published as `ellmos-filecommander-mcp` on npm and indexed b
 
 ## Governance & Runtime Invariants
 
-- **INV-LOCAL-01: Local Stdio & Explicit Egress** — Local stdio transport, zero telemetry, no open listening ports. Outbound HTTP(S) network egress strictly occurs through explicit client calls to `fc_web_fetch`.
+- **INV-LOCAL-01: Local Stdio & Explicit Egress** — Default local stdio transport, zero telemetry, no open listening ports. Explicit `bridge` mode adds an authenticated loopback-only UI API. The built-in HTTP fetch tool makes outbound requests only on `fc_web_fetch` calls; process tools are not network sandboxes. External MCP tunnels require separate setup.
 - **INV-SAFE-02: Safe Deletion & Trash Protection** — `fc_safe_delete` and global `fc_set_safe_mode` route file removals through OS Recycle Bin (Windows) / Trash (macOS/Linux).
 - **INV-LOCK-03: Cloud-Lock Resilient Move** — `fc_move` automatically executes copy + SHA-256 verify + source unlink fallback when sync filters (OneDrive, Dropbox, iCloud) cause EPERM/EBUSY.
 - **INV-DIAG-04: Cloud-Lock Diagnosis** — `fc_check_cloud_lock` provides read-only static path inspection and reparse point detection without mutating filesystem state.

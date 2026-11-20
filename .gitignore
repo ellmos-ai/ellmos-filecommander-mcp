@@ -136,3 +136,6 @@ _archive/
 
 # Internes Automationsdokument (Nutzerentscheid 2026-09-26): nie veroeffentlichen
 MARKETING-LOG.txt
+
+# Isolated local feature worktrees
+.worktrees/

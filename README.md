@@ -15,7 +15,7 @@ The README navigation lists the documentation languages available in this reposi
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -74,6 +74,8 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 <a id="sec-02"></a><a id="system-architecture"></a><a id="systemarchitektur"></a>
 ## System Architecture
 
+The diagrams below describe the default stdio server. The optional [browser bridge](docs/bridge.md#english) adds an authenticated loopback-only UI; [direct ChatGPT access](docs/chatgpt-tunnel.md#english) uses a separately configured MCP tunnel. Neither mode starts automatically.
+
 ### ASCII Four-View Architectural Topology
 
 ```text
@@ -115,7 +117,7 @@ Most filesystem MCP servers only cover basic read/write operations. FileCommande
 +--------------------------------------------------------------------------------------------------+
 | [VIEW 4: AIR-GAP DEFENSE PERIMETER, RUNASINVOKER & CONTROLLED EGRESS]                            |
 |   * Execution Privilege : RunAsInvoker unprivileged user-mode (Zero administrative elevation)    |
-|   * Transport Boundary  : 100% Local stdio transport, zero telemetry, zero open listening ports  |
+|   * Transport Boundary  : Default local stdio, zero telemetry, zero open listening ports         |
 |   * Controlled Egress   : Outbound HTTP(S) strictly gated through caller-invoked fc_web_fetch     |
 |   * Network Safety      : SSRF guard blocking private/internal IP ranges (allow_private override) |
 |   * Governance & Supply : Level 1 SBOM, 100% permissive runtime (MIT/BSD), 48h Security SLA      |
@@ -214,7 +216,7 @@ sequenceDiagram
 
 | Capability / Invariant | Guarantee & Implementation Details | Security & Operational Benefit |
 |------------------------|-----------------------------------|--------------------------------|
-| **Local stdio & explicit egress** | The MCP transport is local stdio, with no telemetry and no automatic network egress. `fc_web_fetch` makes outbound HTTP(S) requests only when a client explicitly invokes it; private targets are blocked by default unless `allow_private` is enabled. | Makes the network boundary visible to clients while retaining a local, port-free server transport. |
+| **Local stdio & explicit egress** | The default MCP transport is local stdio, with no telemetry and no automatic network egress. `fc_web_fetch` makes outbound HTTP(S) requests only when a client explicitly invokes it; private targets are blocked by default unless `allow_private` is enabled. | Makes the network boundary visible to clients while retaining a local, port-free server transport. |
 | **Safe Deletion & Trash Protection** | `fc_safe_delete` moves items to Windows Recycle Bin / macOS Trash / Linux FreeDesktop Trash. `fc_set_safe_mode` routes all deletes safely. | Prevents irreversible data loss from accidental recursive or bulk deletions. |
 | **Cloud-Lock Resilient Move (`fc_move`)** | Automatic detection of cloud sync filters (OneDrive, Dropbox, iCloud reparse points) with seamless copy+verify+delete fallback. | Eliminates `EPERM` / `EBUSY` failures during automated agent operations in sync directories. |
 | **Cloud-Lock Diagnosis (`fc_check_cloud_lock`)** | Read-only report of static cloud-path context plus target existence/type; Cloud Files hydration and process handles are explicitly reported as not checked when unavailable. | Agents can distinguish static OneDrive risk from an actual detected rename lock. |
@@ -256,7 +258,7 @@ FileCommander is purpose-built and validated for four core developer, agentic, a
 - **Profile:** Security officers, compliance auditors, and privacy teams overseeing AI tool integrations in enterprise and production environments.
 - **Key Operational Pain Points:** Undisclosed background telemetry beacons, unvetted network access from local plugins, credential/token leakage into model training or prompt histories, and unprivileged user privilege escalation.
 - **FileCommander Solution:**
-  - Local stdio transport with strictly zero telemetry and zero open network listening ports.
+  - Default local stdio transport with zero telemetry and zero open network listening ports; the explicit `bridge` mode adds a protected loopback-only UI.
   - Explicit outbound network egress strictly restricted to caller-invoked `fc_web_fetch` (internal/private IPs blocked by default).
   - Automated secret and bearer token masking in search excerpts (`INV-MASK-06`).
   - Strict unprivileged user execution (`INV-PROC-09`) and binding 48-hour vulnerability response SLA (`security@open-bricks.org`, `security@ellmos.ai`).
@@ -394,7 +396,23 @@ Add to `.cursor/mcp.json`:
 
 ### Other MCP Clients
 
-The server communicates via **stdio transport**. Point your MCP client to the `dist/index.js` entry point or the `ellmos-filecommander` binary.
+By default, the server communicates via **stdio transport**. Point your MCP client to the `dist/index.js` entry point or the `ellmos-filecommander` binary without subcommands.
+
+### Optional browser bridge and direct ChatGPT access
+
+The optional `bridge` subcommand provides a local browser page for the same FileCommander tools, including persistent process sessions. It starts the server from the same installed package and adds no runtime dependency, second engine, or Cowork installation.
+
+From a source checkout containing this change:
+
+```bash
+npm ci
+npm run build
+npm run bridge -- --cwd "."
+```
+
+Keep the terminal open and use the complete local link it prints. The default address is `http://127.0.0.1:47832`; a random fragment token connects the browser session. For a free port and manual browser opening, use `node dist/index.js bridge --no-open --port 0`.
+
+This option is **unreleased** and is not included in the currently published npm package `1.11.6`. See the [bridge guide](docs/bridge.md#english) for options, session behavior, and the local HTTP boundary. The UI does not register itself with ChatGPT. For native FileCommander tool calls from ChatGPT, follow the separate [Secure MCP Tunnel setup](docs/chatgpt-tunnel.md#english), which connects the existing stdio server directly.
 
 ---
 
@@ -563,7 +581,7 @@ The server enforces 10 strict runtime invariants guaranteeing safety, predictabi
 
 | Invariant ID | Name | Guarantee & Implementation Details | Operational Safety Benefit |
 |--------------|------|-----------------------------------|----------------------------|
-| **INV-LOCAL-01** | **Local stdio & explicit egress** | Local stdio transport, zero telemetry, no open listening ports. Outbound HTTP(S) requests strictly occur via explicit client calls to `fc_web_fetch`. | Zero unauthorized background network leakage; local-first isolation. |
+| **INV-LOCAL-01** | **Local stdio & explicit egress** | Default local stdio transport, zero telemetry, no open listening ports. Explicit `bridge` mode adds an authenticated loopback-only UI. The built-in HTTP fetch tool performs outbound requests only when `fc_web_fetch` is called; process tools are not network sandboxes. | Zero unauthorized background network leakage; local-first isolation. |
 | **INV-SAFE-02** | **Safe Deletion & Trash Protection** | `fc_safe_delete` and global `fc_set_safe_mode` route file and directory deletions through OS Recycle Bin (Windows) / Trash (macOS/Linux). | Eliminates irreversible accidental data loss from AI agent actions. |
 | **INV-LOCK-03** | **Cloud-Lock Resilient Move** | `fc_move` automatically executes copy + SHA-256 verify + source unlink fallback when sync filters (OneDrive, Dropbox, iCloud) cause EPERM/EBUSY. | Guarantees file operations succeed reliably inside cloud-synchronized workspaces. |
 | **INV-DIAG-04** | **Cloud-Lock Diagnosis** | `fc_check_cloud_lock` provides read-only static path inspection and reparse point detection without mutating filesystem state. | Enables agents to assess sync conflict risks before performing modifications. |
@@ -590,7 +608,8 @@ Key points:
 - `fc_start_session` starts an arbitrary interactive command, and subsequent `fc_send_input` calls can execute additional actions
 - `fc_delete_*` tools perform permanent deletion by default (use `fc_safe_delete` or enable **safe mode** via `fc_set_safe_mode` to route all deletes through Recycle Bin / Trash)
 - Safe mode protects only `fc_delete_file` and `fc_delete_directory`; it does not sandbox commands or interactive sessions
-- The server transport is local stdio and emits no telemetry, but an explicit `fc_web_fetch` call performs outbound HTTP(S) access
+- The default server transport is local stdio and emits no telemetry; an explicit `fc_web_fetch` call performs outbound HTTP(S) access
+- The optional browser bridge binds only to `127.0.0.1` and requires a capability token, authenticated session, exact origin, and CSRF token for mutations; see the [bridge security boundary](docs/bridge.md#english)
 - No built-in sandboxing - security is delegated to the MCP client layer
 
 ---
@@ -617,12 +636,15 @@ npm test
 
 ### Testing
 
-The project includes **250 Vitest tests plus 71 standalone i18n checks (321 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+The core suite includes **251 Vitest tests plus 71 standalone i18n checks (322 core checks)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+
+The additional Node.js bridge suite covers authenticated HTTP access, real FileCommander file operations and process sessions, request deduplication, and backend lifecycle behavior. `npm test` runs both suites.
 
 ```bash
 npm test              # Run all tests
 node test-i18n.mjs    # Run standalone i18n checks
-npx vitest run        # Same as above
+npx vitest run        # Run the Vitest suite only
+npm run test:bridge # Run bridge tests after building
 npx vitest --watch    # Watch mode
 ```
 

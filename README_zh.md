@@ -5,6 +5,8 @@
 
 # ellmos FileCommander MCP 服务器
 
+> **Transport scope (English):** The stdio/no-listening-port descriptions below refer to the default server mode. The unreleased, explicitly selected [`bridge` mode](docs/bridge.md#english) adds an authenticated browser UI on `127.0.0.1` only. Native ChatGPT access uses a separate [MCP tunnel setup](docs/chatgpt-tunnel.md#english). Neither connection starts automatically. Test counts below describe the core suite; the bridge suite runs in addition.
+
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | **简体中文** | [日本語](README_ja.md) | [Русский](README_ru.md) | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 README 导航会列出本仓库提供的文档语言。FileCommander 的运行时消息和格式化响应支持德语 (de)、英语 (en)、西班牙语 (es)、中文 (zh)、日语 (ja)、俄语 (ru)、法语 (fr)、印地语 (hi)、阿拉伯语 (ar)、孟加拉语 (bn) 和葡萄牙语 (pt)。此运行时语言列表与 README 文档翻译语言分开说明。它适用于运行时生成的消息和格式化工具结果；MCP 工具标题、发现说明和模式字段说明仍为静态英文。启动服务器前，将 `FC_LANGUAGE` 设置为受支持的代码；也可以在活动的 MCP 会话中调用 `fc_set_language`。`fc_get_language` 会报告当前语言和全部 11 个受支持代码。若未设置 `FC_LANGUAGE` 或其值不受支持，运行时默认使用德语 (de)。日期和时间格式遵循当前语言区域。
@@ -16,7 +18,7 @@ README 导航会列出本仓库提供的文档语言。FileCommander 的运行�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +556,7 @@ npm test
 
 ### 测试
 
-本项目包含 **250 个 Vitest 测试以及 71 个独立的 i18n 检查(共 321 项)**,涵盖文件系统操作、以元数据优先的内联预览、有界内容搜索、原生默认处理程序启动、格式转换、编码修复、归档处理、重复检测、语言包、工具注解、真实 stdio 行为以及安全边界。
+本项目包含 **251 个 Vitest 测试以及 71 个独立的 i18n 检查(共 322 项)**,涵盖文件系统操作、以元数据优先的内联预览、有界内容搜索、原生默认处理程序启动、格式转换、编码修复、归档处理、重复检测、语言包、工具注解、真实 stdio 行为以及安全边界。
 
 ```bash
 npm test              # Run all tests

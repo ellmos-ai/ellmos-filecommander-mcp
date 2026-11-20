@@ -11,7 +11,7 @@
 
 **This MCP server runs with the local permissions of the operating system user invoking it.**
 
-By design, `ellmos-filecommander-mcp` provides AI assistants and MCP clients with powerful local filesystem and process management capabilities. Its MCP transport is **Local-First** stdio, emits no telemetry, and runs in unprivileged standard user mode. It is not an absolute zero-egress system: `fc_web_fetch` performs outbound HTTP(S) access when explicitly invoked.
+By design, `ellmos-filecommander-mcp` provides AI assistants and MCP clients with powerful local filesystem and process management capabilities. Its default MCP transport is **Local-First** stdio, emits no telemetry, and runs in unprivileged standard user mode. The explicitly selected `bridge` mode adds an authenticated local browser UI, as described below. It is not an absolute zero-egress system: `fc_web_fetch` performs outbound HTTP(S) access when explicitly invoked.
 
 ### Tool Risk Classification
 
@@ -37,10 +37,21 @@ By design, `ellmos-filecommander-mcp` provides AI assistants and MCP clients wit
 1. **Safety Mode (`fc_set_safe_mode`)**: When enabled, `fc_delete_file` and `fc_delete_directory` are redirected to `fc_safe_delete` (OS Recycle Bin / Trash). Safe mode does not sandbox `fc_execute_command`, `fc_start_session`, `fc_send_input`, or other process tools.
 2. **Cloud-Lock Safe Operations**: Detects and mitigates cloud sync-filter file locking (e.g. OneDrive reparse points) with automatic fallback strategies.
 3. **Secret Redaction**: Content search tools (`fc_search_content`) automatically identify and redact common API keys, tokens, and authorization credentials in preview output.
-4. **Transport Isolation**: Operates exclusively over standard input/output (`stdio`). Does not bind to network ports or expose HTTP endpoints.
+4. **Transport Isolation**: Default operation uses standard input/output (`stdio`) without listening ports or HTTP endpoints. Explicit `bridge` mode binds only to `127.0.0.1` and protects its UI API with the controls below. It is not an HTTP MCP transport.
 5. **Non-Elevation**: Designed to run as an unprivileged standard user process. Never requires administrative or root privileges.
-6. **Explicit outbound access**: The server makes no automatic network requests in MCP operation. `fc_web_fetch` is the explicit egress boundary and performs an outbound request only when called by a client.
+6. **Explicit outbound access**: The default MCP server and browser bridge emit no telemetry and make no automatic external network requests. `fc_web_fetch` performs an outbound request only when called by a client. Process tools can run network-capable programs and are not network sandboxes. An operator-configured external MCP tunnel has its own outbound connection and credentials.
 7. **Bounded inline preview**: `fc_preview_file` resolves a regular file and reports MIME/size metadata before content. Explicit content requests use standard MCP content blocks and are rejected before reading when the file exceeds 1 MiB or its media type is unsupported.
+
+### Optional Browser Bridge
+
+`ellmos-filecommander bridge` explicitly enables a local HTTP UI with the same user-level filesystem and process capabilities. It does not bind to LAN interfaces, expose a public endpoint, or install a browser extension.
+
+- A fresh 256-bit capability token is printed in the URL fragment for each bridge process. The browser exchanges it for an `HttpOnly`, `SameSite=Strict` session cookie; the session expires after eight hours. Keep the complete start link private.
+- Requests must use the exact `127.0.0.1:<port>` Host. Mutations require the exact local Origin and a session-bound CSRF token. Foreign origins and cross-site requests are rejected; frames are blocked by CSP and `X-Frame-Options`.
+- Requests are limited to 4 MiB, individual results above 8 MiB are truncated, concurrent jobs are capped at 16, and completed history is pruned against 80 jobs and a 32 MiB retention budget. Retrying a recorded request ID cannot silently repeat the same mutation; expired IDs require state inspection.
+- This is a local browser access boundary, not an operating-system sandbox or a substitute for client approvals. Anyone controlling the authenticated local session can invoke the exposed tools. Do not forward this UI port or use it as the endpoint for an MCP tunnel.
+
+See the [bridge guide](docs/bridge.md#english) for lifecycle and session limits and the separate [ChatGPT tunnel guide](docs/chatgpt-tunnel.md#english) for native MCP access.
 
 ### Reporting Vulnerabilities
 
@@ -66,7 +77,7 @@ We commit to a binding initial response SLA within 48 hours and a formal triage 
 
 **Dieser MCP-Server arbeitet mit den Berechtigungen des lokalen Betriebssystem-Benutzers.**
 
-`ellmos-filecommander-mcp` stellt KI-Assistenten und MCP-Clients erweiterte Dateisystem- und Prozessverwaltungsfunktionen bereit. Sein MCP-Transport arbeitet **Local-First** über stdio, übermittelt keine Telemetrie und läuft im unprivilegierten Standard-Benutzerkontext. Das System ist nicht vollständig egressfrei: `fc_web_fetch` führt nach einem ausdrücklichen Aufruf ausgehende HTTP(S)-Zugriffe aus.
+`ellmos-filecommander-mcp` stellt KI-Assistenten und MCP-Clients erweiterte Dateisystem- und Prozessverwaltungsfunktionen bereit. Sein standardmäßiger MCP-Transport arbeitet **Local-First** über stdio, übermittelt keine Telemetrie und läuft im unprivilegierten Standard-Benutzerkontext. Der ausdrücklich gewählte `bridge`-Modus ergänzt eine authentifizierte lokale Browserseite; die Schutzgrenze steht unten. Das System ist nicht vollständig egressfrei: `fc_web_fetch` führt nach einem ausdrücklichen Aufruf ausgehende HTTP(S)-Zugriffe aus.
 
 ### Risikoklassifizierung der Werkzeuge
 
@@ -92,10 +103,21 @@ We commit to a binding initial response SLA within 48 hours and a formal triage 
 1. **Sicherheitsmodus (`fc_set_safe_mode`)**: Leitet `fc_delete_file` und `fc_delete_directory` bei Aktivierung über den System-Papierkorb (`fc_safe_delete`). Der Sicherheitsmodus beschränkt `fc_execute_command`, `fc_start_session`, `fc_send_input` oder andere Prozesswerkzeuge nicht.
 2. **Cloud-Lock-Resilienz**: Erkennt Cloud-Sync-Filter-Sperren (z. B. OneDrive Platzhalter) und greift auf sichere Ersatzroutinen zurück.
 3. **Automatische Schwärzung von Geheimnissen**: `fc_search_content` maskiert bekannte API-Schlüssel, Tokens und Zugangsdaten in Suchergebnissen.
-4. **Transport-Isolation**: Ausschließliche Kommunikation über Standard-Ein-/Ausgabe (`stdio`). Keine Netzwerk-Ports, keine offenen Sockets.
+4. **Transport-Isolation**: Der Standardbetrieb kommuniziert über Standard-Ein-/Ausgabe (`stdio`) ohne offene Netzwerk-Ports oder HTTP-Endpunkte. Der ausdrücklich gestartete `bridge`-Modus bindet nur an `127.0.0.1` und schützt seine Bedien-API wie unten beschrieben. Er ist kein HTTP-MCP-Transport.
 5. **Keine Rechteerweiterung (Non-Elevation)**: Vollständiger Verzicht auf Administrator-/Root-Berechtigungen.
-6. **Expliziter ausgehender Zugriff**: Im MCP-Betrieb erfolgen keine automatischen Netzwerkanfragen. `fc_web_fetch` ist die ausdrückliche Egress-Grenze und sendet nur nach einem Client-Aufruf eine ausgehende Anfrage.
+6. **Expliziter ausgehender Zugriff**: Der standardmäßige MCP-Server und die Browser-Bridge senden keine Telemetrie und keine automatischen externen Netzwerkanfragen. `fc_web_fetch` sendet nur nach einem Client-Aufruf eine ausgehende Anfrage. Prozesswerkzeuge können netzwerkfähige Programme starten und sind keine Netzwerk-Sandbox. Ein separat eingerichteter externer MCP-Tunnel besitzt eine eigene ausgehende Verbindung und eigene Zugangsdaten.
 7. **Begrenzte Inline-Vorschau**: `fc_preview_file` löst eine reguläre Datei auf und meldet zuerst MIME-/Größenmetadaten. Ausdrückliche Inhaltsnachforderungen verwenden Standard-MCP-Content-Blocks und werden vor dem Lesen abgewiesen, wenn die Datei größer als 1 MiB oder ihr Medientyp nicht unterstützt ist.
+
+### Optionale Browser-Bridge
+
+`ellmos-filecommander bridge` aktiviert ausdrücklich eine lokale HTTP-Bedienseite mit denselben Datei- und Prozessrechten des Benutzerkontos. Sie bindet nicht an LAN-Schnittstellen, stellt keinen öffentlichen Endpunkt bereit und installiert keine Browsererweiterung.
+
+- Jeder Bridge-Prozess erzeugt einen zufälligen 256-Bit-Verbindungstoken im URL-Fragment. Der Browser tauscht ihn gegen ein Sitzungscookie mit `HttpOnly` und `SameSite=Strict`; die Sitzung läuft nach acht Stunden ab. Den vollständigen Startlink privat halten.
+- Anfragen müssen den exakten Host `127.0.0.1:<port>` verwenden. Änderungen benötigen die exakte lokale Origin und einen an die Sitzung gebundenen CSRF-Token. Fremde Origins und Cross-Site-Anfragen werden abgelehnt; CSP und `X-Frame-Options` unterbinden Frames.
+- Anfragen sind auf 4 MiB begrenzt; Einzelergebnisse über 8 MiB werden gekürzt. Maximal 16 Aufträge laufen gleichzeitig. Abgeschlossener Verlauf wird anhand von 80 Aufträgen und einem Speicherbudget von 32 MiB bereinigt. Ein bereits erfasster Auftragsbezeichner löst dieselbe Änderung bei Wiederholung nicht stillschweigend erneut aus; nach Ablauf zuerst den Zustand prüfen.
+- Diese Grenze schützt den lokalen Browserzugang. Sie ist weder eine Betriebssystem-Sandbox noch ein Ersatz für Client-Freigaben. Wer eine authentifizierte lokale Sitzung kontrolliert, kann die Werkzeuge aufrufen. Den UI-Port nicht weiterleiten oder als MCP-Tunnel-Endpunkt verwenden.
+
+Sitzungsverhalten und Grenzen stehen in der [Bridge-Anleitung](docs/bridge.md#deutsch); nativen MCP-Zugriff beschreibt die separate [ChatGPT-Tunnel-Anleitung](docs/chatgpt-tunnel.md#deutsch).
 
 ### Schwachstellen melden
 

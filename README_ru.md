@@ -5,6 +5,8 @@
 
 # ellmos FileCommander MCP-сервер
 
+> **Transport scope (English):** The stdio/no-listening-port descriptions below refer to the default server mode. The unreleased, explicitly selected [`bridge` mode](docs/bridge.md#english) adds an authenticated browser UI on `127.0.0.1` only. Native ChatGPT access uses a separate [MCP tunnel setup](docs/chatgpt-tunnel.md#english). Neither connection starts automatically. Test counts below describe the core suite; the bridge suite runs in addition.
+
 [English](README.md) | [Deutsch](README_de.md) | [Español](README_es.md) | [简体中文](README_zh.md) | [日本語](README_ja.md) | **Русский** | [Français](README_fr.md) | [हिन्दी](README_hi.md) | [العربية](README_ar.md) | [বাংলা](README_bn.md) | [Português](README_pt.md)
 
 В навигации README перечислены доступные в этом репозитории языки документации. Сообщения времени выполнения и форматированные ответы FileCommander доступны на немецком (de), английском (en), испанском (es), китайском (zh), японском (ja), русском (ru), французском (fr), хинди (hi), арабском (ar), бенгальском (bn) и португальском (pt). Этот список языков среды выполнения отделён от языков перевода README. Он относится к сообщениям, создаваемым во время выполнения, и форматированным результатам инструментов; названия инструментов MCP, описания для обнаружения инструментов и описания полей схем остаются статическими и англоязычными. До запуска сервера задайте `FC_LANGUAGE` одним из поддерживаемых кодов или вызовите `fc_set_language` в активном сеансе MCP. `fc_get_language` сообщает активный язык и все одиннадцать поддерживаемых кодов. Если `FC_LANGUAGE` не задана или содержит неподдерживаемый код, по умолчанию используется немецкий (de). Форматы даты и времени соответствуют активной локали.
@@ -16,7 +18,7 @@
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-322%20passed%20(251%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +556,7 @@ npm test
 
 ### Тестирование
 
-Проект включает **250 тестов Vitest и 71 автономную проверку i18n (всего 321)**, охватывающих операции с файловой системой, предпросмотр встроенного содержимого, начинающийся с метаданных, ограниченный поиск содержимого, запуск нативного обработчика по умолчанию, преобразование форматов, восстановление кодировки, работу с архивами, поиск дубликатов, языковые пакеты, аннотации инструментов, реальное поведение stdio и границы безопасности.
+Проект включает **251 тест Vitest и 71 автономную проверку i18n (всего 322)**, охватывающих операции с файловой системой, предпросмотр встроенного содержимого, начинающийся с метаданных, ограниченный поиск содержимого, запуск нативного обработчика по умолчанию, преобразование форматов, восстановление кодировки, работу с архивами, поиск дубликатов, языковые пакеты, аннотации инструментов, реальное поведение stdio и границы безопасности.
 
 ```bash
 npm test              # Run all tests
