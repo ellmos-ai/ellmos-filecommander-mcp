@@ -480,7 +480,7 @@ Returns:
   - For binary files: Base64-encoded content
 
 Examples:
-  - path: "C:\\Users\\User\\test.txt"
+  - path: "C:\\Users\\Example\\test.txt"
   - path: "/home/user/config.json"`,
     inputSchema: {
       path: z.string().min(1).describe("Full path to the file"),

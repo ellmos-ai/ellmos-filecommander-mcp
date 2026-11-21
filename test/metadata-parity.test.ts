@@ -723,7 +723,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
       /ghp_[A-Za-z0-9]{36}/,
       /AIza[0-9A-Za-z\-_]{35}/,
       /sk-[A-Za-z0-9]{32,}/,
-      /[a-zA-Z]:\\Users\\(?:lukas|User)\\/i,
+      // TypeScript sources escape backslashes, so a personal path reaches the file as
+      // "C:\\Users\\<name>\\...". Allow one or two backslashes per separator - the
+      // single-backslash form alone let exactly that spelling pass the gate.
+      /[a-zA-Z]:\\{1,2}Users\\{1,2}(?:lukas|User)\\{1,2}/i,
     ];
 
     const filesToAudit = [
