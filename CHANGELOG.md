@@ -15,6 +15,39 @@
 - Scope stdio/no-port documentation to default operation and preserve Cowork Protocol's MIT attribution for reused client code. Cowork is not a runtime dependency.
 - Keep package and registry versions at `1.11.6` under the version freeze. This change does not publish an npm release.
 
+### Fixed
+- **Repository hygiene gate missed the escaped-backslash spelling of personal paths:** the
+  sensitive-pattern audit in `test/metadata-parity.test.ts` matched only single-backslash paths
+  (`C:\Users\<name>\`). TypeScript sources escape backslashes, so the same path reaches the file as
+  `C:\\Users\\<name>\\` and passed the gate unnoticed. Measured, not assumed: the previous regex
+  returned `false` and the widened one (`\\{1,2}` per separator) returns `true` for
+  `src/index.ts`. The one occurrence it exposed - the `fc_read_file` example path - now uses a
+  neutral `C:\\Users\\Example\\test.txt`.
+
+### Added
+- **Cross-language badge gate:** a parity test now compares the test-count badge across all
+  eleven README versions and checks that the advertised total equals the sum of its own two
+  declared parts. Until now only `README.md` and `README_de.md` were asserted, and nothing
+  compared the eleven against each other. The same test also pins `llms.txt` to those numbers.
+
+### Docs
+- **Test counts recounted at the source instead of carried forward:** the badge advertised
+  `321 passed (250 vitest + 71 i18n)` in all eleven READMEs. Measured on 2026-11-21 via
+  `npm test`: 252 Vitest tests plus 71 standalone i18n checks, 323 in total. All eleven badges
+  and prose paragraphs now carry the measured numbers. `README_bn.md` was two generations behind
+  and contradicted its own badge (prose: 249 Vitest / 320 total, badge: 250 / 321).
+  The English and German paragraphs additionally name the measurement date and command; the
+  other nine carry the bare number and get the dated form at the next touch.
+- **`llms.txt` carried a fourth, even older count** (`307 checks (236 Vitest + 71 ...)`) and is
+  now on the measured numbers as well. Four surfaces had four different figures for the same
+  measurement: READMEs 321/250, `README_bn.md` prose 320/249, `llms.txt` 307/236.
+- **Stale version carriers brought to the released version:** `CONTRIBUTING.md` (English and
+  German) and the `THIRD_PARTY_LICENSES.txt` SBOM header still named `1.11.5` while
+  `package.json`, `package-lock.json`, `server.json`, `glama.json`, `src/index.ts`, the
+  `v1.11.6` tag and the published npm package were all at `1.11.6`. Both now name `1.11.6`.
+- **The two parity assertions that pinned `1.11.5` now derive the version from `package.json`,**
+  so the freeze note and the SBOM header cannot lag behind a release again without failing CI.
+
 ## [1.11.6] - 2026-11-09
 
 ### Fixed
