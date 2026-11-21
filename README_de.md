@@ -15,7 +15,7 @@ Die README-Navigation listet die in diesem Repository verfügbaren Dokumentation
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-übersicht)
-[![Tests](https://img.shields.io/badge/tests-321%20passed%20(250%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
+[![Tests](https://img.shields.io/badge/tests-323%20passed%20(252%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#entwicklung)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-papierkorb%20%7C%20trash-blue.svg)](#warum-filecommander)
@@ -614,7 +614,7 @@ npm test
 
 ### Tests
 
-Das Projekt enthält **250 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (321 insgesamt)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
+Das Projekt enthält **252 Vitest-Tests plus 71 eigenständige i18n-Prüfungen (323 insgesamt, gemessen am 2026-11-21 per `npm test`)** für Dateisystemoperationen, metadatenbasierte Inline-Vorschau, begrenzte Inhaltssuche, native Standard-Handler-Aufrufe, Formatkonvertierung, Encoding-Reparatur, Archiv-Handling, Duplikaterkennung, Sprachpakete, Tool-Annotationen, echtes stdio-Verhalten und Sicherheitsgrenzen.
 
 ```bash
 npm test              # Alle Tests ausführen

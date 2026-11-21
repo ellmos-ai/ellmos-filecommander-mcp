@@ -245,7 +245,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-321%20passed');
+    expect(en).toContain('tests-323%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -263,7 +263,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-321%20passed');
+    expect(de).toContain('tests-323%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
@@ -287,6 +287,34 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('31');
     expect(de).toContain('n8n Manager');
     expect(de).toContain('19');
+  });
+
+  it('keeps the test-count badge identical and self-consistent across all 11 README versions', () => {
+    // Measured drift that motivated this gate: README_bn.md claimed 249 vitest / 320 total in its
+    // prose while its own badge said 250 / 321, and nothing compared the eleven badges with each
+    // other. Only README.md and README_de.md were ever asserted.
+    const variants = [
+      'README.md', 'README_ar.md', 'README_bn.md', 'README_de.md', 'README_es.md',
+      'README_fr.md', 'README_hi.md', 'README_ja.md', 'README_pt.md', 'README_ru.md',
+      'README_zh.md',
+    ];
+    const badge = /tests-(\d+)%20passed%20\((\d+)%20vitest%20%2B%20(\d+)%20i18n\)/;
+    const found = new Map<string, string>();
+
+    for (const variant of variants) {
+      const path = resolve(ROOT, variant);
+      expect(existsSync(path), `${variant} is missing`).toBe(true);
+      const match = badge.exec(readFileSync(path, 'utf-8'));
+      expect(match, `${variant} has no parseable test-count badge`).not.toBeNull();
+      found.set(variant, match![0]);
+    }
+
+    const distinct = [...new Set(found.values())];
+    expect(distinct, `test-count badges differ: ${JSON.stringify([...found])}`).toHaveLength(1);
+
+    // The advertised total must be the sum of its own two declared parts.
+    const parts = badge.exec(distinct[0])!;
+    expect(Number(parts[1])).toBe(Number(parts[2]) + Number(parts[3]));
   });
 
   it('verifies bilingual target personas section parity for 4 core profiles', () => {
