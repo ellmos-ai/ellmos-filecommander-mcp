@@ -315,6 +315,11 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     // The advertised total must be the sum of its own two declared parts.
     const parts = badge.exec(distinct[0])!;
     expect(Number(parts[1])).toBe(Number(parts[2]) + Number(parts[3]));
+
+    // llms.txt is the fourth place the same measurement lives. It drifted furthest of all
+    // (307 checks / 236 Vitest while the badge said 321 / 250), so it is gated here too.
+    const llms = readFileSync(llmsPath, 'utf-8');
+    expect(llms).toContain(`${parts[1]} checks (${parts[2]} Vitest + ${parts[3]} standalone i18n checks)`);
   });
 
   it('verifies bilingual target personas section parity for 4 core profiles', () => {

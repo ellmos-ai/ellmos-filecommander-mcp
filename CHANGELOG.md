@@ -15,7 +15,7 @@
 - **Cross-language badge gate:** a parity test now compares the test-count badge across all
   eleven README versions and checks that the advertised total equals the sum of its own two
   declared parts. Until now only `README.md` and `README_de.md` were asserted, and nothing
-  compared the eleven against each other.
+  compared the eleven against each other. The same test also pins `llms.txt` to those numbers.
 
 ### Docs
 - **Test counts recounted at the source instead of carried forward:** the badge advertised
@@ -25,6 +25,9 @@
   and contradicted its own badge (prose: 249 Vitest / 320 total, badge: 250 / 321).
   The English and German paragraphs additionally name the measurement date and command; the
   other nine carry the bare number and get the dated form at the next touch.
+- **`llms.txt` carried a fourth, even older count** (`307 checks (236 Vitest + 71 ...)`) and is
+  now on the measured numbers as well. Four surfaces had four different figures for the same
+  measurement: READMEs 321/250, `README_bn.md` prose 320/249, `llms.txt` 307/236.
 - **Stale version carriers brought to the released version:** `CONTRIBUTING.md` (English and
   German) and the `THIRD_PARTY_LICENSES.txt` SBOM header still named `1.11.5` while
   `package.json`, `package-lock.json`, `server.json`, `glama.json`, `src/index.ts`, the
