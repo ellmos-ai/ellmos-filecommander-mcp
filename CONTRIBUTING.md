@@ -45,7 +45,7 @@ npm test
 
 ### 3. Version Freeze Discipline (`T-20260920-167562623`)
 
-ellmos-filecommander-mcp operates under strict version-freeze discipline. Version identifiers (`1.11.5` across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`) must not be arbitrarily incremented. All improvements, bug fixes, and hygiene adjustments are documented under `## [Unreleased]` in `CHANGELOG.md`.
+ellmos-filecommander-mcp operates under strict version-freeze discipline. Version identifiers (`1.11.6` across `package.json`, `package-lock.json`, `server.json`, `glama.json`, and `src/index.ts`) must not be arbitrarily incremented. All improvements, bug fixes, and hygiene adjustments are documented under `## [Unreleased]` in `CHANGELOG.md`.
 
 ### 4. Quality Gates
 
@@ -103,7 +103,7 @@ npm test
 
 ### 3. Version-Freeze-Disziplin (`T-20260920-167562623`)
 
-ellmos-filecommander-mcp unterliegt strikter Version-Freeze-Disziplin. Die Versionskennung (`1.11.5` in `package.json`, `package-lock.json`, `server.json`, `glama.json` und `src/index.ts`) darf nicht eigenmächtig erhöht werden. Sämtliche Verbesserungen, Fehlerbehebungen und Hygiene-Anpassungen werden unter `## [Unreleased]` in `CHANGELOG.md` dokumentiert.
+ellmos-filecommander-mcp unterliegt strikter Version-Freeze-Disziplin. Die Versionskennung (`1.11.6` in `package.json`, `package-lock.json`, `server.json`, `glama.json` und `src/index.ts`) darf nicht eigenmächtig erhöht werden. Sämtliche Verbesserungen, Fehlerbehebungen und Hygiene-Anpassungen werden unter `## [Unreleased]` in `CHANGELOG.md` dokumentiert.
 
 ### 4. Qualitäts-Tore
 

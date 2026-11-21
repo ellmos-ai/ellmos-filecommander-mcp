@@ -601,7 +601,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(txt).toContain('THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE');
     expect(txt).toContain('Project: ellmos-ai/ellmos-filecommander-mcp (FileCommander)');
     expect(txt).toContain('Audited: 2026-10-03');
-    expect(txt).toContain('Repository Version: 1.11.5');
+    // Derived from package.json so the SBOM header cannot silently lag behind a release.
+    expect(txt).toContain(`Repository Version: ${JSON.parse(readFileSync(pkgPath, 'utf-8')).version}`);
     expect(txt).toContain('Repository License: MIT License');
     expect(txt).toContain('RunAsInvoker');
     expect(txt).toContain('Zero-Copyleft Isolation Guarantee');
@@ -706,7 +707,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     // Version freeze discipline
     expect(contributing).toContain('T-20260920-167562623');
-    expect(contributing).toContain('1.11.5');
+    // Derived from package.json: the freeze note has to name the version that actually ships.
+    expect(contributing).toContain(JSON.parse(readFileSync(pkgPath, 'utf-8')).version);
 
     // Quality gates and statutory disclaimer
     expect(contributing).toContain('npm test');
