@@ -50,6 +50,38 @@ claimed or tested.
       re-run the bilingual heading and content-parity checks. Current measured
       structure: 45 English headings versus 45 German headings (synchronized).
 
+## Documentation parity & hygiene round (2026-11-21)
+
+Measured, not carried forward: `npm test` on 2026-11-21 reports 252 Vitest tests plus 71
+standalone i18n checks, 323 in total.
+
+- [x] Close the escaped-backslash blind spot in the sensitive-path gate; it matched only
+      `C:\Users\<name>\` and therefore missed the escaped `C:\\Users\\<name>\\` form that a
+      TypeScript source actually contains (`12af970`). The one line it exposed, the
+      `fc_read_file` example path, now uses a neutral placeholder.
+- [x] Bring `CONTRIBUTING.md` (EN & DE) and the `THIRD_PARTY_LICENSES.txt` SBOM header from
+      `1.11.5` to the released `1.11.6`, and derive both parity assertions from `package.json`
+      so they can no longer pin a stale value (`5ee4c54`).
+- [x] Recount the test badge and put the measured numbers on all eleven READMEs; add a gate that
+      compares the badge across all eleven versions and checks the total against the sum of its
+      own parts (`b55564c`). `README_bn.md` had contradicted its own badge.
+- [x] Put `llms.txt` on the measured counts as well and pin it to the badge in the same gate
+      (`bf9d2dc`). Four surfaces had carried four different figures for one measurement.
+- [x] Verify the distribution surfaces against each other: GitHub, npm, the MCP registry
+      (`isLatest`, published 2026-11-13) and the `v1.11.6` tag all read `1.11.6`, measured
+      2026-11-21.
+- [ ] PR #36 overlaps this round: it contains the same `1.11.5` to `1.11.6` sync and a badge
+      recount to `325 / 254`, which this round's measurement supersedes. It needs a rebase, and
+      its badge numbers have to reach all eleven READMEs plus `llms.txt` or the new parity gate
+      will fail. Decide whether to rebase it or drop its now-duplicated hunks.
+- [ ] The nine non-English/German README paragraphs carry the bare count without a measurement
+      date. The dated form belongs in all eleven; it needs translating into the remaining nine.
+- [ ] `test/metadata-parity.test.ts` still comments that `1.11.5` and `1.11.6` never reached the
+      MCP registry. Measured on 2026-11-21: `1.11.6` is the registry's `isLatest` entry since
+      2026-11-13. Correct or date the comment.
+- [ ] Consider deriving the advertised test count from a measured source instead of a literal in
+      three places; every round so far has had to chase it by hand.
+
 ## AI Security & Dependency Audit (2026-11-04)
 
 - [x] Comprehensive supply-chain and vulnerability audit (`npm audit` -> 0 vulnerabilities across 215 packages).

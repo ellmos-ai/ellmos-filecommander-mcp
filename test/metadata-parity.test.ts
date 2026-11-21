@@ -245,7 +245,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(en).toContain('open-bricks');
     expect(en).toContain('mermaid');
     expect(en).toContain('50');
-    expect(en).toContain('tests-322%20passed');
+    expect(en).toContain('tests-323%20passed');
     expect(en).toContain('security-48h%20SLA');
     expect(en).toContain('Quick Navigation:');
     expect(en).toContain('[NOTICE](NOTICE)');
@@ -263,7 +263,7 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('open-bricks');
     expect(de).toContain('mermaid');
     expect(de).toContain('50');
-    expect(de).toContain('tests-322%20passed');
+    expect(de).toContain('tests-323%20passed');
     expect(de).toContain('security-48h%20SLA');
     expect(de).toContain('Schnellnavigation:');
     expect(de).toContain('[NOTICE](NOTICE)');
@@ -287,6 +287,39 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(de).toContain('31');
     expect(de).toContain('n8n Manager');
     expect(de).toContain('19');
+  });
+
+  it('keeps the test-count badge identical and self-consistent across all 11 README versions', () => {
+    // Measured drift that motivated this gate: README_bn.md claimed 249 vitest / 320 total in its
+    // prose while its own badge said 250 / 321, and nothing compared the eleven badges with each
+    // other. Only README.md and README_de.md were ever asserted.
+    const variants = [
+      'README.md', 'README_ar.md', 'README_bn.md', 'README_de.md', 'README_es.md',
+      'README_fr.md', 'README_hi.md', 'README_ja.md', 'README_pt.md', 'README_ru.md',
+      'README_zh.md',
+    ];
+    const badge = /tests-(\d+)%20passed%20\((\d+)%20vitest%20%2B%20(\d+)%20i18n\)/;
+    const found = new Map<string, string>();
+
+    for (const variant of variants) {
+      const path = resolve(ROOT, variant);
+      expect(existsSync(path), `${variant} is missing`).toBe(true);
+      const match = badge.exec(readFileSync(path, 'utf-8'));
+      expect(match, `${variant} has no parseable test-count badge`).not.toBeNull();
+      found.set(variant, match![0]);
+    }
+
+    const distinct = [...new Set(found.values())];
+    expect(distinct, `test-count badges differ: ${JSON.stringify([...found])}`).toHaveLength(1);
+
+    // The advertised total must be the sum of its own two declared parts.
+    const parts = badge.exec(distinct[0])!;
+    expect(Number(parts[1])).toBe(Number(parts[2]) + Number(parts[3]));
+
+    // llms.txt is the fourth place the same measurement lives. It drifted furthest of all
+    // (307 checks / 236 Vitest while the badge said 321 / 250), so it is gated here too.
+    const llms = readFileSync(llmsPath, 'utf-8');
+    expect(llms).toContain(`${parts[1]} checks (${parts[2]} Vitest + ${parts[3]} standalone i18n checks)`);
   });
 
   it('verifies bilingual target personas section parity for 4 core profiles', () => {
@@ -601,7 +634,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
     expect(txt).toContain('THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE');
     expect(txt).toContain('Project: ellmos-ai/ellmos-filecommander-mcp (FileCommander)');
     expect(txt).toContain('Audited: 2026-10-03');
-    expect(txt).toContain('Repository Version: 1.11.5');
+    // Derived from package.json so the SBOM header cannot silently lag behind a release.
+    expect(txt).toContain(`Repository Version: ${JSON.parse(readFileSync(pkgPath, 'utf-8')).version}`);
     expect(txt).toContain('Repository License: MIT License');
     expect(txt).toContain('RunAsInvoker');
     expect(txt).toContain('Zero-Copyleft Isolation Guarantee');
@@ -706,7 +740,8 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
 
     // Version freeze discipline
     expect(contributing).toContain('T-20260920-167562623');
-    expect(contributing).toContain('1.11.5');
+    // Derived from package.json: the freeze note has to name the version that actually ships.
+    expect(contributing).toContain(JSON.parse(readFileSync(pkgPath, 'utf-8')).version);
 
     // Quality gates and statutory disclaimer
     expect(contributing).toContain('npm test');
@@ -723,7 +758,10 @@ describe('Metadata, Registry Manifest and Discoverability Parity', () => {
       /ghp_[A-Za-z0-9]{36}/,
       /AIza[0-9A-Za-z\-_]{35}/,
       /sk-[A-Za-z0-9]{32,}/,
-      /[a-zA-Z]:\\Users\\(?:lukas|User)\\/i,
+      // TypeScript sources escape backslashes, so a personal path reaches the file as
+      // "C:\\Users\\<name>\\...". Allow one or two backslashes per separator - the
+      // single-backslash form alone let exactly that spelling pass the gate.
+      /[a-zA-Z]:\\{1,2}Users\\{1,2}(?:lukas|User)\\{1,2}/i,
     ];
 
     const filesToAudit = [
