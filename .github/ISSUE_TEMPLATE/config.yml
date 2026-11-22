@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security Vulnerability Report / Sicherheitslücke melden
+    url: https://github.com/ellmos-ai/ellmos-filecommander-mcp/security/advisories/new
+    about: Bitte melden Sie Sicherheitslücken vertraulich über GitHub Security Advisories statt in öffentlichen Issues. / Please report security vulnerabilities privately via GitHub Security Advisories rather than public issues.

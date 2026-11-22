@@ -2,6 +2,21 @@
 
 ## [Unreleased]
 
+### Hygiene & Governance (Pfad A - 2026-11-15)
+- **Community Health & Issue Templates (`CODE_OF_CONDUCT.md`, `.github/ISSUE_TEMPLATE/`):**
+  - Added bilingual `CODE_OF_CONDUCT.md` (Contributor Covenant v2.1 DE/EN) and included it in `package.json` `"files"`.
+  - Added tailored bilingual `.github/ISSUE_TEMPLATE/bug_report.md`, `feature_request.md`, and `config.yml` routing security reports to GitHub Security Advisories.
+- **CI & Multi-Host `.gitignore` Hardening:**
+  - Added missing `concurrency` (`cancel-in-progress: true`) boundary to `.github/workflows/stale.yml` and `git diff --check` whitespace/EOL verification to `.github/workflows/tests.yml`.
+  - Added role-specific multi-agent lock ignores (`LOCK.orchestrator.*`, `LOCK.operator.*`, `LOCK.worker.*`, `LOCK.thinker.*`, `LOCK.reviewer.*`) and `.mypy_cache/` to `.gitignore`.
+- **Metadata & Contract Test Parity (Version frozen at `1.11.6`):**
+  - Version carriers and test counts are taken from `master` (see `### Docs` below). After merging
+    `master` into this branch the suite was recounted on 2026-11-22 via `npm test`: 255 Vitest tests
+    plus 71 standalone i18n checks, 326 in total (the three governance contract tests of this branch
+    on top of the 252 measured on `master`). All eleven README badges, the prose counts and `llms.txt`
+    carry these numbers.
+  - Expanded `test/metadata-parity.test.ts` with dynamic version parity checks, updated Caret-SemVer override floors (`hono` `^4.13.18`, `@hono/node-server` `^2.1.8`, `express-rate-limit` `^8.6.2`, `nanoid` `^3.3.17`), `stale.yml` concurrency checks, and 3 new governance/template/lock-ignore contract tests.
+
 ### Fixed
 - **Repository hygiene gate missed the escaped-backslash spelling of personal paths:** the
   sensitive-pattern audit in `test/metadata-parity.test.ts` matched only single-backslash paths
@@ -398,6 +413,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.9.3] - 2026-07-24
 
+
 ### Fixed
 - Correct FileCommander (46) and CodeCommander (22) tool counts in the ecosystem family table; counts now verified against the live MCP `tools/list` surface.
 - Align the McpServer runtime version in `src/index.ts` with package.json (was stuck at 1.9.1).
@@ -425,6 +441,7 @@ All notable changes to this project will be documented in this file.
 - Replace the Spanish, Chinese, Japanese, and Russian i18n fallback stubs with full FileCommander runtime translations.
 - Add an i18n regression test covering localized core messages, interpolation, and stub removal for all four language packs.
 
+
 ### Fixed
 - Use `-EncodedCommand` (Base64/UTF-16LE) for PowerShell execution instead of string interpolation, preventing injection via metacharacters (`$`, backtick, `&`). Fixes CodeQL `js/incomplete-string-escaping` alert.
 
@@ -433,6 +450,7 @@ All notable changes to this project will be documented in this file.
 - Refresh discoverability metadata for the current 44-tool FileCommander release, including jsDelivr and LobeHub visibility, cached third-party directory caveats, and additional Cloud-Lock/OCR/ZIP search phrases.
 
 ## [1.8.2] - 2026-06-17
+
 
 ### Fixed
 - Correct version mismatch in banner/description display (1.7.10 → 1.8.0) and improve OCR `fc_ocr` error handling for edge cases.
@@ -470,6 +488,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.7.10] - 2026-05-23
 
+
 ### Fixed
 - Refresh npm lockfile and overrides to resolve Dependabot alerts for `fast-xml-builder`, `fast-uri`, `hono`, and `ip-address`.
 - Update dev dependency lockfile path away from vulnerable Vite/esbuild ranges.
@@ -482,6 +501,7 @@ All notable changes to this project will be documented in this file.
 - Development/Testing section in README.md and README_de.md
 
 ## [1.7.2] - 2026-02-20
+
 
 ### Fixed
 - Update CHANGELOG with 5 missing version entries (v1.5.0-v1.7.1)
@@ -533,6 +553,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.4.1] - 2026-02-14
 
+
 ### Fixed
 - `fc_md_to_html` completely rewritten: line-by-line parser instead of regex chain
 - Added: nested lists, ordered lists, blockquotes, checkboxes, badge images, standalone images
@@ -566,6 +587,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - `fc_str_replace` - String replacement tool with unique-match validation
 - Total tools: 29
+
 
 ### Fixed
 - `fc_safe_delete` PowerShell escaping for paths with special characters

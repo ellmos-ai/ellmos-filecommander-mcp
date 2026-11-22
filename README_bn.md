@@ -16,7 +16,7 @@ README নেভিগেশনে এই রিপোজিটরিতে উ�
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-323%20passed%20(252%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-326%20passed%20(255%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -554,7 +554,7 @@ npm test
 
 ### পরীক্ষা
 
-প্রকল্পটিতে **২৫২টি Vitest পরীক্ষা এবং আলাদা ৭১টি i18n যাচাই (মোট ৩২৩টি)** রয়েছে। এগুলো ফাইল-সিস্টেমের কাজ, metadata-প্রথম inline preview, সীমাবদ্ধ content অনুসন্ধান, native default-handler চালু করা, format conversion, encoding মেরামত, archive handling, duplicate শনাক্তকরণ, language pack, tool annotation, বাস্তব stdio আচরণ এবং নিরাপত্তার সীমানা পরীক্ষা করে।
+প্রকল্পটিতে **২৫৫টি Vitest পরীক্ষা এবং আলাদা ৭১টি i18n যাচাই (মোট ৩২৬টি)** রয়েছে। এগুলো ফাইল-সিস্টেমের কাজ, metadata-প্রথম inline preview, সীমাবদ্ধ content অনুসন্ধান, native default-handler চালু করা, format conversion, encoding মেরামত, archive handling, duplicate শনাক্তকরণ, language pack, tool annotation, বাস্তব stdio আচরণ এবং নিরাপত্তার সীমানা পরীক্ষা করে।
 
 ```bash
 npm test              # Run all tests

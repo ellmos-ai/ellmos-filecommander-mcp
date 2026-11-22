@@ -50,7 +50,7 @@ ellmos-filecommander-mcp operates under strict version-freeze discipline. Versio
 ### 4. Quality Gates
 
 Before submitting a pull request, verify all local quality gates:
-1. `npm test`: 100% green test execution across all Vitest suites and standalone i18n checks (305+ tests).
+1. `npm test`: 100% green test execution across all Vitest suites and standalone i18n checks (320+ tests).
 2. `npm run build`: Zero TypeScript compilation errors.
 3. `git diff --check`: Zero whitespace or line-ending anomalies.
 4. `git diff -G'"version": '`: Zero unauthorized version bumps.
@@ -108,7 +108,7 @@ ellmos-filecommander-mcp unterliegt strikter Version-Freeze-Disziplin. Die Versi
 ### 4. Qualitäts-Tore
 
 Vor dem Einreichen eines Pull Requests müssen alle lokalen Qualitäts-Tore erfüllt sein:
-1. `npm test`: 100% grüne Testergebnisse über alle Vitest-Suiten und Standalone-i18n-Prüfungen (305+ Tests).
+1. `npm test`: 100% grüne Testergebnisse über alle Vitest-Suiten und Standalone-i18n-Prüfungen (320+ Tests).
 2. `npm run build`: 0 TypeScript-Kompilierungsfehler.
 3. `git diff --check`: 0 Whitespace- oder Zeilenumbruchfehler.
 4. `git diff -G'"version": '`: 0 unautorisierte Versionsänderungen.
