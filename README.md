@@ -15,7 +15,7 @@ The README navigation lists the documentation languages available in this reposi
 [![npm version](https://img.shields.io/npm/v/ellmos-filecommander-mcp.svg)](https://www.npmjs.com/package/ellmos-filecommander-mcp)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP Tools](https://img.shields.io/badge/MCP%20Tools-50-blueviolet.svg)](#tools-overview)
-[![Tests](https://img.shields.io/badge/tests-325%20passed%20(254%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-326%20passed%20(255%20vitest%20%2B%2071%20i18n)-brightgreen.svg)](#testing)
 [![Security: Explicit Egress](https://img.shields.io/badge/security-local--first%20%7C%20explicit--egress-blue.svg)](SECURITY.md)
 [![Security: 48h SLA](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Safe Delete](https://img.shields.io/badge/safety-recycle--bin%20%7C%20trash-blue.svg)](#why-filecommander)
@@ -617,7 +617,7 @@ npm test
 
 ### Testing
 
-The project includes **254 Vitest tests plus 71 standalone i18n checks (325 total)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
+The project includes **255 Vitest tests plus 71 standalone i18n checks (326 total, measured 2026-11-22 via `npm test`)** covering filesystem operations, metadata-first inline preview, bounded content search, native default-handler launching, format conversion, encoding repair, archive handling, duplicate detection, language packs, tool annotations, real stdio behavior, and security boundaries.
 
 ```bash
 npm test              # Run all tests

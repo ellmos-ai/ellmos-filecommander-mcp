@@ -10,8 +10,45 @@
   - Added missing `concurrency` (`cancel-in-progress: true`) boundary to `.github/workflows/stale.yml` and `git diff --check` whitespace/EOL verification to `.github/workflows/tests.yml`.
   - Added role-specific multi-agent lock ignores (`LOCK.orchestrator.*`, `LOCK.operator.*`, `LOCK.worker.*`, `LOCK.thinker.*`, `LOCK.reviewer.*`) and `.mypy_cache/` to `.gitignore`.
 - **Metadata & Contract Test Parity (Version frozen at `1.11.6`):**
-  - Synchronized stale `1.11.5` references in `CONTRIBUTING.md` and `THIRD_PARTY_LICENSES.txt` to `1.11.6` (matching `package.json`, `server.json`, `glama.json`, and `src/index.ts`), and updated test counts/verification dates across `README.md`, `README_de.md`, and `llms.txt` (325 checks: 254 Vitest + 71 i18n, verified 2026-11-15).
+  - Version carriers and test counts are taken from `master` (see `### Docs` below). After merging
+    `master` into this branch the suite was recounted on 2026-11-22 via `npm test`: 255 Vitest tests
+    plus 71 standalone i18n checks, 326 in total (the three governance contract tests of this branch
+    on top of the 252 measured on `master`). All eleven README badges, the prose counts and `llms.txt`
+    carry these numbers.
   - Expanded `test/metadata-parity.test.ts` with dynamic version parity checks, updated Caret-SemVer override floors (`hono` `^4.13.18`, `@hono/node-server` `^2.1.8`, `express-rate-limit` `^8.6.2`, `nanoid` `^3.3.17`), `stale.yml` concurrency checks, and 3 new governance/template/lock-ignore contract tests.
+
+### Fixed
+- **Repository hygiene gate missed the escaped-backslash spelling of personal paths:** the
+  sensitive-pattern audit in `test/metadata-parity.test.ts` matched only single-backslash paths
+  (`C:\Users\<name>\`). TypeScript sources escape backslashes, so the same path reaches the file as
+  `C:\\Users\\<name>\\` and passed the gate unnoticed. Measured, not assumed: the previous regex
+  returned `false` and the widened one (`\\{1,2}` per separator) returns `true` for
+  `src/index.ts`. The one occurrence it exposed - the `fc_read_file` example path - now uses a
+  neutral `C:\\Users\\Example\\test.txt`.
+
+### Added
+- **Cross-language badge gate:** a parity test now compares the test-count badge across all
+  eleven README versions and checks that the advertised total equals the sum of its own two
+  declared parts. Until now only `README.md` and `README_de.md` were asserted, and nothing
+  compared the eleven against each other. The same test also pins `llms.txt` to those numbers.
+
+### Docs
+- **Test counts recounted at the source instead of carried forward:** the badge advertised
+  `321 passed (250 vitest + 71 i18n)` in all eleven READMEs. Measured on 2026-11-21 via
+  `npm test`: 252 Vitest tests plus 71 standalone i18n checks, 323 in total. All eleven badges
+  and prose paragraphs now carry the measured numbers. `README_bn.md` was two generations behind
+  and contradicted its own badge (prose: 249 Vitest / 320 total, badge: 250 / 321).
+  The English and German paragraphs additionally name the measurement date and command; the
+  other nine carry the bare number and get the dated form at the next touch.
+- **`llms.txt` carried a fourth, even older count** (`307 checks (236 Vitest + 71 ...)`) and is
+  now on the measured numbers as well. Four surfaces had four different figures for the same
+  measurement: READMEs 321/250, `README_bn.md` prose 320/249, `llms.txt` 307/236.
+- **Stale version carriers brought to the released version:** `CONTRIBUTING.md` (English and
+  German) and the `THIRD_PARTY_LICENSES.txt` SBOM header still named `1.11.5` while
+  `package.json`, `package-lock.json`, `server.json`, `glama.json`, `src/index.ts`, the
+  `v1.11.6` tag and the published npm package were all at `1.11.6`. Both now name `1.11.6`.
+- **The two parity assertions that pinned `1.11.5` now derive the version from `package.json`,**
+  so the freeze note and the SBOM header cannot lag behind a release again without failing CI.
 
 ## [1.11.6] - 2026-11-09
 
@@ -376,6 +413,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.9.3] - 2026-07-24
 
+
 ### Fixed
 - Correct FileCommander (46) and CodeCommander (22) tool counts in the ecosystem family table; counts now verified against the live MCP `tools/list` surface.
 - Align the McpServer runtime version in `src/index.ts` with package.json (was stuck at 1.9.1).
@@ -403,6 +441,7 @@ All notable changes to this project will be documented in this file.
 - Replace the Spanish, Chinese, Japanese, and Russian i18n fallback stubs with full FileCommander runtime translations.
 - Add an i18n regression test covering localized core messages, interpolation, and stub removal for all four language packs.
 
+
 ### Fixed
 - Use `-EncodedCommand` (Base64/UTF-16LE) for PowerShell execution instead of string interpolation, preventing injection via metacharacters (`$`, backtick, `&`). Fixes CodeQL `js/incomplete-string-escaping` alert.
 
@@ -411,6 +450,7 @@ All notable changes to this project will be documented in this file.
 - Refresh discoverability metadata for the current 44-tool FileCommander release, including jsDelivr and LobeHub visibility, cached third-party directory caveats, and additional Cloud-Lock/OCR/ZIP search phrases.
 
 ## [1.8.2] - 2026-06-17
+
 
 ### Fixed
 - Correct version mismatch in banner/description display (1.7.10 → 1.8.0) and improve OCR `fc_ocr` error handling for edge cases.
@@ -448,6 +488,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.7.10] - 2026-05-23
 
+
 ### Fixed
 - Refresh npm lockfile and overrides to resolve Dependabot alerts for `fast-xml-builder`, `fast-uri`, `hono`, and `ip-address`.
 - Update dev dependency lockfile path away from vulnerable Vite/esbuild ranges.
@@ -460,6 +501,7 @@ All notable changes to this project will be documented in this file.
 - Development/Testing section in README.md and README_de.md
 
 ## [1.7.2] - 2026-02-20
+
 
 ### Fixed
 - Update CHANGELOG with 5 missing version entries (v1.5.0-v1.7.1)
@@ -511,6 +553,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.4.1] - 2026-02-14
 
+
 ### Fixed
 - `fc_md_to_html` completely rewritten: line-by-line parser instead of regex chain
 - Added: nested lists, ordered lists, blockquotes, checkboxes, badge images, standalone images
@@ -544,6 +587,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - `fc_str_replace` - String replacement tool with unique-match validation
 - Total tools: 29
+
 
 ### Fixed
 - `fc_safe_delete` PowerShell escaping for paths with special characters
